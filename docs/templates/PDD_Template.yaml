@@ -1,0 +1,65 @@
+# EGOS Prompt Design Document (PDD) Template
+# Version: 1.0
+# Fill in the fields below according to the KOIOS PDD Standard.
+# --- Field Definitions ---
+# id: (Required) Unique identifier (e.g., 'generate_python_code'). MUST match the filename stem.
+# name: (Required) Human-readable title (e.g., 'Python Code Generation Prompt').
+# description: (Required) Explain the prompt's purpose and usage.
+# version: (Required) Semantic version (e.g., '1.0', '1.1').
+# parameters: (Required) List of variable names used in the template (e.g., ['user_request', 'code_context']).
+# template: (Required) The prompt text. Use {variable_name} for parameter substitution.
+# metadata: (Optional) Contextual information.
+#   author: (Optional) Your name or team.
+#   created_date: (Optional) YYYY-MM-DD.
+#   last_updated: (Optional) YYYY-MM-DD.
+#   tags: (Optional) List of keywords (e.g., ['code-generation', 'python', 'refactoring']).
+#   related_pdds: (Optional) List of related PDD IDs.
+# ethik_guidelines: (Optional) Ethical rules for this prompt.
+#   pii_handling: (Optional) Strategy like 'redact', 'error_if_present'.
+#   bias_mitigation_ref: (Optional) Link to bias docs.
+#   forbidden_topics: (Optional) List of topics to avoid.
+#   output_tone: (Optional) Desired output tone (e.g., 'neutral', 'formal').
+# ---
+
+id: "unique_prompt_id" # CHANGE THIS to match filename (e.g., generate_docstring)
+name: "Descriptive Prompt Name" # CHANGE THIS
+
+description: |
+  Provide a clear and concise description of what this prompt is designed
+  to achieve, who should use it, and in what context.
+
+version: "1.0"
+
+parameters:
+  - user_input # CHANGE or ADD required parameter names
+  # - code_context
+  # - style_guide
+
+template: |
+  This is the main prompt template text.
+
+  Use curly braces {{like_this}} to include parameters defined above.
+
+  Example: Please process the following input: {{user_input}}
+
+  Provide detailed instructions to the AI model here.
+  Be specific about the desired output format, constraints, and persona (if any).
+
+# --- Optional Fields Below ---
+
+# metadata:
+#   author: "Your Name / Team"
+#   created_date: "YYYY-MM-DD"
+#   last_updated: "YYYY-MM-DD"
+#   tags:
+#     - example-tag
+#     - another-tag
+#   related_pdds:
+#     - some_other_pdd_id
+
+# ethik_guidelines:
+#   pii_handling: "redact" # e.g., redact, error_if_present
+#   bias_mitigation_ref: "docs/ETHIK/bias_guidelines.md#section-3"
+#   forbidden_topics:
+#     - harmful_content_category_1
+#   output_tone: "helpful"

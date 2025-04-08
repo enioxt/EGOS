@@ -1,0 +1,10 @@
+{
+  "name": "OpenRouter MCP Server",
+  "script": "C:/Eva Guarani EGOS/.cursor/mcp-servers/openrouter_mcp_server.js",
+  "args": [],
+  "env": {
+    "OPENROUTER_API_KEY": "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"
+  },
+  "autoStart": true,
+  "priority": 100
+}

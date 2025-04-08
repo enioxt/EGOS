@@ -1,0 +1,23 @@
+{
+  "name": "Perplexity Search",
+  "description": "Search the web with Perplexity AI",
+  "format": "json",
+  "execution": {
+    "type": "python",
+    "module": "tools.integration.cursor_mcp",
+    "function": "perplexity_search",
+    "args": [
+      {
+        "name": "query",
+        "type": "string",
+        "description": "The search query"
+      },
+      {
+        "name": "persona",
+        "type": "string",
+        "description": "Optional persona to use (philosopher, scientist, etc.)",
+        "required": false
+      }
+    ]
+  }
+}

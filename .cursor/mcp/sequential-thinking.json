@@ -1,0 +1,19 @@
+{
+    "mcpServers": {
+        "sequential-thinking": {
+            "command": "node",
+            "args": [
+                "C:\\Users\\Enidi\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-sequential-thinking\\dist\\index.js"
+            ],
+            "type": "stdio",
+            "env": {
+                "DEBUG": "*",
+                "NODE_ENV": "development",
+                "NODE_DEBUG": "net,stream,module,http",
+                "NO_COLOR": "1",
+                "FORCE_COLOR": "0"
+            },
+            "windowsHide": true
+        }
+    }
+}

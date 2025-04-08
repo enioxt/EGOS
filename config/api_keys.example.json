@@ -1,0 +1,10 @@
+{
+    "perplexity_api_key": "YOUR_PERPLEXITY_API_KEY",
+    "pubmed_api_key": "YOUR_PUBMED_API_KEY_OR_EMAIL",
+    "plos_api_key": "YOUR_PLOS_API_KEY",
+    "semantic_scholar_api_key": "YOUR_SEMANTIC_SCHOLAR_API_KEY",
+    "google_books_api_key": "YOUR_GOOGLE_BOOKS_API_KEY",
+    "crossref_email": "YOUR_EMAIL_FOR_CROSSREF",
+    "last_updated": "YYYY-MM-DDTHH:MM:SSZ",
+    "notes": "Example API keys configuration. Replace placeholders with your actual keys. Do NOT commit real keys."
+}

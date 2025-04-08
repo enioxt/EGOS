@@ -1,0 +1,191 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+ ---
+description: Guidelines for implementing SPARC methodology within the EGOS ecosystem
+globs: ["**/*.py", "**/*.md"]
+alwaysApply: true
+---
+
+# SPARC Orchestration within EGOS (KOIOS Standard)
+
+## Rule
+
+The SPARC methodology (Specification, Pseudocode, Architecture, Refinement, Completion) provides a structured approach for complex system development that complements EGOS's modular architecture. This rule defines how SPARC principles integrate with existing EGOS subsystems and workflows.
+
+### Core Principles Integration:
+
+1. **Subsystem-Mode Mapping**: EGOS subsystems map to SPARC specialized modes:
+   - **ATLAS/NEXUS** → Specification & Architecture
+   - **ETHIK** → Security Reviewer
+   - **CORUJA** → Code Implementation & AI Orchestration
+   - **HARMONY** → TDD, Debug & Integration
+   - **KOIOS** → Documentation Writer & Standards
+   - **MYCELIUM** → Task Communication Layer
+   - **CRONOS** → Monitoring, State & Persistence
+
+2. **Task Delegation Pattern**: When delegating complex tasks:
+   - Break down into subtasks aligned with subsystem responsibilities
+   - Include clear acceptance criteria for each subtask
+   - Maintain context isolation between subtasks
+   - Follow the SPARC sequence (Spec → Pseudocode → Architecture → Code → Test)
+   - Use Mycelium for passing context between task stages
+
+3. **File Structure & Modularity**:
+   - Maintain files under 500 lines (see `file_modularity.mdc`)
+   - Externalize configuration (no hardcoded environment variables)
+   - Design components for testability
+   - Each module/class should have single responsibility
+
+4. **Model Selection Based on Task Type**:
+   - **Reasoning Tasks** (Specification, Architecture, Planning):
+     - Prefer models optimized for reasoning (Claude 3 Opus/Sonnet Thinking, o3, DeepSeek)
+   - **Implementation Tasks** (Coding, Documentation, Testing):
+     - Prefer models optimized for instruction following (Claude 3 Sonnet, GPT-4o, Mistral)
+   - Delegate via appropriate CORUJA PDDs optimized for each model type
+
+## Implementation Guidance
+
+### Task Definition Format
+
+When defining tasks within the SPARC framework, use the following format:
+
+```python
+task = {
+    "id": "unique-task-identifier",
+    "type": "specification|architecture|implementation|testing|security|documentation",
+    "title": "Brief task description",
+    "description": "Detailed task requirements and context",
+    "acceptance_criteria": [
+        "Criterion 1",
+        "Criterion 2",
+        "..."
+    ],
+    "inputs": {
+        "input1": "value1",
+        "input2": "value2"
+    },
+    "dependencies": [
+        "dependency-task-id-1",
+        "dependency-task-id-2"
+    ],
+    "metadata": {
+        "priority": "high|medium|low",
+        "estimated_complexity": 1-5,
+        "owner": "subsystem-name"
+    }
+}
+```
+
+### Mycelium Topic Structure for SPARC Tasks
+
+SPARC task coordination should follow these Mycelium topic patterns:
+
+- Task Creation: `sparc.task.create.<subsystem>`
+- Task Status Updates: `sparc.task.status.<task-id>`
+- Task Completion: `sparc.task.complete.<task-id>`
+- Task Delegation: `sparc.task.delegate.<target-subsystem>`
+- Task Results: `sparc.task.results.<task-id>`
+
+### Implementation Examples
+
+#### Correct Task Delegation (ATLAS → CORUJA → HARMONY)
+
+```python
+# ATLAS phase - Specification & Architecture
+# Clear problem statement with acceptance criteria
+specification = {
+    "id": "auth-module-2025Q2",
+    "type": "specification",
+    "title": "User Authentication Module",
+    "description": "Implement secure authentication system for EGOS dashboard",
+    "acceptance_criteria": [
+        "Support email/password authentication",
+        "Include rate limiting for failed attempts",
+        "Log all authentication attempts (via KOIOS)",
+        "Follow ETHIK validation principles"
+    ],
+    "interfaces": {
+        "input": {"username": "str", "password": "str"},
+        "output": {"success": "bool", "token": "Optional[str]", "error": "Optional[str]"}
+    },
+    "metadata": {
+        "priority": "high",
+        "estimated_complexity": 3,
+        "owner": "ATLAS"
+    }
+}
+
+# NEXUS phase - Architecture
+architecture = {
+    "id": "auth-module-arch-2025Q2",
+    "parent_id": "auth-module-2025Q2",
+    "type": "architecture",
+    "components": [
+        {
+            "name": "AuthenticationService",
+            "responsibility": "Validate credentials, generate tokens",
+            "interfaces": ["IAuthenticator", "ITokenGenerator"],
+            "dependencies": ["KoiosLogger", "ConfigManager"]
+        },
+        {
+            "name": "RateLimiter",
+            "responsibility": "Track and limit authentication attempts",
+            "interfaces": ["IRateLimiter"],
+            "dependencies": ["RedisClient", "KoiosLogger"]
+        }
+    ],
+    "data_flow": [
+        "Request → InputValidator → RateLimiter → AuthenticationService → TokenGenerator → Response"
+    ],
+    "security_considerations": [
+        "Password hashing with Argon2id",
+        "Token expiration and rotation",
+        "IP-based and account-based rate limiting"
+    ]
+}
+
+# CORUJA phase - Implementation
+# Code that follows the specification with proper modularization
+
+# HARMONY phase - Testing
+# Tests that validate the implementation against specification
+```
+
+#### Incorrect Practices
+
+```python
+# ❌ Monolithic implementation (violates modularity)
+class AuthSystem:
+    def __init__(self):
+        self.db_connection = "hardcoded-connection-string"  # ❌ Hardcoded configuration
+        self.secret_key = "super-secret-key"  # ❌ Embedded secret
+
+    def do_everything(self, username, password):  # ❌ No separation of concerns
+        # 200+ lines of code handling validation, auth, tokens, rate limiting
+        # ❌ No clear interfaces or error handling
+        pass
+
+# ❌ Missing clear specification
+# ❌ No tests or validation criteria
+```
+
+## Rationale
+
+Integrating SPARC methodology into EGOS enhances our development workflow by providing:
+
+1. **Structured Task Decomposition**: Breaking complex problems into manageable, specialized subtasks.
+2. **Explicit Handoffs**: Clear interfaces between development stages with defined inputs/outputs.
+3. **Model Specialization**: Using the right AI model for each task type to optimize results.
+4. **Enhanced Modularity**: Reinforcing EGOS's existing modular design principles.
+5. **Quality Assurance**: Building in security, testing, and documentation from the beginning.
+
+This integration respects EGOS's existing architecture and ethical principles while enhancing its development methodology with SPARC's structured approach to task delegation and specialization.
+
+## References
+
+* EGOS Master Quantum Prompt (MQP.md)
+* KOIOS Standards Documentation
+* SPARC Methodology (Reuven Cohen, 2025)

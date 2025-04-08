@@ -1,0 +1,62 @@
+{
+    "mcpServers": {
+        "sequential-thinking": {
+            "command": "node",
+            "args": [
+                "C:\\Users\\Enidi\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-sequential-thinking\\dist\\index.js"
+            ],
+            "type": "stdio",
+            "env": {
+                "DEBUG": "*",
+                "NODE_ENV": "development",
+                "NODE_DEBUG": "net,stream,module,http",
+                "NO_COLOR": "1",
+                "FORCE_COLOR": "0"
+            },
+            "windowsHide": true
+        },
+        "eva-guarani-perplexity": {
+            "command": "C:\\Eva Guarani EGOS\\venv\\Scripts\\python.exe",
+            "args": [
+                "-m",
+                "tools.integration.mcp_server"
+            ],
+            "cwd": "C:\\Eva Guarani EGOS",
+            "type": "stdio",
+            "env": {
+                "DEBUG": "*",
+                "NODE_ENV": "development",
+                "NODE_DEBUG": "net,stream,module,http",
+                "NO_COLOR": "1",
+                "FORCE_COLOR": "0",
+                "PERPLEXITY_API_KEY": "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",
+                "MCP_ID": "eva-guarani-perplexity"
+            },
+            "windowsHide": true,
+            "separateProcess": true,
+            "tools": [
+                {
+                    "name": "perplexity_search",
+                    "description": "Search the web using Perplexity AI",
+                    "parameters": {
+                        "query": {
+                            "type": "string",
+                            "description": "The search query"
+                        },
+                        "persona": {
+                            "type": "string",
+                            "description": "Optional persona to use for search",
+                            "enum": [
+                                "default",
+                                "philosopher",
+                                "scientist"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "logLevel": "DEBUG",
+    "logFile": "C:\\Eva Guarani EGOS\\logs\\mcp.log"
+}

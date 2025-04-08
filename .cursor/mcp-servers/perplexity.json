@@ -1,0 +1,13 @@
+{
+    "name": "EVA & GUARANI Perplexity",
+    "command": "npx",
+    "args": [
+        "-y",
+        "@modelcontextprotocol/server-perplexity"
+    ],
+    "env": {
+        "PERPLEXITY_API_KEY": "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"
+    },
+    "autoStart": true,
+    "priority": 100
+}

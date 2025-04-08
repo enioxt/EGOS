@@ -1,0 +1,198 @@
+{
+  "version": "1.0.0",
+  "max_depth": 5,
+  "cache_duration": 300,
+  "visualization": {
+    "enabled": true,
+    "engine": "mermaid",
+    "max_nodes": 100,
+    "layout": "LR",
+    "themes": {
+      "default": {
+        "node_color": "#1f77b4",
+        "edge_color": "#7f7f7f",
+        "font_family": "Arial"
+      },
+      "dark": {
+        "node_color": "#2ca02c",
+        "edge_color": "#d62728",
+        "font_family": "Helvetica"
+      }
+    }
+  },
+  "storage": {
+    "type": "file",
+    "path": "data/maps",
+    "format": "json",
+    "compression": true,
+    "backup": {
+      "enabled": true,
+      "interval": 3600,
+      "max_backups": 24
+    }
+  },
+  "mycelium": {
+    "topics": {
+      "map_request": "atlas.map.request",
+      "map_result": "atlas.map.result",
+      "metadata_update": "atlas.metadata.update",
+      "metadata_status": "atlas.metadata.status",
+      "relationship_update": "atlas.relationship.update",
+      "relationship_status": "atlas.relationship.status",
+      "alert": "atlas.alert",
+      "metrics": "atlas.metrics",
+      "health": "atlas.health"
+    },
+    "message_format": {
+      "map_request": {
+        "required_fields": ["target"],
+        "optional_fields": ["depth", "include_metadata", "format"]
+      },
+      "metadata_update": {
+        "required_fields": ["component", "metadata"],
+        "optional_fields": ["source", "timestamp"]
+      },
+      "relationship_update": {
+        "required_fields": ["source", "target", "type"],
+        "optional_fields": ["metadata", "timestamp"]
+      }
+    },
+    "retry": {
+      "max_attempts": 3,
+      "initial_delay": 1000,
+      "max_delay": 5000,
+      "backoff_factor": 2
+    },
+    "batch": {
+      "enabled": true,
+      "max_size": 100,
+      "flush_interval": 1000
+    },
+    "security": {
+      "sign_messages": true,
+      "verify_signatures": true,
+      "encryption_enabled": true,
+      "hash_algorithm": "sha256"
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "logs/atlas.log",
+    "max_size": 10485760,
+    "backup_count": 5,
+    "include_relationship_details": true
+  },
+  "monitoring": {
+    "enabled": true,
+    "metrics_interval": 60,
+    "health_check_interval": 30,
+    "alert_channels": ["mycelium", "log"],
+    "performance_thresholds": {
+      "map_generation_time_ms": 1000,
+      "cache_size": 1000,
+      "error_rate": 0.01
+    }
+  },
+  "integration": {
+    "ethik": {
+      "enabled": true,
+      "validation_required": true,
+      "topics": ["ethik.atlas.validate"]
+    },
+    "nexus": {
+      "enabled": true,
+      "dependency_check": true,
+      "topics": ["nexus.atlas.dependency"]
+    },
+    "cronos": {
+      "enabled": true,
+      "backup_interval": 3600,
+      "topics": ["cronos.atlas.backup"]
+    }
+  },
+  "security": {
+    "api_key_required": true,
+    "rate_limit": {
+      "enabled": true,
+      "max_requests": 1000,
+      "window_seconds": 60
+    },
+    "input_validation": {
+      "max_component_name_length": 255,
+      "max_metadata_size_bytes": 102400,
+      "allowed_relationship_types": [
+        "depends_on",
+        "contains",
+        "calls",
+        "implements",
+        "extends",
+        "uses"
+      ]
+    }
+  },
+  "performance": {
+    "cache": {
+      "enabled": true,
+      "max_size": 1000,
+      "ttl_seconds": 300
+    },
+    "async": {
+      "max_workers": 10,
+      "queue_size": 1000
+    },
+    "batching": {
+      "enabled": true,
+      "max_size": 100,
+      "max_latency_ms": 1000
+    }
+  },
+  "relationships": {
+    "types": {
+      "depends_on": {
+        "description": "Component A depends on component B",
+        "bidirectional": false,
+        "metadata_schema": {
+          "required": ["criticality"],
+          "properties": {
+            "criticality": {
+              "type": "string",
+              "enum": ["low", "medium", "high", "critical"]
+            }
+          }
+        }
+      },
+      "contains": {
+        "description": "Component A contains component B",
+        "bidirectional": false,
+        "metadata_schema": {
+          "required": ["type"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["logical", "physical"]
+            }
+          }
+        }
+      },
+      "calls": {
+        "description": "Component A calls component B",
+        "bidirectional": false,
+        "metadata_schema": {
+          "required": ["frequency"],
+          "properties": {
+            "frequency": {
+              "type": "string",
+              "enum": ["rare", "occasional", "frequent", "constant"]
+            }
+          }
+        }
+      }
+    },
+    "validation": {
+      "enabled": true,
+      "schema_required": true,
+      "allow_custom_types": false
+    }
+  }
+}

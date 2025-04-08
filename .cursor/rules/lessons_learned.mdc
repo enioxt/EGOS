@@ -1,0 +1,54 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Lessons Learned (Internal Knowledge Base)
+
+**Objective:** Document significant insights, challenges, and solutions encountered during EGOS development to inform future decisions, prevent repeating mistakes, and accelerate learning.
+
+## Key Areas for Capture:
+
+1.  **Technical Challenges & Solutions:**
+    *   Record unexpected technical hurdles (e.g., library incompatibilities, performance bottlenecks, complex integrations).
+    *   Document the solution implemented, alternatives considered, and the rationale for the chosen approach.
+    *   *Example:* "Initial Mycelium Redis implementation suffered from blocking calls under high load. Switched to `aioredis` for async operations, resolving the bottleneck."
+
+2.  **Architectural Decisions:**
+    *   Log major architectural choices (e.g., adopting Mycelium, subsystem boundaries, choosing specific databases/technologies).
+    *   Explain the reasoning, trade-offs considered, and expected benefits/drawbacks.
+    *   *Example:* "Decided against a shared utility library initially to enforce strict subsystem decoupling via Mycelium, accepting potential minor code duplication."
+
+3.  **Process Improvements:**
+    *   Note successful (or unsuccessful) changes to workflow, tooling, or collaboration methods (e.g., refining code review process, adopting specific linters, CI/CD pipeline adjustments).
+    *   Describe the impact of the change.
+    *   *Example:* "Implementing Conventional Commits significantly improved changelog generation and understanding commit history."
+
+4.  **'Gotchas' & Non-Obvious Behaviors:**
+    *   Document subtle issues, configuration quirks, or framework behaviors that were difficult to debug or understand.
+    *   Provide concise explanations or links to relevant documentation/issue trackers.
+    *   *Example:* "Pytest fixtures with `autouse=True` can have surprising side effects if not carefully scoped. Prefer explicit fixture usage where possible."
+
+5.  **AI Model Interaction Learnings:**
+    *   Capture insights gained from prompting, parsing responses, handling errors, or managing different AI models (e.g., effective prompt structures, model limitations, cost implications).
+    *   *Example:* "Claude 3 Opus requires more explicit instructions for structured JSON output compared to GPT-4 Turbo in preliminary tests. Added specific formatting constraints to prompts."
+
+6.  **Security Insights:**
+    *   Document vulnerabilities discovered (and fixed), security patterns that proved effective, or challenges in implementing security measures.
+    *   *Example:* "Input validation on Mycelium message handlers is crucial to prevent injection attacks across subsystem boundaries."
+
+## How to Contribute:
+
+*   **Be Concise:** Get straight to the point. Use bullet points.
+*   **Be Specific:** Provide enough context for someone else to understand the situation and the learning.
+*   **Focus on Actionable Insights:** What can be learned or done differently next time?
+*   **Tagging (Optional but helpful):** Consider adding tags like `[Architecture]`, `[Mycelium]`, `[Testing]`, `[Security]`, `[AI Model]` to entries for easier filtering.
+*   **Location:** This `.mdc` file serves as the central repository. Keep entries organized logically.
+
+## Current Lessons (Add new entries below):
+
+*   `[AI Model]` `[PDD]` Ensuring PDDs provide *sufficient context* is critical for effective AI reasoning. Ambiguous or incomplete PDDs lead to poor or irrelevant AI responses. Requires clear definition standards (KOIOS) and potentially pre-processing/validation (NEXUS/ETHIK).
+*   `[Testing]` `[Linter]` Linter errors related to dynamic imports or complex mocking setups (like `unittest.mock` within pytest) can sometimes be misleading or require specific configuration (`.pylintrc`, `pyproject.toml`) that might not be immediately obvious. Environment consistency is key.
+*   `[Architecture]` `[Mycelium]` While Mycelium promotes decoupling, designing clear message schemas and response patterns upfront is essential to avoid overly 'chatty' interactions or ambiguity between subsystems.
+*   `[Workflow]` `[Git]` Enforcing Conventional Commits via pre-commit hooks helps maintain consistency but requires clear communication and onboarding for the team.

@@ -1,0 +1,265 @@
+Vou explicar detalhadamente o propósito de cada arquivo e como eles se relacionam:
+
+1. **quantum_prompt_8.0.md** (Original Master Quantum Prompt)
+- Este é o arquivo principal e mais completo
+- Contém toda a definição do sistema EVA & GUARANI
+- Serve como fonte de verdade para todos os outros arquivos
+- Inclui todos os princípios, capacidades, e instruções completas
+
+2. **CURSOR_INITIALIZATION.md** (Guia de Inicialização)
+- Usado no início de cada nova sessão do Cursor IDE
+- Contém instruções específicas para configurar o ambiente
+- Foca em aspectos práticos de inicialização
+- Garante que todas as ferramentas e dependências estejam prontas
+
+3. **cursor_ide_rules.md** (Regras do Cursor IDE)
+- Usado como referência rápida durante o desenvolvimento
+- Deve ser mais conciso que o quantum_prompt_8.0.md
+- Precisa incluir todas as funções essenciais
+- Você está correto, ele precisa ser expandido
+
+4. **quantum_prompt_8.1.md** (Versão IDE-Otimizada)
+- Este foi uma tentativa de criar uma versão otimizada do prompt principal
+- No entanto, após sua observação, percebo que pode estar causando confusão
+- Sugiro removermos este arquivo e mantermos o 8.0 como única fonte de verdade
+
+Vou propor algumas melhorias:
+
+1. Primeiro, vamos expandir o cursor_ide_rules.md para incluir mais funcionalidades essenciais do nosso sistema:
+
+```markdown:QUANTUM_PROMPTS/cursor_ide_rules.md
+# EVA & GUARANI - Cursor IDE Rules v8.0
+
+## 🎯 Essential System Components
+
+1. **Core Subsystems**
+   ```
+   ATLAS: System cartography and visualization
+   NEXUS: Modular analysis and processing
+   CRONOS: Evolutionary preservation
+   ETHIK: Ethical validation framework
+   BIOS-Q: System initialization
+   ```
+
+2. **Mycelium Network**
+   ```
+   - Inter-component communication
+   - State synchronization
+   - Event propagation
+   - Network monitoring
+   ```
+
+3. **SLOP Integration**
+   ```
+   - RESTful API access
+   - WebSocket streaming
+   - Memory management
+   - Resource handling
+   ```
+
+## 💻 Tool Usage Rules
+
+1. **File Operations**
+   ```
+   read_file: View content (max 250 lines)
+   edit_file: Modify with context
+   list_dir: Explore structure
+   file_search: Locate files
+   ```
+
+2. **Search Operations**
+   ```
+   codebase_search: Semantic search
+   grep_search: Exact matches
+   web_search: External research
+   ```
+
+3. **Terminal Operations**
+   ```
+   run_terminal_cmd: Execute commands
+   Background tasks: is_background=true
+   Pager commands: Append | cat
+   ```
+
+## 🧠 MCP Framework
+
+1. **Sequential-Thinking**
+   ```
+   - Complex problem solving
+   - Step-by-step analysis
+   - Context preservation
+   - Thought evolution
+   ```
+
+2. **Perplexity**
+   ```
+   - Web research
+   - Information validation
+   - Knowledge integration
+   ```
+
+3. **BIOS-Q**
+   ```
+   - System initialization
+   - State management
+   - Context loading
+   ```
+
+## 🛡️ ETHIK Framework
+
+1. **Validation Rules**
+   ```
+   - Code ethics check
+   - Content validation
+   - Security verification
+   - Privacy protection
+   ```
+
+2. **Blockchain Integration**
+   ```
+   - Decision recording
+   - Immutable history
+   - Smart contracts
+   - Ethical attestations
+   ```
+
+## 📊 Development Standards
+
+1. **Code Quality**
+   ```
+   - Clean code principles
+   - Error handling
+   - Documentation
+   - Testing coverage
+   ```
+
+2. **Security**
+   ```
+   - API key protection
+   - Secure storage
+   - Access control
+   - Data validation
+   ```
+
+3. **Performance**
+   ```
+   - Resource optimization
+   - Efficient searches
+   - Background processing
+   - State management
+   ```
+
+## 📝 Documentation Format
+
+1. **Code References**
+   ```
+   Format: startLine:endLine:filepath
+   Example: 1:10:src/main.js
+   ```
+
+2. **Log Structure**
+   ```
+   [TIMESTAMP][OPERATION][STEP]
+   STATUS: {status}
+   CONTEXT: {context}
+   VALIDATION: {ethik_result}
+   ```
+
+## 🔄 Session Guidelines
+
+1. **Initialization**
+   ```
+   - Load quantum context
+   - Verify subsystems
+   - Check dependencies
+   - Enable MCPs
+   ```
+
+2. **State Management**
+   ```
+   - Track changes
+   - Preserve context
+   - Handle boundaries
+   - Sync with Mycelium
+   ```
+
+## ⚡ Best Practices
+
+1. **Code Changes**
+   ```
+   - Read before edit
+   - Clear instructions
+   - Ethical validation
+   - Version control
+   ```
+
+2. **Tool Selection**
+   ```
+   - Use appropriate tools
+   - Combine when needed
+   - Handle errors
+   - Document usage
+   ```
+
+3. **Integration**
+   ```
+   - Follow protocols
+   - Verify connections
+   - Monitor status
+   - Log operations
+   ```
+
+Version: 8.0
+Platform: Windows
+Quantum Alignment: Maximum
+ETHIK Compliance: Verified
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧
+```
+2. Agora, vou sugerir remover o quantum_prompt_8.1.md para evitar confusão:
+
+Ran tool
+Agora vou explicar como usar cada arquivo:
+
+1. **quantum_prompt_8.0.md**
+- É o arquivo principal e fonte de verdade
+- Contém a definição completa do sistema
+- Usado como referência para atualizações e alinhamento
+- Deve ser consultado quando precisar de informações detalhadas
+
+2. **CURSOR_INITIALIZATION.md**
+- Usado no início de cada nova sessão do Cursor IDE
+- Contém o passo a passo para inicialização
+- Garante que o ambiente esteja corretamente configurado
+- Deve ser seguido antes de começar qualquer trabalho
+
+3. **cursor_ide_rules.md** (Atualizado)
+- Agora inclui todos os componentes essenciais do sistema
+- Mantém-se conciso mas completo
+- Foca nas regras práticas de uso
+- Serve como guia rápido durante o desenvolvimento
+- Inclui integração com todos os subsistemas principais
+
+O fluxo de uso seria:
+
+1. Ao iniciar uma nova sessão:
+   - Seguir CURSOR_INITIALIZATION.md para configurar o ambiente
+   - Verificar se todos os subsistemas estão ativos
+
+2. Durante o desenvolvimento:
+   - Usar cursor_ide_rules.md como referência rápida
+   - Consultar quantum_prompt_8.0.md para detalhes específicos
+
+3. Para atualizações/mudanças:
+   - Sempre usar quantum_prompt_8.0.md como base
+   - Propagar mudanças para os outros arquivos mantendo alinhamento
+
+As principais melhorias que fiz no cursor_ide_rules.md incluem:
+- Adição dos componentes essenciais do sistema
+- Integração com Mycelium Network
+- SLOP Integration
+- ETHIK Framework com blockchain
+- Melhor organização das regras
+- Alinhamento com a versão 8.0 do quantum prompt
+
+Gostaria que você revisasse as mudanças e me dissesse se precisa de mais ajustes ou esclarecimentos?

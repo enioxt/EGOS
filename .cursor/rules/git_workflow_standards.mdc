@@ -1,0 +1,237 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+---
+description: Standards and procedures for effective Git workflow, especially for challenging situations like merge conflicts and pre-commit hook failures.
+globs: ["**/.git*"]
+alwaysApply: true # This is a core workflow standard
+---
+
+# Git Workflow Standards (KOIOS Standard)
+
+## Rule
+
+Follow these structured procedures when working with Git, especially in challenging situations such as merge conflicts, pre-commit hook failures, or repository transitions.
+
+## Core Principles
+
+1. **Targeted Fixing:** Address specific issues directly rather than attempting to fix everything at once.
+2. **Progressive Resolution:** Solve problems in incremental steps, validating each step.
+3. **Prioritization:** Focus on critical files first, especially those causing merge conflicts.
+4. **Separation of Concerns:** Divide large problematic merges into multiple smaller commits when appropriate.
+5. **Documentation:** Use meaningful commit messages that document the issue resolved.
+
+## Standard Local Commit Workflow
+
+```
+Procedure: EGOS-GIT-COMMIT-01
+```
+
+This procedure outlines the standard workflow for committing completed, non-problematic work from your local machine.
+
+1. **Stage Changes (`git add`):**
+   - Selectively stage *only* the files directly related to the completed task or fix.
+   - Avoid staging files with known, unrelated issues (e.g., files failing pre-commit hooks due to problems outside the scope of your current commit).
+   - Command: `git add <specific_file_1> <specific_file_2>`
+
+2. **Commit Locally (`git commit`):**
+   - Create a commit using a clear, descriptive message following the Conventional Commits format (`commit_messages.mdc`).
+   - Command: `git commit -m "type(scope): description"`
+   - **Pre-commit Hooks:** Aim to resolve any pre-commit hook failures related to the files you are committing *before* attempting the commit. Hooks ensure code quality and consistency.
+
+3. **Push to Remote (`git push`):**
+   - Upload your verified local commit(s) to the central repository (e.g., GitHub).
+   - Command: `git push origin <branch_name>` (usually `main`)
+
+**Note:** For handling merge conflicts or persistent pre-commit hook issues during complex operations, refer to procedures EGOS-GIT-MERGE-01 and EGOS-GIT-PRECOMMIT-01 respectively.
+
+## Standard Procedures
+
+### 1. Merge Conflict Resolution Process
+
+```
+Procedure: EGOS-GIT-MERGE-01
+```
+
+1. **Identify Conflicting Files:**
+   ```bash
+   git status
+   ```
+
+2. **Examine Each Conflict:**
+   - Open each conflicting file and locate conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`)
+   - Understand the changes from both branches
+
+3. **Resolve Strategically:**
+   - For configuration/path conflicts: Choose the value appropriate for the current environment
+   - For feature conflicts: Select the implementation that matches current requirements
+   - For complex merges: Consider creating a hybrid solution that preserves important functionality from both sides
+
+4. **Mark as Resolved:**
+   ```bash
+   git add <resolved-file>
+   ```
+
+5. **Complete the Merge:**
+   ```bash
+   git commit
+   # If pre-commit hooks cause issues:
+   # git commit --no-verify
+   ```
+
+### 2. Pre-commit Hook Failure Handling
+
+```
+Procedure: EGOS-GIT-PRECOMMIT-01
+```
+
+1. **Analyze Hook Failures:**
+   - Identify which hooks are failing (formatting, large files, tests)
+   - Determine if the failures are critical or can be temporarily bypassed
+
+2. **Address Common Failures:**
+   - For formatting issues:
+     ```bash
+     # Fix with automated tools (using Ruff)
+     ruff format .
+     ruff check --fix .
+     ```
+   - For large files:
+     ```bash
+     # Add generated/binary files to .gitignore
+     echo "path/to/large_generated_file.dat" >> .gitignore
+     git add .gitignore
+     ```
+   - For missing imports or dependencies:
+     ```bash
+     # Fix imports in the specific files
+     # Add dependencies to requirements.txt / pyproject.toml and reinstall
+     git add <fixed-files> requirements.txt pyproject.toml
+     ```
+
+3. **Strategic Bypassing:**
+   - For non-critical issues during merges or emergency fixes:
+     ```bash
+     git commit --no-verify -m "fix(<scope>): <description> # --no-verify used"
+     ```
+   - Document bypass reason in the commit message
+
+4. **Post-Bypass Cleanup:**
+   - Create follow-up tasks/issues to address bypassed problems
+   - Implement proper fixes in subsequent commits
+
+### 3. Repository Management and Transitions
+
+```
+Procedure: EGOS-GIT-REPO-01
+```
+
+1. **Configure Credentials:**
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "your_email@example.com"
+   # Consider credential helpers for secure storage
+   ```
+
+2. **Repository Migration:**
+   ```bash
+   # Check current remotes
+   git remote -v
+
+   # Remove existing remotes if needed
+   git remote remove origin
+
+   # Add new remote (Use SSH for push access)
+   git remote add origin git@github.com:<username>/<new-repo-name>.git
+
+   # Verify new configuration
+   git remote -v
+   ```
+
+3. **Push to New Repository:**
+   ```bash
+   git push -u origin --all
+   git push -u origin --tags
+   ```
+
+4. **Validate Migration:**
+   - Verify commits/branches/tags appear in the web interface
+   - Confirm proper rendering of documentation files
+   - Check GitHub Actions/workflows if applicable
+
+## EGOS-Specific Considerations
+
+1. **Local-First Development:**
+   - **Always create and modify files locally first**, then push to GitHub.
+   - Avoid creating files directly on GitHub and then pulling them down.
+   - This ensures proper testing in the local environment and maintains the correct workflow.
+
+2. **Windows Path Handling:**
+   - Use Windows-compatible path formats (`C:\Eva Guarani EGOS\`) in code/config where necessary.
+   - Quote paths with spaces in shell commands: `"C:\Eva Guarani EGOS\"`.
+   - When resolving merge conflicts involving paths, ensure Windows compatibility is maintained.
+
+3. **KOIOS Compliance:**
+   - Follow the commit message standards in `commit_messages.mdc`
+   - Maintain project structure standards during merges
+   - Verify documentation remains accurate after significant merges
+
+4. **ETHIK Considerations:**
+   - Never commit sensitive data (credentials, tokens, PII)
+   - Add potentially sensitive files or patterns to `.gitignore`
+   - Verify no PII is exposed in commit history
+
+## Examples
+
+### Merge Conflict Resolution Example
+
+```bash
+# 1. Identify conflicts
+git status
+# On branch main
+# Your branch is ahead of 'origin/main' by 2 commits.
+#   (use "git push" to publish your local commits)
+#
+# You have unmerged paths.
+#   (fix conflicts and run "git commit")
+#   (use "git merge --abort" to abort the merge)
+#
+# Unmerged paths:
+#   (use "git add <file>..." to mark resolution)
+#       both modified:   subsystems/CRONOS/config/settings.yaml
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+
+# 2. Edit the file subsystems/CRONOS/config/settings.yaml
+#    Locate markers <<<<<<<, =======, >>>>>>>
+#    Resolve the conflict by choosing/merging the correct lines
+#    Remove the conflict markers
+
+# 3. Stage the resolved file
+git add subsystems/CRONOS/config/settings.yaml
+
+# 4. Complete the merge (let pre-commit hooks run if possible)
+git commit
+# If hooks fail on unrelated issues, use --no-verify and document
+# git commit --no-verify -m "Merge branch 'feature/xyz' # --no-verify: Pre-commit failure in unrelated file"
+```
+
+### Repository Transition Example
+
+```bash
+# Configure credentials globally (if not already done)
+# git config --global user.name "Your Name"
+# git config --global user.email "your_email@example.com"
+
+# Set up the new repository remote
+git remote remove origin
+git remote add origin git@github.com:enioxt/egosDev.git
+
+# Push all branches and tags to the new repository
+git push -u origin --all
+git push -u origin --tags
+```
+
+**All EGOS developers should follow these standardized Git workflows to ensure consistent code quality, maintainable repositories, and effective collaboration. These procedures form a core part of the KOIOS standards for the EGOS codebase.**

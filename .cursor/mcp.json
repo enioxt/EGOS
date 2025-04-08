@@ -1,0 +1,135 @@
+{
+    "mcpServers": {
+        "sequential-thinking": {
+            "command": "node",
+            "args": [
+                "C:/Users/Enidi/AppData/Roaming/npm/node_modules/@modelcontextprotocol/server-sequential-thinking/dist/index.js"
+            ],
+            "type": "stdio",
+            "env": {
+                "DEBUG": "*",
+                "NODE_ENV": "development",
+                "MCP_LOG_LEVEL": "debug",
+                "MCP_LOG_FILE": "C:/EGOS/logs/mcp/sequential-thinking.log"
+            },
+            "windowsHide": true
+        },
+        "filesystem": {
+            "command": "node",
+            "args": [
+                "C:/Users/Enidi/AppData/Roaming/npm/node_modules/@modelcontextprotocol/server-filesystem/dist/index.js",
+                "C:/EGOS"
+            ],
+            "type": "stdio",
+            "env": {
+                "DEBUG": "*",
+                "NODE_ENV": "development",
+                "MCP_LOG_LEVEL": "debug",
+                "MCP_LOG_FILE": "C:/EGOS/logs/mcp/filesystem.log",
+                "NODE_DEBUG": "net,stream,module,http",
+                "NO_COLOR": "1",
+                "FORCE_COLOR": "0",
+                "rootPath": "C:/EGOS/"
+            },
+            "windowsHide": true
+        },
+        "perplexity": {
+            "command": "node",
+            "args": [
+                "C:\\Users\\Enidi\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-perplexity\\dist\\index.js"
+            ],
+            "type": "stdio",
+            "env": {
+                "DEBUG": "mcp:*",
+                "LOG_LEVEL": "debug",
+                "LOG_FORMAT": "json",
+                "LOG_DIR": "C:\\EGOS\\logs",
+                "NODE_ENV": "development",
+                "NODE_DEBUG": "net,stream,module,http",
+                "NO_COLOR": "1",
+                "FORCE_COLOR": "0",
+                "PERPLEXITY_API_KEY": "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",
+                "PERPLEXITY_MODEL": "sonar-pro",
+                "DB_PATH": "C:\\EGOS\\logs\\perplexity_chats.db",
+                "DEBUG_LOGS": "true",
+                "PERPLEXITY_TIMEOUT_MS": 60000
+            },
+            "windowsHide": true
+        },
+        "bios-q": {
+            "command": "cmd.exe",
+            "args": [
+                "/c",
+                "start",
+                "/b",
+                "node",
+                "C:\\EGOS\\subsystems\\BIOS-Q\\mcp\\bios_q_mcp.js"
+            ],
+            "type": "stdio",
+            "env": {
+                "DEBUG": "mcp:*",
+                "LOG_LEVEL": "debug",
+                "LOG_FORMAT": "json",
+                "LOG_DIR": "C:\\EGOS\\logs",
+                "NODE_ENV": "development",
+                "NODE_DEBUG": "net,stream,module,http",
+                "NO_COLOR": "1",
+                "FORCE_COLOR": "0",
+                "BIOS_Q_CONFIG": "C:\\EGOS\\subsystems\\BIOS-Q\\config\\bios_q_config.json",
+                "mcpDescription": "Manages BIOS-Q functions and system initialization.",
+                "path": "C:\\EGOS\\subsystems\\BIOS-Q\\mcp\\bios_q_mcp.js",
+                "nodePath": "C:\\Program Files\\nodejs\\node.exe",
+                "API_KEYS_FILE": "C:\\EGOS\\config\\api_keys.json",
+                "PYTHON_PATH": "C:\\EGOS\\venv\\Scripts\\python.exe",
+                "SYSTEM_ROOT": "C:\\EGOS"
+            },
+            "windowsHide": true,
+            "detached": true,
+            "shell": true,
+            "stdio": [
+                "pipe",
+                "pipe",
+                "pipe"
+            ]
+        },
+        "openrouter": {
+            "command": "node",
+            "args": [
+                "C:\\EGOS\\.cursor\\mcp-servers\\openrouter_mcp_server.js"
+            ],
+            "type": "stdio",
+            "env": {
+                "DEBUG": "mcp:*",
+                "LOG_LEVEL": "debug",
+                "LOG_FORMAT": "json",
+                "LOG_DIR": "C:\\EGOS\\logs",
+                "NODE_ENV": "development",
+                "NODE_DEBUG": "net,stream,module,http",
+                "NO_COLOR": "1",
+                "FORCE_COLOR": "0",
+                "OPENROUTER_API_KEY": "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",
+                "MCP_LOG_FILE": "C:\\EGOS\\logs\\mcp\\openrouter.log",
+                "mcpDescription": "MCP Server for OpenRouter Integration",
+                "path": "C:\\EGOS\\.cursor\\mcp-servers\\openrouter_mcp_server.js",
+                "nodePath": "C:\\Program Files\\nodejs\\node.exe",
+                "API_KEYS_FILE": "C:\\EGOS\\config\\api_keys.json",
+                "SYSTEM_ROOT": "C:\\EGOS"
+            },
+            "windowsHide": true
+        }
+    },
+    "logLevel": "DEBUG",
+    "logFile": "C:/EGOS/logs/mcp/mcp.log",
+    "configPaths": [
+        ".cursor/mcp/filesystem.json",
+        ".cursor/mcp/sequential-thinking.json",
+        ".cursor/mcp/openrouter.json"
+    ],
+    "initialization": {
+        "enforceRequiredServers": true,
+        "autoStart": true,
+        "retryOnFailure": true,
+        "maxRetries": 3,
+        "startupDelayMs": 1000
+    }
+}

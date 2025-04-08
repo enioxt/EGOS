@@ -1,0 +1,62 @@
+{
+    "backup": {
+        "directory": "./backups",
+        "retention_days": 30,
+        "max_backups": 100,
+        "compression_level": 9,
+        "auto_backup": {
+            "enabled": true,
+            "interval_hours": 24,
+            "min_changes": 10
+        }
+    },
+    "restore": {
+        "default_strategy": "merge",
+        "verify_integrity": true,
+        "create_restore_point": true,
+        "max_retries": 3,
+        "timeout_seconds": 300
+    },
+    "logging": {
+        "level": "INFO",
+        "file": "logs/cronos.log",
+        "max_size_mb": 100,
+        "backup_count": 5,
+        "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    },
+    "mycelium": {
+        "topics": {
+            "backup_request": "cronos.backup.request",
+            "backup_status": "cronos.backup.status",
+            "restore_request": "cronos.restore.request",
+            "restore_status": "cronos.restore.status",
+            "alert": "cronos.alert"
+        },
+        "retry_interval_seconds": 5,
+        "max_message_size_mb": 100
+    },
+    "security": {
+        "encryption_enabled": true,
+        "hash_algorithm": "sha256",
+        "verify_signatures": true
+    },
+    "integration": {
+        "ethik": {
+            "enabled": true,
+            "validation_timeout": 30
+        },
+        "atlas": {
+            "enabled": true,
+            "metadata_sync": true
+        },
+        "nexus": {
+            "enabled": true,
+            "dependency_check": true
+        }
+    },
+    "performance": {
+        "max_concurrent_operations": 5,
+        "buffer_size_mb": 64,
+        "temp_dir": "./temp"
+    }
+}

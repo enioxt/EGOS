@@ -1,0 +1,126 @@
+{
+  "log_level": "INFO",
+  "core_config": {
+    "analysis": {
+      "suggestions": {
+        "cognitive_load_threshold_high": 50,
+        "imports_threshold": 15,
+        "imported_by_threshold": 10
+      }
+    }
+  },
+  "analysis": {
+    "timeout": 30,
+    "max_depth": 10,
+    "include_metadata": true,
+    "analysis_types": [
+      "dependencies",
+      "relationships",
+      "metrics",
+      "quality"
+    ],
+    "exclude_patterns": [
+      "**/__pycache__/**",
+      "**/.git/**",
+      "**/node_modules/**",
+      "**/.venv/**"
+    ]
+  },
+  "cache": {
+    "enabled": true,
+    "duration": 300,
+    "max_size": 1000,
+    "cleanup_interval": 3600
+  },
+  "mycelium": {
+    "topics": {
+      "analyze_request": "nexus.analyze.request",
+      "analyze_result": "nexus.analyze.result",
+      "dependency_update": "nexus.dependency.update",
+      "dependency_status": "nexus.dependency.status",
+      "module_update": "nexus.module.update",
+      "module_status": "nexus.module.status",
+      "alert": "nexus.alert"
+    },
+    "retry": {
+      "max_attempts": 3,
+      "initial_delay": 1,
+      "max_delay": 5,
+      "backoff_factor": 2
+    },
+    "batch": {
+      "enabled": true,
+      "max_size": 100,
+      "flush_interval": 5
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/nexus.log",
+    "max_size": 10485760,
+    "backup_count": 5,
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  },
+  "integration": {
+    "ethik": {
+      "enabled": true,
+      "validation_timeout": 5,
+      "cache_validations": true
+    },
+    "atlas": {
+      "enabled": true,
+      "sync_interval": 300,
+      "relationship_types": [
+        "depends_on",
+        "imports",
+        "extends",
+        "implements"
+      ]
+    },
+    "cronos": {
+      "enabled": true,
+      "backup_interval": 3600,
+      "max_backups": 10
+    }
+  },
+  "metrics": {
+    "collection": {
+      "enabled": true,
+      "interval": 60
+    },
+    "types": {
+      "dependencies": true,
+      "complexity": true,
+      "coverage": true,
+      "quality": true
+    },
+    "thresholds": {
+      "complexity": 10,
+      "coverage": 80,
+      "quality": 0.8
+    }
+  },
+  "visualization": {
+    "enabled": true,
+    "max_nodes": 100,
+    "max_edges": 500,
+    "layout": "force_directed",
+    "formats": [
+      "json",
+      "dot",
+      "mermaid"
+    ]
+  },
+  "security": {
+    "scan_dependencies": true,
+    "verify_integrity": true,
+    "alert_on_issues": true,
+    "max_vulnerability_age": 30
+  },
+  "performance": {
+    "max_concurrent_analyses": 10,
+    "buffer_size": 8192,
+    "temp_dir": "/tmp/nexus",
+    "cleanup_interval": 3600
+  }
+}

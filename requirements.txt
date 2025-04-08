@@ -1,0 +1,33 @@
+# EVA & GUARANI Core Dependencies
+pyyaml>=6.0.1
+tqdm>=4.66.1
+colorama>=0.4.6
+rich>=13.7.0
+requests>=2.31.0
+python-dotenv>=1.0.0 # Para carregar arquivos .env
+
+# Dashboard Dependencies
+streamlit>=1.24.0
+pandas>=2.0.0
+numpy>=1.24.0
+plotly>=5.14.0
+
+# Testing and Development
+pytest>=8.0
+pytest-cov>=4.1.0
+pytest-asyncio
+black
+ruff
+pre-commit
+
+# Subsystem Specific / Optional
+networkx>=3.2.1 # Usado por alguns subsistemas
+matplotlib>=3.8.0 # Usado por alguns subsistemas
+openai>=1.0 # Opcional: Para traduções AI usando OpenAI API
+watchdog # Opcional: Para monitoramento de arquivos (KOIOS)
+asyncio>=3.4.3
+
+# --- Dependências Locais (Ajustar caminhos antes de descomentar) ---
+# koios @ file:///C:/Users/Enidi/Documents/Projetos/koios
+# mycelium @ file:///path/to/mycelium
+# subsystems.ETHIK @ file:///C:/Eva%20Guarani%20EGOS/subsystems/ETHIK

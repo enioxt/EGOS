@@ -1,0 +1,776 @@
+# EVA & GUARANI EGOS - Análise e Plano de Monetização
+
+Após analisar cuidadosamente todo o projeto EVA & GUARANI EGOS, identifiquei uma oportunidade clara de monetização que equilibra viabilidade técnica com potencial de mercado.
+
+## Análise de Componentes para Monetização
+
+Analisando os subsistemas atuais:
+
+1. **BIOS-Q**: Sistema de gerenciamento de contexto - Tecnicamente avançado, mas sem interface de usuário clara para monetização.
+
+2. **ATLAS**: Cartografia sistêmica - Potencial para visualização de sistemas complexos.
+
+3. **NEXUS**: Análise modular - Útil para desenvolvedores, mas mercado limitado.
+
+4. **CRONOS**: Preservação evolutiva - Componente de suporte, difícil de monetizar isoladamente.
+
+5. **ETHIK**: Framework ético - Diferencial importante, mas não um produto autônomo.
+
+6. **Ferramentas de Tradução**: Bem desenvolvidas com suporte para Portuguese-English, mas mercado competitivo.
+
+7. **EVA Atendimento**: **Produto mais próximo da comercialização** - Já possui público-alvo definido (pequenas empresas no Brasil), modelo de preços estruturado, e soluciona um problema real.
+
+## Proposta: EVA Atendimento como Produto Inicial
+
+O **EVA Atendimento** é claramente o produto mais viável para monetização imediata:
+
+1. **Estado atual**: Possui componentes funcionais para automação de atendimento via WhatsApp.
+
+2. **Mercado-alvo definido**: Pequenas empresas e profissionais independentes no Brasil.
+
+3. **Proposta de valor clara**: Assistente IA para WhatsApp que automatiza atendimento ao cliente com tratamento ético de dados.
+
+4. **Modelo de preços existente**:
+   - Plano Gratuito: Até 100 mensagens/mês
+   - Plano Básico: R$97/mês, até 500 mensagens
+   - Plano Profissional: R$197/mês, até 2.000 mensagens
+   - Plano Empresarial: R$397/mês, mensagens ilimitadas
+
+5. **Recursos existentes**:
+   - Respostas automatizadas
+   - Agendamento
+   - Cotações automatizadas
+   - Rastreamento de pedidos/processos
+   - Lembretes para clientes
+
+## Plano de Ação para Monetização do EVA Atendimento
+
+### 1. Finalização do Produto (1-2 meses)
+
+- **Semana 1-2: Auditoria de código**
+  - Revisar componentes do EVA Atendimento
+  - Identificar lacunas técnicas
+  - Priorizar recursos essenciais para MVP
+
+- **Semana 3-4: Desenvolvimento do Frontend**
+  - Criar painel de controle para empresas
+  - Desenvolver interface de configuração de chatbot
+  - Implementar visualização de métricas de atendimento
+
+- **Semana 5-6: Integração com WhatsApp**
+  - Finalizar integração com WhatsApp Business API
+  - Implementar sistema de templates de mensagens
+  - Desenvolver sistema de controle de fluxo de conversas
+
+- **Semana 7-8: Testes e Otimização**
+  - Realizar testes com usuários reais
+  - Otimizar desempenho
+  - Implementar correções necessárias
+
+### 2. Preparação para o Mercado (1 mês)
+
+- **Semana 9-10: Material de Marketing**
+  - Criar landing page
+  - Desenvolver demonstração do produto
+  - Preparar materiais de apresentação
+
+- **Semana 11-12: Infraestrutura de Vendas**
+  - Implementar sistema de cobrança
+  - Criar documentação de onboarding
+  - Desenvolver sistema de suporte ao cliente
+
+### 3. Lançamento e Aquisição de Clientes (2-3 meses)
+
+- **Mês 1: Soft Launch**
+  - Lançar para 5-10 clientes iniciais (beta)
+  - Coletar feedback e implementar melhorias
+  - Refinar processos operacionais
+
+- **Mês 2-3: Lançamento Completo**
+  - Implementar estratégia de marketing digital
+  - Iniciar parcerias com contadores e empresas de gestão
+  - Estabelecer processos de vendas e onboarding
+
+### 4. Expansão (6-12 meses)
+
+- **Trimestre 1: Consolidação**
+  - Alcançar 20-50 clientes pagantes
+  - Implementar melhorias com base no feedback
+  - Expandir equipe de suporte conforme necessário
+
+- **Trimestre 2: Crescimento**
+  - Expandir para 100+ clientes
+  - Adicionar integrações com sistemas populares no Brasil
+  - Aumentar investimento em marketing
+
+## Necessidades de Recursos
+
+1. **Desenvolvimento**:
+   - Frontend em React para painel administrativo
+   - API em Python (FastAPI) para backend
+   - Infraestrutura na AWS/Azure/GCP
+
+2. **Equipe Mínima**:
+   - 1 Desenvolvedor backend
+   - 1 Desenvolvedor frontend
+   - 1 Product Manager (sua amiga)
+   - 1 Pessoa de marketing/vendas
+
+3. **Parceiros Potenciais**:
+   - Empresas de software de gestão para PMEs
+   - Contadores que atendem pequenas empresas
+   - Associações de pequenos comércios
+
+## Próximos Passos Imediatos
+
+1. **Hoje**: Criar documento detalhado de especificação do produto EVA Atendimento
+2. **Esta semana**: Revisar estado atual do código relacionado ao EVA Atendimento
+3. **Próxima semana**: Reunião com a product manager para validar o plano
+4. **Próximo mês**: Iniciar desenvolvimento do frontend e integrações necessárias
+
+Este plano aproveita os componentes mais maduros do sistema EVA & GUARANI para criar uma fonte de receita que pode financiar o desenvolvimento contínuo dos subsistemas mais avançados como ATLAS, NEXUS, CRONOS e ETHIK.
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧
+
+
+____________________________________
+
+
+
+
+Ran tool
+
+Ran tool
+
+Ran tool
+
+Ran tool
+
+Ran tool
+
+Ran tool
+
+Ran tool
+
+Ran tool
+
+Ran tool
+
+Ran tool
+
+Ran tool
+
+Read file: eva-atendimento/backend/app/integrations/egos_connector.py
+
+```bash
+cd "C:\Eva & Guarani - EGOS" && find . -path "*/personas/*.json" -o -path "*/personas/*.yml" -o -path "*/personas/*.yaml"
+```
+
+Read file: eva-atendimento/backend/.env
+
+Read file: modules/quantum/openai_config.json
+
+Read file: eva-atendimento/backend/app/integrations/stable_diffusion.py
+
+Ran tool
+
+Ran tool
+
+Ran tool
+
+```bash
+find "C:\Eva & Guarani - EGOS" -name "philosophy.json" -o -name "ethics.json" -o -name "sociology.json" -o -name "games.json" -o -name "rpg.json"
+```
+
+```python:eva-atendimento/backend/app/integrations/egos_connector.py
+// ... existing code ...
+
+class EGOSConnector:
+    """Conector para integração com subsistemas EVA & GUARANI"""
+
+    def __init__(self, data_dir: Optional[str] = None):
+        """
+        Inicializa o conector EGOS.
+
+        Args:
+            data_dir: Diretório opcional para armazenamento de dados
+        """
+        self.data_dir = Path(data_dir) if data_dir else Path("data/egos_integration")
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+
+        # Status de disponibilidade de subsistemas
+        self.available_systems = {
+            "atlas": ATLAS_AVAILABLE,
+            "nexus": NEXUS_AVAILABLE,
+            "ethik": ETHIK_AVAILABLE,
+            "cronos": CRONOS_AVAILABLE
+        }
+
+        # Mapeamento para personas existentes no sistema principal
+        self.personas_mapping = {
+            # Módulos core do EVA & GUARANI
+            "atlas": str(Path(__file__).resolve().parents[2] / "data" / "telegram_bot" / "personas" / "atlas.json"),
+            "ethik": str(Path(__file__).resolve().parents[2] / "data" / "telegram_bot" / "personas" / "ethik.json"),
+            "default": str(Path(__file__).resolve().parents[2] / "data" / "telegram_bot" / "personas" / "default.json"),
+
+            # Personas adicionais do sistema EVA & GUARANI principal
+            "philosophy": "quantum_prompts/SPECIALIZED/philosophy.json",
+            "games": "quantum_prompts/SPECIALIZED/games.json",
+            "sociology": "quantum_prompts/SPECIALIZED/sociology.json",
+            "rpg": "quantum_prompts/RPG/overview.md"
+        }
+
+        # Path base para o projeto principal EVA & GUARANI
+        self.egos_base_path = Path(__file__).resolve().parents[4]
+
+        logger.info(f"EGOSConnector inicializado. Subsistemas disponíveis: {self.available_systems}")
+
+    // ... existing code ...
+
+    def list_available_personas(self) -> List[Dict[str, Any]]:
+        """
+        Lista todas as personas disponíveis no sistema EVA & GUARANI.
+
+        Returns:
+            Lista com informações sobre cada persona disponível
+        """
+        personas = []
+
+        # Adiciona personas locais do bot do Telegram
+        telegram_personas_dir = Path(__file__).resolve().parents[2] / "data" / "telegram_bot" / "personas"
+        if telegram_personas_dir.exists():
+            for persona_file in telegram_personas_dir.glob("*.json"):
+                try:
+                    with open(persona_file, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        personas.append({
+                            "id": persona_file.stem,
+                            "name": data.get("name", persona_file.stem),
+                            "description": data.get("description", ""),
+                            "source": "telegram_bot",
+                            "path": str(persona_file)
+                        })
+                except Exception as e:
+                    logger.error(f"Erro ao carregar persona {persona_file}: {str(e)}")
+
+        # Tenta carregar personas do sistema principal
+        for persona_id, relative_path in self.personas_mapping.items():
+            if persona_id in ["atlas", "ethik", "default"]:
+                # Já carregadas acima
+                continue
+
+            full_path = self.egos_base_path / relative_path
+            if full_path.exists():
+                # Para arquivos JSON
+                if full_path.suffix.lower() == ".json":
+                    try:
+                        with open(full_path, "r", encoding="utf-8") as f:
+                            data = json.load(f)
+                            personas.append({
+                                "id": persona_id,
+                                "name": data.get("name", persona_id.capitalize()),
+                                "description": data.get("description", ""),
+                                "source": "egos_core",
+                                "path": str(full_path)
+                            })
+                    except Exception as e:
+                        logger.error(f"Erro ao carregar persona {persona_id} de {full_path}: {str(e)}")
+
+                # Para arquivos Markdown
+                elif full_path.suffix.lower() == ".md":
+                    try:
+                        with open(full_path, "r", encoding="utf-8") as f:
+                            content = f.read()
+                            # Extrai nome e descrição do markdown (primeiras linhas)
+                            lines = content.split("\n")
+                            name = lines[0].replace("#", "").strip() if lines else persona_id.capitalize()
+                            description = lines[2].strip() if len(lines) > 2 else ""
+
+                            personas.append({
+                                "id": persona_id,
+                                "name": name,
+                                "description": description,
+                                "source": "egos_core",
+                                "path": str(full_path)
+                            })
+                    except Exception as e:
+                        logger.error(f"Erro ao carregar persona {persona_id} de {full_path}: {str(e)}")
+
+        return personas
+
+    def get_persona(self, persona_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Obtém os dados de uma persona específica.
+
+        Args:
+            persona_id: Identificador da persona
+
+        Returns:
+            Dicionário com os dados da persona ou None se não encontrada
+        """
+        # Primeiro verifica se é uma persona local do bot
+        telegram_persona_path = Path(__file__).resolve().parents[2] / "data" / "telegram_bot" / "personas" / f"{persona_id}.json"
+        if telegram_persona_path.exists():
+            try:
+                with open(telegram_persona_path, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception as e:
+                logger.error(f"Erro ao carregar persona {persona_id}: {str(e)}")
+                return None
+
+        # Se não é local, verifica no sistema principal
+        if persona_id in self.personas_mapping:
+            relative_path = self.personas_mapping[persona_id]
+            full_path = self.egos_base_path / relative_path
+
+            if full_path.exists():
+                # Para arquivos JSON
+                if full_path.suffix.lower() == ".json":
+                    try:
+                        with open(full_path, "r", encoding="utf-8") as f:
+                            return json.load(f)
+                    except Exception as e:
+                        logger.error(f"Erro ao carregar persona {persona_id} de {full_path}: {str(e)}")
+
+                # Para arquivos Markdown
+                elif full_path.suffix.lower() == ".md":
+                    try:
+                        with open(full_path, "r", encoding="utf-8") as f:
+                            content = f.read()
+                            # Converte o markdown em um formato compatível com o formato de persona
+                            lines = content.split("\n")
+                            name = lines[0].replace("#", "").strip() if lines else persona_id.capitalize()
+                            description = ""
+
+                            # Procura por uma descrição
+                            for i, line in enumerate(lines):
+                                if i > 0 and line and not line.startswith("#"):
+                                    description = line.strip()
+                                    break
+
+                            # Extrai exemplos se possível
+                            examples = []
+                            in_example = False
+                            example_user = ""
+                            example_assistant = ""
+
+                            for line in lines:
+                                if "**User:**" in line:
+                                    if example_user and example_assistant:
+                                        examples.append({"user": example_user, "assistant": example_assistant})
+                                        example_user = ""
+                                        example_assistant = ""
+
+                                    example_user = line.replace("**User:**", "").strip()
+                                    in_example = True
+                                elif "**Assistant:**" in line and in_example:
+                                    example_assistant = line.replace("**Assistant:**", "").strip()
+                                elif in_example and example_user and example_assistant:
+                                    example_assistant += " " + line.strip()
+
+                            # Adiciona o último exemplo se existir
+                            if example_user and example_assistant:
+                                examples.append({"user": example_user, "assistant": example_assistant})
+
+                            # Cria um formato compatível com a persona
+                            return {
+                                "name": name,
+                                "description": description,
+                                "system_prompt": f"Você é {name}, uma persona especializada do sistema EVA & GUARANI. {description}",
+                                "greeting": f"Olá, sou {name}. {description} Como posso ajudar?",
+                                "examples": examples
+                            }
+                    except Exception as e:
+                        logger.error(f"Erro ao converter markdown para persona {persona_id} de {full_path}: {str(e)}")
+
+        return None
+
+// ... existing code ...
+```
+
+```python:eva-atendimento/backend/app/telegram_bot.py
+// ... existing code ...
+
+# Tenta importar a integração Stable Diffusion
+try:
+    import sys
+    import os
+
+    # Adiciona o diretório atual ao PATH para importações
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    if current_dir not in sys.path:
+        sys.path.append(current_dir)
+
+    # Tenta importar diretamente
+    try:
+        from integrations.stable_diffusion import StableDiffusionAPI
+    except ImportError:
+        # Se não funcionar, tenta com caminho absoluto
+        from app.integrations.stable_diffusion import StableDiffusionAPI
+
+    stable_diffusion_api = StableDiffusionAPI()
+    STABLE_DIFFUSION_AVAILABLE = True
+    logger.info("Integração com Stable Diffusion disponível")
+except ImportError as e:
+    logger.warning(f"Integração com Stable Diffusion não disponível: {e}")
+    STABLE_DIFFUSION_AVAILABLE = False
+    stable_diffusion_api = None
+
+# Tenta importar a integração EGOS
+try:
+    try:
+        from integrations.egos_connector import EGOSConnector
+    except ImportError:
+        # Se não funcionar, tenta com caminho absoluto
+        from app.integrations.egos_connector import EGOSConnector
+
+    egos_connector = EGOSConnector()
+    EGOS_AVAILABLE = True
+    logger.info("Integração com EVA & GUARANI EGOS disponível")
+except ImportError as e:
+    logger.warning(f"Integração com EVA & GUARANI EGOS não disponível: {e}")
+    EGOS_AVAILABLE = False
+    egos_connector = None
+
+// ... existing code ...
+
+def load_persona(persona_name: str = "default") -> Dict[str, Any]:
+    """Carrega uma persona pelo nome"""
+    # Primeiro tenta usar o conector EGOS para carregar personas do sistema principal
+    if EGOS_AVAILABLE and egos_connector:
+        persona_data = egos_connector.get_persona(persona_name)
+        if persona_data:
+            logger.info(f"Persona {persona_name} carregada via EGOS")
+            return persona_data
+
+    # Se não conseguir via EGOS, tenta carregar do arquivo local
+    persona_file = PERSONA_DATA_DIR / f"{persona_name}.json"
+
+    try:
+        if persona_file.exists():
+            with open(persona_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+    except Exception as e:
+        logger.error(f"Erro ao carregar persona {persona_name}: {str(e)}")
+
+    # Retorna uma persona padrão se não conseguir carregar
+    return {
+        "name": "Assistente EVA & GUARANI",
+        "system_prompt": "Você é um assistente útil e respeitoso."
+    }
+
+// ... existing code ...
+
+async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Processa os callbacks dos botões inline"""
+    query = update.callback_query
+    await query.answer()
+
+    user_context = load_user_context(query.from_user.id)
+    user_context.update_activity()
+
+    // ... existing code ...
+
+    elif query.data == "persona":
+        # Lista as personas disponíveis
+        personas = []
+
+        # Usa o conector EGOS para listar todas as personas se disponível
+        if EGOS_AVAILABLE and egos_connector:
+            available_personas = egos_connector.list_available_personas()
+            personas = [(p["id"], p["name"]) for p in available_personas]
+            logger.info(f"Encontradas {len(personas)} personas via EGOS")
+        else:
+            # Fallback para listagem direta dos arquivos
+            for persona_file in PERSONA_DATA_DIR.glob("*.json"):
+                persona_name = persona_file.stem
+                try:
+                    with open(persona_file, "r", encoding="utf-8") as f:
+                        persona_data = json.load(f)
+                        personas.append((persona_name, persona_data.get("name", persona_name)))
+                except:
+                    personas.append((persona_name, persona_name))
+
+        if not personas:
+            await query.edit_message_text(
+                text="Nenhuma persona disponível no momento."
+            )
+            return MAIN_MENU
+
+        keyboard = []
+        for persona_id, persona_name in personas:
+            keyboard.append([InlineKeyboardButton(persona_name, callback_data=f"select_persona_{persona_id}")])
+
+        keyboard.append([InlineKeyboardButton("↩️ Voltar", callback_data="back_to_menu")])
+        reply_markup = InlineKeyboardMarkup(keyboard)
+
+        await query.edit_message_text(
+            text="Escolha uma persona para conversar:",
+            reply_markup=reply_markup
+        )
+        return SELECTING_PERSONA
+```
+
+```markdown:eva-atendimento/docs/API_INTEGRATION.md
+# Guia de Integração de APIs para EVA & GUARANI
+
+Este documento contém instruções detalhadas sobre como obter e configurar as APIs necessárias para as integrações do sistema EVA & GUARANI, especialmente para o módulo EVA Atendimento.
+
+## Índice
+
+1. [Stable Diffusion](#stable-diffusion)
+2. [OpenAI](#openai)
+3. [Telegram Bot](#telegram-bot)
+4. [Configuração no .env](#configuração-no-env)
+
+## Stable Diffusion
+
+A integração com Stable Diffusion pode ser feita de duas maneiras:
+
+### Opção 1: API Local (AUTOMATIC1111)
+
+1. **Instale o WebUI AUTOMATIC1111**:
+   - Clone o repositório: `git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git`
+   - Instale as dependências seguindo as instruções do README
+   - Execute com a flag `--api`: `./webui.sh --api` (Linux/Mac) ou `webui-user.bat --api` (Windows)
+
+2. **Configuração no EVA Atendimento**:
+   - A API local é detectada automaticamente na URL `http://127.0.0.1:7860`
+   - Não é necessária configuração adicional no `.env` para a API local
+
+### Opção 2: Serviços de API Externos
+
+#### Stability AI
+
+1. Crie uma conta em [platform.stability.ai](https://platform.stability.ai/)
+2. Vá para a seção "API Keys" no seu perfil
+3. Crie uma nova chave de API
+4. Obtenha informações de uso em [Stability AI API docs](https://platform.stability.ai/docs/api/generation)
+
+#### Replicate
+
+1. Crie uma conta em [replicate.com](https://replicate.com/)
+2. Vá para a seção "API Tokens" nas configurações
+3. Gere um novo token
+4. Explore modelos disponíveis em [replicate.com/explore](https://replicate.com/explore)
+
+## OpenAI
+
+A integração com a OpenAI é usada para processamento de linguagem natural e suporte à geração de conteúdo.
+
+1. **Crie uma conta OpenAI**:
+   - Acesse [platform.openai.com](https://platform.openai.com/)
+   - Clique em "Sign up" para criar uma conta
+
+2. **Obtenha uma chave de API**:
+   - Faça login em sua conta
+   - Acesse [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+   - Clique em "Create new secret key"
+   - Dê um nome descritivo à sua chave
+   - Copie a chave gerada (ela só será mostrada uma vez)
+
+3. **Configure limites (opcional)**:
+   - Acesse [platform.openai.com/account/limits](https://platform.openai.com/account/limits)
+   - Defina limites de gastos para controlar custos
+
+4. **Modelos recomendados**:
+   - Para chat: `gpt-4` ou `gpt-3.5-turbo`
+   - Para embeddings: `text-embedding-3-small` ou `text-embedding-3-large`
+
+## Telegram Bot
+
+Para criar um bot no Telegram e obter o token necessário:
+
+1. **Abra o Telegram** e pesquise por `@BotFather`
+2. **Inicie uma conversa** com o BotFather
+3. **Envie o comando** `/newbot` para criar um novo bot
+4. **Escolha um nome** para seu bot (ex: "EVA & GUARANI Assistant")
+5. **Escolha um username** para seu bot (ex: "eva_guarani_bot") - deve terminar com "bot"
+6. **Copie o token** fornecido pelo BotFather
+7. Configure permissões adicionais com `/mybots` > [seu bot] > Bot Settings
+
+## Configuração no .env
+
+Após obter as chaves de API necessárias, configure-as no arquivo `.env` do projeto:
+
+```bash
+# Configurações do Telegram
+TELEGRAM_TOKEN=seu_token_do_telegram_aqui
+
+# Configurações da OpenAI
+OPENAI_API_KEY=sua_chave_da_openai_aqui
+
+# Configurações do Stable Diffusion (API externa)
+IMAGE_API_KEY=sua_chave_api_aqui
+IMAGE_API_URL=https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image
+# OU
+IMAGE_API_URL=https://api.replicate.com/v1/predictions
+```
+
+### Localização do arquivo .env
+
+O arquivo `.env` deve estar localizado no diretório `eva-atendimento/backend/`.
+
+### Verificando a configuração
+
+Para verificar se suas APIs estão configuradas corretamente:
+
+1. **Telegram Bot**: Inicie uma conversa com seu bot no Telegram
+2. **Stable Diffusion**: Use o comando `/image` no bot do Telegram
+3. **OpenAI**: Verifique os logs em `eva-atendimento/backend/telegram_bot.log`
+
+## Alternativas Gratuitas
+
+Se você não quiser usar APIs pagas, considere estas alternativas:
+
+1. **Modelos locais**: Configure modelos de código aberto localmente
+   - [Llama 3](https://github.com/meta-llama/llama3) para processamento de linguagem
+   - [Stable Diffusion WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui) para geração de imagens
+
+2. **APIs gratuitas com limites**:
+   - [Hugging Face Inference API](https://huggingface.co/inference-api)
+   - [Ollama](https://ollama.ai/) para execução de modelos locais
+
+---
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧
+```
+
+```properties:eva-atendimento/backend/.env
+# Configurações do banco de dados
+DATABASE_URL=sqlite:///./app.db
+
+# Configurações de segurança
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# Configurações do Telegram
+TELEGRAM_TOKEN=6982207608:AAHO-Xtqw9X99xSYIq_u2fIILAXq35S1GCs
+
+# Configurações da OpenAI
+OPENAI_API_KEY=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
+OPENAI_ORGANIZATION=
+
+# Configurações de APIs externas
+# API para geração de imagens (exemplo: Stable Diffusion)
+IMAGE_API_KEY=sua_chave_api_aqui
+IMAGE_API_URL=https://api.exemplo.com/images
+# Caso use API local (AUTOMATIC1111), não é necessário configurar as chaves acima
+
+# API para geração de vídeos (exemplo: Runway ML)
+VIDEO_API_KEY=sua_chave_api_aqui
+VIDEO_API_URL=https://api.exemplo.com/videos
+
+# Configurações de integração com EVA & GUARANI
+EGOS_BASE_PATH=C:\\Eva & Guarani - EGOS
+```
+
+```python:eva-atendimento/backend/app/integrations/egos_connector.py
+// ... existing code ...
+
+import os
+import sys
+import json
+import logging
+from typing import Dict, List, Any, Optional
+from pathlib import Path
+from datetime import datetime
+from dotenv import load_dotenv
+
+# Carrega as variáveis de ambiente
+load_dotenv()
+
+# Configuração de logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+// ... existing code ...
+
+class EGOSConnector:
+    """Conector para integração com subsistemas EVA & GUARANI"""
+
+    def __init__(self, data_dir: Optional[str] = None):
+        """
+        Inicializa o conector EGOS.
+
+        Args:
+            data_dir: Diretório opcional para armazenamento de dados
+        """
+        self.data_dir = Path(data_dir) if data_dir else Path("data/egos_integration")
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+
+        # Status de disponibilidade de subsistemas
+        self.available_systems = {
+            "atlas": ATLAS_AVAILABLE,
+            "nexus": NEXUS_AVAILABLE,
+            "ethik": ETHIK_AVAILABLE,
+            "cronos": CRONOS_AVAILABLE
+        }
+
+        # Mapeamento para personas existentes no sistema principal
+        self.personas_mapping = {
+            # Módulos core do EVA & GUARANI
+            "atlas": str(Path(__file__).resolve().parents[2] / "data" / "telegram_bot" / "personas" / "atlas.json"),
+            "ethik": str(Path(__file__).resolve().parents[2] / "data" / "telegram_bot" / "personas" / "ethik.json"),
+            "default": str(Path(__file__).resolve().parents[2] / "data" / "telegram_bot" / "personas" / "default.json"),
+
+            # Personas adicionais do sistema EVA & GUARANI principal
+            "philosophy": "quantum_prompts/SPECIALIZED/philosophy.json",
+            "games": "quantum_prompts/SPECIALIZED/games.json",
+            "sociology": "quantum_prompts/SPECIALIZED/sociology.json",
+            "rpg": "quantum_prompts/RPG/overview.md"
+        }
+
+        # Path base para o projeto principal EVA & GUARANI
+        egos_path = os.getenv("EGOS_BASE_PATH")
+        if egos_path:
+            self.egos_base_path = Path(egos_path)
+            logger.info(f"Usando caminho base EGOS de variável de ambiente: {self.egos_base_path}")
+        else:
+            self.egos_base_path = Path(__file__).resolve().parents[4]
+            logger.info(f"Usando caminho base EGOS relativo: {self.egos_base_path}")
+
+        logger.info(f"EGOSConnector inicializado. Subsistemas disponíveis: {self.available_systems}")
+
+// ... existing code ...
+```
+Implementei a integração das personas do sistema EVA & GUARANI com o bot do Telegram. Vamos revisar o que foi feito:
+
+1. **Conector EGOS melhorado**:
+   - Adicionei funcionalidades para buscar personas em todo o sistema EVA & GUARANI
+   - Implementei métodos para listar todas as personas disponíveis e obter detalhes de personas específicas
+   - Adicionei suporte para carregar personas a partir de arquivos JSON e Markdown
+   - Configurei o uso da variável de ambiente EGOS_BASE_PATH para localizar o diretório principal
+
+2. **Integração com o Telegram Bot**:
+   - Atualizei o telegram_bot.py para usar o conector EGOS
+   - Modifiquei a função load_persona() para primeiro buscar personas do sistema principal
+   - Atualizei o manipulador de botões para mostrar todas as personas disponíveis
+
+3. **Documentação para APIs**:
+   - Criei o arquivo API_INTEGRATION.md com instruções detalhadas sobre como obter:
+     - API do Telegram Bot via BotFather
+     - API da Stable Diffusion (opções local e serviços externos)
+     - API da OpenAI para processamento de linguagem natural
+   - Incluí instruções de configuração no arquivo .env
+
+4. **Configuração de ambiente**:
+   - Atualizei o arquivo .env para incluir a chave da OpenAI já existente no sistema
+   - Adicionei a variável EGOS_BASE_PATH para facilitar a localização do sistema principal
+
+Para usar as novas funcionalidades:
+1. Inicie o bot do Telegram usando um dos métodos explicados na documentação
+2. No Telegram, use o comando `/persona` para ver as personas disponíveis
+3. As personas serão carregadas tanto do diretório local quanto do sistema principal EVA & GUARANI
+
+Para as APIs necessárias:
+- **OpenAI**: Já configurada com sua chave existente
+- **Stable Diffusion**: Para usar a versão local (AUTOMATIC1111), não é necessário configurar nada adicional
+- **Telegram**: Já configurado com o token existente
+
+Para integrar com mais personas no futuro, basta adicionar seus caminhos ao dicionário `personas_mapping` no arquivo `egos_connector.py`.
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧

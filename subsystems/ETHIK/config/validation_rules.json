@@ -1,0 +1,21 @@
+{
+  "__metadata__": {
+    "description": "Ethical validation rules for the ETHIK Validator.",
+    "version": "0.1.0",
+    "last_updated": ""
+  },
+  "rules": [
+    {
+      "id": "validate-001",
+      "name": "Core Config Modification Attempt",
+      "description": "Logs and warns about attempts to modify critical configuration files.",
+      "severity": "high",
+      "conditions": [
+        "action_context.get('action_type') in ['file_write', 'edit_file']",
+        "any(f in action_context.get('target_path', '') for f in ['config/', 'ROADMAP.md', 'cursor_initialization.md'])"
+      ],
+      "threshold": 0.5,
+      "action": "warn"
+    }
+  ]
+}

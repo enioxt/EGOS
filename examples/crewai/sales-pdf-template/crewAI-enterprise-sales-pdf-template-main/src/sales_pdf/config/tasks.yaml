@@ -1,0 +1,46 @@
+research_lead_task:
+  description: >
+    Conduct thorough research on {lead_info[company]} and the {lead_info[industry]}
+    industry. Focus on their current market position, challenges they might be
+    facing, and potential needs that our product could address. Use online resources
+    and the provided tools to gather comprehensive information.
+  expected_output: >
+    A detailed report on {lead_info[company]}, including their position in the
+    {lead_info[industry]} industry, current challenges, and potential needs that
+    our product could address.
+
+
+research_company_product_task:
+  description: >
+    Analyze {company_info[name]}'s offerings, particularly the {company_info[product_name]}.
+    Research how our product features and benefits align with the needs and challenges
+    of {lead_info[company]} in the {lead_info[industry]} industry. Use the company
+    website and any other available resources to gather detailed product information.
+  expected_output: >
+    A comprehensive overview of {company_info[product_name]}, highlighting features
+    and benefits that specifically address the needs and challenges of {lead_info[company]}.
+
+
+create_pdf_content_task:
+  description: >
+    Using the research on {lead_info[company]} and the analysis of {company_info[product_name]},
+    create compelling content for a ONE-PAGE sales PDF. The content should effectively
+    pitch {company_info[product_name]} to {lead_info[company]} represented by {lead_info[name]}, emphasizing how it
+    addresses their specific needs in the {lead_info[industry]} industry.
+
+    FOLLOW STRICTLY THIS Structure:
+    - 1 Attention-grabbing headline
+    - 1 Brief introduction of {company_info[name]} and {company_info[product_name]}
+    - JUST 4 (four) Concise Key features and benefits, tailored to {lead_info[company]}'s needs
+    - 1 Concise and strong call-to-action
+    - Contact information for {company_info[sales_rep_name]} {company_info[sales_rep_contact]}
+
+    Use Markdown-like formatting for structure (e.g., #, ##, -, ---)
+    MUST BE ONE PAGE ONLY AND DONT PUT ```markdown``` in the content AND NO Conclusion section
+    DONT INCLUDE ANY FINAL MESSAGE OR THOUGHTS FROM YOU
+
+  expected_output: >
+    A single Markdown-formatted string containing all the content for the ONE-PAGE Concise
+    sales PDF, structured and tailored specifically for pitching {company_info[product_name]}
+    to {lead_info[company]} and to be translated to a PDF format.
+    MUST BE ONE PAGE ONLY!

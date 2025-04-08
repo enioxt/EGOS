@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "backup_location": "backups/CRONOS",
+  "excluded_directories": [
+    "node_modules",
+    ".venv",
+    "venv",
+    "quarantine",
+    "__pycache__",
+    ".git",
+    ".idea",
+    ".vscode",
+    "dist",
+    "build",
+    "tmp",
+    "temp",
+    "archives",
+    "external/dependencies",
+    "logs"
+  ],
+  "excluded_extensions": [
+    ".pyc",
+    ".pyo",
+    ".pyd",
+    ".so",
+    ".dll",
+    ".exe",
+    ".zip",
+    ".tar",
+    ".gz",
+    ".rar",
+    ".jar",
+    ".war",
+    ".class",
+    ".log",
+    ".coverage"
+  ],
+  "backup_frequency": "daily",
+  "retention_policy": {
+    "daily": 7,
+    "weekly": 4,
+    "monthly": 3
+  }
+}

@@ -1,0 +1,30 @@
+fetch_zendesk_ticket_task:
+  description: >
+    Fetch a ticket from Zendesk using the API. This task should pull down a single
+    ticket based on the ticket id. Use the Zendesk API tool to retrieve the ticket
+    data.
+
+    Ticket id: {ticket_id}
+  expected_output: >
+    A JSON object containing the fetched ticket from Zendesk.
+
+categorize_and_analyze_ticket_task:
+  description: >
+    If a ticket is provided, categorize it into one of the following categories:
+    - Technical Issue
+    - Billing
+    - Account Access
+    - Feature Request
+    - Bug Report
+    - Customer Service Inquiry
+    - Refund Request
+    - Product Feedback
+    - Subscription Management
+    - Order Issue
+
+    Also, perform sentiment analysis on the ticket content using the OpenAI sentiment analysis tool.
+    If no ticket is provided, return "no ticket found".
+
+    Output the result as a Markdown report.
+  expected_output: >
+    A Markdown-formatted report categorizing the ticket (if provided) and providing a sentiment analysis summary. If no ticket is provided, output "no ticket found".

@@ -1,0 +1,46 @@
+analyze_target_company_task:
+  description: >
+    Conduct a comprehensive analysis of {target_company}. Focus on key
+    characteristics such as industry, size, location, product offerings,
+    target market, and any unique attributes. Consider how these characteristics
+    might relate to their potential need for {our_product}.
+  expected_output: >
+    A detailed profile of {target_company}, highlighting the key characteristics
+    that will be used to find similar companies. Include any insights about how
+    these characteristics might influence their interest in {our_product}.
+
+find_potential_similar_companies_task:
+  description: >
+    Using the profile of {target_company}, search for and identify other
+    companies that share similar characteristics. Look for companies in the
+    same or adjacent industries, of similar size, with comparable product
+    offerings or target markets. Aim to find at least 10 potential matches.
+  expected_output: >
+    A list of at least 10 companies that potentially match the profile of
+    {target_company}, including basic information about each (name, industry,
+    size, location, key products, website).
+
+evaluate_similarity_task:
+  description: >
+    Evaluate each of the potential similar companies identified. Compare them
+    to the profile of {target_company}, considering all relevant factors. Assign
+    a similarity score to each company on a scale of 0 to 1, where 1 is most
+    similar. Provide a brief explanation for each score.
+  expected_output: >
+    A list of evaluated companies, each with a similarity score and brief
+    explanation. Companies should be sorted by similarity score, with the
+    most similar companies at the top.
+
+develop_approach_recommendations_task:
+  description: >
+    Based on the analysis of {target_company} and the identified similar
+    companies, develop recommendations for how the sales team should approach
+    these prospects about {our_product}. Consider common characteristics,
+    potential pain points, and how our product might address their needs.
+  expected_output: >
+    A SimilarCompanyFinderResult object containing:
+    1. The detailed profile of {target_company}
+    2. A list of similar companies (SimilarCompany objects), including their
+       similarity scores
+    3. Approach recommendations for the sales team, including key talking
+       points and strategies for engaging these similar companies

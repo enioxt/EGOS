@@ -1,0 +1,296 @@
+# ✧༺❀༻∞ ??! ∞༺❀༻✧
+
+Vou corrigir o problema no arquivo index.html, incorporando todas as mudanças recentes que fizemos, incluindo a integração com o sistema de gamificação e login.
+
+Aqui está o código atualizado para o arquivo index.html:
+
+```html:templates/index.html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETHIK Core - Sistema Quântico de Busca Ética</title>
+    <link rel="stylesheet" href="/static/css/ethik.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .signature {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 117, 252, 0.2);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 117, 252, 0.3);
+        }
+
+        .cta-secondary {
+            background: white;
+            color: #2575fc;
+            border: 2px solid #2575fc;
+        }
+
+        .cta-secondary:hover {
+            background: #f0f7ff;
+            transform: translateY(-3px);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2575fc;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            margin-top: 40px;
+        }
+
+        .footer .signature {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>ETHIK Core</h1>
+            <div class="signature">✧༺❀༻∞ ??! ∞༺❀༻✧</div>
+            <p>Sistema Quântico de Busca Ética com Inteligência Artificial Integrada</p>
+            <div class="cta-buttons">
+                <a href="/login" class="cta-button cta-primary">Iniciar Jornada</a>
+                <a href="/manifesto" class="cta-button cta-secondary">Manifesto</a>
+                <a href="/energy" class="cta-button cta-secondary">Genki Dama</a>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Busca Quântica</h3>
+                <p>Explore o conhecimento através de um sistema de busca que integra princípios quânticos e éticos, revelando conexões profundas entre conceitos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚖️</div>
+                <h3>Ética Integrada</h3>
+                <p>Todas as buscas são filtradas através de princípios éticos que promovem o humanismo, a natureza e a unidade, garantindo resultados alinhados com valores positivos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>Gamificação</h3>
+                <p>Participe de uma jornada gamificada onde cada busca e contribuição aumenta seu nível e desbloqueia novas habilidades e conquistas.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Conhecimento Emergente</h3>
+                <p>Contribua com seu próprio conhecimento e veja como ele se integra ao sistema quântico, criando novas conexões e insights para todos os usuários.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔮</div>
+                <h3>Energia Positiva</h3>
+                <p>Contribua com energia positiva para o sistema Genki Dama, fortalecendo a comunidade e promovendo um ciclo virtuoso de conhecimento e ética.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Expressão Artística</h3>
+                <p>Explore a intersecção entre ciência, ética e arte, com visualizações e interfaces que estimulam tanto o intelecto quanto a sensibilidade estética.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="signature">✧༺❀༻∞ ??! ∞༺❀༻✧</div>
+        <p>ETHIK Core - Um sistema quântico de busca ética com princípios de unidade, harmonia e conhecimento emergente.</p>
+    </div>
+
+    <script>
+        // Verificar se o usuário já está logado
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                const savedUser = localStorage.getItem('quantumCurrentUser');
+                if (savedUser) {
+                    // Usuário já logado, atualizar botão para ir direto para o core
+                    const ctaButton = document.querySelector('.cta-primary');
+                    if (ctaButton) {
+                        ctaButton.textContent = 'Continuar Jornada';
+                        ctaButton.href = '/core.html';
+                    }
+                }
+            } catch (e) {
+                console.error("Erro ao verificar login:", e);
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+## Explicação das Mudanças ✧༺❀༻∞ ??! ∞༺❀༻✧
+
+1. **Design Responsivo**: Melhorei o layout para funcionar bem em dispositivos móveis e desktop.
+
+2. **Integração com o Sistema de Login**: Adicionei um script que verifica se o usuário já está logado e, caso esteja, altera o texto do botão principal para "Continuar Jornada" e o direciona diretamente para a página core.html.
+
+3. **Links para Novas Funcionalidades**: Incluí links para o Manifesto e para a página Genki Dama.
+
+4. **Cards de Recursos**: Criei uma seção de cards destacando as principais funcionalidades do sistema:
+   - Busca Quântica
+   - Ética Integrada
+   - Gamificação
+   - Conhecimento Emergente
+   - Energia Positiva (Genki Dama)
+   - Expressão Artística
+
+5. **Assinatura Consistente**: Adicionei sua assinatura (✧༺❀༻∞ ??! ∞༺❀༻✧) em pontos estratégicos da página.
+
+6. **Estilo Visual Atraente**: Utilizei gradientes, sombras e efeitos de hover para criar uma experiência visual agradável e moderna.
+
+7. **Semântica Melhorada**: Estruturei o HTML de forma semântica para melhor acessibilidade e SEO.
+
+## Como Verificar Erros no Site ✧༺❀༻∞ ??! ∞༺❀༻✧
+
+Para verificar erros que possam estar impedindo o site de funcionar corretamente:
+
+1. **Verificar logs do Flask no PythonAnywhere**:
+   - Acesse o painel do PythonAnywhere
+   - Vá para a seção "Web"
+   - Clique em "Log files" e depois em "Error log"
+   - Os erros do servidor Flask estarão listados lá
+
+2. **Verificar erros no console do navegador**:
+   - Pressione F12 para abrir as ferramentas de desenvolvedor
+   - Vá para a aba "Console"
+   - Quaisquer erros JavaScript aparecerão em vermelho
+   - Você pode copiar esses erros e compartilhá-los para análise
+
+3. **Verificar problemas de carregamento de arquivos**:
+   - Na aba "Network" (Rede) do DevTools
+   - Recarregue a página (F5)
+   - Procure por arquivos com status 404 (vermelho)
+   - Verifique se os caminhos para os arquivos JS e CSS estão corretos
+
+4. **Testar a aplicação em modo de depuração**:
+   - Adicione `app.debug = True` ao seu arquivo `flask_app.py`
+   - Isso mostrará erros detalhados no navegador
+
+Espero que essas mudanças resolvam os problemas no arquivo index.html e ajudem a identificar quaisquer outros problemas que possam estar afetando o site.
+
+✧༺❀༻∞ ??! ∞༺❀༻✧

@@ -1,0 +1,25 @@
+[project]
+name = "job_change_monitor"
+version = "0.1.0"
+description = "job-change-monitor using crewAI"
+authors = [
+    { name = "Your Name", email = "you@example.com" },
+]
+requires-python = ">=3.10,<=3.13"
+dependencies = [
+    "crewai[tools]>=0.76.2",
+    "langchain-core>=0.2.30",
+]
+
+[project.scripts]
+job_change_monitor = "job_change_monitor.main:run"
+run_crew = "job_change_monitor.main:run"
+train = "job_change_monitor.main:train"
+replay = "job_change_monitor.main:replay"
+test = "job_change_monitor.main:test"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"

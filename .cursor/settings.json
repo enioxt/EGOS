@@ -1,0 +1,67 @@
+{
+    "onStartup": {
+        "runScript": "python core/bios_quantum.py",
+        "showBiosQ": true
+    },
+    "biosQ": {
+        "autoUpdate": true,
+        "updateInterval": "daily",
+        "showOnStartup": true
+    },
+    "ui": {
+        "showStatusInSidebar": true,
+        "roadmapVisualization": "timeline"
+    },
+    "project": {
+        "name": "EVA & GUARANI - EGOS",
+        "description": "Sistema Quântico com Ética Integrada"
+    },
+    "quantumPrompt": {
+        "location": "QUANTUM_PROMPTS/core_principles.md",
+        "integrationLevel": "maximum",
+        "updateFrequency": "realtime"
+    },
+    "ai": {
+        "customCommands": [
+            {
+                "name": "Search with Perplexity",
+                "prompt": "Using the Perplexity API, search for: {selection}",
+                "description": "Search the web using Perplexity API",
+                "key": "ctrl+alt+p"
+            },
+            {
+                "name": "Search as Philosopher",
+                "prompt": "Using the Perplexity API with philosopher persona, search for: {selection}",
+                "description": "Search the web from a philosophical perspective",
+                "key": "ctrl+alt+shift+p"
+            },
+            {
+                "name": "Search as Scientist",
+                "prompt": "Using the Perplexity API with scientist persona, search for: {selection}",
+                "description": "Search the web from a scientific perspective",
+                "key": "ctrl+alt+shift+s"
+            }
+        ]
+    },
+    "mcp": {
+        "autoStart": false,
+        "manualConnection": true,
+        "externalPort": 38002,
+        "forceExternal": true,
+        "retryConnectOnFailure": true,
+        "retryIntervalMs": 5000,
+        "maxRetries": 10,
+        "checkForExisting": true,
+        "servers": {
+            "eva-guarani-perplexity": {
+                "enabled": true,
+                "autoConnect": true,
+                "useExisting": true,
+                "host": "localhost",
+                "port": 38002,
+                "forceConnection": true,
+                "checkBeforeStart": true
+            }
+        }
+    }
+}

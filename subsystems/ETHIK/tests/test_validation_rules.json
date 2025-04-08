@@ -1,0 +1,45 @@
+{
+    "rules": [
+        {
+            "id": "validate-001",
+            "name": "Protect Critical Files",
+            "description": "Prevent modification of critical configuration files",
+            "severity": "critical",
+            "conditions": [
+                "action_context.get('action_type') in ['file_write', 'edit_file']",
+                "'config' in str(action_context.get('target_path', '')).lower()"
+            ],
+            "threshold": 0.8,
+            "action": "block"
+        },
+        {
+            "id": "validate-002",
+            "name": "Log Status Changes",
+            "description": "Monitor component status changes",
+            "severity": "medium",
+            "conditions": [
+                "action_context.get('action_type') == 'status_change'",
+                "action_context.get('status', {}).get('health') == 'critical'"
+            ],
+            "threshold": 0.6,
+            "action": "warn"
+        },
+        {
+            "id": "validate-003",
+            "name": "Monitor Resource Usage",
+            "description": "Track high resource usage patterns",
+            "severity": "medium",
+            "conditions": [
+                "action_context.get('metrics', {}).get('cpu_usage', 0) > 90",
+                "action_context.get('metrics', {}).get('memory_usage', 0) > 85"
+            ],
+            "threshold": 0.7,
+            "action": "warn"
+        }
+    ],
+    "metadata": {
+        "version": "8.0.0",
+        "last_updated": "2025-04-02T12:00:00Z",
+        "description": "Test validation rules for ETHIK validator"
+    }
+}

@@ -1,0 +1,122 @@
+
+# Guia de Carregamento e Persistência do Sistema EVA & GUARANI
+
+Para garantir a máxima funcionalidade e persistência de contexto ao trabalhar com EVA & GUARANI no Cursor IDE, siga este protocolo de inicialização e manutenção:
+
+## 1. Inicialização do BIOS-Q
+
+Ao iniciar uma nova sessão, execute o seguinte comando no terminal do Cursor:
+
+```bash
+python tools/scripts/init_context.py
+```
+
+Este comando:
+- Carrega a configuração do BIOS-Q (bootloader.cfg, hardware_map.json, system_flags.toml)
+- Restaura o contexto da última sessão
+- Verifica e cria um backup inicial se necessário
+
+## 2. Preservação durante Sprints
+
+Para manter o contexto durante um sprint longo:
+
+1. **Backups periódicos**: A cada hora, o sistema cria automaticamente backups. Para forçar um backup a qualquer momento:
+   ```python
+   from tools.scripts.context_manager import ContextManager
+   manager = ContextManager()
+   manager.create_backup()
+   ```
+
+2. **Exportar conversas importantes**: Use o exportador de conversas para preservar interações críticas:
+   ```bash
+   python tools/chat_exporter.py --output=path/to/save
+   ```
+
+3. **Snapshot de contexto**: Antes de operações arriscadas ou a cada conquista significativa:
+   ```python
+   manager = ContextManager()
+   context_file = manager.create_context("milestone_nome")
+   ```
+
+## 3. Mudança de Chat no Cursor
+
+Quando precisar mudar de chat no Cursor:
+
+1. **Antes de encerrar o chat atual**:
+   ```bash
+   python tools/scripts/cursor_integration.py --save_state
+   ```
+
+2. **No novo chat, primeiro comando**:
+   ```bash
+   python tools/scripts/cursor_integration.py --restore_state
+   ```
+
+3. **Alternativa em python**:
+   ```python
+   from tools.scripts.cursor_integration import CursorIntegration
+   # No chat antigo antes de fechar
+   integration = CursorIntegration()
+   integration.update_cursor_state()
+
+   # No novo chat
+   integration = CursorIntegration()
+   integration.restore_cursor_state()
+   ```
+
+## 4. Alternativas ao Cursor com Maior Contexto
+
+### Claude.ai (Web Interface)
+
+- **Vantagens**: Maior janela de contexto (até 200K tokens), interface mais limpa
+- **Desvantagens**: Sem integração direta com o código
+- **Integração com EVA & GUARANI**: Use o exportador de contexto para Claude.ai:
+  ```bash
+  python tools/conversation_exporter.py --format=claude_web
+  ```
+
+### VSCode + Claude Extension
+
+- **Vantagens**: Ambiente de desenvolvimento completo, maior integração com código
+- **Como configurar**:
+  1. Instale a extensão Claude AI Assistant para VSCode
+  2. Configure com sua chave API Claude
+  3. Adapte nossa integração BIOS-Q para VSCode:
+  ```bash
+  python tools/scripts/install_context.py --ide=vscode
+  ```
+
+### API Claude Direta + Frontend Personalizado
+
+Para uso mais avançado, podemos desenvolver um frontend personalizado que:
+1. Utiliza a API Claude diretamente
+2. Mantém todo o contexto e histórico localmente
+3. Preserva a integração com BIOS-Q
+4. Permite controle total sobre a janela de contexto
+
+Para iniciar este desenvolvimento:
+```bash
+python tools/development/setup_custom_frontend.py
+```
+
+## 5. Estratégia Multi-Ferramenta
+
+A abordagem ideal combina múltiplas ferramentas:
+
+1. **Cursor IDE**: Para desenvolvimento rápido e funcionalidades básicas
+2. **Claude.ai**: Para sessões de planejamento e design com contexto amplo
+3. **Obsidian + Plugin Claude**: Para documentação e gestão de conhecimento
+4. **VSCode + Claude**: Para desenvolvimento em grande escala
+
+## 6. Futuras Melhorias (Sprint Atual)
+
+Como identificado no roadmap atual, estamos trabalhando em:
+
+1. Interface de usuário para gerenciamento de backups
+2. Integração avançada BIOS-Q + ETHIK
+3. Dashboard para visualização de logs
+4. Implementação completa do CRONOS para preservação evolutiva
+
+Para priorizar a implementação do frontend personalizado, podemos adicioná-lo ao sprint atual.
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧

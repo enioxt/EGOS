@@ -1,0 +1,83 @@
+{
+    "name": "bios-q",
+    "version": "1.0.0",
+    "description": "Quantum System Initialization Protocol",
+    "type": "stdio",
+    "autostart": true,
+    "required": true,
+    "restartDelay": 1000,
+    "maxRestarts": 10,
+    "config": {
+        "paths": {
+            "root": "C:\\Eva Guarani EGOS",
+            "quantum_prompts": "C:\\Eva Guarani EGOS\\QUANTUM_PROMPTS",
+            "bios_q": "C:\\Eva Guarani EGOS\\BIOS-Q",
+            "logs": "C:\\Eva Guarani EGOS\\logs"
+        },
+        "initialization": {
+            "verify_structure": true,
+            "load_context": true,
+            "verify_dependencies": true,
+            "display_banner": true
+        },
+        "logging": {
+            "level": "debug",
+            "format": "json",
+            "files": {
+                "mcp": "mcp.log",
+                "bios_q": "bios_q.log"
+            }
+        }
+    },
+    "env": {
+        "DEBUG": "*",
+        "NODE_ENV": "development",
+        "NODE_DEBUG": "net,stream,module,http",
+        "NO_COLOR": "1",
+        "FORCE_COLOR": "0",
+        "LOG_LEVEL": "debug",
+        "LOG_FORMAT": "json",
+        "LOG_DIR": "C:\\Eva Guarani EGOS\\logs",
+        "BIOS_Q_ROOT": "C:\\Eva Guarani EGOS\\BIOS-Q",
+        "SYSTEM_ROOT": "C:\\Eva Guarani EGOS",
+        "QUANTUM_PROMPTS_ROOT": "C:\\Eva Guarani EGOS\\QUANTUM_PROMPTS",
+        "LOGS_DIR": "C:\\Eva Guarani EGOS\\logs"
+    },
+    "tools": [
+        {
+            "name": "bios_q_status",
+            "description": "Get the current status of the BIOS-Q system",
+            "schema": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        {
+            "name": "bios_q_heartbeat",
+            "description": "Check if BIOS-Q is alive and responding",
+            "schema": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        }
+    ],
+    "mcpServers": {
+        "bios-q": {
+            "command": "node",
+            "args": [
+                "C:\\Eva Guarani EGOS\\BIOS-Q\\mcp\\bios_q_mcp.js"
+            ],
+            "type": "stdio",
+            "env": {
+                "DEBUG": "*",
+                "NODE_ENV": "development",
+                "NODE_DEBUG": "net,stream,module,http",
+                "NO_COLOR": "1",
+                "FORCE_COLOR": "0"
+            },
+            "windowsHide": true
+        }
+    }
+}

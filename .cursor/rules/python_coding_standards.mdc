@@ -1,0 +1,203 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+---
+description: General Python coding standards and best practices for EGOS development
+globs: ["**/*.py"]
+alwaysApply: true
+---
+
+# Python Coding Standards (KOIOS Standard)
+
+## Rule
+
+All Python code **must** follow these core standards:
+
+*   **Indentation:** Use 4 spaces per indentation level (no tabs).
+*   **Line Length:** **Maximum line length of 100 characters.**
+*   **Naming Conventions (PEP 8):**
+    *   `snake_case` for functions, methods, variables, modules.
+    *   `PascalCase` for classes.
+    *   `UPPER_CASE` for constants.
+    *   Use meaningful, descriptive names.
+*   **Imports:**
+    *   Group imports in the standard order: standard library, third-party, local application (e.g., `subsystems`, `tools`).
+    *   Use absolute imports where possible (`from subsystems.KOIOS import ...`) rather than relative imports (`from ..KOIOS import ...`), unless necessary within the same sub-package.
+    *   Use `ruff` for automated import sorting (`I` rule).
+*   **Type Hinting:** Include type hints for function/method arguments and return values (`def func(arg: int) -> str:`).
+*   **Function/Method Length:** Aim for functions/methods shorter than ~50 lines where feasible (encourages refactoring, testability).
+*   **Best Practices:**
+    *   Avoid global variables; encapsulate state in classes.
+    *   Avoid mutable default arguments (e.g., `def func(arg=[]):`); use `None` and initialize inside (e.g., `if arg is None: arg = []`).
+    *   Use `pathlib` for filesystem paths instead of `os.path`.
+    *   Use f-strings for string formatting.
+*   **Documentation:** Document all public modules, classes, functions, and methods with docstrings (`python_documentation.mdc`).
+
+**Specific Guidance for Line Length (E501 Prevention):**
+
+To adhere to the 100-character limit and prevent E501 errors:
+
+1.  **Break Long Lines:** Use Python's implicit line joining inside parentheses `()`, brackets `[]`, and braces `{}`.
+    ```python
+    # Good: Implicit joining for function arguments
+    result = some_very_long_function_name(
+        parameter_one=value1,
+        parameter_two=value2,
+        another_parameter=value3,
+    )
+
+    # Good: Implicit joining for lists/tuples/dicts
+    my_list = [
+        "item1", "item2", "item3", "item4", "item5",
+        "item6", "item7", "item8", "item9", "item10",
+    ]
+    ```
+2.  **Use Parentheses for Long Expressions:** Enclose long conditional statements or calculations in parentheses.
+    ```python
+    # Good: Breaking long conditions
+    if (
+        condition_one
+        and condition_two
+        and (condition_three or condition_four)
+    ):
+        # ... code ...
+    ```
+3.  **Format Long Strings:**
+    *   For f-strings or regular strings, use implicit concatenation or parentheses.
+    ```python
+    # Good: Implicit concatenation
+    long_string = (
+        f"This is the first part of a long f-string with {variable}, "
+        f"and this is the second part to keep lines short."
+    )
+
+    # Good: Intermediate variables for complex f-strings
+    part1 = f"User: {user_id}, Action: {action}"
+    part2 = f"Timestamp: {timestamp}, Status: {status}"
+    log_message = f"{part1}, {part2}"
+    logger.info(log_message)
+    ```
+4.  **Refactor Complex Statements:** If a line is long because it does too much, extract parts into helper functions or intermediate variables.
+5.  **Avoid End-of-Line Comments:** Place comments on their own line above the code they refer to, rather than at the end of a potentially long line.
+
+## Rationale
+
+Consistent coding standards ensure readability, maintainability, and collaboration across the EGOS codebase. Following established Python conventions (PEP 8) while adding project-specific requirements helps ensure high-quality, maintainable code. Using modern features like `pathlib` and f-strings further improves clarity and efficiency. **Proactively managing line length prevents linter errors and significantly improves code readability.**
+
+## Examples
+
+### Correct Usage (Illustrates Line Length Management)
+
+```python
+import os
+from typing import List, Optional, Dict
+from pathlib import Path
+from datetime import datetime
+
+import numpy as np
+
+from koios.logger import KoiosLogger # Assume KoiosLogger exists
+
+logger = KoiosLogger.get_logger("SUBSYSTEM.Example")
+
+MAX_ITEMS = 100
+DEFAULT_TIMEOUT = 30
+
+class DataProcessor:
+    """Processes data according to EGOS standards, respecting line limits."""
+
+    def __init__(
+        self,
+        config_path: Optional[Path] = None,
+        timeout: int = DEFAULT_TIMEOUT
+    ):
+        """Initialize with optional configuration path and timeout.
+
+        Args:
+            config_path: Path object pointing to the configuration file.
+            timeout: Processing timeout in seconds.
+        """
+        self.logger = KoiosLogger.get_logger("SUBSYSTEM.DataProcessor")
+        self.config_path = config_path
+        self.timeout = timeout
+
+    def process_items(
+        self, items: List[str], extra_params: Optional[Dict] = None
+    ) -> np.ndarray:
+        """Process a list of items into a numpy array.
+
+        Args:
+            items: List of string items to process.
+            extra_params: Additional parameters for processing.
+
+        Returns:
+            Processed data as numpy array.
+        """
+        if extra_params is None:
+            extra_params = {}
+
+        if (
+            len(items) > MAX_ITEMS
+            and not extra_params.get("allow_override")
+        ):
+            # Example of breaking long condition and string
+            error_message = (
+                f"Cannot process more than {MAX_ITEMS} items "
+                "without allow_override flag."
+            )
+            self.logger.error(error_message)
+            raise ValueError(error_message)
+
+        result = []
+        for item in items:
+            processed = self._transform(item)
+            result.append(processed)
+
+        # Example of intermediate variable for log message
+        log_source = self.config_path.name if self.config_path else 'input list'
+        success_log = (
+            f"Processed {len(items)} items from {log_source} "
+            f"successfully at {datetime.now()}"
+        )
+        self.logger.info(success_log)
+        return np.array(result)
+
+    def _transform(self, item: str) -> float:
+        """Transform a single item to a float value."""
+        # Implementation details
+        # Use strip() to handle whitespace before checking if empty
+        return float(item) if item.strip() else 0.0
+```
+
+### Incorrect Usage (Potential E501 Violations)
+
+```python
+# ... (imports omitted for brevity) ...
+
+class data_processor: # WRONG: Class name should be PascalCase
+    # ... (init omitted) ...
+    def ProcessItems(self, items, extra_params=None): # WRONG: Method name snake_case, missing type hints
+        # WRONG: Long condition on one line
+        if len(items) > MAX_ITEMS and not extra_params.get("allow_override"):
+            # WRONG: Long f-string log message
+            self.logger.error(f"Cannot process more than {MAX_ITEMS} items without allow_override flag. Failing operation.")
+            raise ValueError("Too many items")
+
+        result = []
+        for i in items: # WRONG: Non-descriptive variable name 'i'
+            processed = self._transform(i)
+            result.append(processed)
+
+        # WRONG: Long f-string log message directly in call
+        self.logger.info(f"Processed {len(items)} items from {self.config_path.name if self.config_path else 'input list'} successfully at {datetime.now()}")
+        return np.array(result)
+    # ... (_transform omitted) ...
+```
+
+<<<<<<< HEAD
+**All Python code must follow KOIOS coding standards for readability, maintainability, and collaboration. Proactively manage line length using the techniques above to prevent E501 errors and improve code clarity.**
+=======
+**All Python code must follow KOIOS coding standards for readability, maintainability, and collaboration. Use appropriate naming conventions, formatting, and documentation patterns.**
+>>>>>>> public/main

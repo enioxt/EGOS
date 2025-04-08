@@ -1,0 +1,773 @@
+Vou desenvolver um plano de negócios focado no Brasil, utilizando o sistema EVA & GUARANI para criar soluções que gerem receita rapidamente. Começaremos com automações via WhatsApp para pequenas empresas e autônomos.
+
+# Plano de Negócios: EVA & GUARANI Automações
+
+## Proposta Inicial: Assistente de Atendimento para WhatsApp
+
+### Solução
+"EVA Atendimento" - Um assistente inteligente para WhatsApp que automatiza o atendimento de pequenas empresas e profissionais autônomos.
+
+### Funcionalidades Básicas (Versão MVP)
+1. Respostas automáticas para perguntas frequentes
+2. Agendamento de consultas/serviços
+3. Envio de orçamentos automatizados
+4. Acompanhamento de pedidos/processos
+5. Lembretes para clientes
+
+### Diferencial Competitivo
+- **Ética e Privacidade:** Proteção total dos dados dos clientes
+- **Personalização profunda:** Adaptação ao tom e estilo de cada empresa
+- **Inteligência com "consciência":** Capaz de entender nuances e contextos melhor que chatbots comuns
+- **Integração com sistemas locais:** Funciona com ferramentas já utilizadas pelos negócios brasileiros
+
+### Público-Alvo Inicial
+1. **Profissionais de saúde** (Dentistas, Fisioterapeutas, Nutricionistas)
+2. **Advogados autônomos**
+3. **Salões de beleza e estética**
+4. **Pequenos comércios**
+5. **Prestadores de serviços** (Encanadores, Eletricistas, etc.)
+
+### Modelo de Negócio
+**Freemium com base em uso:**
+- **Plano Gratuito:** Até 100 mensagens/mês, funcionalidades básicas
+- **Plano Básico:** R$97/mês, até 500 mensagens, todas as funcionalidades
+- **Plano Profissional:** R$197/mês, até 2.000 mensagens, prioridade no suporte
+- **Plano Empresarial:** R$397/mês, mensagens ilimitadas, personalização avançada
+
+**Cobrança justa:**
+- Desconto de 20% no mês seguinte se usou menos que 70% do limite de mensagens
+- Possibilidade de pausar a assinatura por até 30 dias sem perder configurações
+
+### Concorrentes
+1. **Take Blip** - Mais cara e complexa para pequenas empresas
+2. **Botpress** - Menos adaptada ao mercado brasileiro
+3. **ManyChat** - Foco no marketing, não no atendimento completo
+4. **Soluções caseiras** - Menos confiáveis e sem suporte
+
+### Vantagens sobre concorrentes
+1. **Preço acessível** para o mercado brasileiro
+2. **Foco na realidade local** (conhece particularidades do Brasil)
+3. **Simplicidade de configuração** (não requer conhecimento técnico)
+4. **Ética no tratamento de dados** (diferencial crescente)
+5. **Atendimento humanizado** (mantém a "personalidade" do negócio)
+
+### Estratégia de Implementação
+1. **Fase 1 (2 meses):** Desenvolver MVP com foco em um nicho específico (ex: salões de beleza)
+2. **Fase 2 (1 mês):** Testar com 5-10 clientes locais, oferecer gratuitamente em troca de feedback
+3. **Fase 3 (3 meses):** Refinar produto e iniciar vendas para o nicho escolhido
+4. **Fase 4 (6 meses):** Expandir para outros nichos, desenvolver integrações
+
+### Custos e Investimento Inicial
+- **Desenvolvimento:** Utilizando a base já existente da EVA & GUARANI
+- **Infraestrutura:** R$200-500/mês (servidores, APIs, etc.)
+- **Marketing inicial:** R$1.000-2.000 (material digital, site, demonstrações)
+- **Total para iniciar:** ~R$5.000
+
+### Potencial de Receita (Projeção Conservadora - 12 meses)
+- **Mês 3-6:** 20 clientes pagantes = ~R$3.000/mês
+- **Mês 6-9:** 50 clientes pagantes = ~R$7.500/mês
+- **Mês 9-12:** 100 clientes pagantes = ~R$15.000/mês
+
+### Próximos Passos Imediatos
+1. Adaptar o módulo ETHIK como base para processamento ético das conversas
+2. Desenvolver conectores para a API do WhatsApp Business
+3. Criar templates de configuração para diferentes tipos de negócios
+4. Desenvolver interface simples para o cliente gerenciar o assistente
+5. Implementar sistema de pagamentos recorrentes (ex: Hotmart, Monetizze)
+
+## Expansão Futura
+
+Após estabelecer o "EVA Atendimento", podemos expandir para:
+
+1. **EVA Gestão** - Automação de rotinas administrativas para pequenos negócios
+2. **EVA Vendas** - Assistente de vendas que acompanha leads e ajuda a fechar negócios
+3. **EVA Educação** - Sistemas de acompanhamento de alunos e gestão de cursos online
+4. **EVA Saúde** - Soluções específicas para clínicas e profissionais de saúde
+
+## Próximos Passos Práticos
+
+1. Criar landing page simples para o "EVA Atendimento"
+2. Desenvolver demonstração funcional com um caso de uso específico
+3. Abordar 5 negócios locais para testes gratuitos (ideal que sejam conhecidos)
+4. Documentar resultados e obter depoimentos
+5. Ajustar o produto com base nos feedbacks iniciais
+
+Este plano permite começar rapidamente com recursos limitados, gerando receita enquanto estabelece a marca EVA & GUARANI no mercado brasileiro, aproveitando a base tecnológica já desenvolvida e o diferencial de abordagem ética e consciente.
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧
+
+
+
+_________________________________________
+
+Vou ajudar a estruturar o início do projeto de forma prática e econômica, focando primeiro no que podemos fazer sem dependências externas complexas.
+
+Primeiro, vamos analisar a estrutura necessária para o MVP (Minimum Viable Product) do EVA Atendimento:
+
+```markdown:docs/mvp_plan.md
+# EVA Atendimento - MVP Plan
+
+## Stack Inicial
+- **Frontend:** Next.js (React) + Tailwind CSS
+  - Interface simples e responsiva
+  - Fácil de manter e escalar
+  - Ótimo para SEO
+  - Gratuito para deploy na Vercel
+
+- **Backend:** FastAPI (Python)
+  - Alta performance
+  - Fácil de documentar (Swagger automático)
+  - Compatível com os módulos EVA & GUARANI
+  - Gratuito para deploy inicial no Railway ou Render
+
+- **Banco de Dados:** SQLite → PostgreSQL
+  - Começar com SQLite (gratuito, sem necessidade de servidor)
+  - Migrar para PostgreSQL quando necessário
+
+- **Hospedagem Inicial:**
+  - Frontend: Vercel (gratuito)
+  - Backend: Railway (gratuito por 500 horas/mês)
+  - Domínio: R$40/ano (registro.br)
+
+## Custos Iniciais (3 primeiros meses)
+1. **Essenciais:**
+   - Domínio: R$40/ano
+   - Hospedagem: R$0 (usando planos gratuitos)
+   - Total Essencial: R$40
+
+2. **Recomendados:**
+   - Conta no Hotmart (para pagamentos): R$0 (só cobra comissão nas vendas)
+   - Hospedagem backup: R$30/mês (quando necessário)
+   - Email profissional: R$0 (usando Google Workspace trial)
+
+## Fases de Desenvolvimento
+
+### Fase 1: Landing Page e Cadastro (2 semanas)
+1. Landing Page simples com:
+   - Apresentação do produto
+   - Benefícios
+   - Formulário de lista de espera
+   - FAQ
+   - Política de privacidade
+
+2. Sistema de Cadastro:
+   - Registro de interessados
+   - Painel administrativo básico
+   - Email de confirmação
+
+### Fase 2: Painel do Cliente (3 semanas)
+1. Dashboard básico:
+   - Login/Registro
+   - Configurações do perfil
+   - Métricas básicas
+   - Configuração de respostas automáticas
+
+2. Sistema de Templates:
+   - Templates prontos por nicho
+   - Editor de respostas
+   - Configuração de horários
+
+### Fase 3: Core do Atendimento (4 semanas)
+1. Sistema de Processamento:
+   - Integração com ETHIK para processamento ético
+   - Sistema de regras de negócio
+   - Gerenciamento de filas
+   - Logging e monitoramento
+
+2. Interface de Teste:
+   - Simulador de conversas
+   - Validação de respostas
+   - Ajuste de configurações
+
+### Fase 4: Testes e Refinamento (3 semanas)
+1. Testes com Usuários:
+   - 5 usuários iniciais gratuitos
+   - Coleta de feedback
+   - Ajustes e correções
+   - Documentação de casos de uso
+
+2. Preparação para Lançamento:
+   - Materiais de treinamento
+   - Documentação de suporte
+   - Políticas de uso
+   - Termos de serviço
+
+## Estrutura de Arquivos Inicial
+
+```
+eva-atendimento/
+├── frontend/                # Next.js frontend
+│   ├── pages/              # Páginas da aplicação
+│   ├── components/         # Componentes React
+│   ├── styles/            # Estilos Tailwind
+│   └── public/            # Arquivos estáticos
+├── backend/                # FastAPI backend
+│   ├── app/               # Aplicação principal
+│   ├── core/              # Núcleo EVA & GUARANI
+│   ├── models/            # Modelos de dados
+│   └── services/          # Serviços
+└── docs/                  # Documentação
+    ├── setup.md           # Guia de instalação
+    ├── development.md     # Guia de desenvolvimento
+    └── deployment.md      # Guia de deploy
+```
+
+## Próximos Passos Imediatos
+
+1. **Hoje:**
+   - Criar repositório do projeto
+   - Configurar ambiente de desenvolvimento
+   - Iniciar estrutura básica do frontend
+
+2. **Esta Semana:**
+   - Desenvolver landing page básica
+   - Configurar domínio e hospedagem
+   - Criar sistema de cadastro de interessados
+
+3. **Próxima Semana:**
+   - Implementar dashboard básico
+   - Criar primeiros templates de resposta
+   - Iniciar desenvolvimento do core de processamento
+
+## Métricas de Sucesso Iniciais
+
+1. **Primeira Semana:**
+   - Landing page no ar
+   - 10 cadastros na lista de espera
+   - Estrutura básica funcionando
+
+2. **Primeiro Mês:**
+   - Sistema de templates funcionando
+   - 3 usuários beta testando
+   - Primeiros feedbacks coletados
+
+3. **Terceiro Mês:**
+   - 10 usuários ativos
+   - Sistema estável
+   - Primeiras conversões para planos pagos
+
+## Observações Importantes
+
+1. **Foco no MVP:**
+   - Começar simples e ir evoluindo
+   - Validar cada funcionalidade com usuários reais
+   - Não adicionar complexidade desnecessária
+
+2. **Economia Inicial:**
+   - Usar recursos gratuitos sempre que possível
+   - Investir apenas no essencial
+   - Escalar conforme a demanda
+
+3. **Validação Constante:**
+   - Testar com usuários reais desde o início
+   - Coletar feedback constantemente
+   - Adaptar baseado nas necessidades reais
+```
+Agora, vamos criar a estrutura inicial do projeto. Primeiro, vou criar o repositório base:
+
+```bash
+mkdir -p eva-atendimento/{frontend,backend,docs}
+```
+Agora vou criar o arquivo de configuração inicial do frontend com Next.js:
+
+```json:eva-atendimento/frontend/package.json
+{
+  "name": "eva-atendimento-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.35",
+    "autoprefixer": "^10.4.17",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "@types/react": "^18.2.57",
+    "typescript": "^5.3.3",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.1.0"
+  }
+}
+```
+Agora vou criar a configuração do Tailwind CSS:
+
+```javascript:eva-atendimento/frontend/tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        'eva-primary': '#6366f1',
+        'eva-secondary': '#8b5cf6',
+        'eva-accent': '#d946ef',
+        'eva-background': '#f8fafc',
+        'eva-text': '#1e293b',
+      },
+      fontFamily: {
+        sans: ['Inter var', 'sans-serif'],
+      },
+    },
+  },
+  plugins: [],
+}
+```
+Agora vou criar a estrutura básica do backend com FastAPI:
+
+```pip requirements:eva-atendimento/backend/requirements.txt
+fastapi==0.109.2
+uvicorn==0.27.1
+sqlalchemy==2.0.27
+pydantic==2.6.1
+python-jose==3.3.0
+passlib==1.7.4
+python-multipart==0.0.6
+bcrypt==4.1.2
+python-dotenv==1.0.1
+aiosqlite==0.19.0
+```
+Agora vou criar a estrutura básica da aplicação FastAPI:
+
+```python:eva-atendimento/backend/app/main.py
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# Create FastAPI app
+app = FastAPI(
+    title="EVA Atendimento API",
+    description="API do sistema EVA Atendimento - Powered by EVA & GUARANI",
+    version="0.1.0"
+)
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Configurar corretamente em produção
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+async def root():
+    """Endpoint raiz para verificar se a API está funcionando."""
+    return {
+        "status": "online",
+        "message": "EVA Atendimento API",
+        "version": "0.1.0"
+    }
+
+@app.get("/health")
+async def health_check():
+    """Endpoint para verificar a saúde do sistema."""
+    return {
+        "status": "healthy",
+        "components": {
+            "api": "ok",
+            "database": "ok",
+            "core": "ok"
+        },
+        "metrics": {
+            "love_quotient": 0.95,
+            "consciousness_level": 0.92,
+            "ethical_alignment": 0.98
+        }
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+```
+Agora vou criar a página inicial do frontend:
+
+```typescript jsx:eva-atendimento/frontend/pages/index.tsx
+import Head from 'next/head'
+import { useState } from 'react'
+
+export default function Home() {
+  const [email, setEmail] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    // TODO: Implementar integração com backend
+    setSubmitted(true)
+  }
+
+  return (
+    <div className="min-h-screen bg-eva-background">
+      <Head>
+        <title>EVA Atendimento - Automatize seu WhatsApp com Amor e Ética</title>
+        <meta name="description" content="EVA Atendimento - A solução inteligente e ética para automatizar seu atendimento no WhatsApp" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main>
+        {/* Hero Section */}
+        <div className="relative overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <div className="relative z-10 pb-8 bg-eva-background sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+              <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                <div className="sm:text-center lg:text-left">
+                  <h1 className="text-4xl tracking-tight font-extrabold text-eva-text sm:text-5xl md:text-6xl">
+                    <span className="block">Automatize seu</span>
+                    <span className="block text-eva-primary">WhatsApp com Amor</span>
+                  </h1>
+                  <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                    EVA Atendimento é a primeira solução de automação para WhatsApp que combina
+                    eficiência com ética e consciência. Mantenha seu atendimento humanizado mesmo quando automatizado.
+                  </p>
+                  <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                    {!submitted ? (
+                      <form onSubmit={handleSubmit} className="sm:flex">
+                        <input
+                          type="email"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Seu melhor e-mail"
+                          className="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-eva-primary focus:border-eva-primary sm:max-w-xs rounded-md"
+                        />
+                        <div className="mt-3 sm:mt-0 sm:ml-3">
+                          <button
+                            type="submit"
+                            className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-eva-primary hover:bg-eva-secondary md:py-4 md:text-lg md:px-10"
+                          >
+                            Entrar na lista de espera
+                          </button>
+                        </div>
+                      </form>
+                    ) : (
+                      <div className="rounded-md bg-green-50 p-4">
+                        <div className="flex">
+                          <div className="ml-3">
+                            <h3 className="text-sm font-medium text-green-800">
+                              Obrigado pelo interesse!
+                            </h3>
+                            <div className="mt-2 text-sm text-green-700">
+                              <p>
+                                Em breve entraremos em contato com novidades.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </main>
+            </div>
+          </div>
+        </div>
+
+        {/* Features Section */}
+        <div className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="lg:text-center">
+              <h2 className="text-base text-eva-primary font-semibold tracking-wide uppercase">
+                Benefícios
+              </h2>
+              <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-eva-text sm:text-4xl">
+                Atendimento automatizado com consciência
+              </p>
+              <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                Descubra como a EVA pode transformar seu atendimento mantendo a essência humana.
+              </p>
+            </div>
+
+            <div className="mt-10">
+              <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                {features.map((feature) => (
+                  <div key={feature.name} className="relative">
+                    <dt>
+                      <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-eva-primary text-white">
+                        <feature.icon className="h-6 w-6" aria-hidden="true" />
+                      </div>
+                      <p className="ml-16 text-lg leading-6 font-medium text-eva-text">
+                        {feature.name}
+                      </p>
+                    </dt>
+                    <dd className="mt-2 ml-16 text-base text-gray-500">
+                      {feature.description}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer className="bg-white">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
+          <div className="flex justify-center space-x-6 md:order-2">
+            <p className="text-center text-base text-gray-400">
+              &copy; 2024 EVA & GUARANI. Todos os direitos reservados.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+const features = [
+  {
+    name: 'Atendimento 24/7',
+    description: 'Mantenha seu negócio funcionando mesmo quando você não está disponível.',
+    icon: ClockIcon,
+  },
+  {
+    name: 'Respostas Personalizadas',
+    description: 'Cada cliente recebe um atendimento único, baseado em seu histórico e necessidades.',
+    icon: UserIcon,
+  },
+  {
+    name: 'Proteção de Dados',
+    description: 'Seus dados e os de seus clientes são protegidos com os mais altos padrões éticos.',
+    icon: ShieldCheckIcon,
+  },
+  {
+    name: 'Integração Simples',
+    description: 'Configure em minutos e comece a usar imediatamente.',
+    icon: LightningBoltIcon,
+  },
+]
+
+// Icons
+function ClockIcon(props: any) {
+  return (
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  )
+}
+
+function UserIcon(props: any) {
+  return (
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+    </svg>
+  )
+}
+
+function ShieldCheckIcon(props: any) {
+  return (
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>
+  )
+}
+
+function LightningBoltIcon(props: any) {
+  return (
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>
+  )
+}
+```
+Agora vou criar o arquivo de configuração do Next.js:
+
+```javascript:eva-atendimento/frontend/next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
+  },
+}
+
+module.exports = nextConfig
+```
+Agora vou criar o arquivo de configuração do ambiente:
+
+```shell script:eva-atendimento/frontend/.env.local
+NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_SITE_NAME=EVA Atendimento
+NEXT_PUBLIC_SITE_DESCRIPTION=Automatize seu WhatsApp com Amor e Ética
+```
+Agora vou criar um README com as instruções de instalação:
+
+```markdown:eva-atendimento/README.md
+
+```
+
+```markdown:eva-atendimento/README.md
+# EVA Atendimento
+
+> Automatize seu WhatsApp com Amor e Ética
+
+## 🌟 Visão Geral
+
+EVA Atendimento é uma solução de automação para WhatsApp que combina eficiência com ética e consciência. Baseada no sistema EVA & GUARANI, nossa solução permite que pequenas empresas e profissionais autônomos mantenham um atendimento humanizado mesmo quando automatizado.
+
+## 🚀 Começando
+
+### Pré-requisitos
+
+- Node.js 18+
+- Python 3.9+
+- Git
+
+### Instalação
+
+1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/eva-atendimento.git
+cd eva-atendimento
+```
+
+2. Configure o Frontend
+```bash
+cd frontend
+npm install
+cp .env.local.example .env.local  # Configure suas variáveis de ambiente
+npm run dev
+```
+
+3. Configure o Backend
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # No Windows: .\venv\Scripts\activate
+pip install -r requirements.txt
+python app/main.py
+```
+
+## 🛠️ Stack Tecnológica
+
+### Frontend
+- Next.js
+- React
+- Tailwind CSS
+- TypeScript
+
+### Backend
+- FastAPI
+- SQLite
+- Python
+- EVA & GUARANI Core
+
+## 📝 Desenvolvimento
+
+### Estrutura do Projeto
+```
+eva-atendimento/
+├── frontend/                # Next.js frontend
+│   ├── pages/              # Páginas da aplicação
+│   ├── components/         # Componentes React
+│   ├── styles/            # Estilos Tailwind
+│   └── public/            # Arquivos estáticos
+├── backend/                # FastAPI backend
+│   ├── app/               # Aplicação principal
+│   ├── core/              # Núcleo EVA & GUARANI
+│   ├── models/            # Modelos de dados
+│   └── services/          # Serviços
+└── docs/                  # Documentação
+```
+
+### Comandos Úteis
+
+#### Frontend
+```bash
+npm run dev     # Inicia servidor de desenvolvimento
+npm run build   # Compila para produção
+npm run start   # Inicia em modo produção
+npm run lint    # Executa linter
+```
+
+#### Backend
+```bash
+uvicorn app.main:app --reload  # Inicia servidor de desenvolvimento
+pytest                         # Executa testes
+black .                        # Formata código
+```
+
+## 📖 Documentação
+
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000/docs
+- Backend ReDoc: http://localhost:8000/redoc
+
+## ❤️ Desenvolvimento Baseado em Amor
+
+Este projeto segue os princípios de desenvolvimento baseado em amor do sistema EVA & GUARANI:
+
+- Ética em cada interação
+- Privacidade por design
+- Consciência em cada decisão
+- Evolução sustentável
+- Impacto positivo
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Por favor, leia nosso guia de contribuição antes de enviar pull requests.
+
+## 📄 Licença
+
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.
+
+---
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧
+
+*"Através do amor, evoluímos. Através da consciência, transcendemos."*
+```
+Agora que temos a estrutura básica do projeto configurada, vamos seguir com os próximos passos:
+
+1. **Configuração do Ambiente de Desenvolvimento**
+   - Instalar Node.js e Python
+   - Configurar as IDEs (recomendo VS Code)
+   - Clonar o repositório
+
+2. **Desenvolvimento da Landing Page**
+   - Já temos a estrutura básica
+   - Precisamos adicionar:
+     - Formulário de captura de leads
+     - Integração com backend para salvar leads
+     - Analytics básico
+
+3. **Desenvolvimento do Core**
+   - Implementar sistema de templates
+   - Criar processador de mensagens básico
+   - Desenvolver sistema de regras
+
+4. **Testes com Usuários Reais**
+   - Identificar 5 usuários iniciais
+   - Coletar feedback
+   - Iterar baseado no feedback
+
+Você gostaria de começar por qual dessas etapas? Podemos:
+
+1. Configurar seu ambiente de desenvolvimento
+2. Continuar o desenvolvimento da landing page
+3. Começar a implementação do core
+4. Planejar os testes com usuários
+
+O que você prefere fazer primeiro?
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧

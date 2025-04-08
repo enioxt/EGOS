@@ -1,0 +1,87 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+---
+description: Guidelines for logging AI interactions (e.g., MCPs, CORUJA) within EGOS.
+globs: ["**/mcp/*.py", "**/core/coruja_*.py", "**/interfaces/ai_*.py"]
+alwaysApply: false
+---
+
+# AI Interaction Logging Standards (KOIOS & Future Opik Integration)
+
+## Rule
+
+When implementing or modifying components that interact directly with AI models (e.g., MCP handlers, CORUJA components, AI service interfaces), **ensure** comprehensive logging of the interaction:
+
+1.  **Log the Full Prompt:** Record the exact prompt sent to the AI model.
+2.  **Log the Full Response:** Record the complete, raw response received from the AI model.
+3.  **Log Relevant Context:** Include key contextual information, such as:
+    *   The specific AI model used (e.g., Gemini 2.5 Pro, Claude Sonnet).
+    *   Key parameters used in the API call (e.g., temperature, max tokens).
+    *   Relevant user input or data driving the interaction.
+    *   The purpose or goal of the AI call.
+    *   Timestamp of the interaction.
+4.  **Use `KoiosLogger`:** Utilize the standard `KoiosLogger` for all logging activities.
+5.  **Avoid Sensitive Data:** Ensure no sensitive user data (PII, credentials) is inadvertently logged in prompts or context unless absolutely necessary and properly handled according to ETHIK guidelines.
+
+## Rationale
+
+Detailed logging of AI interactions is **crucial** for:
+
+*   **Debugging:** Understanding why an AI produced a specific output.
+*   **Evaluation:** Assessing the quality, relevance, and ethical alignment of AI responses (aligns with ETHIK and future evaluation goals).
+*   **Reproducibility:** Recreating specific interaction scenarios.
+*   **Optimization:** Analyzing prompt effectiveness and identifying areas for improvement.
+*   **Future Integration:** Preparing for potential integration with specialized AI tracing and evaluation platforms like Comet Opik (See Roadmap Item: KOIOS - Integration Points).
+
+## Example (Conceptual - within an MCP handler)
+
+```python
+from koios.logger import KoiosLogger
+
+logger = KoiosLogger.get_logger("MCP.ExampleMCP")
+
+async def handle_request(payload: dict):
+    user_query = payload.get("query")
+    target_model = "gemini-2.5-pro"
+    parameters = {"temperature": 0.7, "max_output_tokens": 1024}
+
+    prompt = f"Analyze the following user query: {user_query}"
+
+    log_context = {
+        "model": target_model,
+        "parameters": parameters,
+        "purpose": "Analyze user query for intent",
+        "user_input_snippet": user_query[:50] # Avoid logging full potentially sensitive input if long
+    }
+
+    logger.info(
+        "Sending request to AI model",
+        extra={"ai_interaction": log_context, "prompt": prompt}
+    )
+
+    try:
+        # Replace with actual AI call
+        ai_response_content = await call_ai_service(prompt, target_model, parameters)
+
+        logger.info(
+            "Received response from AI model",
+            extra={"ai_interaction": log_context, "response": ai_response_content}
+        )
+
+        # Process the response...
+        return process_ai_response(ai_response_content)
+
+    except Exception as e:
+        logger.error(
+            "AI interaction failed",
+            extra={"ai_interaction": log_context, "error": str(e)},
+            exc_info=True
+        )
+        # Handle error appropriately
+        raise
+```
+
+**Thoroughly log all AI interaction details (prompts, responses, context) to facilitate debugging, evaluation, and potential future integration with specialized tools like Comet Opik.**

@@ -1,0 +1,76 @@
+{
+    "mcpServers": {
+        "sequential-thinking": {
+            "command": "node",
+            "args": [
+                "C:\\Users\\Enidi\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-sequential-thinking\\dist\\index.js"
+            ],
+            "type": "stdio",
+            "env": {
+                "DEBUG": "*",
+                "NODE_ENV": "development",
+                "NODE_DEBUG": "net,stream,module,http",
+                "NO_COLOR": "1",
+                "FORCE_COLOR": "0",
+                "MCP_ID": "sequential-thinking"
+            },
+            "windowsHide": true,
+            "separateProcess": true
+        },
+        "eva-guarani-perplexity": {
+            "command": "C:\\EGOS\\venv\\Scripts\\python.exe",
+            "args": [
+                "-m",
+                "tools.integration.mcp_server"
+            ],
+            "cwd": "C:\\EGOS",
+            "type": "stdio",
+            "env": {
+                "DEBUG": "*",
+                "NODE_ENV": "development",
+                "NODE_DEBUG": "net,stream,module,http",
+                "NO_COLOR": "1",
+                "FORCE_COLOR": "0",
+                "PERPLEXITY_API_KEY": "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",
+                "MCP_ID": "eva-guarani-perplexity",
+NewIntegrations
+                "PYTHON_PATH": "C:\\EGOS\\venv\\Scripts\\python.exe",
+                "API_KEYS_FILE": "C:\\EGOS\\config\\api_keys.json",
+                "LOG_DIR": "C:\\EGOS\\logs",
+                "SYSTEM_ROOT": "C:\\EGOS"
+
+                "PYTHON_PATH": "C:\\Eva Guarani EGOS\\venv\\Scripts\\python.exe",
+                "API_KEYS_FILE": "C:\\Eva Guarani EGOS\\config\\api_keys.json",
+                "LOG_DIR": "C:\\Eva Guarani EGOS\\logs",
+                "SYSTEM_ROOT": "C:\\Eva Guarani EGOS"
+main
+            },
+            "windowsHide": true,
+            "separateProcess": true,
+            "tools": [
+                {
+                    "name": "perplexity_search",
+                    "description": "Search the web using Perplexity AI",
+                    "parameters": {
+                        "query": {
+                            "type": "string",
+                            "description": "The search query"
+                        },
+                        "persona": {
+                            "type": "string",
+                            "description": "Optional persona to use for search",
+                            "enum": [
+                                "default",
+                                "philosopher",
+                                "scientist"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "logLevel": "DEBUG",
+    "logFile": "C:\\EGOS\\logs\\mcp.log",
+    "separateProcesses": true
+}

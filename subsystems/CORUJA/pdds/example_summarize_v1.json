@@ -1,0 +1,56 @@
+{
+  "id": "example_summarize_v1",
+  "metadata": {
+    "name": "Example Text Summarization",
+    "version": "1.0",
+    "description": "A basic prompt to summarize a given text.",
+    "tags": [
+      "example",
+      "summarization",
+      "coruja"
+    ],
+    "author": "EGOS System",
+    "created_date": "2024-08-15T18:00:00Z",
+    "last_updated": "2024-08-15T18:00:00Z"
+  },
+  "parameters": [
+    {
+      "name": "input_text",
+      "description": "The text to be summarized.",
+      "type": "string",
+      "required": true
+    },
+    {
+        "name": "max_length",
+        "description": "Maximum desired length of the summary (e.g., words or sentences).",
+        "type": "integer",
+        "required": false,
+        "default": 100
+    }
+  ],
+  "prompt_template": "Please summarize the following text in approximately {max_length} words or less:\n\n---\n{input_text}\n---\n\nSummary:",
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string",
+        "description": "The generated summary of the input text."
+      }
+    },
+    "required": [
+      "summary"
+    ]
+  },
+  "ethik_guidelines": null,
+  "examples": [
+    {
+        "input": {
+            "input_text": "The quick brown fox jumps over the lazy dog. This sentence is famous for containing all letters of the English alphabet. It is often used for testing typewriters or keyboards.",
+            "max_length": 20
+        },
+        "output": {
+            "summary": "A famous sentence containing all English letters, often used for keyboard tests."
+        }
+    }
+  ]
+}

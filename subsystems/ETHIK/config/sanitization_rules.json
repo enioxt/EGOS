@@ -1,0 +1,22 @@
+{
+  "__metadata__": {
+    "description": "Ethical sanitization rules for the ETHIK Sanitizer. Focused on PII protection.",
+    "version": "0.1.1",
+    "last_updated": ""
+  },
+  "rules": [
+    {
+      "id": "sanitize-002",
+      "name": "Privacy Protection",
+      "description": "Protects sensitive information",
+      "severity": "critical",
+      "patterns": [
+        "\\\\b\\\\d{3}-\\\\d{2}-\\\\d{4}\\\\b",
+        "\\\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Z|a-z]{2,}\\\\b",
+        "\\\\b\\\\d{16}\\\\b"
+      ],
+      "replacements": {},
+      "conditions": ["!is_authorized"]
+    }
+  ]
+}

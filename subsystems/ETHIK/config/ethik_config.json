@@ -1,0 +1,202 @@
+{
+  "__metadata__": {
+    "type": "configuration",
+    "category": "core",
+    "subsystem": "ETHIK",
+    "status": "active",
+    "required": true,
+    "simulation_capable": true,
+    "dependencies": [],
+    "description": "Core configuration for the ETHIK subsystem, defining thresholds and weights.",
+    "author": "EVA & GUARANI",
+    "version": "1.0.0",
+    "last_updated": "2025-04-02",
+    "principles": [
+        "redemption", "compassion", "privacy", "accessibility", "love",
+        "trust", "integrity", "awareness", "connection", "preservation"
+    ],
+    "security_level": "standard",
+    "test_coverage": 0.0,
+    "documentation_quality": 0.0,
+    "ethical_validation": true,
+    "windows_compatibility": true,
+    "encoding": "utf-8",
+    "backup_required": true,
+    "translation_status": "completed",
+    "api_endpoints": [],
+    "related_files": [
+        "core/validator.py",
+        "core/sanitizer.py",
+        "config/validation_rules.json",
+        "config/sanitization_rules.json"
+    ],
+    "changelog": "Migrated from backup, cleaned up structure, added component configs.",
+    "review_status": "pending"
+  },
+  "threshold_warning": 0.6,
+  "threshold_critical": 0.4,
+  "principle_weights": {
+    "redemption": 1.0,
+    "compassion": 1.0,
+    "privacy": 1.0,
+    "accessibility": 1.0,
+    "love": 1.0,
+    "trust": 1.0,
+    "integrity": 1.0,
+    "awareness": 1.0,
+    "connection": 1.0,
+    "preservation": 1.0
+  },
+  "validator_config": {
+      "monitoring_interval": 15,
+      "validation_retention_days": 30,
+      "rules_file": "../config/validation_rules.json"
+  },
+  "sanitizer_config": {
+      "cache_retention_hours": 1,
+      "history_retention_days": 7,
+      "ethical_threshold": 0.7,
+      "max_cache_size": 50,
+      "rules_file": "../config/sanitization_rules.json"
+  },
+  "version": "1.0.0",
+  "max_history_size": 1000,
+  "alert_threshold": 0.7,
+  "validation": {
+      "default_severity": 0.5,
+      "min_score_threshold": 0.8,
+      "max_validation_time": 5000,
+      "cache_duration": 300,
+      "retry_attempts": 3,
+      "retry_delay": 1000
+  },
+  "rules": {
+      "auto_reload": true,
+      "reload_interval": 300,
+      "rules_path": "rules",
+      "default_rules": {
+          "ethical_compliance": {
+              "condition": "action.ethical_score >= 0.8",
+              "severity": 0.9,
+              "description": "Ensures actions meet minimum ethical standards"
+          },
+          "data_privacy": {
+              "condition": "not action.exposes_sensitive_data",
+              "severity": 0.95,
+              "description": "Prevents exposure of sensitive data"
+          },
+          "resource_safety": {
+              "condition": "action.resource_impact <= 0.7",
+              "severity": 0.8,
+              "description": "Prevents excessive resource consumption"
+          }
+      }
+  },
+  "mycelium": {
+      "topics": {
+          "validate_request": "ethik.validate.request",
+          "validate_result": "ethik.validate.result",
+          "rules_update": "ethik.rules.update",
+          "rules_status": "ethik.rules.status",
+          "alert": "ethik.alert",
+          "metrics": "ethik.metrics",
+          "health": "ethik.health"
+      },
+      "message_format": {
+          "validate_request": {
+              "required_fields": ["action", "context"],
+              "optional_fields": ["rules", "priority", "timeout"]
+          },
+          "validate_result": {
+              "required_fields": ["request_id", "action", "valid", "score"],
+              "optional_fields": ["details", "timestamp"]
+          },
+          "rules_update": {
+              "required_fields": ["rules"],
+              "optional_fields": ["source", "version"]
+          }
+      },
+      "retry": {
+          "max_attempts": 3,
+          "initial_delay": 1000,
+          "max_delay": 5000,
+          "backoff_factor": 2
+      },
+      "batch": {
+          "enabled": true,
+          "max_size": 100,
+          "flush_interval": 1000
+      },
+      "security": {
+          "sign_messages": true,
+          "verify_signatures": true,
+          "encryption_enabled": true,
+          "hash_algorithm": "sha256"
+      }
+  },
+  "logging": {
+      "level": "INFO",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+      "file": "logs/ethik.log",
+      "max_size": 10485760,
+      "backup_count": 5,
+      "include_validation_details": true
+  },
+  "monitoring": {
+      "enabled": true,
+      "metrics_interval": 60,
+      "health_check_interval": 30,
+      "alert_channels": ["mycelium", "log"],
+      "performance_thresholds": {
+          "validation_time_ms": 1000,
+          "queue_size": 1000,
+          "error_rate": 0.01
+      }
+  },
+  "integration": {
+      "atlas": {
+          "enabled": true,
+          "sync_interval": 300,
+          "metadata_topics": ["atlas.ethik.metadata"]
+      },
+      "nexus": {
+          "enabled": true,
+          "dependency_check": true,
+          "status_topic": "nexus.ethik.status"
+      },
+      "cronos": {
+          "enabled": true,
+          "backup_interval": 3600,
+          "state_topic": "cronos.ethik.state"
+      }
+  },
+  "security": {
+      "api_key_required": true,
+      "rate_limit": {
+          "enabled": true,
+          "max_requests": 1000,
+          "window_seconds": 60
+      },
+      "input_validation": {
+          "max_action_size_bytes": 10240,
+          "max_context_size_bytes": 102400,
+          "allowed_types": ["string", "number", "boolean", "object", "array"]
+      }
+  },
+  "performance": {
+      "cache": {
+          "enabled": true,
+          "max_size": 1000,
+          "ttl_seconds": 300
+      },
+      "async": {
+          "max_workers": 10,
+          "queue_size": 1000
+      },
+      "batching": {
+          "enabled": true,
+          "max_size": 100,
+          "max_latency_ms": 1000
+      }
+  }
+}

@@ -1,0 +1,70 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# EGOS Python Logging Standards (KOIOS)
+
+These guidelines align with `subsystems/KOIOS/docs/STANDARDS.md`, Section 10.
+
+## Core Principles:
+
+1.  **Framework:** Use Python's built-in `logging` module.
+2.  **`KoiosLogger` (Future):** A standardized logger (`subsystems/KOIOS/core/logging.py`) will be implemented. **Prefer using this once available** for consistent formatting and potential central configuration (e.g., Mycelium integration).
+3.  **Logger Naming:**
+    *   Obtain loggers hierarchically using `__name__` or explicit paths:
+        *   `logging.getLogger(__name__)` (Recommended for typical module usage)
+        *   `logging.getLogger("SUBSYSTEM_NAME.ModuleName")` (e.g., `logging.getLogger("NEXUS.Core")`)
+    *   The `KoiosLogger`, once implemented, should simplify obtaining correctly named loggers.
+4.  **Log Format (Target):** Aim for **structured logging (JSON)**. The `KoiosLogger` will define the final format, likely including timestamp, level, logger name (module path), message, and relevant context.
+5.  **Log Levels:** Use standard levels appropriately:
+    *   `DEBUG`: Detailed information, typically of interest only when diagnosing problems.
+    *   `INFO`: Confirmation that things are working as expected.
+    *   `WARNING`: An indication that something unexpected happened, or indicative of some problem in the near future (e.g. 'disk space low'). The software is still working as expected.
+    *   `ERROR`: Due to a more serious problem, the software has not been able to perform some function.
+    *   `CRITICAL`: A serious error, indicating that the program itself may be unable to continue running.
+6.  **Clarity:** Log messages should be clear, concise, and informative.
+7.  **Context:** Include relevant contextual information (e.g., IDs, state variables) using the `extra` parameter, especially for structured logging.
+8.  **Exceptions:** Log exceptions using `logger.exception("Error occurred: ...")` or `logger.error("...", exc_info=True)` to automatically include traceback information.
+9.  **Mycelium Integration (Future):** Important logs (e.g., WARNING, ERROR, CRITICAL) may be configured (via `KoiosLogger`) to be emitted as `log.<source_node>.<level>` events on the Mycelium network for system-wide visibility.
+
+## Examples:
+
+```python
+import logging
+
+# Get logger (current standard, using __name__ is common)
+logger = logging.getLogger(__name__) # e.g., logger name becomes 'subsystems.cronos.backup_manager'
+
+# --- Future standard (once KoiosLogger exists) ---
+# from koios.logger import KoiosLogger
+# logger = KoiosLogger.get_logger(__name__)
+# --- Example: logger = KoiosLogger.get_logger("CRONOS.BackupManager") ---
+
+def perform_backup(name: str, job_id: str):
+    log_context = {"backup_job_id": job_id, "backup_name": name}
+    logger.info(f"Starting backup: {name}", extra=log_context)
+    try:
+        # ... backup logic ...
+        # Example: data_processed = process_data(source)
+        logger.info(f"Backup completed successfully: {name}", extra=log_context)
+        # return data_processed
+    except FileNotFoundError as e:
+        logger.error(
+            f"Backup source not found for {name}: {e}",
+            exc_info=True,
+            extra=log_context
+        )
+        # Handle or re-raise
+    except Exception as e:
+        # Use logger.exception for unexpected errors to include traceback automatically
+        logger.exception(
+            f"Unexpected critical error during backup {name}: {e}",
+            extra=log_context
+        )
+        # Consider raising a specific application error
+        # raise BackupError(f"Critical failure during backup {name}") from e
+```
+
+**Note:** When modifying or adding logging, ensure it follows these principles and prepares for the future `KoiosLogger` integration and structured logging patterns.

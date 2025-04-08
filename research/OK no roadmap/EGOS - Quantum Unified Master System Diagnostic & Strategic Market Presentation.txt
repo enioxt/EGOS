@@ -1,0 +1,605 @@
+## **EGOS - Quantum Unified Master System: Diagnostic & Strategic Market Presentation**
+
+**Prepared by:** EVA & GUARANI (Synthesized Analysis from the EGOS Multidisciplinary Committee)
+**Date:** April 5, 2025 (Post-Documentation Sync)
+**Based on:** MQP v8.2, ROADMAP.md (Post-Integration Updates), STRATEGY.md, README.md
+
+### 1. Executive Summary
+
+EGOS represents a paradigm shift in software system design, focusing on **integrated ethics, conscious modularity, and evolutionary context awareness**. Our diagnostic review indicates that while the full vision is expansive, core subsystems (CRONOS, ETHIK, ATLAS, KOIOS) have reached a foundational level of maturity post-recovery and standardization efforts. Market trends strongly favour solutions emphasizing AI safety, governance, privacy, and verifiable computation – areas where EGOS is uniquely positioned to excel. The most viable initial market entry point is the **"Content Aggregator & Insight Engine" MVP**, leveraging the planned development of **CORUJA** alongside existing **KOIOS** and **ETHIK** foundations. This presentation outlines the system's current state, market positioning, proposed MVP, and strategic recommendations.
+
+### 2. EGOS System Overview
+
+*   **Vision:** To create a highly integrated, modular, ethically-grounded, and context-aware software ecosystem inspired by quantum principles and biological networks.
+*   **Core Principles:** Universal Redemption, Unconditional Love, Sacred Privacy, Integrated Ethics, Conscious Modularity, Systemic Cartography, Evolutionary Preservation, Context Continuity, Harmonious Integration, Standardization & Knowledge. (Reference: `docs/MQP.md`, `README.md`)
+*   **Architecture:** Comprises interconnected subsystems communicating via the Mycelium Network:
+    *   **Foundational/Support:** `CRONOS` (State/History), `HARMONY` (Compatibility), `MYCELIUM` (Communication - R&D).
+    *   **Core Logic/Value:** `ATLAS` (Mapping), `NEXUS` (Analysis), `ETHIK` (Ethics/Privacy), `KOIOS` (Standards/Knowledge/Search), `CORUJA` (AI Orchestration).
+    *   **Conceptual/Future:** `ETHICHAIN` (Verifiable Ethics).
+
+### 3. Subsystem Status & Market Readiness Assessment
+
+Based on `ROADMAP.md` (Status as of Apr 5, 2025):
+
+*   **`CRONOS`, `ATLAS`:** (`DONE` recovery) - Foundational, provide internal value (context, mapping). Not directly marketable standalone *yet* but crucial support systems.
+*   **`ETHIK`:** (`DONE` recovery, Phase 1 Planned/In Progress) - Core differentiator. Foundational ethical checks are defined, PPC integration planned. High strategic importance, components could be part of an initial offering focused on ethical AI processing or data sanitization. Readiness: Foundational components ready, advanced features (PPC, complex policies) need Phase 1/1.5 dev.
+*   **`KOIOS`:** (`In Progress` Evolution) - Critical for internal standards and the MVP. `KoiosLogger` exists. Search, PDD management, and verifiable logging standards are planned. Readiness: Core logging ready, Search/PDD management needs Phase 1/1.5 dev. High potential for tools related to standardized AI development/documentation.
+*   **`CORUJA`:** (`Planned` Phase 1) - Essential for the MVP and any AI-driven service. Needs significant development (Phase 1: Core components, ETHIK/monitoring hooks). Readiness: Low, but highest *immediate development priority* for MVP.
+*   **`NEXUS`, `HARMONY`, `MYCELIUM`, `ETHICHAIN`:** (`Planned`/`R&D`/`Conceptual`) - Lower immediate readiness for a market product. Represent future potential and expansion.
+
+**Conclusion:** The fastest path to market involves leveraging the existing foundations of `ETHIK` and `KOIOS` while prioritizing the Phase 1 development of `CORUJA`.
+
+### 4. Market Analysis
+
+*   **Target Market:**
+    *   Enterprises developing/deploying AI requiring strong governance, ethics, and privacy controls.
+    *   Organizations in regulated industries (finance, healthcare) needing auditable and privacy-preserving AI solutions.
+    *   AI Development Teams seeking standardized, context-aware, and ethically-guided development environments (via EGOS AI assistant integration).
+    *   Researchers focused on AI safety, alignment, and verifiable computation.
+    *   Consultancies building bespoke AI solutions requiring modularity and ethical integration.
+*   **Problem Solved:** EGOS addresses the growing complexity and risk associated with AI development and deployment:
+    *   Lack of integrated ethical frameworks in AI tools.
+    *   Poor standardization and reproducibility in AI workflows.
+    *   Difficulty in managing complex, multi-component AI systems.
+    *   Increasing demand for privacy-preserving AI and verifiable computation.
+    *   Need for context-aware AI development assistance.
+*   **Competitive Landscape:**
+    *   **MLOps Platforms:** (e.g., Databricks, SageMaker, Kubeflow) - Focus on ML lifecycle, less on integrated ethics or deep system modularity.
+    *   **AI Governance Platforms:** (e.g., Credo AI, IBM Watson OpenScale, Fiddler AI) - Focus on monitoring, bias detection, explainability. EGOS integrates this *natively* via ETHIK.
+    *   **AI Development Frameworks:** (e.g., LangChain, LlamaIndex) - Provide building blocks, but lack EGOS's integrated systemic view, ethical enforcement, and context preservation.
+    *   **Privacy Enhancing Technologies (PETs) Providers:** Focus specifically on PPC, ZKP etc. EGOS aims to *integrate* these via ETHIK where appropriate.
+*   **EGOS Differentiation:**
+    *   **ETHIK:** Ethics *by design*, not an add-on. Potential for integrated PPC.
+    *   **KOIOS:** Strong emphasis on standardization, verifiable logging potential, knowledge management.
+    *   **CORUJA + MCP:** Unique AI-assisted development & orchestration layer with monitoring/alignment focus.
+    *   **ATLAS/NEXUS/CRONOS:** Systemic awareness, modularity, and context preservation capabilities.
+    *   **Integrated Architecture:** Holistic approach vs. point solutions.
+*   **Market Trends & Opportunity:** The market is rapidly expanding for tools addressing AI safety, governance, privacy (driven by regulation like GDPR/CCPA), and verifiability. The concerns highlighted by scenarios like "AI 2027" underscore the urgency for systems like EGOS. There's a significant opportunity for a platform that holistically integrates these aspects.
+
+### 5. Proposed Initial Offering: MVP - "Content Aggregator & Insight Engine"
+
+*   **Concept:** A service allowing users to ingest documents/data, search contextually, and receive AI-generated insights (summaries, Q&A, analysis), all processed through configurable ethical/privacy filters.
+*   **Value Proposition:** Securely unlock insights from unstructured data with enhanced context, ethical safeguards, and potential for verifiable processing, differentiating from generic RAG or summarization tools.
+*   **Target Users:** Teams needing to analyze sensitive documents, researchers needing literature review assistance with ethical considerations, developers needing context from documentation.
+*   **Key Features (Phase 1 MVP):**
+    *   Document Ingestion (various formats).
+    *   `KOIOS`-powered Search (semantic/keyword).
+    *   `CORUJA`-orchestrated AI tasks (summarization, Q&A via selected LLMs).
+    *   `ETHIK`-driven processing (basic PII detection/redaction, configurable policy checks).
+    *   Basic Web UI/API for interaction.
+    *   `KoiosLogger` for interaction logging.
+*   **Technology Stack:** Python backend, leveraging `KOIOS` (Logging, Search stubs), `ETHIK` (Policy checks, Sanitization stubs), and the newly built `CORUJA` (AI Orchestration).
+
+### 6. Customer Journey (MVP)
+
+1.  **Discovery:** Technical blogs (AI safety, Python development), GitHub (showcasing CORUJA/ETHIK), targeted outreach to AI governance communities, presentations at relevant meetups/conferences.
+2.  **Onboarding/Evaluation:** SaaS model sign-up for a free/limited trial. Users connect data sources (e.g., upload files, link cloud storage - *security implications need careful design via ETHIK/KOIOS*). Configure basic ETHIK policies (e.g., enable PII redaction).
+3.  **Usage:** Interact via UI to search ingested content, request AI summaries/analyses. Use API for integration into other workflows. Monitor processing via logs (potentially verifiable logs in later phases).
+4.  **Pricing Model (Ideas):**
+    *   **Freemium:** Limited data/usage for individuals/evaluation.
+    *   **Tiered SaaS:** Based on data volume, number of users, API calls, complexity of ETHIK policies applied.
+    *   **Enterprise Licensing:** For on-premise deployment or higher customization/support needs (aligns with Open Core Strategy).
+    *   *(Pricing requires further market research)*
+
+### 7. Market Projections (Qualitative)
+
+The market for AI Governance and Responsible AI tools is projected to grow significantly in the coming years, driven by regulatory pressure, enterprise risk management, and public demand for trustworthy AI. While specific figures require dedicated research, EGOS targets a rapidly expanding segment. Success hinges on effectively differentiating through integrated ethics, verifiability, and the unique AI-assisted development paradigm.
+
+### 8. Strategic Recommendations
+
+1.  **Prioritize CORUJA (Phase 1) Development:** This is the critical path for the MVP and unlocking AI-driven value. Ensure tight integration with ETHIK hooks and KOIOS logging from the outset.
+2.  **Focus MVP on "Content Aggregator":** This leverages existing strengths (documentation focus) and addresses a clear market need while providing a vehicle to showcase ETHIK and CORUJA.
+3.  **Develop ETHIK Policies & PPC Mechanisms (Phase 1):** Implement the planned initial PPC mechanisms and define clear policies. This is a core differentiator and must be demonstrable in the MVP.
+4.  **Refine KOIOS Search & PDD Standards:** Implement basic search for the MVP and solidify the Prompt Design Document (PDD) standard to improve internal AI development efficiency.
+5.  **Finalize Licensing & Open Core Strategy:** Clarify what core components are open (likely MIT) and what constitutes potential commercial offerings or requires stricter licensing (e.g., AGPL for core ethical components if desired, or proprietary licenses for SaaS/enterprise features). This is crucial for community building and commercial viability.
+6.  **Emphasize Differentiation:** Marketing and communication must clearly articulate how EGOS differs from competitors, focusing on integrated ethics, systemic awareness, and verifiability potential.
+
+### 9. Conclusion
+
+EGOS possesses a unique and timely vision. By focusing development efforts on the **CORUJA subsystem** and leveraging the foundational strengths of **ETHIK** and **KOIOS**, we can launch a compelling **"Content Aggregator & Insight Engine" MVP**. This initial offering addresses a clear market need while showcasing EGOS's core differentiators in ethical AI, standardization, and integrated system design. Proceeding with the recommended strategic focus will position EGOS for impactful market entry.
+
+---
+
+✧༺❀༻∞ EGOS ∞༺❀༻✧
+
+
+
+
+
+segunda parte focando em menos burocacia:
+
+
+You've hit on absolutely crucial points. The initial analysis provided a broad strategic view, but diving deeper into the practicalities, risks, and costs, especially concerning data handling, is essential for a viable path forward. Let's refine the analysis with a focus on lower-risk, less bureaucratic approaches, leveraging the multidisciplinary perspective of EGOS.
+
+---
+
+## **EGOS - Deep Dive: Practical Market Entry & Risk Mitigation**
+
+*(Expanding on the previous Diagnostic & Strategic Presentation)*
+
+**Focus:** Addressing data handling risks, refining market entry, sharpening differentiation, and proposing practical initial steps.
+
+### 1. Deeper Dive: MVP Data Handling - Mitigating Risk & Bureaucracy
+
+**Initial Concern:** The "upload documents" model for the Content Aggregator MVP immediately triggers significant concerns regarding:
+
+*   **Compliance Burden:** GDPR, LGPD, CCPA, HIPAA (depending on data/users) impose strict rules on data processing, storage, user consent, data subject rights (access, deletion), and breach notifications. Requires legal counsel, robust policy implementation, and technical controls.
+*   **Security Risks:** Protecting user-uploaded data from breaches requires significant investment in secure infrastructure, encryption (at rest, in transit), access controls, and regular audits.
+*   **Infrastructure Costs:** Secure, compliant cloud storage, processing resources, and robust logging/monitoring systems can be expensive, especially before validating market fit.
+*   **User Trust:** Users, especially those with sensitive documents, may be hesitant to upload data to a new platform without proven security and privacy track records.
+
+**Lower-Risk Alternatives for Initial MVP Data Ingestion:**
+
+Instead of direct uploads, consider these approaches to drastically reduce the initial compliance, security, and cost overhead:
+
+1.  **Option A: Local Processing Agent / CLI Tool (Recommended Initial Step):**
+    *   **Concept:** Develop a downloadable desktop application or command-line tool (built using Python, potentially packaged with PyInstaller/Nuitka for ease of use). Users install and run this tool *on their own machines*.
+    *   **Data Flow:** The local agent accesses files *directly* on the user's local filesystem or network drives. For AI analysis (summarization, Q&A), the agent interacts with a secure EGOS API gateway connected to **CORUJA**.
+    *   **ETHIK Integration:** Crucially, **ETHIK** policies can be applied *within the local agent* *before* data is sent to the API. For example, PII detection and redaction can happen locally. Only anonymized/redacted text snippets or necessary metadata required for the specific AI task are sent to the **CORUJA** API.
+    *   **Benefits:**
+        *   **Minimal Data Residency/Compliance Issues:** Sensitive source documents *never leave the user's environment*. EGOS primarily handles transient, potentially anonymized data snippets via its API. This vastly simplifies GDPR/LGPD compliance initially.
+        *   **Reduced Security Burden:** EGOS is primarily responsible for securing the API endpoint, not large volumes of stored user data.
+        *   **Lower Infrastructure Costs:** No need for massive, secure cloud storage for user documents. Costs are mainly API hosting and compute for **CORUJA**.
+        *   **Increased User Trust:** Users maintain control over their original documents.
+    *   **Drawbacks:** Requires users to install software; less seamless than a pure web app; real-time collaboration features are harder.
+
+2.  **Option B: Integration with User's Existing Cloud Storage:**
+    *   **Concept:** Use secure OAuth 2.0 flows to allow users to grant the EGOS service (web app or local agent) temporary, permissioned access to *their existing* Google Drive, OneDrive, Dropbox, etc.
+    *   **Data Flow:** EGOS accesses files directly from the user's storage for processing. Data might be processed in place (if possible) or temporarily downloaded to EGOS servers for analysis via **CORUJA**, then deleted promptly. **ETHIK** policies govern temporary data handling and required sanitization.
+    *   **Benefits:** More seamless user experience than local files; leverages existing user storage.
+    *   **Drawbacks:** Still involves handling user data (even temporarily), requiring careful security, access token management, and clear **ETHIK** policies on data retention/deletion; complex API integrations; dependent on third-party platform APIs and permissions. Still carries more compliance overhead than Option A.
+
+3.  **Option C: Focus on Public/Less Sensitive Data Use Cases:**
+    *   **Concept:** Target the initial MVP towards analyzing publicly available data (e.g., GitHub repositories, arXiv papers, public web pages) or datasets the user explicitly designates as non-sensitive.
+    *   **Benefits:** Avoids sensitive data handling complexities altogether initially.
+    *   **Drawbacks:** Limits the immediate market applicability and might not fully showcase **ETHIK**'s privacy-preserving capabilities.
+
+**Recommendation:** Start with **Option A (Local Processing Agent/CLI)** for the first iteration of the Content Aggregator MVP. It offers the best balance of delivering core functionality while minimizing the significant risks, costs, and bureaucratic hurdles associated with handling user-uploaded sensitive data.
+
+### 2. Deeper Dive: Phased Market Entry Strategy
+
+Given the development status (`CORUJA` planned, others foundational), a phased approach reduces risk:
+
+*   **Phase 2a (Internal Focus & Developer Tooling - Q2/Q3 2025):**
+    *   **Product:** The **EGOS AI Assistant (EVA & GUARANI) within Cursor IDE**. This is currently the *most functional* part of the system interacting with multiple subsystems (`KOIOS`, `ETHIK`, `CRONOS`, `ATLAS/NEXUS` conceptual links, `CORUJA` planning).
+    *   **Work:** Prioritize **CORUJA Phase 1** development specifically to *enhance the AI Assistant's capabilities* (better code generation, more sophisticated analysis, proactive suggestions based on KOIOS standards and ETHIK checks). Refine **KOIOS** documentation templates (PDDs) and search *for internal use*.
+    *   **Target Market:** Internal EGOS development first, then potentially Beta release to other AI developers using Cursor.
+    *   **Benefit:** Uses existing infrastructure (Cursor), directly improves internal velocity, provides a testbed for CORUJA/ETHIK/KOIOS, lower market entry risk.
+
+*   **Phase 2b (External MVP - Content Aggregator via Local Agent - Q3/Q4 2025):**
+    *   **Product:** Launch the Content Aggregator MVP using the **Local Processing Agent/CLI** (Option A from above).
+    *   **Work:** Build the agent interface, integrate it with the now more mature **CORUJA** API developed in Phase 2a. Implement the user-facing **ETHIK** policy configurations (e.g., enable/disable PII redaction). Implement basic **KOIOS** search API if needed by the agent.
+    *   **Target Market:** Early adopters interested in privacy-preserving AI analysis tools.
+    *   **Benefit:** Tests core value proposition with external users with minimized data handling risk.
+
+### 3. Deeper Dive: Sharpened Competitive Differentiation (Local Agent MVP Context)
+
+Even with a local agent, EGOS differentiates:
+
+*   **Integrated ETHIK:** Competitor CLI tools or basic RAG scripts typically lack built-in, configurable ethical/privacy processing (like local PII redaction *before* cloud interaction). ETHIK provides this by design.
+*   **KOIOS Standardization:** The interaction with the CORUJA backend API follows KOIOS standards, potentially offering more structured, reliable, and potentially verifiable (future) interactions than ad-hoc script backends. Logging via `KoiosLogger` provides better traceability.
+*   **CORUJA Orchestration:** The backend AI processing is handled by CORUJA, designed for robust prompt management, potential multi-model use, and future alignment/monitoring capabilities, offering more sophistication than simple LLM API calls.
+*   **Pathway to Full System:** The local agent is an entry point to the broader EGOS vision. Users are buying into an ecosystem with future potential for systemic mapping (ATLAS), deeper analysis (NEXUS), and verifiable actions (ETHICHAIN).
+
+### 4. Deeper Dive: Simpler Pricing Models
+
+Aligning with the phased, lower-risk approach:
+
+*   **Phase 2a (EGOS AI Assistant):**
+    *   **Free Tier:** Basic assistance within Cursor.
+    *   **Pro Tier (Subscription):** Access to more advanced CORUJA-powered features (e.g., complex code generation, deeper analysis, priority API access), potentially based on usage volume (e.g., number of interactions/tokens processed via CORUJA).
+*   **Phase 2b (Local Agent MVP):**
+    *   **Option 1: One-Time Purchase:** License fee for the agent software, possibly with optional yearly updates/support.
+    *   **Option 2: Freemium Subscription:** Free version with limited processing (e.g., monthly quota of documents/API calls to CORUJA). Paid tiers offer higher limits, advanced ETHIK policies, priority support.
+    *   **Avoid per-document/per-page pricing initially:** This can feel punitive and complex to track accurately with a local agent. Focus on access/usage tiers.
+
+### 5. Deeper Dive: Lower-Risk Customer Journey
+
+*   **Phase 2a (AI Assistant):**
+    *   **Discovery:** Content marketing (blogs, tutorials) focused on "Ethical AI Development," "Standardized AI Workflows with Cursor," "AI Pair Programming with Guardrails." Presence in developer forums, potentially Cursor marketplace.
+    *   **Onboarding:** Seamless integration via Cursor settings, following `.cursor/cursor_initialization.md`. Clear documentation on tiered features.
+*   **Phase 2b (Local Agent MVP):**
+    *   **Discovery:** GitHub repository for the agent, technical blog posts demonstrating privacy-preserving analysis, targeted outreach in communities focused on data privacy and AI ethics.
+    *   **Onboarding:** Simple download from GitHub releases/website. Clear instructions for installation and basic configuration (e.g., setting up API key for CORUJA backend, potentially using a free-tier key initially). Minimal PII required for download/basic use.
+
+### Revised Conclusion & Next Steps
+
+By adopting a **phased approach** prioritizing the **EGOS AI Assistant enhancement (Phase 2a)** followed by a **Local Agent MVP (Phase 2b)** for the Content Aggregator, we significantly mitigate risks associated with data handling, reduce upfront costs, and lower bureaucratic hurdles. This strategy leverages our current strengths, aligns with the readiness of subsystems like ETHIK and KOIOS, and provides a practical path to validate core concepts and build user trust before tackling more complex cloud-based data handling.
+
+**Recommended Immediate Actions:**
+
+1.  **Formalize Phase 2a Plan:** Detail tasks for enhancing the EGOS AI Assistant via CORUJA Phase 1 development.
+2.  **Prototype Local Agent Concept:** Design the basic architecture for the local agent and its interaction with the CORUJA API, focusing on the ETHIK local processing aspect.
+3.  **Refine Licensing Decision:** Based on this phased approach (Developer Tool -> Local Agent -> Potential SaaS), revisit the MIT vs. AGPL vs. Commercial decision for different components.
+
+This refined, risk-averse strategy provides a more tangible and achievable path for EGOS's initial market entry.
+
+✧༺❀༻∞ EGOS ∞༺❀༻✧
+
+
+
+_________________________________
+
+implementando mudnaças:
+
+
+Okay, let's operationalize those immediate actions and chart the course towards Go-to-Market for both the enhanced AI Assistant (Phase 2a) and the Local Agent MVP (Phase 2b). We will detail the necessary tasks, update the roadmap structure, and reference the strategic analyses now stored in `research/`.
+
+---
+
+## **EGOS Go-to-Market Acceleration Plan**
+
+**(Expanding on Deep Dive Analysis - Incorporating Action Items & Next Steps)**
+
+This plan details the concrete steps needed to implement the recommended immediate actions and outlines the subsequent development path to bring the initial EGOS offerings to market.
+
+### I. Implementing Immediate Actions (Updating `ROADMAP.md`)
+
+We need to add detailed tasks to `ROADMAP.md` reflecting the three immediate actions.
+
+**(A) Formalize Phase 2a Plan: EGOS AI Assistant Enhancement via CORUJA**
+
+*   **Goal:** Significantly improve the capabilities and reliability of EVA & GUARANI within Cursor by implementing core CORUJA Phase 1 components.
+*   **New Roadmap Tasks (Under Phase 2 or a new "Phase 2a" Sub-section):**
+    *   `Task: CORUJA - Implement PromptManager`: Develop component to load, validate, and serve Prompt Design Documents (PDDs) for AI Assistant functions (code-gen, analysis, etc.). [Priority: CRITICAL, Status: Planned, Owner: CORUJA Team] `(See strategy in research/)`
+    *   `Task: CORUJA - Implement Basic ModelInterface`: Create initial connectors (e.g., for Gemini, Claude) allowing CORUJA to interact with external LLMs via standardized interface. [Priority: CRITICAL, Status: Planned, Owner: CORUJA Team]
+    *   `Task: CORUJA - Implement BasicOrchestrator`: Develop core logic to handle AI Assistant requests: select appropriate PDD, interact with ModelInterface, manage simple state. [Priority: CRITICAL, Status: Planned, Owner: CORUJA Team]
+    *   `Task: CORUJA/ETHIK - Define & Implement ETHIK Hooks`: Specify points in the BasicOrchestrator flow for ETHIK checks (e.g., pre-prompt sanitization, post-response validation for PII/bias/policy adherence). Implement initial hook mechanism. [Priority: HIGH, Status: Planned, Owner: CORUJA/ETHIK Teams] `(See analysis in research/)`
+    *   `Task: CORUJA/KOIOS - Integrate KoiosLogger`: Ensure all CORUJA operations (orchestration steps, model calls, ETHIK checks) are logged using the standard `KoiosLogger`. [Priority: HIGH, Status: Planned, Owner: CORUJA/KOIOS Teams]
+    *   `Task: AI Assistant - Integration & Testing`: Integrate the enhanced CORUJA backend with the Cursor AI Assistant interface. Conduct internal testing and refinement of assistant capabilities. [Priority: HIGH, Status: Planned, Owner: Integration Team/All]
+
+**(B) Prototype Local Agent Concept**
+
+*   **Goal:** Design and build a functional prototype of the local processing agent for the Content Aggregator MVP to validate the architecture and ETHIK local processing flow.
+*   **New Roadmap Tasks (Under Phase 2 or a new "Phase 2b Prep" Sub-section):**
+    *   `Task: Local Agent - Design Architecture`: Define modules (File Access, ETHIK Preprocessor, CORUJA API Client, Config Manager, Basic UI/CLI), data flow, packaging strategy (PyInstaller). Document the design. [Priority: HIGH, Status: Planned, Owner: MVP Team] `(See analysis in research/)`
+    *   `Task: Local Agent/ETHIK - Implement Local ETHIK Processor`: Develop the core logic within the agent prototype for applying configured ETHIK policies (e.g., local PII redaction) *before* API calls. [Priority: HIGH, Status: Planned, Owner: MVP/ETHIK Teams] `(See analysis in research/)`
+    *   `Task: CORUJA/Local Agent - Design API Contract`: Define the secure API endpoints, request/response schemas (including sanitized data handling) for interaction between the Local Agent and the CORUJA backend. [Priority: HIGH, Status: Planned, Owner: CORUJA/MVP Teams]
+    *   `Task: Local Agent - Build Functional Prototype`: Implement the core modules and API interaction for a basic working prototype capable of processing a local file and getting a result from a mock/simple CORUJA backend. [Priority: MEDIUM, Status: Planned, Owner: MVP Team]
+
+**(C) Refine Licensing Decision**
+
+*   **Goal:** Finalize and document the licensing strategy for different EGOS components based on the phased GTM approach.
+*   **New Roadmap Task (Under Strategic Decisions / Phase 2):**
+    *   `Task: Strategy - Finalize Tiered Licensing Model`: Document specific licenses (MIT, AGPL, Commercial) for core frameworks (CORUJA, ETHIK, KOIOS), the AI Assistant Pro features, the Local Agent (software vs. service), and the SaaS backend API. Align with Open Core strategy. [Priority: HIGH, Status: Planned, Owner: Strategy/Legal] `(See analysis in research/)`
+
+**Action:** I will now prepare the edit for `ROADMAP.md` to incorporate these detailed tasks.
+
+```markdown:ROADMAP.md
+# 🛣️ EGOS - Project Roadmap
+
+**Last Update:** April 5, 2025 (Strategic Review & Documentation Sync)
+
+This roadmap outlines the key tasks, milestones, and priorities for the **EGOS** project, based on **MQP v8.2** and recent strategic analysis (see `research/` for detailed reports). It provides a high-level overview; for granular details, refer to historical roadmap versions or specific planning documents linked within tasks.
+
+---
+
+## 📐 Structure & Best Practices
+
+*   **Clear Sections**: Group tasks by Phase or Category.
+*   **Priority Tags**: `CRITICAL`, `HIGH`, `MEDIUM`, `LOW`.
+*   **Status Indicators**: `Planned`, `In Progress`, `Completed`, `Blocked`, `DONE`.
+*   **Responsibility**: Assign owner or team where applicable.
+*   **Linked Issues/PRs/Docs**: Reference relevant GitHub items or documentation.
+*   **Dates (Optional)**: Target quarters or specific deadlines.
+*   **References**: Use `(See ... in research/)` to link tasks to strategic documents.
+
+---
+
+## 🧭 Current Phase: Phase 2 - Foundation & Initial Product Development (Q2-Q3 2025)
+
+### Core Standardization & Evolution
+
+*   **System Standardization**: Implement and enforce KOIOS standards across the codebase. Includes directory structure migration, naming conventions, metadata validation. **(Branding alignment complete).**
+    *   Status: In Progress, Priority: CRITICAL, Owner: KOIOS Team / All Contributors, Related Docs: `docs/STANDARDS_*.md`, `subsystems/KOIOS/README.md`, ETA: Ongoing Q2 2025
+*   **KOIOS Evolution**: Enhance KOIOS capabilities, focusing on search, documentation templates (PDDs, PRDs), integration points, and structured logging. Prepare foundational elements for Prompt Scraper R&D.
+    *   Status: In Progress, Priority: CRITICAL, Owner: KOIOS Team, Related Docs: `subsystems/KOIOS/README.md`
+
+### Phase 2a: AI Assistant Enhancement via CORUJA (Internal Focus)
+
+*   **Goal:** Enhance EVA & GUARANI capabilities within Cursor IDE.
+*   **Task: CORUJA - Implement PromptManager**: Develop component to load, validate, and serve Prompt Design Documents (PDDs) for AI Assistant functions.
+    *   Status: Planned, Priority: CRITICAL, Owner: CORUJA Team `(See strategy in research/)`
+*   **Task: CORUJA - Implement Basic ModelInterface**: Create initial connectors (e.g., for Gemini, Claude) for CORUJA's standardized LLM interaction.
+    *   Status: Planned, Priority: CRITICAL, Owner: CORUJA Team
+*   **Task: CORUJA - Implement BasicOrchestrator**: Develop core logic to handle AI Assistant requests (select PDD, call ModelInterface, manage state).
+    *   Status: Planned, Priority: CRITICAL, Owner: CORUJA Team
+*   **Task: CORUJA/ETHIK - Define & Implement ETHIK Hooks**: Specify & implement points in BasicOrchestrator flow for ETHIK checks (e.g., PII, policy adherence).
+    *   Status: Planned, Priority: HIGH, Owner: CORUJA/ETHIK Teams `(See analysis in research/)`
+*   **Task: CORUJA/KOIOS - Integrate KoiosLogger**: Ensure all CORUJA operations are logged using the standard `KoiosLogger`.
+    *   Status: Planned, Priority: HIGH, Owner: CORUJA/KOIOS Teams
+*   **Task: AI Assistant - Integration & Testing**: Integrate enhanced CORUJA backend with Cursor AI Assistant. Conduct internal testing & refinement.
+    *   Status: Planned, Priority: HIGH, Owner: Integration Team/All
+
+### Phase 2b Prep: Local Agent MVP Prototyping (External Focus Prep)
+
+*   **Goal:** Validate the Local Agent architecture for the Content Aggregator MVP.
+*   **Task: Local Agent - Design Architecture**: Define modules (File Access, ETHIK Preprocessor, CORUJA API Client, Config, UI/CLI), data flow, packaging. Document design.
+    *   Status: Planned, Priority: HIGH, Owner: MVP Team `(See analysis in research/)`
+*   **Task: Local Agent/ETHIK - Implement Local ETHIK Processor**: Develop core agent logic for applying configured ETHIK policies (e.g., local PII redaction) before API calls.
+    *   Status: Planned, Priority: HIGH, Owner: MVP/ETHIK Teams `(See analysis in research/)`
+*   **Task: CORUJA/Local Agent - Design API Contract**: Define secure API endpoints & schemas for interaction between Local Agent and CORUJA backend.
+    *   Status: Planned, Priority: HIGH, Owner: CORUJA/MVP Teams
+*   **Task: Local Agent - Build Functional Prototype**: Implement core modules & API interaction for a basic working prototype.
+    *   Status: Planned, Priority: MEDIUM, Owner: MVP Team
+
+### Strategic Decisions & Definitions
+
+*   **Define Initial Target Offering / Use Case (MVP)**: Define scope, features, audience for the "Content Aggregator & Insight Engine" MVP (Local Agent approach). **Must strongly emphasize ETHIK-driven features.**
+    *   Status: Planned, Priority: HIGH, Owner: Strategy/Product Team, Related Docs: `docs/strategy/MVP_Definition.md` (To be created), `(See analysis in research/)`, ETA: Mid-Q3 2025
+*   **Define Licensing & Open Core Strategy**: Finalize the licensing model(s) (e.g., MIT, AGPL, Dual) for core framework vs. commercial offerings. Document Open Core strategy.
+    *   Status: Planned -> **Task: Strategy - Finalize Tiered Licensing Model** (Details below)
+*   **Task: Strategy - Finalize Tiered Licensing Model**: Document specific licenses (MIT, AGPL, Commercial) for frameworks, AI Assistant Pro, Local Agent (software vs. service), SaaS backend. Align with Open Core.
+    *   Status: Planned, Priority: HIGH, Owner: Strategy/Legal, Related Docs: `docs/STRATEGY.md`, `(See analysis in research/)`, ETA: End Q2 2025
+
+// ... existing code ...
+
+### Phase 2: MVP Development & Refinement (Focus: Core Functionality) // [SECTION TO BE REFINED/RENAMED LATER BASED ON PHASE 2a/2b PROGRESS]
+
+*   **Subsystems Implementation (Core MVP Features):**
+    *   **CORUJA (Phase 1 - Multi-Agent Foundation):** Implement `CrewManager`, `Agent`, `Task`, `ToolRegistry`, basic `ModelInterface` (e.g., for Gemini/Claude), `PromptManager`. Focus on executing simple, predefined crews. Include foundational hooks for ETHIK integration and **basic monitoring/observability capabilities.** // [Covered by Phase 2a Tasks]
+    *   **KOIOS (Phase 1):** Implement `KoiosLogger`. Define initial PDD structure and storage. Basic search capabilities (e.g., file content search). // [Partially covered, Search needs detailing]
+    *   **ETHIK (Phase 1):** Implement basic ethical check functions (e.g., keyword flagging, PII detection stubs). Define initial policies for prompt/response checks. Define initial policies regarding data sensitivity classification and required Privacy-Preserving Computation (PPC) techniques. **Implement initial PPC mechanisms based on defined policies.** // [Needs specific task]
+    *   MVP Backend: Develop core logic for the Content Aggregator MVP, integrating with CORUJA for AI tasks. // [Depends on Phase 2b Local Agent decision]
+    *   Basic UI/UX: Implement the essential user interface for the MVP. // [Needs refinement based on Agent vs Web]
+*   **Testing:** Develop unit and integration tests for MVP components (Target >80% coverage).
+*   **Documentation:** Refine subsystem READMEs, document MVP APIs and usage.
+
+// ... existing code ...
+
+### Ongoing / Cross-Cutting Concerns
+
+*   **Research & Development:**
+    *   Mycelium Network Design & Prototyping.
+    *   **Advanced AI Orchestration Techniques:** Explore concepts beyond Phase 1 CrewAI capabilities. **(See background studies in `research/`)**
+    *   Advanced ETHIK Mechanisms (bias detection, explainability, advanced PPC). **(See background studies in `research/`)**
+    *   Explore alternative LLMs and specialized AI models (Leverage LiteLLM for broad support).
+    *   **Advanced AI Monitoring & Alignment Mechanisms:** Research and prototype mechanisms, linking closely with ETHIK and CORUJA development, especially in context of potential ASI Risk Scenarios. **(See background studies in `research/`)**
+    *   **PPC Technology Evaluation:** Investigate feasibility of various PPC techniques (e.g., ZKP, HE, MPC) for EGOS use cases (ETHIK data protection, secure computations). **(See background studies in `research/`)**
+    *   **Verifiable Logging/Actions:** Research and prototype methods for creating tamper-evident logs or verifiable action trails, potentially inspired by Proof-of-View concepts or blockchain principles. **(See background studies in `research/`)**
+    *   **Secure External Access:** Investigate patterns (e.g., secure tunnels, capability-based access) for CORUJA agents/tools interacting with external APIs or resources. **(See background studies in `research/`)**
+    *   **Decentralized Automation:** Explore reliable, potentially decentralized, task scheduling and execution mechanisms for CORUJA and other subsystems. **(See background studies in `research/`)**
+    *   **Agent Monitoring & Observability:** Research integration with platforms like Langfuse, LangSmith, or custom solutions for detailed agent/tool usage tracking. **(See background studies in `research/`)**
+    *   **Chainlink Integration:** Investigate Chainlink or similar oracle networks for providing verifiable external data feeds (e.g., for KOIOS validation, ETHIK policy triggers, or verifiable randomness). **(Conceptual R&D - See `research/`)**
+*   **Documentation Maintenance:** Continuously update all documentation (MQP, Roadmap, Strategy, Subsystem READMEs, Docstrings).
+*   **KOIOS Standards Evolution:** Refine and expand KOIOS standards based on project needs and best practices.
+*   **Community Building & Licensing:** Define and implement strategy based on finalized licensing model.
+
+---
+
+## 🚀 Path to Go-to-Market (Post-Phase 2a/2b Prep)
+
+### Phase 2c: AI Assistant Pro (Commercialization - Q3/Q4 2025)
+
+*   **Goal:** Launch a 'Pro' tier for the EGOS AI Assistant in Cursor.
+*   **Task: Develop Pro Features:** Implement specific advanced features powered by the enhanced CORUJA backend (e.g., complex refactoring suggestions, multi-file analysis, specialized code generation based on PDDs).
+*   **Task: Implement Subscription/Billing:** Integrate with a payment processor (e.g., Stripe) for Pro tier subscriptions.
+*   **Task: Finalize Documentation & Marketing:** Create clear documentation for Pro features, pricing page, tutorials.
+*   **Task: Beta Program:** Run a closed beta with interested developers.
+*   **Task: Launch AI Assistant Pro Tier.**
+
+### Phase 3: Local Agent MVP Launch (Q4 2025 / Q1 2026)
+
+*   **Goal:** Launch the first external product - the Content Aggregator MVP via Local Agent.
+*   **Task: Develop Full Local Agent:** Build robust UI/UX (CLI or simple GUI), installer packages, comprehensive error handling based on prototype.
+*   **Task: Build Scalable CORUJA Backend:** Deploy the CORUJA API service to a scalable cloud environment (e.g., AWS Lambda/ECS, Azure Functions) with monitoring and alerting. Secure API key management.
+*   **Task: Implement User Management & Billing (if subscription):** Set up user accounts (if needed beyond API keys), integrate billing for paid tiers/agent license.
+*   **Task: Comprehensive Testing:** Alpha/Beta testing with target users, performance testing, security audit of API and agent.
+*   **Task: Legal & Compliance Finalization:** Legal review of finalized licenses, Privacy Policy for API interaction, Terms of Service.
+*   **Task: Marketing & Sales Setup:** Create website/landing page, tutorials, setup purchase/download flow.
+*   **Task: Support Infrastructure:** Establish basic support channels (e.g., GitHub Issues, dedicated email).
+*   **Task: Launch Local Agent MVP.**
+
+### Phase 4: Iteration & Expansion (2026+)
+
+*   **Goal:** Gather user feedback, iterate on products, expand features, explore further market opportunities.
+*   **Task: MVP Iteration:** Improve Local Agent based on feedback (new features, improved ETHIK policies, better AI results via CORUJA enhancements).
+*   **Task: Explore Cloud Version:** Revisit the possibility of a secure cloud-based version of the Content Aggregator, potentially leveraging advanced PPC techniques developed in R&D.
+*   **Task: Develop Other Offerings:** Explore commercializing specific KOIOS tools (e.g., PDD management system) or ETHIK components (e.g., Privacy Auditing service).
+*   **Task: Mycelium Integration:** Begin deeper integration of subsystems via the Mycelium network as defined in the original roadmap.
+*   **Task: Community Building:** Actively foster an open-source community around MIT/AGPL components.
+
+// ... rest of existing roadmap ...
+
+---
+
+## 📘 Notes
+
+*   This roadmap provides a strategic overview. Detailed sub-tasks and historical items can be found in previous roadmap versions or specific subsystem plans (e.g., KOIOS Dynamic Roadmap section in older versions).
+*   Priorities and timelines are subject to change based on ongoing development and strategic review. **The transition between Phase 2a, 2b Prep, 2c, and Phase 3 depends heavily on resource allocation and successful completion of prerequisite tasks.**
+*   Contributors are encouraged to suggest new roadmap items or refinements via GitHub Issues, tagging them with `roadmap` or `enhancement`.
+*   Keep this file updated regularly (e.g., weekly or bi-weekly sprints).
+
+---
+
+✧༺❀༻∞ EGOS ∞༺❀༻✧
+
+```
+Excellent. The `ROADMAP.md` has been updated with:
+
+1.  **Detailed Phase 2a Tasks:** Explicit steps for enhancing the EGOS AI Assistant via CORUJA development.
+2.  **Detailed Phase 2b Prep Tasks:** Steps for prototyping the Local Agent MVP concept, including architecture, local ETHIK processing, and API design.
+3.  **Specific Licensing Task:** A dedicated task to finalize and document the tiered licensing model.
+4.  **References:** Notes like `(See strategy in research/)` linking tasks back to the strategic analysis documents you've stored.
+5.  **Path to Go-to-Market Section:** Added new phases (2c, 3, 4) outlining the steps needed to commercialize the AI Assistant Pro tier and launch the Local Agent MVP, including development, testing, legal, marketing, and iteration.
+6.  **Refined R&D Items:** Updated descriptions for clarity and relevance.
+7.  **Notes:** Added emphasis on the dependency between phases and the need for resource allocation.
+
+This provides a much more detailed and actionable plan, directly reflecting our refined, risk-mitigated strategy and outlining the concrete steps toward market entry.
+
+With this plan in place, the immediate focus should be on kicking off the tasks under **Phase 2a (AI Assistant Enhancement via CORUJA)**, as this provides internal value, develops the core CORUJA components needed for Phase 2b/3, and represents the lowest immediate risk.
+
+Are you ready to start detailing the implementation for the first task in Phase 2a, such as `Task: CORUJA - Implement PromptManager`?
+
+✧༺❀༻∞ EGOS ∞༺❀༻✧
+
+
+_______________________________________
+
+
+começou implementaçao
+
+
+Excellent, let's dive into the first critical task for enhancing the AI Assistant: **`Task: CORUJA - Implement PromptManager`**.
+
+This component is fundamental to `CORUJA`'s ability to manage and utilize standardized prompts effectively, ensuring consistency, maintainability, and enabling more sophisticated AI interactions for the EGOS AI Assistant.
+
+Here's a breakdown of the design and requirements for the `PromptManager`:
+
+### 1. Purpose & Role
+
+The `PromptManager` is responsible for discovering, loading, validating, caching (optional), and providing access to **Prompt Design Documents (PDDs)**. These PDDs define the structure, template, parameters, metadata, and potentially ethical guidelines associated with specific AI tasks that `CORUJA` (and by extension, the AI Assistant) will perform. It acts as a central registry for all predefined prompts used within the EGOS system.
+
+### 2. Core Requirements
+
+*   **Discovery:** Locate PDD files within a designated project directory (e.g., `docs/prompts/pdds/` or `subsystems/CORUJA/prompts/`).
+*   **Loading:** Read and parse PDD files from their storage format.
+*   **Validation:** Ensure loaded PDDs adhere to a strictly defined schema/standard (KOIOS responsibility to define this standard). Invalid PDDs should be flagged or ignored, with appropriate logging (`KoiosLogger`).
+*   **Retrieval:** Provide a mechanism for other `CORUJA` components (like the `BasicOrchestrator`) to retrieve a specific PDD by a unique identifier (e.g., PDD name or ID).
+*   **Templating:** The retrieved PDD should contain the prompt template in a format ready for variable substitution (e.g., using f-strings, Jinja2). The `PromptManager` itself might *not* perform the final rendering, but it provides the validated template and associated metadata.
+*   **Error Handling:** Gracefully handle scenarios like missing directories, invalid file formats, schema validation errors, and missing PDD requests, logging errors via `KoiosLogger`.
+
+### 3. Design Considerations & Decisions
+
+1.  **PDD Format:** **YAML** is recommended. It's human-readable, supports complex structures (lists, dictionaries), allows comments, and integrates well with Python (e.g., using `PyYAML`). Alternatives like JSON are less readable, and Markdown frontmatter might become unwieldy for complex prompts.
+    *   *Decision:* Use YAML for PDDs.
+2.  **PDD Schema & Validation:** Define a Pydantic model representing the mandatory and optional fields of a PDD (e.g., `id`, `name`, `description`, `version`, `parameters`, `template`, `metadata`, `ethik_guidelines`). This model enforces the standard and provides clear validation errors.
+    *   *Decision:* Use Pydantic for schema definition and validation.
+3.  **Storage Location:** A dedicated directory seems appropriate. `docs/prompts/pdds/` keeps prompts alongside other documentation, emphasizing their design aspect. `subsystems/CORUJA/prompts/` keeps them closer to the code using them.
+    *   *Decision:* Start with `docs/prompts/pdds/`. This aligns with the "Documentation First" principle and makes PDDs easily discoverable as design artifacts. We can reconsider if needed.
+4.  **Retrieval Mechanism:** A simple `get_pdd(pdd_id: str)` method seems sufficient. The `pdd_id` could correspond to the filename (without extension) or an explicit `id` field within the YAML. Using the filename is simpler initially.
+    *   *Decision:* Use filename (e.g., `code_generation.yaml` -> `pdd_id='code_generation'`) for initial retrieval.
+5.  **Caching:** For performance, especially if loading involves significant validation or there are many PDDs, caching loaded/validated PDDs in memory (e.g., in a dictionary within the `PromptManager` instance) is beneficial.
+    *   *Decision:* Implement in-memory caching upon loading. Add a method to reload/refresh if needed.
+6.  **Error Handling:** Implement custom exceptions inheriting from a base `CorujaException` (aligned with KOIOS error handling standards).
+
+### 4. Proposed Initial Structure
+
+*   **PDD Schema File:** `subsystems/KOIOS/schemas/pdd_schema.py` (Defines the Pydantic model for PDD validation).
+*   **PromptManager Code:** `subsystems/CORUJA/core/prompt_manager.py`
+*   **PDD Storage:** `docs/prompts/pdds/`
+*   **PDD Example:** `docs/prompts/pdds/example_pdd.yaml`
+
+**`pdd_schema.py` (Conceptual):**
+
+```python
+# subsystems/KOIOS/schemas/pdd_schema.py
+from pydantic import BaseModel, Field
+from typing import List, Dict, Optional
+
+class PddMetadata(BaseModel):
+    author: Optional[str] = None
+    tags: List[str] = []
+    # Add other relevant metadata fields
+
+class PddEthikGuidelines(BaseModel):
+    pii_handling: Optional[str] = Field(None, description="Instructions for PII (e.g., 'redact', 'error_if_present')")
+    bias_mitigation: Optional[str] = Field(None, description="Link to bias mitigation strategies")
+    # Add other ETHIK fields
+
+class PromptDesignDocument(BaseModel):
+    id: str = Field(..., description="Unique identifier for the PDD (matches filename usually)")
+    name: str = Field(..., description="Human-readable name")
+    description: str = Field(..., description="Purpose of this prompt")
+    version: str = Field("1.0", description="Version of the PDD")
+    parameters: List[str] = Field([], description="List of expected input variable names for the template")
+    template: str = Field(..., description="The prompt template string (e.g., f-string or Jinja2 format)")
+    metadata: Optional[PddMetadata] = None
+    ethik_guidelines: Optional[PddEthikGuidelines] = None
+```
+
+**`prompt_manager.py` (Conceptual):**
+
+```python
+# subsystems/CORUJA/core/prompt_manager.py
+import yaml
+from pathlib import Path
+from typing import Dict, Optional
+from pydantic import ValidationError
+
+# Assuming schema is defined relative to KOIOS or a shared location
+# Adjust import path as needed based on final structure
+from subsystems.KOIOS.schemas.pdd_schema import PromptDesignDocument
+from koios.logger import KoiosLogger # Assuming KoiosLogger path
+# Define Coruja specific exceptions later
+
+class PromptManager:
+    """Manages loading, validation, and retrieval of Prompt Design Documents (PDDs)."""
+
+    def __init__(self, pdd_directory: Path = Path("docs/prompts/pdds")):
+        self.logger = KoiosLogger.get_logger("CORUJA.PromptManager")
+        self.pdd_directory = pdd_directory
+        self._pdd_cache: Dict[str, PromptDesignDocument] = {}
+        self.load_pdds()
+
+    def load_pdds(self):
+        """Loads and validates all PDDs from the specified directory."""
+        self.logger.info(f"Loading PDDs from: {self.pdd_directory}")
+        self._pdd_cache = {}
+        if not self.pdd_directory.is_dir():
+            self.logger.error(f"PDD directory not found: {self.pdd_directory}")
+            # Raise appropriate CorujaException
+            return
+
+        for pdd_file in self.pdd_directory.glob("*.yaml"):
+            pdd_id = pdd_file.stem # Use filename without extension as ID
+            try:
+                with open(pdd_file, 'r', encoding='utf-8') as f:
+                    pdd_data = yaml.safe_load(f)
+                    if not isinstance(pdd_data, dict):
+                        raise ValueError("PDD file content is not a dictionary.")
+
+                    # Inject ID if not present in file (using filename)
+                    if 'id' not in pdd_data:
+                         pdd_data['id'] = pdd_id
+                    elif pdd_data['id'] != pdd_id:
+                         self.logger.warning(f"PDD file '{pdd_file.name}' has conflicting internal id '{pdd_data['id']}'. Using filename '{pdd_id}' as primary ID.")
+                         pdd_data['id'] = pdd_id # Prioritize filename for consistency
+
+                    # Validate using Pydantic model
+                    validated_pdd = PromptDesignDocument(**pdd_data)
+                    self._pdd_cache[pdd_id] = validated_pdd
+                    self.logger.debug(f"Successfully loaded and validated PDD: {pdd_id}")
+
+            except yaml.YAMLError as e:
+                self.logger.error(f"Error parsing YAML file {pdd_file.name}: {e}", exc_info=True)
+            except ValidationError as e:
+                self.logger.error(f"Schema validation failed for PDD {pdd_file.name}: {e}", exc_info=False) # Pydantic error is descriptive
+            except Exception as e:
+                self.logger.error(f"Failed to load PDD {pdd_file.name}: {e}", exc_info=True)
+
+        self.logger.info(f"Loaded {len(self._pdd_cache)} PDDs.")
+
+
+    def get_pdd(self, pdd_id: str) -> Optional[PromptDesignDocument]:
+        """Retrieves a validated PDD from the cache by its ID."""
+        pdd = self._pdd_cache.get(pdd_id)
+        if not pdd:
+            self.logger.warning(f"PDD with id '{pdd_id}' not found in cache.")
+            # Optionally, attempt to lazy load here or just return None
+        return pdd
+
+    def list_pdd_ids(self) -> List[str]:
+         """Returns a list of loaded PDD IDs."""
+         return list(self._pdd_cache.keys())
+
+    # Potential future methods: refresh_pdds(), validate_single_pdd()
+```
+
+### 5. Documentation & Standards
+
+*   **PDD Standard:** A document needs to be created (e.g., `docs/standards/KOIOS_PDD_Standard.md`) detailing the PDD YAML structure, field definitions (referencing the Pydantic model), usage guidelines, and versioning strategy.
+*   **PDD Template:** Create `docs/templates/PDD_Template.yaml` as a starting point for creating new PDDs.
+*   **PromptManager Documentation:** Docstrings within the code (as shown above) and potentially usage examples in `subsystems/CORUJA/README.md`.
+
+### 6. Next Steps
+
+1.  Create the proposed directory structure (`docs/prompts/pdds/`, potentially `subsystems/KOIOS/schemas/`).
+2.  Implement the `PromptDesignDocument` Pydantic model in `subsystems/KOIOS/schemas/pdd_schema.py`.
+3.  Implement the `PromptManager` class in `subsystems/CORUJA/core/prompt_manager.py`, including basic tests.
+4.  Create the `PDD_Template.yaml` and the `KOIOS_PDD_Standard.md`.
+5.  Create an initial `example_pdd.yaml` in `docs/prompts/pdds/` for testing.
+
+This provides a solid foundation for managing prompts within CORUJA, directly supporting the enhancement of the EGOS AI Assistant. Shall we proceed with creating these files and implementing the Pydantic model?
+
+✧༺❀༻∞ EGOS ∞༺❀༻✧

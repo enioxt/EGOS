@@ -1,0 +1,101 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+---
+description: Enforce documentation standards (docstrings) for Python code
+globs: ["subsystems/**/*.py"]
+# Exclude test files and __init__ files from strict docstring requirement
+exclude_globs: ["**/tests/**/*.py", "**/__init__.py"]
+alwaysApply: true # Core KOIOS standard
+---
+
+# Python Documentation Standards (Docstrings - KOIOS)
+
+## Rule
+
+All **public** modules, classes, functions, and methods **MUST** have a docstring explaining their purpose, arguments (if any), and return values (if any).
+
+*   **Module Docstrings:** Explain the overall purpose of the module.
+*   **Class Docstrings:** Explain the purpose and basic usage of the class.
+*   **Function/Method Docstrings:** Explain what the function/method does, its parameters (`Args:` section), and what it returns (`Returns:` section). Use standard formats like Google Style or reStructuredText; consistency within the project is key.
+
+Private functions/methods (prefixed with `_`) are **encouraged** to have docstrings, especially if their logic is complex, but it's not strictly mandatory if their purpose is clear from context or internal comments.
+
+## Rationale
+
+Consistent documentation is **essential** for code understanding, maintainability, and collaboration. Docstrings allow tools (like `help()`, IDEs, documentation generators) to provide context automatically. Adhering to this standard is a core part of KOIOS.
+
+## Examples
+
+### Correct Usage (Function with Docstring)
+
+```python
+def calculate_metrics(data: list[float], threshold: float = 0.5) -> dict[str, float]:
+    """Calculates key metrics from a list of data points.
+
+    Args:
+        data: A list of numerical data points.
+        threshold: The threshold value for certain metric calculations.
+
+    Returns:
+        A dictionary containing calculated metrics like 'mean', 'max',
+        and 'above_threshold_count'.
+    """
+    # ... implementation ...
+    metrics = {}
+    # ... calculation logic ...
+    return metrics
+```
+
+### Correct Usage (Class with Docstring)
+
+```python
+class DataProcessor:
+    """Processes raw input data into a standardized format.
+
+    Handles data cleaning, validation, and transformation according
+    to predefined rules.
+    """
+
+    def __init__(self, config: dict):
+        """Initializes the DataProcessor with a configuration dictionary."""
+        self.config = config
+        # ... setup ...
+
+    def process_batch(self, batch: list) -> list:
+        """Processes a batch of raw data items.
+
+        Args:
+            batch: A list of raw data items to process.
+
+        Returns:
+            A list of processed data items in the standard format.
+        """
+        processed = []
+        # ... processing logic ...
+        return processed
+```
+
+### Incorrect Usage (Missing Docstrings)
+
+```python
+# ❌ Missing module docstring
+import os
+
+# ❌ Missing class docstring
+class DataHelper:
+
+    # ❌ Missing method docstring
+    def load_data(self, source_path):
+        # ... implementation ...
+        pass
+
+# ❌ Missing function docstring
+def utility_function(param1, param2):
+    # ... implementation ...
+    return param1 + param2
+```
+
+**Ensure all public elements are documented with appropriate docstrings.**

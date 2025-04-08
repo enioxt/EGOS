@@ -1,0 +1,25 @@
+[project]
+name = "sales_contact_finder"
+version = "0.1.0"
+description = "sales-contact-finder using crewAI"
+authors = [
+    { name = "Your Name", email = "you@example.com" },
+]
+requires-python = ">=3.10,<=3.13"
+dependencies = [
+    "crewai[tools]>=0.76.2",
+    "langchain-core>=0.2.30",
+]
+
+[project.scripts]
+sales_contact_finder = "sales_contact_finder.main:run"
+run_crew = "sales_contact_finder.main:run"
+train = "sales_contact_finder.main:train"
+replay = "sales_contact_finder.main:replay"
+test = "sales_contact_finder.main:test"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"

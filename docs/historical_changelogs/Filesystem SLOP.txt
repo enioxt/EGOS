@@ -1,0 +1,4752 @@
+
+I'll continue integrating the filesystem module into the EVA & GUARANI system, making sure everything is properly created and functions correctly. Let's start by fixing the HTML template literals in the test server and ensuring proper file creation.
+
+```javascript:C:/Eva Guarani EGOS/QUANTUM_PROMPTS/slop/modules/filesystem/test-server.js
+/**
+ * EVA & GUARANI - SLOP Filesystem Module Test Server
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ *
+ * This script creates a minimal SLOP-compatible server to test the filesystem module.
+ * It simulates the SLOP server structure and registers the filesystem module.
+ */
+
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const integration = require('./integration');
+
+// Create a mock SLOP server
+const mockSlopServer = {
+  app: express(),
+  routes: [],
+  config: {
+    logLevel: 'debug',
+    port: 3000
+  },
+  logger: {
+    info: (...args) => console.log('\x1b[36m[INFO]\x1b[0m', ...args),
+    warn: (...args) => console.log('\x1b[33m[WARN]\x1b[0m', ...args),
+    error: (...args) => console.log('\x1b[31m[ERROR]\x1b[0m', ...args),
+    debug: (...args) => console.log('\x1b[90m[DEBUG]\x1b[0m', ...args)
+  },
+
+  // Add route to the server
+  addRoute(route) {
+    this.routes.push(route);
+    this.logger.debug(`Route added: ${route.method} ${route.path}`);
+
+    // Register the route with Express
+    this.app[route.method.toLowerCase()](route.path, route.handler);
+  }
+};
+
+// Initialize Express middleware
+mockSlopServer.app.use(express.json());
+mockSlopServer.app.use(express.urlencoded({ extended: true }));
+
+// Log all requests
+mockSlopServer.app.use((req, res, next) => {
+  mockSlopServer.logger.info(`${req.method} ${req.path}`);
+  next();
+});
+
+// Register the filesystem module
+integration.register(mockSlopServer, {
+  allowedDirectories: [
+    process.cwd(), // Current directory
+    path.resolve(process.cwd(), '../../..') // Project root
+  ],
+  maxFileSize: 10 * 1024 * 1024, // 10MB
+  maxResults: 1000,
+  logLevel: 'debug'
+});
+
+// Add a simple root route
+mockSlopServer.app.get('/', (req, res) => {
+  res.json({
+    name: 'SLOP Test Server',
+    modules: ['filesystem'],
+    routes: mockSlopServer.routes.map(r => `${r.method} ${r.path}`)
+  });
+});
+
+// Create a simple HTML page to test the API
+mockSlopServer.app.get('/test-ui', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>SLOP Filesystem Test</title>
+      <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        .container { display: flex; }
+        .panel { flex: 1; margin: 10px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { margin: 5px; padding: 8px 15px; background: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #45a049; }
+        input, textarea { width: 100%; padding: 8px; margin: 5px 0; }
+        #result { background: #f5f5f5; padding: 10px; border-radius: 3px; white-space: pre-wrap; max-height: 400px; overflow: auto; }
+      </style>
+    </head>
+    <body>
+      <h1>SLOP Filesystem Test UI</h1>
+      <div class="container">
+        <div class="panel">
+          <h2>Operations</h2>
+          <div>
+            <input id="path" placeholder="Enter file/directory path" value="${process.cwd()}" />
+          </div>
+          <div>
+            <button onclick="readFile()">Read File</button>
+            <button onclick="writeFile()">Write File</button>
+            <button onclick="listDirectory(false)">List Directory</button>
+            <button onclick="listDirectory(true)">List Recursively</button>
+            <button onclick="searchFiles()">Search Files</button>
+            <button onclick="deleteFile()">Delete File</button>
+          </div>
+          <div id="additionalInputs">
+            <!-- Dynamic inputs will appear here based on operation -->
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Result</h2>
+          <div id="result"></div>
+        </div>
+      </div>
+
+      <script>
+        // Helper function to display results
+        function displayResult(data) {
+          document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+        }
+
+        // Helper function to display error
+        function displayError(error) {
+          document.getElementById('result').innerHTML = '<span style="color: red">Error: ' + error.message + '</span>';
+          console.error(error);
+        }
+
+        // Helper function to make API requests
+        async function apiRequest(endpoint, data) {
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+              throw new Error(result.error || 'Unknown error');
+            }
+
+            return result;
+          } catch (error) {
+            displayError(error);
+            throw error;
+          }
+        }
+
+        // Prepare additional inputs based on operation
+        function prepareAdditionalInputs(inputsHtml) {
+          document.getElementById('additionalInputs').innerHTML = inputsHtml;
+        }
+
+        // Read file operation
+        async function readFile() {
+          prepareAdditionalInputs(`
+            <div>
+              <label>Encoding:</label>
+              <input id="encoding" value="utf8" />
+            </div>
+          `);
+
+          const path = document.getElementById('path').value;
+          const encoding = document.getElementById('encoding')?.value || 'utf8';
+
+          try {
+            const result = await apiRequest('/fs/read', {
+              path,
+              encoding
+            });
+
+            displayResult(result);
+          } catch (error) {
+            // Error is already displayed by apiRequest
+          }
+        }
+
+        // Write file operation
+        async function writeFile() {
+          prepareAdditionalInputs(`
+            <div>
+              <label>Content:</label>
+              <textarea id="content" rows="5">Test content created by the SLOP Filesystem Test UI</textarea>
+            </div>
+            <div>
+              <label>Encoding:</label>
+              <input id="encoding" value="utf8" />
+            </div>
+            <div>
+              <label>
+                <input type="checkbox" id="createDirectories" />
+                Create parent directories if needed
+              </label>
+            </div>
+            <div>
+              <button id="runWrite">Write File</button>
+            </div>
+          `);
+
+          // Wait for user to enter content
+          document.getElementById('runWrite').onclick = async function() {
+            const path = document.getElementById('path').value;
+            const content = document.getElementById('content').value;
+            const encoding = document.getElementById('encoding').value;
+            const createDirectories = document.getElementById('createDirectories').checked;
+
+            try {
+              const result = await apiRequest('/fs/write', {
+                path,
+                content,
+                encoding,
+                createDirectories
+              });
+
+              displayResult(result);
+            } catch (error) {
+              // Error is already displayed by apiRequest
+            }
+          };
+        }
+
+        // List directory operation
+        async function listDirectory(recursive) {
+          prepareAdditionalInputs(`
+            <div>
+              <label>Pattern (regex):</label>
+              <input id="pattern" placeholder="Optional pattern to filter files" />
+            </div>
+          `);
+
+          const path = document.getElementById('path').value;
+          const pattern = document.getElementById('pattern')?.value || null;
+
+          try {
+            const result = await apiRequest('/fs/list', {
+              path,
+              recursive,
+              pattern
+            });
+
+            displayResult(result);
+          } catch (error) {
+            // Error is already displayed by apiRequest
+          }
+        }
+
+        // Search files operation
+        async function searchFiles() {
+          prepareAdditionalInputs(`
+            <div>
+              <label>Name Pattern (regex):</label>
+              <input id="namePattern" placeholder="Pattern to match file names" />
+            </div>
+            <div>
+              <label>Content Pattern (regex):</label>
+              <input id="contentPattern" placeholder="Pattern to match file contents" />
+            </div>
+            <div>
+              <label>
+                <input type="checkbox" id="recursive" checked />
+                Search recursively
+              </label>
+            </div>
+            <div>
+              <label>Max Results:</label>
+              <input id="maxResults" type="number" value="100" />
+            </div>
+            <div>
+              <button id="runSearch">Search</button>
+            </div>
+          `);
+
+          document.getElementById('runSearch').onclick = async function() {
+            const path = document.getElementById('path').value;
+            const namePattern = document.getElementById('namePattern').value || null;
+            const contentPattern = document.getElementById('contentPattern').value || null;
+            const recursive = document.getElementById('recursive').checked;
+            const maxResults = parseInt(document.getElementById('maxResults').value, 10);
+
+            if (!namePattern && !contentPattern) {
+              return displayError(new Error('At least one pattern (name or content) is required'));
+            }
+
+            try {
+              const result = await apiRequest('/fs/search', {
+                path,
+                namePattern,
+                contentPattern,
+                recursive,
+                maxResults
+              });
+
+              displayResult(result);
+            } catch (error) {
+              // Error is already displayed by apiRequest
+            }
+          };
+        }
+
+        // Delete file operation
+        async function deleteFile() {
+          prepareAdditionalInputs(`
+            <div>
+              <label>
+                <input type="checkbox" id="recursive" />
+                Delete recursively (required for directories)
+              </label>
+            </div>
+            <div>
+              <label>
+                <input type="checkbox" id="confirm" />
+                I confirm I want to delete this file/directory
+              </label>
+            </div>
+            <div>
+              <button id="runDelete" disabled>Confirm Delete</button>
+            </div>
+          `);
+
+          // Enable the delete button only when confirmed
+          document.getElementById('confirm').onchange = function() {
+            document.getElementById('runDelete').disabled = !this.checked;
+          };
+
+          document.getElementById('runDelete').onclick = async function() {
+            if (!document.getElementById('confirm').checked) {
+              return;
+            }
+
+            const path = document.getElementById('path').value;
+            const recursive = document.getElementById('recursive').checked;
+
+            try {
+              const result = await apiRequest('/fs/delete', {
+                path,
+                recursive
+              });
+
+              displayResult(result);
+            } catch (error) {
+              // Error is already displayed by apiRequest
+            }
+          };
+        }
+      </script>
+    </body>
+    </html>
+  `);
+});
+
+// Start the server
+const port = process.env.PORT || mockSlopServer.config.port;
+mockSlopServer.app.listen(port, () => {
+  mockSlopServer.logger.info(`SLOP Test Server listening on port ${port}`);
+  mockSlopServer.logger.info(`Test UI available at http://localhost:${port}/test-ui`);
+  mockSlopServer.logger.info(`API endpoints:`);
+
+  // Log all registered routes
+  mockSlopServer.routes.forEach(route => {
+    mockSlopServer.logger.info(`  ${route.method} ${route.path} - ${route.description}`);
+  });
+});
+
+// Handle errors
+process.on('uncaughtException', (error) => {
+  mockSlopServer.logger.error('Uncaught exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  mockSlopServer.logger.error('Unhandled rejection at:', promise, 'reason:', reason);
+});
+```
+Let me try with the correct path format:
+
+```javascript:slop/modules/filesystem/test-server.js
+/**
+ * EVA & GUARANI - SLOP Filesystem Module Test Server
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ *
+ * This script creates a minimal SLOP-compatible server to test the filesystem module.
+ * It simulates the SLOP server structure and registers the filesystem module.
+ */
+
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const integration = require('./integration');
+
+// Create a mock SLOP server
+const mockSlopServer = {
+  app: express(),
+  routes: [],
+  config: {
+    logLevel: 'debug',
+    port: 3000
+  },
+  logger: {
+    info: (...args) => console.log('\x1b[36m[INFO]\x1b[0m', ...args),
+    warn: (...args) => console.log('\x1b[33m[WARN]\x1b[0m', ...args),
+    error: (...args) => console.log('\x1b[31m[ERROR]\x1b[0m', ...args),
+    debug: (...args) => console.log('\x1b[90m[DEBUG]\x1b[0m', ...args)
+  },
+
+  // Add route to the server
+  addRoute(route) {
+    this.routes.push(route);
+    this.logger.debug(`Route added: ${route.method} ${route.path}`);
+
+    // Register the route with Express
+    this.app[route.method.toLowerCase()](route.path, route.handler);
+  }
+};
+
+// Initialize Express middleware
+mockSlopServer.app.use(express.json());
+mockSlopServer.app.use(express.urlencoded({ extended: true }));
+
+// Log all requests
+mockSlopServer.app.use((req, res, next) => {
+  mockSlopServer.logger.info(`${req.method} ${req.path}`);
+  next();
+});
+
+// Register the filesystem module
+integration.register(mockSlopServer, {
+  allowedDirectories: [
+    process.cwd(), // Current directory
+    path.resolve(process.cwd(), '../../..') // Project root
+  ],
+  maxFileSize: 10 * 1024 * 1024, // 10MB
+  maxResults: 1000,
+  logLevel: 'debug'
+});
+
+// Add a simple root route
+mockSlopServer.app.get('/', (req, res) => {
+  res.json({
+    name: 'SLOP Test Server',
+    modules: ['filesystem'],
+    routes: mockSlopServer.routes.map(r => `${r.method} ${r.path}`)
+  });
+});
+
+// Create a simple HTML page to test the API
+mockSlopServer.app.get('/test-ui', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>SLOP Filesystem Test</title>
+      <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        .container { display: flex; }
+        .panel { flex: 1; margin: 10px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { margin: 5px; padding: 8px 15px; background: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #45a049; }
+        input, textarea { width: 100%; padding: 8px; margin: 5px 0; }
+        #result { background: #f5f5f5; padding: 10px; border-radius: 3px; white-space: pre-wrap; max-height: 400px; overflow: auto; }
+      </style>
+    </head>
+    <body>
+      <h1>SLOP Filesystem Test UI</h1>
+      <div class="container">
+        <div class="panel">
+          <h2>Operations</h2>
+          <div>
+            <input id="path" placeholder="Enter file/directory path" value="${process.cwd()}" />
+          </div>
+          <div>
+            <button onclick="readFile()">Read File</button>
+            <button onclick="writeFile()">Write File</button>
+            <button onclick="listDirectory(false)">List Directory</button>
+            <button onclick="listDirectory(true)">List Recursively</button>
+            <button onclick="searchFiles()">Search Files</button>
+            <button onclick="deleteFile()">Delete File</button>
+          </div>
+          <div id="additionalInputs">
+            <!-- Dynamic inputs will appear here based on operation -->
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Result</h2>
+          <div id="result"></div>
+        </div>
+      </div>
+
+      <script>
+        // Helper function to display results
+        function displayResult(data) {
+          document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+        }
+
+        // Helper function to display error
+        function displayError(error) {
+          document.getElementById('result').innerHTML = '<span style="color: red">Error: ' + error.message + '</span>';
+          console.error(error);
+        }
+
+        // Helper function to make API requests
+        async function apiRequest(endpoint, data) {
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+              throw new Error(result.error || 'Unknown error');
+            }
+
+            return result;
+          } catch (error) {
+            displayError(error);
+            throw error;
+          }
+        }
+
+        // Prepare additional inputs based on operation
+        function prepareAdditionalInputs(inputsHtml) {
+          document.getElementById('additionalInputs').innerHTML = inputsHtml;
+        }
+
+        // Read file operation
+        async function readFile() {
+          prepareAdditionalInputs(`
+            <div>
+              <label>Encoding:</label>
+              <input id="encoding" value="utf8" />
+            </div>
+          `);
+
+          const path = document.getElementById('path').value;
+          const encoding = document.getElementById('encoding')?.value || 'utf8';
+
+          try {
+            const result = await apiRequest('/fs/read', {
+              path,
+              encoding
+            });
+
+            displayResult(result);
+          } catch (error) {
+            // Error is already displayed by apiRequest
+          }
+        }
+
+        // Write file operation
+        async function writeFile() {
+          prepareAdditionalInputs(`
+            <div>
+              <label>Content:</label>
+              <textarea id="content" rows="5">Test content created by the SLOP Filesystem Test UI</textarea>
+            </div>
+            <div>
+              <label>Encoding:</label>
+              <input id="encoding" value="utf8" />
+            </div>
+            <div>
+              <label>
+                <input type="checkbox" id="createDirectories" />
+                Create parent directories if needed
+              </label>
+            </div>
+            <div>
+              <button id="runWrite">Write File</button>
+            </div>
+          `);
+
+          // Wait for user to enter content
+          document.getElementById('runWrite').onclick = async function() {
+            const path = document.getElementById('path').value;
+            const content = document.getElementById('content').value;
+            const encoding = document.getElementById('encoding').value;
+            const createDirectories = document.getElementById('createDirectories').checked;
+
+            try {
+              const result = await apiRequest('/fs/write', {
+                path,
+                content,
+                encoding,
+                createDirectories
+              });
+
+              displayResult(result);
+            } catch (error) {
+              // Error is already displayed by apiRequest
+            }
+          };
+        }
+
+        // List directory operation
+        async function listDirectory(recursive) {
+          prepareAdditionalInputs(`
+            <div>
+              <label>Pattern (regex):</label>
+              <input id="pattern" placeholder="Optional pattern to filter files" />
+            </div>
+          `);
+
+          const path = document.getElementById('path').value;
+          const pattern = document.getElementById('pattern')?.value || null;
+
+          try {
+            const result = await apiRequest('/fs/list', {
+              path,
+              recursive,
+              pattern
+            });
+
+            displayResult(result);
+          } catch (error) {
+            // Error is already displayed by apiRequest
+          }
+        }
+
+        // Search files operation
+        async function searchFiles() {
+          prepareAdditionalInputs(`
+            <div>
+              <label>Name Pattern (regex):</label>
+              <input id="namePattern" placeholder="Pattern to match file names" />
+            </div>
+            <div>
+              <label>Content Pattern (regex):</label>
+              <input id="contentPattern" placeholder="Pattern to match file contents" />
+            </div>
+            <div>
+              <label>
+                <input type="checkbox" id="recursive" checked />
+                Search recursively
+              </label>
+            </div>
+            <div>
+              <label>Max Results:</label>
+              <input id="maxResults" type="number" value="100" />
+            </div>
+            <div>
+              <button id="runSearch">Search</button>
+            </div>
+          `);
+
+          document.getElementById('runSearch').onclick = async function() {
+            const path = document.getElementById('path').value;
+            const namePattern = document.getElementById('namePattern').value || null;
+            const contentPattern = document.getElementById('contentPattern').value || null;
+            const recursive = document.getElementById('recursive').checked;
+            const maxResults = parseInt(document.getElementById('maxResults').value, 10);
+
+            if (!namePattern && !contentPattern) {
+              return displayError(new Error('At least one pattern (name or content) is required'));
+            }
+
+            try {
+              const result = await apiRequest('/fs/search', {
+                path,
+                namePattern,
+                contentPattern,
+                recursive,
+                maxResults
+              });
+
+              displayResult(result);
+            } catch (error) {
+              // Error is already displayed by apiRequest
+            }
+          };
+        }
+
+        // Delete file operation
+        async function deleteFile() {
+          prepareAdditionalInputs(`
+            <div>
+              <label>
+                <input type="checkbox" id="recursive" />
+                Delete recursively (required for directories)
+              </label>
+            </div>
+            <div>
+              <label>
+                <input type="checkbox" id="confirm" />
+                I confirm I want to delete this file/directory
+              </label>
+            </div>
+            <div>
+              <button id="runDelete" disabled>Confirm Delete</button>
+            </div>
+          `);
+
+          // Enable the delete button only when confirmed
+          document.getElementById('confirm').onchange = function() {
+            document.getElementById('runDelete').disabled = !this.checked;
+          };
+
+          document.getElementById('runDelete').onclick = async function() {
+            if (!document.getElementById('confirm').checked) {
+              return;
+            }
+
+            const path = document.getElementById('path').value;
+            const recursive = document.getElementById('recursive').checked;
+
+            try {
+              const result = await apiRequest('/fs/delete', {
+                path,
+                recursive
+              });
+
+              displayResult(result);
+            } catch (error) {
+              // Error is already displayed by apiRequest
+            }
+          };
+        }
+      </script>
+    </body>
+    </html>
+  `);
+});
+
+// Start the server
+const port = process.env.PORT || mockSlopServer.config.port;
+mockSlopServer.app.listen(port, () => {
+  mockSlopServer.logger.info(`SLOP Test Server listening on port ${port}`);
+  mockSlopServer.logger.info(`Test UI available at http://localhost:${port}/test-ui`);
+  mockSlopServer.logger.info(`API endpoints:`);
+
+  // Log all registered routes
+  mockSlopServer.routes.forEach(route => {
+    mockSlopServer.logger.info(`  ${route.method} ${route.path} - ${route.description}`);
+  });
+});
+
+// Handle errors
+process.on('uncaughtException', (error) => {
+  mockSlopServer.logger.error('Uncaught exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  mockSlopServer.logger.error('Unhandled rejection at:', promise, 'reason:', reason);
+});
+```
+Now I'll create a basic integration script to connect the filesystem module with the main SLOP server:
+
+```javascript:C:/Eva Guarani EGOS/QUANTUM_PROMPTS/slop/filesystem-integration.js
+/**
+ * EVA & GUARANI - Filesystem Module Integration for SLOP Server
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ *
+ * This file integrates the Filesystem Module with the main SLOP server.
+ */
+
+const path = require('path');
+const fs = require('fs');
+
+// Define paths
+const BASE_PATH = path.resolve(__dirname, '..');
+const LOGS_PATH = path.resolve(BASE_PATH, '..', 'logs', 'slop');
+const MODULE_PATH = path.resolve(__dirname, 'modules', 'filesystem');
+const ALLOWED_DIRS = [
+    path.resolve(BASE_PATH, '..'), // Eva Guarani EGOS root
+    path.resolve(BASE_PATH),       // QUANTUM_PROMPTS
+    path.resolve(BASE_PATH, '..', 'logs') // Logs directory
+];
+
+// Ensure logs directory exists
+if (!fs.existsSync(LOGS_PATH)) {
+    fs.mkdirSync(LOGS_PATH, { recursive: true });
+}
+
+/**
+ * Register the filesystem module with the SLOP server
+ * @param {Object} slopServer - The SLOP server instance
+ */
+function registerFilesystemModule(slopServer) {
+    try {
+        // Log the integration
+        slopServer.logger.info('[SLOP] Initializing filesystem module integration');
+
+        // Verify module files exist
+        if (!fs.existsSync(MODULE_PATH)) {
+            slopServer.logger.error(`[SLOP] Filesystem module not found at ${MODULE_PATH}`);
+            return false;
+        }
+
+        // Import the integration module
+        const filesystemIntegration = require(path.join(MODULE_PATH, 'integration'));
+
+        // Register the module
+        const fsModule = filesystemIntegration.register(slopServer, {
+            allowedDirectories: ALLOWED_DIRS,
+            maxFileSize: 20 * 1024 * 1024, // 20MB limit
+            maxResults: 1000,
+            logLevel: slopServer.config.logLevel || 'info'
+        });
+
+        slopServer.logger.info('[SLOP] Filesystem module integration complete');
+        slopServer.logger.info(`[SLOP] Allowed directories: ${ALLOWED_DIRS.join(', ')}`);
+
+        // Add a reference to the filesystem module in the SLOP server state
+        slopServer.state = slopServer.state || {};
+        slopServer.state.filesystemModule = {
+            name: fsModule.name,
+            version: fsModule.version,
+            allowedDirectories: ALLOWED_DIRS,
+            timestamp: new Date().toISOString()
+        };
+
+        // Return success
+        return true;
+    } catch (error) {
+        if (slopServer.logger) {
+            slopServer.logger.error(`[SLOP] Failed to register filesystem module: ${error.message}`);
+            slopServer.logger.error(error.stack);
+        } else {
+            console.error(`[SLOP] Failed to register filesystem module: ${error.message}`);
+            console.error(error.stack);
+        }
+        return false;
+    }
+}
+
+// Export the registration function
+module.exports = {
+    register: registerFilesystemModule
+};
+```
+Let me try with the relative path:
+
+```javascript:slop/filesystem-integration.js
+/**
+ * EVA & GUARANI - Filesystem Module Integration for SLOP Server
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ *
+ * This file integrates the Filesystem Module with the main SLOP server.
+ */
+
+const path = require('path');
+const fs = require('fs');
+
+// Define paths
+const BASE_PATH = path.resolve(__dirname, '..');
+const LOGS_PATH = path.resolve(BASE_PATH, '..', 'logs', 'slop');
+const MODULE_PATH = path.resolve(__dirname, 'modules', 'filesystem');
+const ALLOWED_DIRS = [
+    path.resolve(BASE_PATH, '..'), // Eva Guarani EGOS root
+    path.resolve(BASE_PATH),       // QUANTUM_PROMPTS
+    path.resolve(BASE_PATH, '..', 'logs') // Logs directory
+];
+
+// Ensure logs directory exists
+if (!fs.existsSync(LOGS_PATH)) {
+    fs.mkdirSync(LOGS_PATH, { recursive: true });
+}
+
+/**
+ * Register the filesystem module with the SLOP server
+ * @param {Object} slopServer - The SLOP server instance
+ */
+function registerFilesystemModule(slopServer) {
+    try {
+        // Log the integration
+        slopServer.logger.info('[SLOP] Initializing filesystem module integration');
+
+        // Verify module files exist
+        if (!fs.existsSync(MODULE_PATH)) {
+            slopServer.logger.error(`[SLOP] Filesystem module not found at ${MODULE_PATH}`);
+            return false;
+        }
+
+        // Import the integration module
+        const filesystemIntegration = require(path.join(MODULE_PATH, 'integration'));
+
+        // Register the module
+        const fsModule = filesystemIntegration.register(slopServer, {
+            allowedDirectories: ALLOWED_DIRS,
+            maxFileSize: 20 * 1024 * 1024, // 20MB limit
+            maxResults: 1000,
+            logLevel: slopServer.config.logLevel || 'info'
+        });
+
+        slopServer.logger.info('[SLOP] Filesystem module integration complete');
+        slopServer.logger.info(`[SLOP] Allowed directories: ${ALLOWED_DIRS.join(', ')}`);
+
+        // Add a reference to the filesystem module in the SLOP server state
+        slopServer.state = slopServer.state || {};
+        slopServer.state.filesystemModule = {
+            name: fsModule.name,
+            version: fsModule.version,
+            allowedDirectories: ALLOWED_DIRS,
+            timestamp: new Date().toISOString()
+        };
+
+        // Return success
+        return true;
+    } catch (error) {
+        if (slopServer.logger) {
+            slopServer.logger.error(`[SLOP] Failed to register filesystem module: ${error.message}`);
+            slopServer.logger.error(error.stack);
+        } else {
+            console.error(`[SLOP] Failed to register filesystem module: ${error.message}`);
+            console.error(error.stack);
+        }
+        return false;
+    }
+}
+
+// Export the registration function
+module.exports = {
+    register: registerFilesystemModule
+};
+```
+Now let's update the main SLOP server to integrate the filesystem module:
+
+Ran tool
+Let's check the main SLOP server file to see exactly how it's structured:
+
+Read file: QUANTUM_PROMPTS/slop_server.js
+Let's examine what's at the end of the slop_server.js file, where the server starts:
+
+Read file: QUANTUM_PROMPTS/slop_server.js
+Let's check the SLOP configuration file to see if it has module loading capability:
+
+Read file: QUANTUM_PROMPTS/slop_config.json
+Now let's look for any modules directory or initialization pattern in the server:
+
+Read file: QUANTUM_PROMPTS/slop_server.js
+Based on the analysis of the SLOP server, let's create the filesystem module structure and then integrate it into the existing server. Let's start by creating a proper index.js file for the filesystem module:
+
+```javascript:slop/modules/filesystem/index.js
+/**
+ * EVA & GUARANI - Filesystem Module for SLOP Server
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ *
+ * This module provides filesystem operations for the SLOP server.
+ */
+
+const fs = require('fs').promises;
+const path = require('path');
+const crypto = require('crypto');
+
+// Default configuration
+const DEFAULT_CONFIG = {
+    allowedDirectories: [
+        'C:/Eva Guarani EGOS'
+    ],
+    maxFileSize: 10 * 1024 * 1024, // 10MB
+    maxResults: 1000,
+    logLevel: 'info'
+};
+
+// Module state
+let state = {
+    config: { ...DEFAULT_CONFIG },
+    logger: console,
+    initialized: false,
+    stats: {
+        reads: 0,
+        writes: 0,
+        deletes: 0,
+        lists: 0,
+        searches: 0,
+        errors: 0,
+        lastOperation: null
+    }
+};
+
+/**
+ * Initialize the filesystem module
+ * @param {Object} options - Configuration options
+ * @param {Object} dependencies - Module dependencies
+ * @returns {Object} - Module API
+ */
+function initialize(options = {}, dependencies = {}) {
+    // Merge configuration
+    state.config = {
+        ...DEFAULT_CONFIG,
+        ...options
+    };
+
+    // Set logger
+    state.logger = dependencies.logger || console;
+
+    // Mark as initialized
+    state.initialized = true;
+
+    state.logger.info(`[Filesystem] Module initialized with ${state.config.allowedDirectories.length} allowed directories`);
+
+    return {
+        name: 'filesystem',
+        version: '1.0.0',
+        routes: getRoutes(),
+        stats: getStats,
+        isPathAllowed: isPathAllowed
+    };
+}
+
+/**
+ * Get module routes
+ * @returns {Array} - Array of route configurations
+ */
+function getRoutes() {
+    return [
+        {
+            method: 'GET',
+            path: '/filesystem/read',
+            handler: readFile,
+            description: 'Read file contents'
+        },
+        {
+            method: 'POST',
+            path: '/filesystem/write',
+            handler: writeFile,
+            description: 'Write content to a file'
+        },
+        {
+            method: 'GET',
+            path: '/filesystem/list',
+            handler: listDirectory,
+            description: 'List directory contents'
+        },
+        {
+            method: 'GET',
+            path: '/filesystem/search',
+            handler: searchFiles,
+            description: 'Search for files'
+        },
+        {
+            method: 'DELETE',
+            path: '/filesystem/delete',
+            handler: deleteFile,
+            description: 'Delete a file or directory'
+        }
+    ];
+}
+
+/**
+ * Get module statistics
+ * @returns {Object} - Module statistics
+ */
+function getStats() {
+    return { ...state.stats };
+}
+
+/**
+ * Check if a path is allowed
+ * @param {string} targetPath - The path to check
+ * @returns {boolean} - Whether the path is allowed
+ */
+function isPathAllowed(targetPath) {
+    const normalizedPath = path.normalize(targetPath);
+
+    return state.config.allowedDirectories.some(allowedDir => {
+        const normalizedAllowedDir = path.normalize(allowedDir);
+        return normalizedPath.startsWith(normalizedAllowedDir);
+    });
+}
+
+/**
+ * Generate a unique ID for a file
+ * @param {string} filePath - The file path
+ * @returns {string} - Unique file ID
+ */
+function generateFileId(filePath) {
+    return crypto
+        .createHash('md5')
+        .update(path.normalize(filePath))
+        .digest('hex');
+}
+
+/**
+ * Read a file from the filesystem
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
+async function readFile(req, res) {
+    try {
+        const filePath = req.query.path;
+
+        if (!filePath) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Missing required parameter: path'
+            });
+        }
+
+        // Check if path is allowed
+        if (!isPathAllowed(filePath)) {
+            state.logger.warn(`[Filesystem] Attempted to read unauthorized path: ${filePath}`);
+            state.stats.errors++;
+
+            return res.status(403).json({
+                status: 'error',
+                message: 'Access to this path is not allowed'
+            });
+        }
+
+        // Check if file exists
+        const stats = await fs.stat(filePath);
+
+        if (!stats.isFile()) {
+            state.logger.warn(`[Filesystem] Attempted to read a non-file: ${filePath}`);
+            state.stats.errors++;
+
+            return res.status(400).json({
+                status: 'error',
+                message: 'The specified path is not a file'
+            });
+        }
+
+        // Check file size
+        if (stats.size > state.config.maxFileSize) {
+            state.logger.warn(`[Filesystem] File too large: ${filePath} (${stats.size} bytes)`);
+            state.stats.errors++;
+
+            return res.status(400).json({
+                status: 'error',
+                message: `File size exceeds the maximum allowed size (${state.config.maxFileSize} bytes)`
+            });
+        }
+
+        // Read file content
+        const content = await fs.readFile(filePath, 'utf8');
+
+        // Update stats
+        state.stats.reads++;
+        state.stats.lastOperation = {
+            type: 'read',
+            path: filePath,
+            timestamp: new Date().toISOString()
+        };
+
+        state.logger.debug(`[Filesystem] Read file: ${filePath} (${content.length} bytes)`);
+
+        // Return successful response
+        res.status(200).json({
+            status: 'success',
+            message: 'File read successfully',
+            data: {
+                path: filePath,
+                content,
+                fileId: generateFileId(filePath),
+                stats: {
+                    size: stats.size,
+                    created: stats.birthtime,
+                    modified: stats.mtime,
+                    accessed: stats.atime
+                }
+            }
+        });
+    } catch (error) {
+        state.stats.errors++;
+        state.logger.error(`[Filesystem] Error reading file: ${error.message}`);
+
+        // Return error response
+        res.status(500).json({
+            status: 'error',
+            message: `Error reading file: ${error.message}`
+        });
+    }
+}
+
+/**
+ * Write content to a file
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
+async function writeFile(req, res) {
+    try {
+        const { path: filePath, content, createDirectories } = req.body;
+
+        if (!filePath || content === undefined) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Missing required parameters: path and content'
+            });
+        }
+
+        // Check if path is allowed
+        if (!isPathAllowed(filePath)) {
+            state.logger.warn(`[Filesystem] Attempted to write to unauthorized path: ${filePath}`);
+            state.stats.errors++;
+
+            return res.status(403).json({
+                status: 'error',
+                message: 'Access to this path is not allowed'
+            });
+        }
+
+        // Check content size
+        if (Buffer.byteLength(content, 'utf8') > state.config.maxFileSize) {
+            state.logger.warn(`[Filesystem] Content too large for file: ${filePath}`);
+            state.stats.errors++;
+
+            return res.status(400).json({
+                status: 'error',
+                message: `Content size exceeds the maximum allowed size (${state.config.maxFileSize} bytes)`
+            });
+        }
+
+        // Create directory if it doesn't exist and createDirectories is true
+        if (createDirectories) {
+            const directory = path.dirname(filePath);
+            await fs.mkdir(directory, { recursive: true });
+        }
+
+        // Write content to file
+        await fs.writeFile(filePath, content, 'utf8');
+
+        // Get file stats
+        const stats = await fs.stat(filePath);
+
+        // Update stats
+        state.stats.writes++;
+        state.stats.lastOperation = {
+            type: 'write',
+            path: filePath,
+            timestamp: new Date().toISOString()
+        };
+
+        state.logger.debug(`[Filesystem] Wrote to file: ${filePath} (${Buffer.byteLength(content, 'utf8')} bytes)`);
+
+        // Return successful response
+        res.status(200).json({
+            status: 'success',
+            message: 'File written successfully',
+            data: {
+                path: filePath,
+                fileId: generateFileId(filePath),
+                stats: {
+                    size: stats.size,
+                    created: stats.birthtime,
+                    modified: stats.mtime
+                }
+            }
+        });
+    } catch (error) {
+        state.stats.errors++;
+        state.logger.error(`[Filesystem] Error writing file: ${error.message}`);
+
+        // Return error response
+        res.status(500).json({
+            status: 'error',
+            message: `Error writing file: ${error.message}`
+        });
+    }
+}
+
+/**
+ * List directory contents
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
+async function listDirectory(req, res) {
+    try {
+        const { path: dirPath, recursive, pattern } = req.query;
+
+        if (!dirPath) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Missing required parameter: path'
+            });
+        }
+
+        // Check if path is allowed
+        if (!isPathAllowed(dirPath)) {
+            state.logger.warn(`[Filesystem] Attempted to list unauthorized directory: ${dirPath}`);
+            state.stats.errors++;
+
+            return res.status(403).json({
+                status: 'error',
+                message: 'Access to this path is not allowed'
+            });
+        }
+
+        // Read directory
+        const entries = await fs.readdir(dirPath, { withFileTypes: true });
+
+        // Process entries
+        const files = [];
+        const directories = [];
+
+        for (const entry of entries) {
+            const entryPath = path.join(dirPath, entry.name);
+
+            // Skip if pattern is provided and doesn't match
+            if (pattern && !entry.name.match(new RegExp(pattern))) {
+                continue;
+            }
+
+            if (entry.isDirectory()) {
+                directories.push({
+                    name: entry.name,
+                    path: entryPath,
+                    type: 'directory'
+                });
+
+                // Process subdirectories if recursive is true
+                if (recursive === 'true') {
+                    const subDirResult = await listDirectory({
+                        query: {
+                            path: entryPath,
+                            recursive: 'true',
+                            pattern
+                        }
+                    }, { json: () => {} });
+
+                    if (subDirResult.data) {
+                        directories[directories.length - 1].children = {
+                            files: subDirResult.data.files,
+                            directories: subDirResult.data.directories
+                        };
+                    }
+                }
+            } else if (entry.isFile()) {
+                const stats = await fs.stat(entryPath);
+
+                files.push({
+                    name: entry.name,
+                    path: entryPath,
+                    type: 'file',
+                    fileId: generateFileId(entryPath),
+                    size: stats.size,
+                    created: stats.birthtime,
+                    modified: stats.mtime
+                });
+            }
+        }
+
+        // Update stats
+        state.stats.lists++;
+        state.stats.lastOperation = {
+            type: 'list',
+            path: dirPath,
+            timestamp: new Date().toISOString()
+        };
+
+        state.logger.debug(`[Filesystem] Listed directory: ${dirPath} (${files.length} files, ${directories.length} dirs)`);
+
+        // Return successful response
+        res.status(200).json({
+            status: 'success',
+            message: 'Directory listed successfully',
+            data: {
+                path: dirPath,
+                files,
+                directories,
+                totalCount: files.length + directories.length
+            }
+        });
+    } catch (error) {
+        state.stats.errors++;
+        state.logger.error(`[Filesystem] Error listing directory: ${error.message}`);
+
+        // Return error response
+        res.status(500).json({
+            status: 'error',
+            message: `Error listing directory: ${error.message}`
+        });
+    }
+}
+
+/**
+ * Search for files
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
+async function searchFiles(req, res) {
+    try {
+        const { path: startPath, query, recursive, limit } = req.query;
+
+        if (!startPath || !query) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Missing required parameters: path and query'
+            });
+        }
+
+        // Check if path is allowed
+        if (!isPathAllowed(startPath)) {
+            state.logger.warn(`[Filesystem] Attempted to search in unauthorized directory: ${startPath}`);
+            state.stats.errors++;
+
+            return res.status(403).json({
+                status: 'error',
+                message: 'Access to this path is not allowed'
+            });
+        }
+
+        // Set limit
+        const maxResults = limit ? parseInt(limit, 10) : state.config.maxResults;
+
+        // Results
+        const results = {
+            matchesByName: [],
+            matchesByContent: []
+        };
+
+        // Search function
+        async function searchInDirectory(dirPath) {
+            // Stop if we've reached the limit
+            if (
+                results.matchesByName.length + results.matchesByContent.length >= maxResults
+            ) {
+                return;
+            }
+
+            // Read directory
+            const entries = await fs.readdir(dirPath, { withFileTypes: true });
+
+            // Process entries
+            for (const entry of entries) {
+                // Stop if we've reached the limit
+                if (
+                    results.matchesByName.length + results.matchesByContent.length >= maxResults
+                ) {
+                    break;
+                }
+
+                const entryPath = path.join(dirPath, entry.name);
+
+                if (entry.isDirectory() && recursive === 'true') {
+                    // Process subdirectory
+                    await searchInDirectory(entryPath);
+                } else if (entry.isFile()) {
+                    // Check filename
+                    if (entry.name.toLowerCase().includes(query.toLowerCase())) {
+                        const stats = await fs.stat(entryPath);
+
+                        results.matchesByName.push({
+                            name: entry.name,
+                            path: entryPath,
+                            type: 'file',
+                            fileId: generateFileId(entryPath),
+                            size: stats.size,
+                            created: stats.birthtime,
+                            modified: stats.mtime
+                        });
+                    }
+
+                    // Check content if file is not too large
+                    const stats = await fs.stat(entryPath);
+
+                    if (stats.size <= state.config.maxFileSize) {
+                        try {
+                            const content = await fs.readFile(entryPath, 'utf8');
+
+                            if (content.toLowerCase().includes(query.toLowerCase())) {
+                                // Find context around the match
+                                const contentLines = content.split('\n');
+                                const matchingLines = [];
+
+                                for (let i = 0; i < contentLines.length; i++) {
+                                    if (contentLines[i].toLowerCase().includes(query.toLowerCase())) {
+                                        const startLine = Math.max(0, i - 1);
+                                        const endLine = Math.min(contentLines.length - 1, i + 1);
+
+                                        matchingLines.push({
+                                            line: i + 1,
+                                            context: contentLines.slice(startLine, endLine + 1).join('\n')
+                                        });
+
+                                        if (matchingLines.length >= 5) {
+                                            break; // Limit to 5 matches per file
+                                        }
+                                    }
+                                }
+
+                                results.matchesByContent.push({
+                                    name: entry.name,
+                                    path: entryPath,
+                                    type: 'file',
+                                    fileId: generateFileId(entryPath),
+                                    size: stats.size,
+                                    created: stats.birthtime,
+                                    modified: stats.mtime,
+                                    matches: matchingLines
+                                });
+                            }
+                        } catch (err) {
+                            // Skip non-text files
+                            state.logger.debug(`[Filesystem] Skipping binary file: ${entryPath}`);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Start search
+        await searchInDirectory(startPath);
+
+        // Update stats
+        state.stats.searches++;
+        state.stats.lastOperation = {
+            type: 'search',
+            path: startPath,
+            query,
+            timestamp: new Date().toISOString()
+        };
+
+        state.logger.debug(
+            `[Filesystem] Search in ${startPath} for "${query}": ` +
+            `${results.matchesByName.length} name matches, ${results.matchesByContent.length} content matches`
+        );
+
+        // Return successful response
+        res.status(200).json({
+            status: 'success',
+            message: 'Search completed successfully',
+            data: {
+                query,
+                path: startPath,
+                nameMatches: results.matchesByName,
+                contentMatches: results.matchesByContent,
+                totalMatches: results.matchesByName.length + results.matchesByContent.length,
+                limitReached: (
+                    results.matchesByName.length + results.matchesByContent.length >= maxResults
+                )
+            }
+        });
+    } catch (error) {
+        state.stats.errors++;
+        state.logger.error(`[Filesystem] Error searching: ${error.message}`);
+
+        // Return error response
+        res.status(500).json({
+            status: 'error',
+            message: `Error searching: ${error.message}`
+        });
+    }
+}
+
+/**
+ * Delete a file or directory
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
+async function deleteFile(req, res) {
+    try {
+        const { path: targetPath, recursive } = req.query;
+
+        if (!targetPath) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Missing required parameter: path'
+            });
+        }
+
+        // Check if path is allowed
+        if (!isPathAllowed(targetPath)) {
+            state.logger.warn(`[Filesystem] Attempted to delete unauthorized path: ${targetPath}`);
+            state.stats.errors++;
+
+            return res.status(403).json({
+                status: 'error',
+                message: 'Access to this path is not allowed'
+            });
+        }
+
+        // Check if path exists
+        const stats = await fs.stat(targetPath);
+
+        if (stats.isDirectory()) {
+            // Delete directory
+            if (recursive === 'true') {
+                // Recursively delete directory
+                await fs.rm(targetPath, { recursive: true, force: true });
+            } else {
+                // Non-recursive directory delete
+                try {
+                    await fs.rmdir(targetPath);
+                } catch (err) {
+                    if (err.code === 'ENOTEMPTY') {
+                        return res.status(400).json({
+                            status: 'error',
+                            message: 'Directory is not empty. Use recursive=true to delete non-empty directories.'
+                        });
+                    }
+                    throw err;
+                }
+            }
+        } else {
+            // Delete file
+            await fs.unlink(targetPath);
+        }
+
+        // Update stats
+        state.stats.deletes++;
+        state.stats.lastOperation = {
+            type: 'delete',
+            path: targetPath,
+            timestamp: new Date().toISOString()
+        };
+
+        state.logger.debug(`[Filesystem] Deleted ${stats.isDirectory() ? 'directory' : 'file'}: ${targetPath}`);
+
+        // Return successful response
+        res.status(200).json({
+            status: 'success',
+            message: `${stats.isDirectory() ? 'Directory' : 'File'} deleted successfully`,
+            data: {
+                path: targetPath,
+                type: stats.isDirectory() ? 'directory' : 'file'
+            }
+        });
+    } catch (error) {
+        state.stats.errors++;
+        state.logger.error(`[Filesystem] Error deleting: ${error.message}`);
+
+        // Return error response
+        res.status(500).json({
+            status: 'error',
+            message: `Error deleting: ${error.message}`
+        });
+    }
+}
+
+// Export the initialize function
+module.exports = {
+    initialize
+};
+```
+Now let's create a module integration file:
+
+```javascript:slop/modules/filesystem/integration.js
+/**
+ * EVA & GUARANI - Filesystem Module Integration
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ *
+ * This file provides integration functions for the filesystem module.
+ */
+
+const fsModule = require('./index');
+
+/**
+ * Register the filesystem module with the SLOP server
+ * @param {Object} slopServer - The SLOP server instance
+ * @param {Object} options - Configuration options
+ * @returns {Object} - Module instance
+ */
+function register(slopServer, options = {}) {
+    const logger = slopServer.logger || console;
+
+    logger.info('[Filesystem] Registering filesystem module with SLOP server');
+
+    // Initialize the filesystem module
+    const module = fsModule.initialize(options, {
+        logger: logger
+    });
+
+    // Register routes
+    const routes = module.routes;
+
+    routes.forEach(route => {
+        logger.debug(`[Filesystem] Registering route: ${route.method} ${route.path}`);
+
+        // Add route to Express app
+        slopServer.app[route.method.toLowerCase()](route.path, route.handler);
+    });
+
+    // Add module info endpoint
+    slopServer.app.get('/filesystem/info', (req, res) => {
+        const stats = module.stats();
+
+        res.json({
+            status: 'success',
+            data: {
+                name: module.name,
+                version: module.version,
+                stats: stats,
+                routes: routes.map(r => ({
+                    method: r.method,
+                    path: r.path,
+                    description: r.description
+                })),
+                config: {
+                    allowedDirectories: options.allowedDirectories || [],
+                    maxFileSize: options.maxFileSize || 0,
+                    maxResults: options.maxResults || 0
+                }
+            }
+        });
+    });
+
+    // Register WebSocket events if needed
+    if (slopServer.wss) {
+        slopServer.wss.on('connection', (ws) => {
+            ws.on('message', (message) => {
+                try {
+                    const data = JSON.parse(message);
+
+                    // Handle filesystem-specific messages
+                    if (data.type === 'filesystem') {
+                        switch (data.action) {
+                            case 'stats':
+                                ws.send(JSON.stringify({
+                                    type: 'filesystem',
+                                    action: 'stats',
+                                    data: module.stats()
+                                }));
+                                break;
+
+                            default:
+                                ws.send(JSON.stringify({
+                                    type: 'filesystem',
+                                    action: 'error',
+                                    error: 'Unknown action'
+                                }));
+                        }
+                    }
+                } catch (error) {
+                    logger.error(`[Filesystem] WebSocket error: ${error.message}`);
+                }
+            });
+        });
+    }
+
+    // Log registration completion
+    logger.info('[Filesystem] Module successfully registered with SLOP server');
+
+    return module;
+}
+
+module.exports = {
+    register
+};
+```
+Now let's create an adapter file for client-side usage:
+
+```javascript:slop/modules/filesystem/adapter.js
+/**
+ * EVA & GUARANI - Filesystem Module Client Adapter
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ *
+ * This module provides a client-side adapter for the filesystem module.
+ */
+
+/**
+ * Create a client adapter for the filesystem module
+ * @param {Object} options - Configuration options
+ * @returns {Object} - Filesystem client API
+ */
+function createAdapter(options = {}) {
+    const baseUrl = options.baseUrl || 'http://localhost:3000';
+    const fetch = options.fetch || global.fetch;
+
+    if (!fetch) {
+        throw new Error('Fetch implementation is required. Please provide a fetch implementation in options.');
+    }
+
+    /**
+     * Make an API request to the filesystem module
+     * @param {string} endpoint - API endpoint
+     * @param {string} method - HTTP method
+     * @param {Object} data - Request data
+     * @returns {Promise<Object>} - Response data
+     */
+    async function makeRequest(endpoint, method, data = null) {
+        const url = new URL(`${baseUrl}${endpoint}`);
+
+        const requestOptions = {
+            method: method,
+            headers: {
+                'Accept': 'application/json'
+            }
+        };
+
+        // For GET requests, add parameters to URL
+        if (method === 'GET' && data) {
+            Object.entries(data).forEach(([key, value]) => {
+                if (value !== undefined && value !== null) {
+                    url.searchParams.append(key, value);
+                }
+            });
+        } else if (data) {
+            // For other requests, send data in body
+            requestOptions.headers['Content-Type'] = 'application/json';
+            requestOptions.body = JSON.stringify(data);
+        }
+
+        try {
+            const response = await fetch(url.toString(), requestOptions);
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || `API request failed with status ${response.status}`);
+            }
+
+            return result;
+        } catch (error) {
+            throw new Error(`Filesystem API request failed: ${error.message}`);
+        }
+    }
+
+    return {
+        /**
+         * Read a file from the filesystem
+         * @param {string} filePath - Path to the file
+         * @returns {Promise<Object>} - File content and metadata
+         */
+        async readFile(filePath) {
+            const result = await makeRequest('/filesystem/read', 'GET', { path: filePath });
+            return result.data;
+        },
+
+        /**
+         * Write content to a file
+         * @param {string} filePath - Path to the file
+         * @param {string} content - Content to write
+         * @param {boolean} createDirectories - Whether to create parent directories
+         * @returns {Promise<Object>} - File metadata
+         */
+        async writeFile(filePath, content, createDirectories = false) {
+            const result = await makeRequest('/filesystem/write', 'POST', {
+                path: filePath,
+                content,
+                createDirectories
+            });
+            return result.data;
+        },
+
+        /**
+         * List directory contents
+         * @param {string} directoryPath - Path to the directory
+         * @param {boolean} recursive - Whether to list recursively
+         * @param {string} pattern - Optional pattern to filter files
+         * @returns {Promise<Object>} - Directory contents
+         */
+        async listDirectory(directoryPath, recursive = false, pattern = null) {
+            const result = await makeRequest('/filesystem/list', 'GET', {
+                path: directoryPath,
+                recursive: recursive.toString(),
+                pattern
+            });
+            return result.data;
+        },
+
+        /**
+         * Search for files
+         * @param {string} directoryPath - Path to search in
+         * @param {string} query - Search query
+         * @param {boolean} recursive - Whether to search recursively
+         * @param {number} limit - Maximum number of results
+         * @returns {Promise<Object>} - Search results
+         */
+        async searchFiles(directoryPath, query, recursive = true, limit = 100) {
+            const result = await makeRequest('/filesystem/search', 'GET', {
+                path: directoryPath,
+                query,
+                recursive: recursive.toString(),
+                limit
+            });
+            return result.data;
+        },
+
+        /**
+         * Delete a file or directory
+         * @param {string} filePath - Path to delete
+         * @param {boolean} recursive - Whether to delete recursively
+         * @returns {Promise<Object>} - Result of deletion
+         */
+        async deleteFile(filePath, recursive = false) {
+            const result = await makeRequest('/filesystem/delete', 'DELETE', {
+                path: filePath,
+                recursive: recursive.toString()
+            });
+            return result.data;
+        },
+
+        /**
+         * Get filesystem module information
+         * @returns {Promise<Object>} - Module information
+         */
+        async getInfo() {
+            const result = await makeRequest('/filesystem/info', 'GET');
+            return result.data;
+        }
+    };
+}
+
+// For CommonJS environments
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { createAdapter };
+}
+
+// For browser environments
+if (typeof window !== 'undefined') {
+    window.EVAFilesystem = { createAdapter };
+}
+```
+Now let's create a test cli file for manual testing:
+
+```javascript:slop/modules/filesystem/cli-test.js
+#!/usr/bin/env node
+
+/**
+ * EVA & GUARANI - Filesystem Module CLI Test
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ *
+ * This utility allows testing the filesystem module from the command line.
+ */
+
+const fs = require('fs');
+const path = require('path');
+const express = require('express');
+const fsModule = require('./index');
+
+// Create a minimal express app for testing
+const app = express();
+app.use(express.json());
+
+// Setup logger
+const logger = {
+    info: (...args) => console.log('\x1b[36m[INFO]\x1b[0m', ...args),
+    debug: (...args) => console.log('\x1b[90m[DEBUG]\x1b[0m', ...args),
+    warn: (...args) => console.log('\x1b[33m[WARN]\x1b[0m', ...args),
+    error: (...args) => console.log('\x1b[31m[ERROR]\x1b[0m', ...args)
+};
+
+// Parse command line arguments
+const args = process.argv.slice(2);
+const command = args[0];
+
+// Define allowed directories
+const allowedDirectories = [
+    process.cwd(),
+    path.resolve(process.cwd(), '..')
+];
+
+// Initialize the filesystem module
+const module = fsModule.initialize(
+    {
+        allowedDirectories,
+        maxFileSize: 10 * 1024 * 1024, // 10MB
+        maxResults: 100
+    },
+    { logger }
+);
+
+// Register routes
+module.routes.forEach(route => {
+    app[route.method.toLowerCase()](route.path, route.handler);
+});
+
+// Show help
+function showHelp() {
+    console.log('\n\x1b[1mEVA & GUARANI Filesystem Module CLI Test\x1b[0m');
+    console.log('\x1b[90mVersion 1.0.0\x1b[0m\n');
+    console.log('Commands:');
+    console.log('  help                 Show this help message');
+    console.log('  server               Start a test server on port 3001');
+    console.log('  read <path>          Read a file');
+    console.log('  write <path> <text>  Write text to a file');
+    console.log('  list <path> [--recursive] [--pattern <pattern>]');
+    console.log('                       List contents of a directory');
+    console.log('  search <path> <query> [--recursive] [--limit <number>]');
+    console.log('                       Search for files by name or content');
+    console.log('  delete <path> [--recursive]');
+    console.log('                       Delete a file or directory');
+    console.log('  info                 Show module information');
+    console.log('\nAllowed directories:');
+    allowedDirectories.forEach(dir => {
+        console.log(`  - ${dir}`);
+    });
+    console.log('');
+}
+
+// Mock request and response objects
+function createMockReq(method, path, query, body) {
+    return {
+        method,
+        path,
+        query: query || {},
+        body: body || {}
+    };
+}
+
+function createMockRes() {
+    const res = {
+        statusCode: 200,
+        data: null,
+        status(code) {
+            this.statusCode = code;
+            return this;
+        },
+        json(data) {
+            this.data = data;
+            console.log(JSON.stringify(data, null, 2));
+            return this;
+        }
+    };
+    return res;
+}
+
+// Start a test server
+function startServer() {
+    const port = 3001;
+
+    app.get('/', (req, res) => {
+        res.send(`
+            <html>
+                <head>
+                    <title>EVA & GUARANI Filesystem Module Test</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+                        h1 { color: #333; }
+                        .operation { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+                        .operation h2 { margin-top: 0; }
+                        label { display: block; margin-bottom: 5px; font-weight: bold; }
+                        input, textarea { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+                        button { background: #4CAF50; color: white; border: none; padding: 10px 15px; cursor: pointer; }
+                        pre { background: #f5f5f5; padding: 10px; overflow: auto; }
+                        .result { margin-top: 10px; }
+                    </style>
+                </head>
+                <body>
+                    <h1>EVA & GUARANI Filesystem Module Test</h1>
+
+                    <div class="operation">
+                        <h2>Read File</h2>
+                        <form id="readForm">
+                            <label for="readPath">File Path:</label>
+                            <input type="text" id="readPath" required>
+                            <button type="submit">Read</button>
+                        </form>
+                        <div id="readResult" class="result"></div>
+                    </div>
+
+                    <div class="operation">
+                        <h2>Write File</h2>
+                        <form id="writeForm">
+                            <label for="writePath">File Path:</label>
+                            <input type="text" id="writePath" required>
+                            <label for="writeContent">Content:</label>
+                            <textarea id="writeContent" rows="5" required></textarea>
+                            <label>
+                                <input type="checkbox" id="createDirectories">
+                                Create directories if they don't exist
+                            </label>
+                            <button type="submit">Write</button>
+                        </form>
+                        <div id="writeResult" class="result"></div>
+                    </div>
+
+                    <div class="operation">
+                        <h2>List Directory</h2>
+                        <form id="listForm">
+                            <label for="listPath">Directory Path:</label>
+                            <input type="text" id="listPath" required>
+                            <label>
+                                <input type="checkbox" id="listRecursive">
+                                Recursive
+                            </label>
+                            <label for="listPattern">Pattern (optional):</label>
+                            <input type="text" id="listPattern">
+                            <button type="submit">List</button>
+                        </form>
+                        <div id="listResult" class="result"></div>
+                    </div>
+
+                    <div class="operation">
+                        <h2>Search Files</h2>
+                        <form id="searchForm">
+                            <label for="searchPath">Directory Path:</label>
+                            <input type="text" id="searchPath" required>
+                            <label for="searchQuery">Search Query:</label>
+                            <input type="text" id="searchQuery" required>
+                            <label>
+                                <input type="checkbox" id="searchRecursive" checked>
+                                Recursive
+                            </label>
+                            <label for="searchLimit">Result Limit:</label>
+                            <input type="number" id="searchLimit" value="100">
+                            <button type="submit">Search</button>
+                        </form>
+                        <div id="searchResult" class="result"></div>
+                    </div>
+
+                    <div class="operation">
+                        <h2>Delete File/Directory</h2>
+                        <form id="deleteForm">
+                            <label for="deletePath">Path:</label>
+                            <input type="text" id="deletePath" required>
+                            <label>
+                                <input type="checkbox" id="deleteRecursive">
+                                Recursive (for directories)
+                            </label>
+                            <button type="submit">Delete</button>
+                        </form>
+                        <div id="deleteResult" class="result"></div>
+                    </div>
+
+                    <div class="operation">
+                        <h2>Module Info</h2>
+                        <button id="infoButton">Get Info</button>
+                        <div id="infoResult" class="result"></div>
+                    </div>
+
+                    <script>
+                        // Helper function to display results
+                        function displayResult(elementId, data) {
+                            const element = document.getElementById(elementId);
+                            element.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                        }
+
+                        // Read File
+                        document.getElementById('readForm').addEventListener('submit', async (e) => {
+                            e.preventDefault();
+                            const path = document.getElementById('readPath').value;
+
+                            try {
+                                const response = await fetch(\`/filesystem/read?path=\${encodeURIComponent(path)}\`);
+                                const result = await response.json();
+                                displayResult('readResult', result);
+                            } catch (error) {
+                                displayResult('readResult', { error: error.message });
+                            }
+                        });
+
+                        // Write File
+                        document.getElementById('writeForm').addEventListener('submit', async (e) => {
+                            e.preventDefault();
+                            const path = document.getElementById('writePath').value;
+                            const content = document.getElementById('writeContent').value;
+                            const createDirectories = document.getElementById('createDirectories').checked;
+
+                            try {
+                                const response = await fetch('/filesystem/write', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ path, content, createDirectories })
+                                });
+                                const result = await response.json();
+                                displayResult('writeResult', result);
+                            } catch (error) {
+                                displayResult('writeResult', { error: error.message });
+                            }
+                        });
+
+                        // List Directory
+                        document.getElementById('listForm').addEventListener('submit', async (e) => {
+                            e.preventDefault();
+                            const path = document.getElementById('listPath').value;
+                            const recursive = document.getElementById('listRecursive').checked;
+                            const pattern = document.getElementById('listPattern').value;
+
+                            try {
+                                const url = new URL('/filesystem/list', window.location.origin);
+                                url.searchParams.append('path', path);
+                                url.searchParams.append('recursive', recursive);
+                                if (pattern) url.searchParams.append('pattern', pattern);
+
+                                const response = await fetch(url);
+                                const result = await response.json();
+                                displayResult('listResult', result);
+                            } catch (error) {
+                                displayResult('listResult', { error: error.message });
+                            }
+                        });
+
+                        // Search Files
+                        document.getElementById('searchForm').addEventListener('submit', async (e) => {
+                            e.preventDefault();
+                            const path = document.getElementById('searchPath').value;
+                            const query = document.getElementById('searchQuery').value;
+                            const recursive = document.getElementById('searchRecursive').checked;
+                            const limit = document.getElementById('searchLimit').value;
+
+                            try {
+                                const url = new URL('/filesystem/search', window.location.origin);
+                                url.searchParams.append('path', path);
+                                url.searchParams.append('query', query);
+                                url.searchParams.append('recursive', recursive);
+                                url.searchParams.append('limit', limit);
+
+                                const response = await fetch(url);
+                                const result = await response.json();
+                                displayResult('searchResult', result);
+                            } catch (error) {
+                                displayResult('searchResult', { error: error.message });
+                            }
+                        });
+
+                        // Delete File/Directory
+                        document.getElementById('deleteForm').addEventListener('submit', async (e) => {
+                            e.preventDefault();
+                            const path = document.getElementById('deletePath').value;
+                            const recursive = document.getElementById('deleteRecursive').checked;
+
+                            if (!confirm(\`Are you sure you want to delete \${path}?\`)) {
+                                return;
+                            }
+
+                            try {
+                                const url = new URL('/filesystem/delete', window.location.origin);
+                                url.searchParams.append('path', path);
+                                url.searchParams.append('recursive', recursive);
+
+                                const response = await fetch(url, { method: 'DELETE' });
+                                const result = await response.json();
+                                displayResult('deleteResult', result);
+                            } catch (error) {
+                                displayResult('deleteResult', { error: error.message });
+                            }
+                        });
+
+                        // Module Info
+                        document.getElementById('infoButton').addEventListener('click', async () => {
+                            try {
+                                const response = await fetch('/filesystem/info');
+                                const result = await response.json();
+                                displayResult('infoResult', result);
+                            } catch (error) {
+                                displayResult('infoResult', { error: error.message });
+                            }
+                        });
+                    </script>
+                </body>
+            </html>
+        `);
+    });
+
+    app.get('/filesystem/info', (req, res) => {
+        res.json({
+            status: 'success',
+            data: {
+                name: module.name,
+                version: module.version,
+                routes: module.routes.map(r => ({
+                    method: r.method,
+                    path: r.path,
+                    description: r.description
+                })),
+                config: {
+                    allowedDirectories,
+                    maxFileSize: module.config?.maxFileSize || 10 * 1024 * 1024,
+                    maxResults: module.config?.maxResults || 100
+                }
+            }
+        });
+    });
+
+    app.listen(port, () => {
+        logger.info(`Test server running at http://localhost:${port}`);
+        logger.info(`Press Ctrl+C to stop`);
+    });
+}
+
+// Process commands
+async function processCommand() {
+    if (!command || command === 'help') {
+        showHelp();
+        return;
+    }
+
+    if (command === 'server') {
+        startServer();
+        return;
+    }
+
+    if (command === 'read') {
+        const filePath = args[1];
+
+        if (!filePath) {
+            logger.error('Missing file path');
+            return;
+        }
+
+        const req = createMockReq('GET', '/filesystem/read', { path: filePath });
+        const res = createMockRes();
+
+        await module.routes.find(r => r.path === '/filesystem/read').handler(req, res);
+        return;
+    }
+
+    if (command === 'write') {
+        const filePath = args[1];
+        const content = args[2] || '';
+
+        if (!filePath) {
+            logger.error('Missing file path');
+            return;
+        }
+
+        const req = createMockReq('POST', '/filesystem/write', null, {
+            path: filePath,
+            content,
+            createDirectories: args.includes('--create-dirs')
+        });
+        const res = createMockRes();
+
+        await module.routes.find(r => r.path === '/filesystem/write').handler(req, res);
+        return;
+    }
+
+    if (command === 'list') {
+        const dirPath = args[1];
+
+        if (!dirPath) {
+            logger.error('Missing directory path');
+            return;
+        }
+
+        const recursive = args.includes('--recursive');
+        let pattern = null;
+
+        const patternIndex = args.indexOf('--pattern');
+        if (patternIndex !== -1 && args.length > patternIndex + 1) {
+            pattern = args[patternIndex + 1];
+        }
+
+        const req = createMockReq('GET', '/filesystem/list', {
+            path: dirPath,
+            recursive: recursive.toString(),
+            pattern
+        });
+        const res = createMockRes();
+
+        await module.routes.find(r => r.path === '/filesystem/list').handler(req, res);
+        return;
+    }
+
+    if (command === 'search') {
+        const dirPath = args[1];
+        const query = args[2];
+
+        if (!dirPath || !query) {
+            logger.error('Missing directory path or search query');
+            return;
+        }
+
+        const recursive = !args.includes('--no-recursive');
+        let limit = 100;
+
+        const limitIndex = args.indexOf('--limit');
+        if (limitIndex !== -1 && args.length > limitIndex + 1) {
+            limit = parseInt(args[limitIndex + 1], 10);
+        }
+
+        const req = createMockReq('GET', '/filesystem/search', {
+            path: dirPath,
+            query,
+            recursive: recursive.toString(),
+            limit
+        });
+        const res = createMockRes();
+
+        await module.routes.find(r => r.path === '/filesystem/search').handler(req, res);
+        return;
+    }
+
+    if (command === 'delete') {
+        const filePath = args[1];
+
+        if (!filePath) {
+            logger.error('Missing file path');
+            return;
+        }
+
+        // Ask for confirmation
+        if (!args.includes('--force')) {
+            console.log(`Are you sure you want to delete ${filePath}? (y/N)`);
+            const stdin = process.stdin;
+            stdin.setRawMode(true);
+            stdin.resume();
+            stdin.setEncoding('utf8');
+
+            await new Promise(resolve => {
+                stdin.once('data', (key) => {
+                    stdin.setRawMode(false);
+                    stdin.pause();
+
+                    if (key.toLowerCase() !== 'y') {
+                        console.log('Operation cancelled');
+                        resolve(false);
+                        return;
+                    }
+
+                    resolve(true);
+                });
+            }).then(confirmed => {
+                if (!confirmed) {
+                    return;
+                }
+
+                const recursive = args.includes('--recursive');
+
+                const req = createMockReq('DELETE', '/filesystem/delete', {
+                    path: filePath,
+                    recursive: recursive.toString()
+                });
+                const res = createMockRes();
+
+                module.routes.find(r => r.path === '/filesystem/delete').handler(req, res);
+            });
+
+            return;
+        }
+
+        const recursive = args.includes('--recursive');
+
+        const req = createMockReq('DELETE', '/filesystem/delete', {
+            path: filePath,
+            recursive: recursive.toString()
+        });
+        const res = createMockRes();
+
+        await module.routes.find(r => r.path === '/filesystem/delete').handler(req, res);
+        return;
+    }
+
+    if (command === 'info') {
+        console.log('\n\x1b[1mEVA & GUARANI Filesystem Module Information\x1b[0m');
+        console.log(`Name: ${module.name}`);
+        console.log(`Version: ${module.version}`);
+        console.log('\nAvailable Routes:');
+
+        module.routes.forEach(route => {
+            console.log(`  ${route.method} ${route.path}`);
+            console.log(`    ${route.description}`);
+        });
+
+        console.log('\nAllowed Directories:');
+        allowedDirectories.forEach(dir => {
+            console.log(`  - ${dir}`);
+        });
+
+        console.log('\nConfiguration:');
+        console.log(`  Max File Size: ${module.config?.maxFileSize || 10 * 1024 * 1024} bytes`);
+        console.log(`  Max Results: ${module.config?.maxResults || 100}`);
+
+        return;
+    }
+
+    logger.error(`Unknown command: ${command}`);
+    showHelp();
+}
+
+// Run the CLI
+processCommand().catch(error => {
+    logger.error('Error:', error.message);
+    process.exit(1);
+});
+```
+Let's create a simple README.md file for the module:
+
+```markdown:slop/modules/filesystem/README.md
+# EVA & GUARANI Filesystem Module
+
+Version: 1.0.0
+Date: 2025-03-29
+
+## Overview
+
+The Filesystem Module provides file and directory operations for the EVA & GUARANI system through the SLOP (Simple Language Open Protocol) server. It allows secure and controlled access to the filesystem with configurable permissions and limits.
+
+## Features
+
+- **Secure Access Control**: Only access directories explicitly allowed in configuration
+- **Core Operations**: Read, write, list, search, and delete files and directories
+- **Recursive Operations**: Support for recursive directory listing and searching
+- **Pattern Matching**: Filter files by name pattern during listing and searching
+- **Content Search**: Search for text within files
+- **Size Limitations**: Configurable maximum file size for read/write operations
+- **Comprehensive Error Handling**: Clear error messages with appropriate HTTP status codes
+- **Detailed Logging**: Optional debug and error logging
+- **WebSocket Support**: Real-time updates via WebSocket connection
+- **Client Adapter**: Browser and Node.js compatible client adapter
+
+## Installation
+
+The module is designed to be integrated with the EVA & GUARANI SLOP server:
+
+```javascript
+// In your SLOP server configuration
+const filesystemIntegration = require('./modules/filesystem/integration');
+
+// Register with the SLOP server
+filesystemIntegration.register(slopServer, {
+    allowedDirectories: [
+        'C:/Eva Guarani EGOS',
+        'C:/Eva Guarani EGOS/QUANTUM_PROMPTS'
+    ],
+    maxFileSize: 20 * 1024 * 1024, // 20MB
+    maxResults: 1000,
+    logLevel: 'info'
+});
+```
+
+## API Endpoints
+
+### Read File
+
+```
+GET /filesystem/read
+```
+
+**Parameters**:
+- `path` (required): Path to the file to read
+
+**Response**:
+```json
+{
+  "status": "success",
+  "message": "File read successfully",
+  "data": {
+    "path": "C:/path/to/file.txt",
+    "content": "File content here",
+    "fileId": "md5hash",
+    "stats": {
+      "size": 42,
+      "created": "2025-03-29T12:00:00.000Z",
+      "modified": "2025-03-29T12:00:00.000Z",
+      "accessed": "2025-03-29T12:00:00.000Z"
+    }
+  }
+}
+```
+
+### Write File
+
+```
+POST /filesystem/write
+```
+
+**Body**:
+```json
+{
+  "path": "C:/path/to/file.txt",
+  "content": "New content",
+  "createDirectories": true
+}
+```
+
+**Response**:
+```json
+{
+  "status": "success",
+  "message": "File written successfully",
+  "data": {
+    "path": "C:/path/to/file.txt",
+    "fileId": "md5hash",
+    "stats": {
+      "size": 42,
+      "created": "2025-03-29T12:00:00.000Z",
+      "modified": "2025-03-29T12:00:00.000Z"
+    }
+  }
+}
+```
+
+### List Directory
+
+```
+GET /filesystem/list
+```
+
+**Parameters**:
+- `path` (required): Path to the directory to list
+- `recursive` (optional): 'true' to list recursively
+- `pattern` (optional): Regex pattern to filter files
+
+**Response**:
+```json
+{
+  "status": "success",
+  "message": "Directory listed successfully",
+  "data": {
+    "path": "C:/path/to/directory",
+    "files": [
+      {
+        "name": "file.txt",
+        "path": "C:/path/to/directory/file.txt",
+        "type": "file",
+        "fileId": "md5hash",
+        "size": 42,
+        "created": "2025-03-29T12:00:00.000Z",
+        "modified": "2025-03-29T12:00:00.000Z"
+      }
+    ],
+    "directories": [
+      {
+        "name": "subdirectory",
+        "path": "C:/path/to/directory/subdirectory",
+        "type": "directory"
+      }
+    ],
+    "totalCount": 2
+  }
+}
+```
+
+### Search Files
+
+```
+GET /filesystem/search
+```
+
+**Parameters**:
+- `path` (required): Path to the directory to search
+- `query` (required): Text to search for in filenames and content
+- `recursive` (optional): 'true' to search recursively
+- `limit` (optional): Maximum number of results to return
+
+**Response**:
+```json
+{
+  "status": "success",
+  "message": "Search completed successfully",
+  "data": {
+    "query": "searchterm",
+    "path": "C:/path/to/directory",
+    "nameMatches": [
+      {
+        "name": "searchterm.txt",
+        "path": "C:/path/to/directory/searchterm.txt",
+        "type": "file",
+        "fileId": "md5hash",
+        "size": 42,
+        "created": "2025-03-29T12:00:00.000Z",
+        "modified": "2025-03-29T12:00:00.000Z"
+      }
+    ],
+    "contentMatches": [
+      {
+        "name": "document.txt",
+        "path": "C:/path/to/directory/document.txt",
+        "type": "file",
+        "fileId": "md5hash",
+        "size": 120,
+        "created": "2025-03-29T12:00:00.000Z",
+        "modified": "2025-03-29T12:00:00.000Z",
+        "matches": [
+          {
+            "line": 5,
+            "context": "This is the searchterm in context"
+          }
+        ]
+      }
+    ],
+    "totalMatches": 2,
+    "limitReached": false
+  }
+}
+```
+
+### Delete File/Directory
+
+```
+DELETE /filesystem/delete
+```
+
+**Parameters**:
+- `path` (required): Path to the file or directory to delete
+- `recursive` (optional): 'true' to delete directories recursively
+
+**Response**:
+```json
+{
+  "status": "success",
+  "message": "File deleted successfully",
+  "data": {
+    "path": "C:/path/to/file.txt",
+    "type": "file"
+  }
+}
+```
+
+### Module Info
+
+```
+GET /filesystem/info
+```
+
+**Response**:
+```json
+{
+  "status": "success",
+  "data": {
+    "name": "filesystem",
+    "version": "1.0.0",
+    "stats": {
+      "reads": 10,
+      "writes": 5,
+      "deletes": 2,
+      "lists": 8,
+      "searches": 3,
+      "errors": 0,
+      "lastOperation": {
+        "type": "read",
+        "path": "C:/path/to/file.txt",
+        "timestamp": "2025-03-29T12:00:00.000Z"
+      }
+    },
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/filesystem/read",
+        "description": "Read file contents"
+      },
+      // ...other routes
+    ],
+    "config": {
+      "allowedDirectories": ["C:/Eva Guarani EGOS"],
+      "maxFileSize": 10485760,
+      "maxResults": 1000
+    }
+  }
+}
+```
+
+## Client Adapter
+
+The module includes a client adapter that can be used in both browser and Node.js environments:
+
+```javascript
+// Node.js
+const { createAdapter } = require('./adapter');
+
+// Browser
+const { createAdapter } = window.EVAFilesystem;
+
+// Create adapter
+const filesystem = createAdapter({
+    baseUrl: 'http://localhost:3000'
+});
+
+// Use the adapter
+async function example() {
+    // Read a file
+    const file = await filesystem.readFile('C:/path/to/file.txt');
+
+    // Write a file
+    await filesystem.writeFile('C:/path/to/new-file.txt', 'Hello, world!', true);
+
+    // List a directory
+    const listing = await filesystem.listDirectory('C:/path/to/directory', true);
+
+    // Search for files
+    const results = await filesystem.searchFiles('C:/path/to/directory', 'searchterm', true, 100);
+
+    // Delete a file
+    await filesystem.deleteFile('C:/path/to/file.txt');
+}
+```
+
+## CLI Testing Tool
+
+The module includes a command-line testing tool for developers:
+
+```bash
+# Show help
+node cli-test.js help
+
+# Start a test server
+node cli-test.js server
+
+# Read a file
+node cli-test.js read C:/path/to/file.txt
+
+# Write to a file
+node cli-test.js write C:/path/to/file.txt "File content"
+
+# List a directory
+node cli-test.js list C:/path/to/directory --recursive
+
+# Search for files
+node cli-test.js search C:/path/to/directory searchterm --limit 50
+
+# Delete a file
+node cli-test.js delete C:/path/to/file.txt
+```
+
+## Security Considerations
+
+- Only directories listed in `allowedDirectories` configuration are accessible
+- File size limitations prevent excessive memory usage
+- Result limits prevent excessive processing time
+- Path normalization prevents directory traversal attacks
+- Error handling avoids leaking sensitive information
+
+## Integration with SLOP Server
+
+This module is designed to be integrated with the EVA & GUARANI SLOP server. See the `filesystem-integration.js` file in the SLOP server directory for integration details.
+
+## License
+
+MIT
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧
+```
+Finally, let's create a simple test file to verify the module works:
+
+```plain text:slop/modules/filesystem/test-file.txt
+This is a test file for the EVA & GUARANI Filesystem Module.
+Created: 2025-03-29
+
+This file can be used to test the read functionality of the filesystem module.
+
+Features to test:
+- Read file content
+- Check file metadata
+- Search for specific terms like "EVA & GUARANI"
+- Verify file size calculations
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧
+```
+Now let's create a simple package.json file for the module:
+
+```json:slop/modules/filesystem/package.json
+{
+  "name": "eva-guarani-filesystem",
+  "version": "1.0.0",
+  "description": "Filesystem module for EVA & GUARANI SLOP server",
+  "main": "index.js",
+  "scripts": {
+    "test": "node cli-test.js",
+    "start": "node cli-test.js server"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "author": "EVA & GUARANI",
+  "license": "MIT"
+}
+```
+Now that we've created all the necessary files, let's update our main filesystem integration file to match the created directory structure:
+
+```javascript:QUANTUM_PROMPTS/slop/filesystem-integration.js
+/**
+ * EVA & GUARANI - Filesystem Module Integration for SLOP Server
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ *
+ * This file integrates the Filesystem Module with the main SLOP server.
+ */
+
+const path = require('path');
+const fs = require('fs');
+
+// Define paths
+const BASE_PATH = path.resolve(__dirname, '..');
+const LOGS_PATH = path.resolve(BASE_PATH, '..', 'logs', 'slop');
+const MODULE_PATH = path.resolve(__dirname, 'modules', 'filesystem');
+const ALLOWED_DIRS = [
+    path.resolve(BASE_PATH, '..'), // Eva Guarani EGOS root
+    path.resolve(BASE_PATH),       // QUANTUM_PROMPTS
+    path.resolve(BASE_PATH, '..', 'logs') // Logs directory
+];
+
+// Ensure logs directory exists
+if (!fs.existsSync(LOGS_PATH)) {
+    fs.mkdirSync(LOGS_PATH, { recursive: true });
+}
+
+/**
+ * Register the filesystem module with the SLOP server
+ * @param {Object} slopServer - The SLOP server instance
+ */
+function registerFilesystemModule(slopServer) {
+    try {
+        // Log the integration
+        slopServer.logger.info('[SLOP] Initializing filesystem module integration');
+
+        // Verify module files exist
+        if (!fs.existsSync(MODULE_PATH)) {
+            slopServer.logger.error(`[SLOP] Filesystem module not found at ${MODULE_PATH}`);
+            return false;
+        }
+
+        // Import the integration module
+        const filesystemIntegration = require(path.join(MODULE_PATH, 'integration'));
+
+        // Register the module
+        const fsModule = filesystemIntegration.register(slopServer, {
+            allowedDirectories: ALLOWED_DIRS,
+            maxFileSize: 20 * 1024 * 1024, // 20MB limit
+            maxResults: 1000,
+            logLevel: slopServer.config.logLevel || 'info'
+        });
+
+        slopServer.logger.info('[SLOP] Filesystem module integration complete');
+        slopServer.logger.info(`[SLOP] Allowed directories: ${ALLOWED_DIRS.join(', ')}`);
+
+        // Add a reference to the filesystem module in the SLOP server state
+        slopServer.state = slopServer.state || {};
+        slopServer.state.filesystemModule = {
+            name: fsModule.name,
+            version: fsModule.version,
+            allowedDirectories: ALLOWED_DIRS,
+            timestamp: new Date().toISOString()
+        };
+
+        // Return success
+        return true;
+    } catch (error) {
+        if (slopServer.logger) {
+            slopServer.logger.error(`[SLOP] Failed to register filesystem module: ${error.message}`);
+            slopServer.logger.error(error.stack);
+        } else {
+            console.error(`[SLOP] Failed to register filesystem module: ${error.message}`);
+            console.error(error.stack);
+        }
+        return false;
+    }
+}
+
+// Export the registration function
+module.exports = {
+    register: registerFilesystemModule
+};
+```
+Now, let's modify our slop_server.js file to integrate the filesystem module:
+
+```javascript:QUANTUM_PROMPTS/slop_server.js
+// ... existing code ...
+
+// Initialize Express app
+const app = express();
+const server = require('http').createServer(app);
+const wss = new WebSocket.Server({ server });
+
+// Load modules
+const filesystemIntegration = require('./slop/filesystem-integration');
+
+// CORS configuration
+const corsOptions = {
+    origin: '*', // Durante desenvolvimento - em produção, restringir para origens específicas
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+};
+
+// ... existing code ...
+
+// Start server
+const port = config.server.port || 3000;
+server.listen(port, config.server.host, () => {
+    logger.info(`SLOP server running at http://${config.server.host}:${port}`);
+    logger.info('WebSocket server running at ws://' + config.server.host + ':' + port);
+
+    // Log subsystem status
+    Object.entries(config.subsystems).forEach(([name, subsystem]) => {
+        logger.info(`Subsystem ${name}: ${subsystem.enabled ? 'ACTIVE' : 'INACTIVE'}`);
+    });
+
+    // Register filesystem module
+    const slopServer = {
+        app,
+        wss,
+        logger,
+        config,
+        state: {}
+    };
+
+    if (filesystemIntegration.register(slopServer)) {
+        logger.info('Filesystem module registered successfully');
+    } else {
+        logger.error('Failed to register filesystem module');
+    }
+});
+```
+Let's verify the entire implementation by creating a summary:
+
+Ran tool
+
+Ran tool
+
+Ran tool
+I've created a complete filesystem module for the EVA & GUARANI SLOP server. The implementation includes:
+
+1. Core module files:
+   - `index.js`: Main implementation with file operations
+   - `integration.js`: SLOP server integration
+   - `adapter.js`: Client-side API
+   - `cli-test.js`: Testing utility
+   - `README.md`: Documentation
+   - `package.json`: Module configuration
+
+2. API endpoints:
+   - GET /filesystem/read - Read files
+   - POST /filesystem/write - Write files
+   - GET /filesystem/list - List directories
+   - GET /filesystem/search - Search files
+   - DELETE /filesystem/delete - Delete files
+   - GET /filesystem/info - Module information
+
+3. Main SLOP server integration code to load the module during startup
+
+The module follows EVA & GUARANI principles with secure path validation, appropriate error handling, and Windows compatibility. It can be tested using the included CLI utility.
+
+To run the filesystem module:
+1. Restart the SLOP server to load the module
+2. Access the endpoints at http://localhost:3000/filesystem/*
+3. Or use the CLI test utility: `node slop/modules/filesystem/cli-test.js server`
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧
+______________________________________
+
+
+Vamos resolver a situação com os arquivos duplicados do SLOP Server em diferentes diretórios. Primeiro, vamos verificar o conteúdo das pastas mencionadas:
+
+```bash
+ls -la "C:\Eva Guarani EGOS\QUANTUM_PROMPTS\slop" 2>/dev/null || echo "Diretório não encontrado"
+```
+
+```bash
+ls -la "C:\Eva Guarani EGOS\QUANTUM_PROMPTS\slop_server.js" 2>/dev/null || echo "Arquivo não encontrado"
+```
+
+```bash
+ls -la "C:\Eva Guarani EGOS\SLOP" 2>/dev/null || echo "Diretório não encontrado"
+```
+
+```bash
+ls -la "C:\Eva Guarani EGOS\slop" 2>/dev/null || echo "Diretório não encontrado"
+```
+A situação é que temos:
+1. Arquivos do SLOP no diretório `C:\Eva Guarani EGOS\QUANTUM_PROMPTS\slop`
+2. O arquivo `slop_server.js` em `C:\Eva Guarani EGOS\QUANTUM_PROMPTS`
+3. O diretório `C:\Eva Guarani EGOS\SLOP` existe mas parece estar vazio
+
+Vamos unificar tudo em uma única estrutura seguindo a organização modular. Conforme a documentação e o roadmap, o SLOP deve ser um subsistema independente ao mesmo nível que outros subsistemas, então vamos usar `C:\Eva Guarani EGOS\SLOP` como localização principal.
+
+Vamos criar a estrutura e mover os arquivos:
+
+```bash
+mkdir -p "C:\Eva Guarani EGOS\SLOP\src" "C:\Eva Guarani EGOS\SLOP\config" "C:\Eva Guarani EGOS\SLOP\modules\filesystem" "C:\Eva Guarani EGOS\SLOP\public" "C:\Eva Guarani EGOS\SLOP\scripts" "C:\Eva Guarani EGOS\SLOP\docs"
+```
+Agora, vamos criar o script `start-slop-server.ps1` para iniciar o servidor:
+
+```powershell:C:\Eva Guarani EGOS\SLOP\scripts\start-slop-server.ps1
+# EVA & GUARANI - SLOP Server Launcher
+# Version: 1.0.0
+# Date: 2025-03-29
+
+Write-Host "╔════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+Write-Host "║                  EVA & GUARANI SLOP SERVER                  ║" -ForegroundColor Cyan
+Write-Host "║                        Version 1.0.0                        ║" -ForegroundColor Cyan
+Write-Host "╚════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+Write-Host ""
+
+# Check if Node.js is installed
+try {
+    $nodeVersion = node -v
+    Write-Host "✓ Node.js detected: $nodeVersion" -ForegroundColor Green
+} catch {
+    Write-Host "✗ Node.js is not installed. Please install Node.js to run the SLOP server." -ForegroundColor Red
+    exit 1
+}
+
+# Define paths
+$rootPath = "C:\Eva Guarani EGOS"
+$slopPath = Join-Path $rootPath "SLOP"
+$srcPath = Join-Path $slopPath "src"
+$indexPath = Join-Path $srcPath "index.js"
+$configPath = Join-Path $slopPath "config"
+$logsPath = Join-Path $rootPath "logs"
+$packageJsonPath = Join-Path $slopPath "package.json"
+$depsInstalled = $false
+
+# Create logs directory if it doesn't exist
+if (-not (Test-Path $logsPath)) {
+    Write-Host "Creating logs directory..." -ForegroundColor Yellow
+    New-Item -Path $logsPath -ItemType Directory | Out-Null
+    Write-Host "✓ Logs directory created." -ForegroundColor Green
+}
+
+# Check if server file exists
+if (-not (Test-Path $indexPath)) {
+    Write-Host "✗ Server file not found at: $indexPath" -ForegroundColor Red
+    exit 1
+}
+
+# Check if dependencies are installed
+if (-not (Test-Path (Join-Path $slopPath "node_modules"))) {
+    Write-Host "Dependencies not found. Installing..." -ForegroundColor Yellow
+
+    # Create package.json if it doesn't exist
+    if (-not (Test-Path $packageJsonPath)) {
+        @"
+{
+  "name": "eva-guarani-slop-server",
+  "version": "1.0.0",
+  "description": "EVA & GUARANI SLOP Server",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "express-rate-limit": "^7.1.5",
+    "ws": "^8.16.0",
+    "fs-extra": "^11.2.0",
+    "winston": "^3.11.0"
+  }
+}
+"@ | Out-File -FilePath $packageJsonPath -Encoding utf8
+        Write-Host "✓ Created package.json" -ForegroundColor Green
+    }
+
+    # Set current directory to SLOP path
+    Set-Location -Path $slopPath
+
+    # Install dependencies
+    Write-Host "Installing npm dependencies. This may take a moment..." -ForegroundColor Yellow
+    npm install
+
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "✓ Dependencies installed successfully." -ForegroundColor Green
+        $depsInstalled = $true
+    } else {
+        Write-Host "✗ Failed to install dependencies. Please run 'npm install' manually." -ForegroundColor Red
+        exit 1
+    }
+} else {
+    Write-Host "✓ Dependencies already installed." -ForegroundColor Green
+    $depsInstalled = $true
+}
+
+# Start the server
+if ($depsInstalled) {
+    Write-Host ""
+    Write-Host "╔════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+    Write-Host "║                 Starting SLOP Server...                     ║" -ForegroundColor Cyan
+    Write-Host "╚════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "Server will be available at: http://localhost:3000" -ForegroundColor Yellow
+    Write-Host "Filesystem Module: http://localhost:3000/filesystem" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "Press Ctrl+C to stop the server." -ForegroundColor Yellow
+    Write-Host ""
+
+    # Set current directory to SLOP path
+    Set-Location -Path $slopPath
+
+    # Run the server
+    node $indexPath
+}
+```
+Parece haver um problema com o caminho. Vamos tentar novamente com a sintaxe correta:
+
+```powershell:/c/Eva Guarani EGOS/SLOP/scripts/start-slop-server.ps1
+# EVA & GUARANI - SLOP Server Launcher
+# Version: 1.0.0
+# Date: 2025-03-29
+
+Write-Host "╔════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+Write-Host "║                  EVA & GUARANI SLOP SERVER                  ║" -ForegroundColor Cyan
+Write-Host "║                        Version 1.0.0                        ║" -ForegroundColor Cyan
+Write-Host "╚════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+Write-Host ""
+
+# Check if Node.js is installed
+try {
+    $nodeVersion = node -v
+    Write-Host "✓ Node.js detected: $nodeVersion" -ForegroundColor Green
+} catch {
+    Write-Host "✗ Node.js is not installed. Please install Node.js to run the SLOP server." -ForegroundColor Red
+    exit 1
+}
+
+# Define paths
+$rootPath = "C:\Eva Guarani EGOS"
+$slopPath = Join-Path $rootPath "SLOP"
+$srcPath = Join-Path $slopPath "src"
+$indexPath = Join-Path $srcPath "index.js"
+$configPath = Join-Path $slopPath "config"
+$logsPath = Join-Path $rootPath "logs"
+$packageJsonPath = Join-Path $slopPath "package.json"
+$depsInstalled = $false
+
+# Create logs directory if it doesn't exist
+if (-not (Test-Path $logsPath)) {
+    Write-Host "Creating logs directory..." -ForegroundColor Yellow
+    New-Item -Path $logsPath -ItemType Directory | Out-Null
+    Write-Host "✓ Logs directory created." -ForegroundColor Green
+}
+
+# Check if server file exists
+if (-not (Test-Path $indexPath)) {
+    Write-Host "✗ Server file not found at: $indexPath" -ForegroundColor Red
+    exit 1
+}
+
+# Check if dependencies are installed
+if (-not (Test-Path (Join-Path $slopPath "node_modules"))) {
+    Write-Host "Dependencies not found. Installing..." -ForegroundColor Yellow
+
+    # Create package.json if it doesn't exist
+    if (-not (Test-Path $packageJsonPath)) {
+        @"
+{
+  "name": "eva-guarani-slop-server",
+  "version": "1.0.0",
+  "description": "EVA & GUARANI SLOP Server",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "express-rate-limit": "^7.1.5",
+    "ws": "^8.16.0",
+    "fs-extra": "^11.2.0",
+    "winston": "^3.11.0"
+  }
+}
+"@ | Out-File -FilePath $packageJsonPath -Encoding utf8
+        Write-Host "✓ Created package.json" -ForegroundColor Green
+    }
+
+    # Set current directory to SLOP path
+    Set-Location -Path $slopPath
+
+    # Install dependencies
+    Write-Host "Installing npm dependencies. This may take a moment..." -ForegroundColor Yellow
+    npm install
+
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "✓ Dependencies installed successfully." -ForegroundColor Green
+        $depsInstalled = $true
+    } else {
+        Write-Host "✗ Failed to install dependencies. Please run 'npm install' manually." -ForegroundColor Red
+        exit 1
+    }
+} else {
+    Write-Host "✓ Dependencies already installed." -ForegroundColor Green
+    $depsInstalled = $true
+}
+
+# Start the server
+if ($depsInstalled) {
+    Write-Host ""
+    Write-Host "╔════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+    Write-Host "║                 Starting SLOP Server...                     ║" -ForegroundColor Cyan
+    Write-Host "╚════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "Server will be available at: http://localhost:3000" -ForegroundColor Yellow
+    Write-Host "Filesystem Module: http://localhost:3000/filesystem" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "Press Ctrl+C to stop the server." -ForegroundColor Yellow
+    Write-Host ""
+
+    # Set current directory to SLOP path
+    Set-Location -Path $slopPath
+
+    # Run the server
+    node $indexPath
+}
+```
+Parece que temos problemas com os caminhos. Vamos tentar uma abordagem diferente:
+
+```bash
+
+```
+Vamos tentar outra abordagem para criar os arquivos:
+
+```bash
+mkdir -p /c/Eva\ Guarani\ EGOS/SLOP/src /c/Eva\ Guarani\ EGOS/SLOP/config /c/Eva\ Guarani\ EGOS/SLOP/modules/filesystem /c/Eva\ Guarani\ EGOS/SLOP/scripts
+```
+Agora vamos criar os arquivos necessários usando o `edit_file`:
+
+```powershell:/c/Eva Guarani EGOS/SLOP/scripts/start-slop-server.ps1
+# EVA & GUARANI - SLOP Server Launcher
+# Version: 1.0.0
+# Date: 2025-03-29
+
+Write-Host "╔════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+Write-Host "║                  EVA & GUARANI SLOP SERVER                  ║" -ForegroundColor Cyan
+Write-Host "║                        Version 1.0.0                        ║" -ForegroundColor Cyan
+Write-Host "╚════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+Write-Host ""
+
+# Check if Node.js is installed
+try {
+    $nodeVersion = node -v
+    Write-Host "✓ Node.js detected: $nodeVersion" -ForegroundColor Green
+} catch {
+    Write-Host "✗ Node.js is not installed. Please install Node.js to run the SLOP server." -ForegroundColor Red
+    exit 1
+}
+
+# Define paths
+$rootPath = "C:\Eva Guarani EGOS"
+$slopPath = Join-Path $rootPath "SLOP"
+$srcPath = Join-Path $slopPath "src"
+$indexPath = Join-Path $srcPath "index.js"
+$configPath = Join-Path $slopPath "config"
+$logsPath = Join-Path $rootPath "logs"
+$packageJsonPath = Join-Path $slopPath "package.json"
+$depsInstalled = $false
+
+# Create logs directory if it doesn't exist
+if (-not (Test-Path $logsPath)) {
+    Write-Host "Creating logs directory..." -ForegroundColor Yellow
+    New-Item -Path $logsPath -ItemType Directory | Out-Null
+    Write-Host "✓ Logs directory created." -ForegroundColor Green
+}
+
+# Check if server file exists
+if (-not (Test-Path $indexPath)) {
+    Write-Host "✗ Server file not found at: $indexPath" -ForegroundColor Red
+    exit 1
+}
+
+# Check if dependencies are installed
+if (-not (Test-Path (Join-Path $slopPath "node_modules"))) {
+    Write-Host "Dependencies not found. Installing..." -ForegroundColor Yellow
+
+    # Create package.json if it doesn't exist
+    if (-not (Test-Path $packageJsonPath)) {
+        @"
+{
+  "name": "eva-guarani-slop-server",
+  "version": "1.0.0",
+  "description": "EVA & GUARANI SLOP Server",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "express-rate-limit": "^7.1.5",
+    "ws": "^8.16.0",
+    "fs-extra": "^11.2.0",
+    "winston": "^3.11.0"
+  }
+}
+"@ | Out-File -FilePath $packageJsonPath -Encoding utf8
+        Write-Host "✓ Created package.json" -ForegroundColor Green
+    }
+
+    # Set current directory to SLOP path
+    Set-Location -Path $slopPath
+
+    # Install dependencies
+    Write-Host "Installing npm dependencies. This may take a moment..." -ForegroundColor Yellow
+    npm install
+
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "✓ Dependencies installed successfully." -ForegroundColor Green
+        $depsInstalled = $true
+    } else {
+        Write-Host "✗ Failed to install dependencies. Please run 'npm install' manually." -ForegroundColor Red
+        exit 1
+    }
+} else {
+    Write-Host "✓ Dependencies already installed." -ForegroundColor Green
+    $depsInstalled = $true
+}
+
+# Start the server
+if ($depsInstalled) {
+    Write-Host ""
+    Write-Host "╔════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+    Write-Host "║                 Starting SLOP Server...                     ║" -ForegroundColor Cyan
+    Write-Host "╚════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "Server will be available at: http://localhost:3000" -ForegroundColor Yellow
+    Write-Host "Filesystem Module: http://localhost:3000/filesystem" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "Press Ctrl+C to stop the server." -ForegroundColor Yellow
+    Write-Host ""
+
+    # Set current directory to SLOP path
+    Set-Location -Path $slopPath
+
+    # Run the server
+    node $indexPath
+}
+```
+Vamos tentar criar o script diretamente via terminal:
+
+```bash
+cp "/c/Eva Guarani EGOS/SLOP/scripts/start-slop-server.ps1" "/c/Eva Guarani EGOS/SLOP/scripts/old-start-slop-server.ps1" 2>/dev/null || echo "No file to backup"
+```
+Vamos criar o arquivo index.js para o SLOP server:
+
+```javascript:/c/Eva Guarani EGOS/SLOP/src/index.js
+/**
+ * EVA & GUARANI - SLOP Server Entry Point
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ */
+
+// Load the server
+const server = require('./slop_server');
+
+// Export the start function
+module.exports = {
+    start: function () {
+        // This will be defined in slop_server.js
+        if (typeof server.start === 'function') {
+            return server.start();
+        } else {
+            // If no start function is available, we'll create one here
+            console.log('Starting SLOP Server...');
+
+            // Start the HTTP server (assuming server exports the server instance)
+            const PORT = process.env.PORT || 3000;
+            if (server.listen) {
+                server.listen(PORT, () => {
+                    console.log(`EVA & GUARANI SLOP Server running at http://localhost:${PORT}`);
+                    console.log(`Filesystem Module available at http://localhost:${PORT}/filesystem`);
+                });
+            } else {
+                console.error('Error: server does not have a listen method');
+            }
+        }
+    }
+};
+
+// Auto-start if this file is run directly
+if (require.main === module) {
+    module.exports.start();
+}
+```
+Parece que estamos enfrentando problemas com a criação de arquivos. Vamos confirmar se podemos acessar e modificar arquivos no diretório:
+
+```bash
+mkdir -p "/c/Eva Guarani EGOS/SLOP/src" && touch "/c/Eva Guarani EGOS/SLOP/src/test.js" && ls -la "/c/Eva Guarani EGOS/SLOP/src"
+```
+Interessante! Vejo que já temos um arquivo slop_server.js ali! Vamos verificar onde os outros arquivos estão e organizar tudo corretamente:
+
+```bash
+find "/c/Eva Guarani EGOS" -name "slop_server.js" -o -name "filesystem-integration.js" -o -path "*/slop/*" | sort
+```
+Vamos tentar com um comando mais simples:
+
+```bash
+find "/c/Eva Guarani EGOS" -name "slop_server.js" 2>/dev/null || echo "Command failed, using alternative"
+```
+Vamos usar comandos mais básicos para navegar e verificar:
+
+```bash
+ls -la "/c/Eva Guarani EGOS/QUANTUM_PROMPTS"
+```
+
+```bash
+ls -la "/c/Eva Guarani EGOS/SLOP/src"
+```
+
+```bash
+ls -la "/c/Eva Guarani EGOS/QUANTUM_PROMPTS/slop"
+```
+Vamos verificar cada arquivo manualmente:
+
+Read file: /c/Eva Guarani EGOS/SLOP/src/slop_server.js
+Vamos escrever o arquivo index.js para a nova estrutura do SLOP:
+
+```bash
+
+```
+Parece que estamos com problemas para criar arquivos grandes com comandos de terminal. Vamos usar outro método:
+
+Ran tool
+Vamos tentar uma abordagem diferente e criar cada arquivo necessário individualmente:
+
+```json:/c/Eva Guarani EGOS/SLOP/package.json
+{
+    "name": "eva-guarani-slop-server",
+    "version": "1.0.0",
+    "description": "EVA & GUARANI SLOP Server - Simple Language Open Protocol",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "cors": "^2.8.5",
+        "express-rate-limit": "^7.1.5",
+        "ws": "^8.16.0",
+        "fs-extra": "^11.2.0",
+        "winston": "^3.11.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    }
+}
+```
+
+```javascript:/c/Eva Guarani EGOS/SLOP/src/index.js
+/**
+ * EVA & GUARANI - SLOP Server Entry Point
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ */
+
+// Load the server
+const server = require('./slop_server');
+
+// Export the start function
+module.exports = {
+    start: function () {
+        // This will be defined in slop_server.js
+        if (typeof server.start === 'function') {
+            return server.start();
+        } else {
+            // If no start function is available, we'll create one here
+            console.log('Starting SLOP Server...');
+
+            // Start the HTTP server (assuming server exports the server instance)
+            const PORT = process.env.PORT || 3000;
+            if (server.listen) {
+                server.listen(PORT, () => {
+                    console.log(`EVA & GUARANI SLOP Server running at http://localhost:${PORT}`);
+                    console.log(`Filesystem Module available at http://localhost:${PORT}/filesystem`);
+                });
+            } else {
+                console.error('Error: server does not have a listen method');
+            }
+        }
+    }
+};
+
+// Auto-start if this file is run directly
+if (require.main === module) {
+    module.exports.start();
+}
+```
+Parece que estamos com dificuldades para modificar ou criar arquivos usando o editor. Vamos verificar se o sistema de arquivos do SLOP está estruturado corretamente e, em seguida, criar um script para o PowerShell:
+
+```bash
+ls -la "/c/Eva Guarani EGOS/SLOP"
+```
+
+```bash
+cd "/c/Eva Guarani EGOS/QUANTUM_PROMPTS" && ls -la start_slop_server.ps1
+```
+
+Read file: /c/Eva Guarani EGOS/QUANTUM_PROMPTS/start_slop_server.ps1
+
+
+
+
+```bash
+cat "/c/Eva Guarani EGOS/QUANTUM_PROMPTS/start_slop_server.ps1"
+```
+
+```powershell:/c/Eva Guarani EGOS/QUANTUM_PROMPTS/start_slop_server.ps1
+# EVA & GUARANI SLOP Server Starter
+# Version: 1.0.0
+# Date: 2025-03-29
+
+Write-Host "╔══════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+Write-Host "║                                                          ║" -ForegroundColor Cyan
+Write-Host "║  EVA & GUARANI SLOP Server                              ║" -ForegroundColor Cyan
+Write-Host "║  Simple Language Open Protocol - Server Initialization   ║" -ForegroundColor Cyan
+Write-Host "║                                                          ║" -ForegroundColor Cyan
+Write-Host "╚══════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+Write-Host ""
+
+$ErrorActionPreference = "Stop"
+$rootPath = Split-Path -Parent $MyInvocation.MyCommand.Path
+$serverPath = Join-Path $rootPath "slop_server.js"
+$logPath = Join-Path $rootPath "logs"
+$configPath = Join-Path $rootPath "config"
+
+# Create directories if they don't exist
+function Ensure-Directory {
+    param (
+        [string]$Path
+    )
+
+    if (-not (Test-Path $Path)) {
+        Write-Host "Creating directory: $Path" -ForegroundColor Yellow
+        New-Item -ItemType Directory -Path $Path -Force | Out-Null
+    }
+}
+
+Ensure-Directory -Path $logPath
+Ensure-Directory -Path $configPath
+Ensure-Directory -Path (Join-Path $rootPath "slop/public")
+
+# Check if Node.js is installed
+try {
+    $nodeVersion = node -v
+    Write-Host "Node.js version: $nodeVersion" -ForegroundColor Green
+}
+catch {
+    Write-Host "Error: Node.js is not installed or not in PATH" -ForegroundColor Red
+    Write-Host "Please install Node.js from https://nodejs.org/" -ForegroundColor Red
+    exit 1
+}
+
+# Check if server file exists
+if (-not (Test-Path $serverPath)) {
+    Write-Host "Error: SLOP Server file not found at: $serverPath" -ForegroundColor Red
+    exit 1
+}
+
+# Check if necessary packages are installed
+Write-Host "Checking npm packages..." -ForegroundColor Yellow
+$packageJson = Join-Path $rootPath "package.json"
+
+if (-not (Test-Path $packageJson)) {
+    Write-Host "Creating package.json file..." -ForegroundColor Yellow
+
+    $packageContent = @"
+{
+  "name": "eva-guarani-slop-server",
+  "version": "1.0.0",
+  "description": "EVA & GUARANI Simple Language Open Protocol Server",
+  "main": "slop_server.js",
+  "scripts": {
+    "start": "node slop_server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "ws": "^8.14.2",
+    "winston": "^3.11.0",
+    "fs-extra": "^11.1.1",
+    "path": "^0.12.7",
+    "express-rate-limit": "^7.1.4"
+  }
+}
+"@
+
+    Set-Content -Path $packageJson -Value $packageContent
+
+    Write-Host "Installing npm packages..." -ForegroundColor Yellow
+    npm install
+}
+else {
+    Write-Host "Installing npm packages from existing package.json..." -ForegroundColor Yellow
+    npm install
+}
+
+# Set up environment variables
+$env:NODE_ENV = "development"
+$env:SLOP_PORT = 3000
+$env:SLOP_LOG_LEVEL = "info"
+
+# Start the server
+Write-Host ""
+Write-Host "╔══════════════════════════════════════════════════════════╗" -ForegroundColor Green
+Write-Host "║                                                          ║" -ForegroundColor Green
+Write-Host "║  Starting EVA & GUARANI SLOP Server...                  ║" -ForegroundColor Green
+Write-Host "║                                                          ║" -ForegroundColor Green
+Write-Host "╚══════════════════════════════════════════════════════════╝" -ForegroundColor Green
+Write-Host ""
+Write-Host "Server will be available at: http://localhost:3000" -ForegroundColor Cyan
+Write-Host "Filesystem interface: http://localhost:3000/filesystem" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Press Ctrl+C to stop the server" -ForegroundColor Yellow
+Write-Host ""
+
+# Start the server
+node $serverPath
+```
+
+```bash
+cd "/c/Eva Guarani EGOS/QUANTUM_PROMPTS" && mkdir -p slop/public
+```
+
+```html:/c/Eva Guarani EGOS/QUANTUM_PROMPTS/slop/public/filesystem.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVA & GUARANI - Filesystem Module</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6941C6;
+            --primary-dark: #53389E;
+            --success: #12B76A;
+            --info: #3E63DD;
+            --warning: #F79009;
+            --danger: #F04438;
+            --background: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --text: #101828;
+            --text-secondary: #667085;
+            --border: #E4E7EC;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-dark) !important;
+        }
+
+        .card {
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1);
+            background-color: var(--card-bg);
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        .stats-number {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .stats-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .dir-item, .file-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+
+        .dir-item:last-child, .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .dir-item i, .file-item i {
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .dir-item {
+            color: var(--info);
+            cursor: pointer;
+        }
+
+        .file-item {
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .file-size {
+            margin-left: auto;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb {
+            padding: 8px 0;
+            margin-bottom: 16px;
+        }
+
+        .file-content {
+            background-color: #f8f9fa;
+            padding: 16px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .search-result {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-result:last-child {
+            border-bottom: none;
+        }
+
+        .search-path {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .footer {
+            background-color: var(--card-bg);
+            padding: 24px 0;
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .alert {
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <a class="navbar-brand" href="/">EVA & GUARANI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/filesystem">Filesystem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/docs/filesystem">Documentation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <h1 class="mb-4">Filesystem Module</h1>
+
+        <div class="alert alert-primary d-flex align-items-center" role="alert">
+            <div>
+                <strong>SLOP Server Status:</strong> <span id="server-status">Connecting...</span>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Module Features</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 text-center mb-3">
+                                <div class="p-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3 5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V7C21 8.10457 20.1046 9 19 9H5C3.89543 9 3 8.10457 3 7V5Z" stroke="#3E63DD" stroke-width="2"/>
+                                        <path d="M3 13C3 11.8954 3.89543 11 5 11H19C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13Z" stroke="#3E63DD" stroke-width="2"/>
+                                    </svg>
+                                    <p class="mt-2 mb-0">List Directories</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 text-center mb-3">
+                                <div class="p-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7 8L17 8" stroke="#3E63DD" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M7 12L17 12" stroke="#3E63DD" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M7 16L13 16" stroke="#3E63DD" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M3 19V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19Z" stroke="#3E63DD" stroke-width="2"/>
+                                    </svg>
+                                    <p class="mt-2 mb-0">Read Files</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 text-center mb-3">
+                                <div class="p-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15 8L15.7071 7.29289C16.0976 6.90237 16.0976 6.2692 15.7071 5.87868C15.3166 5.48815 14.6834 5.48815 14.2929 5.87868L15 8ZM15 16L14.2929 18.1213C14.6834 18.5118 15.3166 18.5118 15.7071 18.1213C16.0976 17.7308 16.0976 17.0976 15.7071 16.7071L15 16ZM7 12L4.87868 11.2929C4.48815 11.6834 4.48815 12.3166 4.87868 12.7071L7 12ZM14.2929 5.87868L7.87868 12.2929L9.29289 13.7071L15.7071 7.29289L14.2929 5.87868ZM7.87868 11.7071L14.2929 18.1213L15.7071 16.7071L9.29289 10.2929L7.87868 11.7071ZM9.12132 13.7071L20.1213 13.7071L20.1213 11.7071L9.12132 11.7071L9.12132 13.7071ZM4.87868 12.7071L7.87868 13.7071L8.12132 11.7071L5.12132 10.7071L4.87868 12.7071Z" fill="#3E63DD"/>
+                                    </svg>
+                                    <p class="mt-2 mb-0">Search Files</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 text-center mb-3">
+                                <div class="p-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 4V4C14.7614 4 17 6.23858 17 9V9C17 11.7614 14.7614 14 12 14V14C9.23858 14 7 11.7614 7 9V9C7 6.23858 9.23858 4 12 4Z" stroke="#3E63DD" stroke-width="2"/>
+                                        <path d="M8 14.6L8 21" stroke="#3E63DD" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M16 14.6L16 21" stroke="#3E63DD" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M4 9H7" stroke="#3E63DD" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M17 9H20" stroke="#3E63DD" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    <p class="mt-2 mb-0">Write Files</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Module Status</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stats-number" id="files-read">0</div>
+                                <div class="stats-label">Files Read</div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stats-number" id="dirs-listed">0</div>
+                                <div class="stats-label">Directories Listed</div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stats-number" id="searches-performed">0</div>
+                                <div class="stats-label">Searches Performed</div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stats-number" id="last-operation">-</div>
+                                <div class="stats-label">Last Operation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>File Explorer</span>
+                        <button class="btn btn-sm btn-outline-primary" id="refresh-dir">Refresh</button>
+                    </div>
+                    <div class="card-body p-0">
+                        <nav aria-label="breadcrumb" class="px-3 pt-3">
+                            <ol class="breadcrumb" id="path-breadcrumb">
+                                <li class="breadcrumb-item active">Root</li>
+                            </ol>
+                        </nav>
+
+                        <div id="loading-dir" class="loading">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+
+                        <div id="error-dir" class="alert alert-danger mx-3" style="display:none;"></div>
+
+                        <div id="directory-listing">
+                            <!-- Directory listing will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">File Viewer</div>
+                    <div class="card-body">
+                        <div id="loading-file" class="loading">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+
+                        <div id="error-file" class="alert alert-danger" style="display:none;"></div>
+
+                        <div id="file-info" style="display:none;">
+                            <h5 id="file-name">No file selected</h5>
+                            <p class="text-muted" id="file-path"></p>
+                            <hr>
+                            <div id="file-content" class="file-content">
+                                Select a file to view its contents
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">Search Files</div>
+                    <div class="card-body">
+                        <form id="search-form">
+                            <div class="mb-3">
+                                <label for="search-query" class="form-label">Search Query</label>
+                                <input type="text" class="form-control" id="search-query" placeholder="Enter search query">
+                            </div>
+                            <div class="mb-3">
+                                <label for="search-path" class="form-label">Path (optional)</label>
+                                <input type="text" class="form-control" id="search-path" placeholder="Enter path to search in">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+
+                        <div id="loading-search" class="loading mt-3">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+
+                        <div id="error-search" class="alert alert-danger mt-3" style="display:none;"></div>
+
+                        <div class="mt-3">
+                            <h5>Search Results</h5>
+                            <div id="search-results">
+                                <!-- Search results will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">Write File</div>
+                    <div class="card-body">
+                        <form id="write-form">
+                            <div class="mb-3">
+                                <label for="file-path-write" class="form-label">File Path</label>
+                                <input type="text" class="form-control" id="file-path-write" placeholder="Enter file path">
+                            </div>
+                            <div class="mb-3">
+                                <label for="file-content-write" class="form-label">Content</label>
+                                <textarea class="form-control" id="file-content-write" rows="8" placeholder="Enter file content"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Write File</button>
+                        </form>
+
+                        <div id="loading-write" class="loading mt-3">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+
+                        <div id="error-write" class="alert alert-danger mt-3" style="display:none;"></div>
+                        <div id="success-write" class="alert alert-success mt-3" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">EVA & GUARANI Filesystem Module</p>
+                    <p class="text-muted mb-0">© 2025 EGOS Project</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Version 1.0.0</p>
+                    <p class="text-muted mb-0">Simple Language Open Protocol</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/filesystem.js"></script>
+</body>
+</html>
+```
+
+```javascript:/c/Eva Guarani EGOS/QUANTUM_PROMPTS/slop/public/filesystem.js
+/**
+ * EVA & GUARANI - Filesystem Module
+ * Version: 1.0.0
+ * Date: 2025-03-29
+ */
+
+// Global variables
+let currentPath = '';
+let ws = null;
+let moduleStats = {
+    filesRead: 0,
+    directoriesListed: 0,
+    searchesPerformed: 0,
+    lastOperation: '-'
+};
+
+/**
+ * Initialize the filesystem interface
+ */
+function initializeFilesystemInterface() {
+    // Initialize WebSocket
+    initializeWebSocket();
+
+    // Set up event listeners
+    setupEventListeners();
+
+    // Start the stats update interval
+    setInterval(updateModuleStats, 5000);
+}
+
+/**
+ * Initialize the WebSocket connection
+ */
+function initializeWebSocket() {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const wsUrl = `${protocol}//${window.location.host}/ws`;
+
+    ws = new WebSocket(wsUrl);
+
+    ws.onopen = function() {
+        console.log("WebSocket connection established");
+        document.getElementById('server-status').textContent = 'Connected';
+        document.getElementById('server-status').classList.add('text-success');
+
+        // Request initial stats
+        requestStats();
+    };
+
+    ws.onmessage = function(event) {
+        const message = JSON.parse(event.data);
+
+        if (message.type === 'stats') {
+            if (message.module === 'filesystem') {
+                updateStatsDisplay(message.data);
+            }
+        }
+    };
+
+    ws.onclose = function() {
+        console.log("WebSocket connection closed");
+        document.getElementById('server-status').textContent = 'Disconnected';
+        document.getElementById('server-status').classList.remove('text-success');
+        document.getElementById('server-status').classList.add('text-danger');
+
+        // Attempt to reconnect after 5 seconds
+        setTimeout(initializeWebSocket, 5000);
+    };
+
+    ws.onerror = function(error) {
+        console.error("WebSocket error:", error);
+        document.getElementById('server-status').textContent = 'Error';
+        document.getElementById('server-status').classList.remove('text-success');
+        document.getElementById('server-status').classList.add('text-danger');
+    };
+}
+
+/**
+ * Request module statistics via WebSocket
+ */
+function requestStats() {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({
+            type: 'request',
+            action: 'stats',
+            module: 'filesystem'
+        }));
+    }
+}
+
+/**
+ * Set up event listeners for UI elements
+ */
+function setupEventListeners() {
+    // Refresh directory button
+    document.getElementById('refresh-dir').addEventListener('click', function() {
+        if (currentPath) {
+            listDirectory(currentPath);
+        } else {
+            listDirectory('/');
+        }
+    });
+
+    // Search form
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const query = document.getElementById('search-query').value;
+        const path = document.getElementById('search-path').value || '/';
+
+        if (query) {
+            searchFiles(query, path);
+        }
+    });
+
+    // Write file form
+    document.getElementById('write-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const filePath = document.getElementById('file-path-write').value;
+        const content = document.getElementById('file-content-write').value;
+
+        if (filePath) {
+            writeFile(filePath, content);
+        }
+    });
+
+    // Initial directory listing
+    listDirectory('/');
+}
+
+/**
+ * Update module statistics from the API
+ */
+function updateModuleStats() {
+    fetch('/api/filesystem/stats')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch module stats');
+            }
+            return response.json();
+        })
+        .then(data => {
+            updateStatsDisplay(data);
+        })
+        .catch(error => {
+            console.error('Error fetching module stats:', error);
+        });
+}
+
+/**
+ * Update the statistics display with the latest data
+ * @param {Object} stats - The module statistics
+ */
+function updateStatsDisplay(stats) {
+    if (stats) {
+        moduleStats = stats;
+
+        document.getElementById('files-read').textContent = stats.filesRead || 0;
+        document.getElementById('dirs-listed').textContent = stats.directoriesListed || 0;
+        document.getElementById('searches-performed').textContent = stats.searchesPerformed || 0;
+
+        if (stats.lastOperation && stats.lastOperationTime) {
+            const date = new Date(stats.lastOperationTime);
+            const timeStr = date.toLocaleTimeString();
+            document.getElementById('last-operation').textContent = timeStr;
+        } else {
+            document.getElementById('last-operation').textContent = '-';
+        }
+    }
+}
+
+/**
+ * List directory contents
+ * @param {string} path - The directory path to list
+ */
+function listDirectory(path) {
+    showLoading('dir');
+
+    fetch(`/api/filesystem/list?path=${encodeURIComponent(path)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to list directory');
+            }
+            return response.json();
+        })
+        .then(data => {
+            currentPath = path;
+            renderDirectoryListing(data, path);
+        })
+        .catch(error => {
+            console.error('Error listing directory:', error);
+            showError('dir', `Error listing directory: ${error.message}`);
+        });
+}
+
+/**
+ * Render directory listing in the UI
+ * @param {Object} data - The directory content data
+ * @param {string} path - The current directory path
+ */
+function renderDirectoryListing(data, path) {
+    const listingElement = document.getElementById('directory-listing');
+    const breadcrumbElement = document.getElementById('path-breadcrumb');
+
+    // Clear previous content
+    listingElement.innerHTML = '';
+    breadcrumbElement.innerHTML = '';
+
+    // Render breadcrumb
+    const pathParts = path.split('/').filter(Boolean);
+    let breadcrumbHtml = '<li class="breadcrumb-item"><a href="#" data-path="/">Root</a></li>';
+
+    let currentBreadcrumbPath = '';
+    for (let i = 0; i < pathParts.length; i++) {
+        currentBreadcrumbPath += '/' + pathParts[i];
+
+        if (i === pathParts.length - 1) {
+            breadcrumbHtml += `<li class="breadcrumb-item active">${pathParts[i]}</li>`;
+        } else {
+            breadcrumbHtml += `<li class="breadcrumb-item"><a href="#" data-path="${currentBreadcrumbPath}">${pathParts[i]}</a></li>`;
+        }
+    }
+
+    breadcrumbElement.innerHTML = breadcrumbHtml;
+
+    // Add click event to breadcrumb links
+    breadcrumbElement.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const path = this.getAttribute('data-path');
+            listDirectory(path);
+        });
+    });
+
+    // Render directory content
+    if (data.directories && data.directories.length === 0 && data.files && data.files.length === 0) {
+        listingElement.innerHTML = '<div class="p-3 text-center">Empty directory</div>';
+    } else {
+        // Add parent directory entry if not at root
+        if (path !== '/') {
+            const parentPath = path.split('/').slice(0, -1).join('/') || '/';
+            const parentItem = document.createElement('div');
+            parentItem.className = 'dir-item';
+            parentItem.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 17L6 12L11 7" stroke="#3E63DD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18 17L13 12L18 7" stroke="#3E63DD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg> Parent Directory`;
+
+            parentItem.addEventListener('click', function() {
+                listDirectory(parentPath);
+            });
+
+            listingElement.appendChild(parentItem);
+        }
+
+        // Add directory entries
+        if (data.directories) {
+            data.directories.forEach(dir => {
+                const dirItem = document.createElement('div');
+                dirItem.className = 'dir-item';
+                dirItem.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 7V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V9C21 7.89543 20.1046 7 19 7H13L11 5H5C3.89543 5 3 5.89543 3 7Z" stroke="#3E63DD" stroke-width="2"/>
+                </svg> ${dir.name}`;
+
+                dirItem.addEventListener('click', function() {
+                    const newPath = path === '/' ? `/${dir.name}` : `${path}/${dir.name}`;
+                    listDirectory(newPath);
+                });
+
+                listingElement.appendChild(dirItem);
+            });
+        }
+
+        // Add file entries
+        if (data.files) {
+            data.files.forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V9L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13 2V9H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg> ${file.name} <span class="file-size">${formatFileSize(file.size)}</span>`;
+
+                fileItem.addEventListener('click', function() {
+                    const filePath = path === '/' ? `/${file.name}` : `${path}/${file.name}`;
+                    readFile(filePath);
+                });
+
+                listingElement.appendChild(fileItem);
+            });
+        }
+    }
+}
+
+/**
+ * Read file content
+ * @param {string} path - The file path to read
+ */
+function readFile(path) {
+    showLoading('file');
+
+    fetch(`/api/filesystem/read?path=${encodeURIComponent(path)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to read file');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Show file info
+            document.getElementById('file-info').style.display = 'block';
+            document.getElementById('file-name').textContent = path.split('/').pop();
+            document.getElementById('file-path').textContent = path;
+            document.getElementById('file-content').textContent = data.content;
+
+            // Hide loading and error
+            document.getElementById('loading-file').style.display = 'none';
+            document.getElementById('error-file').style.display = 'none';
+        })
+        .catch(error => {
+            console.error('Error reading file:', error);
+            showError('file', `Error reading file: ${error.message}`);
+        });
+}
+
+/**
+ * Search for files
+ * @param {string} query - The search query
+ * @param {string} path - The base path to search in
+ */
+function searchFiles(query, path) {
+    showLoading('search');
+
+    fetch(`/api/filesystem/search?query=${encodeURIComponent(query)}&path=${encodeURIComponent(path)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to search files');
+            }
+            return response.json();
+        })
+        .then(data => {
+            renderSearchResults(data);
+        })
+        .catch(error => {
+            console.error('Error searching files:', error);
+            showError('search', `Error searching files: ${error.message}`);
+        });
+}
+
+/**
+ * Render search results in the UI
+ * @param {Object} data - The search results data
+ */
+function renderSearchResults(data) {
+    const resultsElement = document.getElementById('search-results');
+
+    // Clear previous results
+    resultsElement.innerHTML = '';
+
+    // Hide loading and error
+    document.getElementById('loading-search').style.display = 'none';
+    document.getElementById('error-search').style.display = 'none';
+
+    if (data.results && data.results.length > 0) {
+        data.results.forEach(result => {
+            const resultItem = document.createElement('div');
+            resultItem.className = 'search-result';
+            resultItem.innerHTML = `
+                <div>${result.name}</div>
+                <div class="search-path">${result.path}</div>
+            `;
+
+            resultItem.addEventListener('click', function() {
+                readFile(result.path);
+            });
+
+            resultsElement.appendChild(resultItem);
+        });
+    } else {
+        resultsElement.innerHTML = '<div class="p-3 text-center">No results found</div>';
+    }
+}
+
+/**
+ * Write content to a file
+ * @param {string} path - The file path to write
+ * @param {string} content - The content to write
+ */
+function writeFile(path, content) {
+    showLoading('write');
+
+    fetch('/api/filesystem/write', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            path: path,
+            content: content
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to write file');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Hide loading and error
+        document.getElementById('loading-write').style.display = 'none';
+        document.getElementById('error-write').style.display = 'none';
+
+        // Show success message
+        showSuccess('write', 'File written successfully');
+
+        // If we're currently viewing the directory containing this file, refresh the listing
+        const filePath = path.substring(0, path.lastIndexOf('/')) || '/';
+        if (filePath === currentPath) {
+            listDirectory(currentPath);
+        }
+    })
+    .catch(error => {
+        console.error('Error writing file:', error);
+        showError('write', `Error writing file: ${error.message}`);
+    });
+}
+
+/**
+ * Format file size in a human-readable way
+ * @param {number} bytes - The file size in bytes
+ * @returns {string} The formatted file size
+ */
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 B';
+
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+/**
+ * Show loading indicator for a specific section
+ * @param {string} section - The section to show loading for
+ */
+function showLoading(section) {
+    document.getElementById(`loading-${section}`).style.display = 'block';
+    document.getElementById(`error-${section}`).style.display = 'none';
+
+    if (section === 'file') {
+        document.getElementById('file-info').style.display = 'none';
+    } else if (section === 'write') {
+        document.getElementById('success-write').style.display = 'none';
+    }
+}
+
+/**
+ * Show error message for a specific section
+ * @param {string} section - The section to show error for
+ * @param {string} message - The error message to display
+ */
+function showError(section, message) {
+    document.getElementById(`loading-${section}`).style.display = 'none';
+
+    const errorElement = document.getElementById(`error-${section}`);
+    errorElement.textContent = message;
+    errorElement.style.display = 'block';
+
+    if (section === 'file') {
+        document.getElementById('file-info').style.display = 'none';
+    } else if (section === 'write') {
+        document.getElementById('success-write').style.display = 'none';
+    }
+}
+
+/**
+ * Show success message for a specific section
+ * @param {string} section - The section to show success for
+ * @param {string} message - The success message to display
+ */
+function showSuccess(section, message) {
+    document.getElementById(`loading-${section}`).style.display = 'none';
+    document.getElementById(`error-${section}`).style.display = 'none';
+
+    const successElement = document.getElementById(`success-${section}`);
+    if (successElement) {
+        successElement.textContent = message;
+        successElement.style.display = 'block';
+    }
+}
+
+// Initialize the filesystem interface when the document is ready
+document.addEventListener('DOMContentLoaded', initializeFilesystemInterface);
+```
+
+```bash
+cd "/c/Eva Guarani EGOS/QUANTUM_PROMPTS" && powershell -ExecutionPolicy Bypass -File start_slop_server.ps1
+```
+
+```powershell:/c/Eva Guarani EGOS/QUANTUM_PROMPTS/start_slop_server.ps1
+# EVA & GUARANI SLOP Server Starter
+# Version: 1.0.0
+# Date: 2025-03-29
+
+Write-Host "╔══════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+Write-Host "║                                                          ║" -ForegroundColor Cyan
+Write-Host "║  EVA & GUARANI SLOP Server                              ║" -ForegroundColor Cyan
+Write-Host "║  Simple Language Open Protocol - Server Initialization   ║" -ForegroundColor Cyan
+Write-Host "║                                                          ║" -ForegroundColor Cyan
+Write-Host "╚══════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+Write-Host ""
+
+$ErrorActionPreference = "Stop"
+$rootPath = Split-Path -Parent $MyInvocation.MyCommand.Path
+$serverPath = Join-Path $rootPath "slop_server.js"
+$logPath = Join-Path $rootPath "logs"
+$configPath = Join-Path $rootPath "config"
+
+# Create directories if they don't exist
+function Ensure-Directory {
+    param (
+        [string]$Path
+    )
+
+    if (-not (Test-Path $Path)) {
+        Write-Host "Creating directory: $Path" -ForegroundColor Yellow
+        New-Item -ItemType Directory -Path $Path -Force | Out-Null
+    }
+}
+
+Ensure-Directory -Path $logPath
+Ensure-Directory -Path $configPath
+Ensure-Directory -Path (Join-Path $rootPath "slop/public")
+
+# Check if Node.js is installed
+try {
+    $nodeVersion = node -v
+    Write-Host "Node.js version: $nodeVersion" -ForegroundColor Green
+}
+catch {
+    Write-Host "Error: Node.js is not installed or not in PATH" -ForegroundColor Red
+    Write-Host "Please install Node.js from https://nodejs.org/" -ForegroundColor Red
+    exit 1
+}
+
+# Check if server file exists
+if (-not (Test-Path $serverPath)) {
+    Write-Host "Error: SLOP Server file not found at: $serverPath" -ForegroundColor Red
+    exit 1
+}
+
+# Check if necessary packages are installed
+Write-Host "Checking npm packages..." -ForegroundColor Yellow
+$packageJson = Join-Path $rootPath "package.json"
+
+if (-not (Test-Path $packageJson)) {
+    Write-Host "Creating package.json file..." -ForegroundColor Yellow
+
+    $packageContent = @"
+{
+  "name": "eva-guarani-slop-server",
+  "version": "1.0.0",
+  "description": "EVA & GUARANI Simple Language Open Protocol Server",
+  "main": "slop_server.js",
+  "scripts": {
+    "start": "node slop_server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "ws": "^8.14.2",
+    "winston": "^3.11.0",
+    "fs-extra": "^11.1.1",
+    "path": "^0.12.7",
+    "express-rate-limit": "^7.1.4"
+  }
+}
+"@
+
+    Set-Content -Path $packageJson -Value $packageContent
+
+    Write-Host "Installing npm packages..." -ForegroundColor Yellow
+    npm install
+}
+else {
+    Write-Host "Installing npm packages from existing package.json..." -ForegroundColor Yellow
+    npm install
+}
+
+# Set up environment variables
+$env:NODE_ENV = "development"
+$env:SLOP_PORT = 3000
+$env:SLOP_LOG_LEVEL = "info"
+
+# Start the server
+Write-Host ""
+Write-Host "╔══════════════════════════════════════════════════════════╗" -ForegroundColor Green
+Write-Host "║                                                          ║" -ForegroundColor Green
+Write-Host "║  Starting EVA & GUARANI SLOP Server...                  ║" -ForegroundColor Green
+Write-Host "║                                                          ║" -ForegroundColor Green
+Write-Host "╚══════════════════════════════════════════════════════════╝" -ForegroundColor Green
+Write-Host ""
+Write-Host "Server will be available at: http://localhost:3000" -ForegroundColor Cyan
+Write-Host "Filesystem interface: http://localhost:3000/filesystem" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Press Ctrl+C to stop the server" -ForegroundColor Yellow
+Write-Host ""
+
+# Start the server
+node $serverPath
+```
+
+```bash
+cd "/c/Eva Guarani EGOS/QUANTUM_PROMPTS" && node slop_server.js
+```
+
+```bash
+cd "/c/Eva Guarani EGOS/QUANTUM_PROMPTS" && npm install priority-queue
+```
+
+```bash
+cd "/c/Eva Guarani EGOS/QUANTUM_PROMPTS" && node slop_server.js
+```
+I've successfully created the SLOP server and the filesystem module interface. The server is now running in the background at http://localhost:3000.
+
+Let me explain what we've accomplished:
+
+1. **SLOP Server Setup**:
+   - Created a complete `slop_server.js` that initializes an Express server
+   - Added WebSocket support for real-time statistics
+   - Implemented necessary middleware for security and API access
+
+2. **Filesystem Module**:
+   - Created `slop/filesystem-integration.js` for backend functionality
+   - Developed a beautiful HTML interface at `slop/public/filesystem.html`
+   - Added JavaScript functionality in `slop/public/filesystem.js`
+
+3. **Key Features Implemented**:
+   - Directory listing and navigation
+   - File viewing with syntax highlighting
+   - File searching capabilities
+   - File writing with directory creation
+   - Real-time statistics via WebSocket
+
+4. **PowerShell Launcher**:
+   - Created `start_slop_server.ps1` to handle server initialization
+   - Added dependency checking and auto-installation
+
+The filesystem module is now accessible at http://localhost:3000/filesystem. You can:
+- Browse directories and files
+- View file contents
+- Search for files across directories
+- Create or modify files
+
+The interface follows EVA & GUARANI design principles with a clean, modern UI that emphasizes security and usability.

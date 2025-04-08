@@ -1,0 +1,25 @@
+repos:
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.4
+    hooks:
+    -   id: ruff
+        args: [--fix]
+        exclude: '(^examples/)'
+    -   id: ruff-format
+        exclude: '(^examples/)'
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+        exclude: '(^subsystems/CRONOS/core/backups/)'
+    -   id: check-added-large-files
+        args: ['--maxkb=1000']
+
+# -   repo: https://github.com/psf/black  # REMOVED - Standardizing on ruff format
+#     rev: 25.1.0 # Use the version installed
+#     hooks:
+#     -   id: black
+#         args: [--line-length=100]
+#         exclude: '(^|/)backups/|(^|/)external/|(^|/)\.cursor/|(^|/)\.obsidian/|(^|/)Researchs/|(^|/)\.roo/|(^|/)\.benchmarks/'

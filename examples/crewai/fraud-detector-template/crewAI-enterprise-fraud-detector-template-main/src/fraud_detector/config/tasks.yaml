@@ -1,0 +1,28 @@
+financial_forensics_analyst_task:
+  description: >
+    Analyze the transactional behaviors and patterns for {customer_name} ( {customer_info} ) to identify potential fraud.
+    Focus on unusual activities and deviations from typical patterns in the {topic} sector. Assess both historical and recent transactions related to {customer_name}.
+  expected_output: >
+    A JSON-formatted output containing a detailed list of transactions flagged as suspicious for {customer_name},
+    each with a fraud flag (`true`/`false`), a confidence score (0-100%), and a brief explanation of the reason for suspicion.
+    Include key transaction details such as date, amount, and nature of the transaction.
+
+compliance_officer_task:
+  description: >
+    Conduct a thorough review of compliance for {customer_name} ( {customer_info} ) within the {topic} sector.
+    Evaluate adherence to legal standards and internal policies, focusing on {customer_name}'s recent activities.
+    Propose updates to compliance measures based on analysis of {customer_name}'s cases and broader trends in fraud prevention.
+  expected_output: >
+    A JSON-formatted output summarizing the compliance status for {customer_name}, highlighting areas of concern.
+    Each key compliance area should be flagged as compliant (`true`/`false`) with a confidence score (0-100%) reflecting the
+    robustness of compliance. Provide actionable recommendations for compliance improvements.
+
+risk_assessment_analyst_task:
+  description: >
+    Perform an extensive risk assessment for {customer_name} ( {customer_info} ), analyzing their profile and transactions in the {topic} sector.
+    Use comprehensive data analysis to evaluate the risk associated with their financial activities, considering factors such as transaction frequency,
+    amounts, geographical locations, and types of transactions. Incorporate any relevant external factors like market trends or regulatory changes that could impact risk levels.
+  expected_output: >
+    A JSON-formatted output providing an exhaustive risk assessment report for {customer_name}, with a potential risk flag (`true`/`false` for high risk),
+    a detailed risk score (0-100%), and an in-depth summary of factors contributing to the risk assessment. The output should also include predictions on
+    potential future risks and recommendations for mitigating identified risks. Include segments detailing specific risk factors and their respective impacts.

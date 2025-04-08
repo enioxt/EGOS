@@ -1,0 +1,120 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+---
+description: Define testing standards and best practices for EGOS.
+globs: ["tests/**/*.py", "**/test_*.py"]
+alwaysApply: true # Essential for code quality
+---
+
+# Testing Standards & Best Practices (HARMONY/KOIOS Standard)
+
+**Objective:** Ensure the quality, reliability, and correctness of EGOS software through comprehensive and effective testing.
+
+## Core Principles:
+
+1.  **Test Everything:** All non-trivial code (logic, functionality) MUST have corresponding tests.
+2.  **Minimum Coverage:** Aim for a *minimum* of 80% line coverage, striving for >90% for critical components (ETHIK, Security, Core logic). Coverage reports MUST be generated and reviewed.
+3.  **Test Organization:**
+    *   Tests MUST reside in a top-level `tests/` directory mirroring the project structure (e.g., `tests/subsystems/CORUJA/core/test_basic_orchestrator.py` tests `subsystems/CORUJA/core/basic_orchestrator.py`).
+    *   Test files MUST be named `test_*.py`.
+    *   Test functions MUST be named `test_*()`.
+    *   Test classes (if used) MUST be named `Test*`.
+4.  **Test Quality:**
+    *   **Independent & Idempotent:** Tests MUST NOT depend on the execution order of other tests. Each test should set up its own environment and clean up afterward. Tests should produce the same result every time they are run with the same input.
+    *   **Focused:** Each test should verify a *single* logical concept or behavior.
+    *   **Readable:** Tests should be clear and easy to understand. Use descriptive names for test functions and variables.
+    *   **Maintainable:** Avoid overly complex test logic. Refactor common setup/teardown into fixtures or helper methods.
+    *   **Fast:** Unit tests should execute quickly. Isolate tests from external dependencies (databases, network services) using mocks, stubs, or fakes.
+5.  **Test Types:**
+    *   **Unit Tests:** Test individual functions, methods, or classes in isolation. Use mocking extensively.
+    *   **Integration Tests:** Test the interaction between multiple components or subsystems (e.g., service interaction via Mycelium). Minimize mocking where possible for these tests.
+    *   **(Future) End-to-End (E2E) Tests:** Test complete user workflows through the system.
+    *   **(Future) Performance Tests:** Measure and verify performance characteristics under load.
+6.  **Testing Framework:** `pytest` is the standard testing framework for EGOS. Leverage its features like fixtures, parametrization (`@pytest.mark.parametrize`), and assertions.
+7.  **Mocking:** Use the `unittest.mock` library (or `pytest-mock`) for creating mocks, stubs, and spies.
+8.  **Arrange-Act-Assert (AAA) Pattern:** Structure tests clearly:
+    *   **Arrange:** Set up the preconditions for the test (create objects, mock dependencies).
+    *   **Act:** Execute the code under test.
+    *   **Assert:** Verify the outcome is as expected.
+9.  **Test Documentation:** Briefly describe the purpose of non-obvious tests using comments or docstrings within the test file.
+
+## Examples
+
+### Good Test Structure (pytest)
+
+```python
+# tests/subsystems/ETHIK/core/test_validator.py
+import pytest
+from unittest.mock import MagicMock
+
+from subsystems.ETHIK.core.validator import EthikValidator
+from subsystems.ETHIK.core.patterns import PatternRegistry # Assuming this exists
+
+@pytest.fixture
+def mock_pattern_registry():
+    """Fixture to provide a mocked PatternRegistry."""
+    registry = MagicMock(spec=PatternRegistry)
+    registry.get_pii_patterns.return_value = [r"\b\d{3}-\d{2}-\d{4}\b"] # Example SSN
+    return registry
+
+@pytest.fixture
+def validator(mock_pattern_registry):
+    """Fixture to provide an EthikValidator instance with mocked dependencies."""
+    return EthikValidator(pattern_registry=mock_pattern_registry)
+
+def test_detect_pii_finds_ssn(validator):
+    """Verify that PII detection correctly identifies a standard SSN pattern."""
+    # Arrange
+    text_with_ssn = "User account 123-45-6789 needs reset."
+    expected_pii = [("123-45-6789", "SSN_PATTERN_placeholder")] # Placeholder name
+
+    # Act
+    detected_pii = validator.detect_pii(text_with_ssn)
+
+    # Assert
+    assert detected_pii == expected_pii
+    # Ensure the mock was called as expected (optional but good practice)
+    validator.pattern_registry.get_pii_patterns.assert_called_once()
+
+def test_detect_pii_no_ssn(validator):
+    """Verify that PII detection returns empty when no PII is present."""
+    # Arrange
+    text_without_ssn = "This text is safe and contains no secrets."
+
+    # Act
+    detected_pii = validator.detect_pii(text_without_ssn)
+
+    # Assert
+    assert detected_pii == []
+    validator.pattern_registry.get_pii_patterns.assert_called_once()
+
+@pytest.mark.parametrize(
+    "input_text, expected_result",
+    [
+        ("Contact support at 123-45-6789.", True),
+        ("My number is 987-65-4321.", True),
+        ("Regular text here.", False),
+        ("Phone: 555-1234", False), # Assuming only SSN pattern loaded
+    ]
+)
+def test_contains_pii_various_inputs(validator, input_text, expected_result):
+    """Test contains_pii with multiple inputs using parametrization."""
+    # Arrange (handled by fixtures and parameters)
+
+    # Act
+    result = validator.contains_pii(input_text)
+
+    # Assert
+    assert result == expected_result
+
+```
+
+### Avoiding Common Pitfalls:
+
+*   **Don't test external libraries:** Assume `pytest` or `requests` work correctly. Test *your* integration with them.
+*   **Don't rely on global state:** Tests should be runnable in any order.
+*   **Don't write tests that depend on specific file paths** (unless testing file I/O, then use temporary files/directories from `pytest` fixtures like `tmp_path`).
+*   **Keep tests fast:** If a test is slow, investigate if it's doing too much or hitting external resources unnecessarily.

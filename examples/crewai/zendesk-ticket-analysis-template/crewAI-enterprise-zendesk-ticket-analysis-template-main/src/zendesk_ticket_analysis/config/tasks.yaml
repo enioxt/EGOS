@@ -1,0 +1,22 @@
+pull_zendesk_tickets_task:
+  description: >
+    Fetch ticket data from Zendesk using the API. This task should pull down tickets
+    based on the specified criteria as well as the user's question. Use the Zendesk API tool
+    to retrieve the data. The query should be formatted based on the user's question, which
+    will be passed in the format {user_query}. Tickets should be filtered or prioritized
+    according to the relevant aspects of the question.
+  expected_output: >
+    A JSON object containing the fetched tickets from Zendesk, filtered or organized based
+    on the user's question.
+
+summarize_tickets_task:
+  description: >
+    Analyze the tickets fetched from Zendesk and generate a summary. The summary
+    should highlight key insights, trends, and any areas of concern. In addition to the summary,
+    answer the user's specific question as best as possible based on the ticket data. The
+    user's question will be provided in the format {user_query}. Ensure that the question
+    is addressed directly in the summary.
+  expected_output: >
+    A Markdown-formatted summary of the Zendesk tickets, highlighting key insights and trends.
+    Additionally, include a clear and concise answer to the user's question {user_query} based
+    on the analyzed ticket data.

@@ -1,0 +1,38 @@
+monitor_profiles_task:
+  description: >
+    Regularly check the LinkedIn profiles of the specified contacts {contacts} for any
+    changes in job status, company, or position. Pay attention to updates in
+    their work experience section, job titles, or any new posts indicating a
+    career move.
+  expected_output: >
+    A list of potential job changes detected, including the contact's name,
+    their previous position and company, and any new position or company
+    information found.
+
+validate_changes_task:
+  description: >
+    For each potential job change detected, conduct additional research to
+    verify the information. This may include checking company websites,
+    press releases, or other professional networks. Confirm the accuracy
+    of the new position, company, and approximate date of the change.
+  expected_output: >
+    A list of validated job changes, including the contact's name, previous
+    and new positions and companies, the date of change (if available), and
+    any additional relevant details about the change.
+
+analyze_opportunities_task:
+  description: >
+    For each validated job change, analyze how this change might create a
+    new opportunity for selling {our_product}. Consider factors such as:
+    - How the new role or company might benefit from {our_product}
+    - Any challenges the contact might face in their new position that {our_product} could address
+    - How the contact's past experience with or knowledge of {our_product} (if any) might be leveraged
+    Develop specific, actionable recommendations for the sales team on how to
+    approach each contact in light of their job change.
+
+    REMOVE ANY INFORMATION NOT RELATED TO THE JOB CHANGE MONITOR
+  expected_output: >
+    A MonitoringResult object containing:
+    1. A list of JobChange objects, each detailing a validated job change
+    2. A dictionary of action recommendations, with the contact's name as the key
+       and a specific, actionable recommendation as the value

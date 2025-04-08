@@ -1,0 +1,119 @@
+<think>O usuário está pedindo para continuar de onde estamos. Com base na documentação que criamos e nas informações da pesquisa web fornecida, vou expandir o guia de uso da API Perplexity para incluir informações atualizadas da documentação oficial.
+
+Observando a informação da pesquisa web, vejo detalhes sobre:
+1. Como registrar e obter uma chave API da Perplexity
+2. Como realizar chamadas API usando cURL e Python
+3. Detalhes sobre autenticação com token Bearer
+
+Também vejo que estamos em um documento "EGOS/docs/perplexity_usage_guide.md" que já contém bastante informação sobre os modelos disponíveis e como usá-los. Vou adicionar uma seção sobre autenticação e exemplos de código alinhados com a documentação oficial, além de informações específicas sobre consumo de créditos e limites da API.</think># Autenticação e Configuração da API
+
+## Obtenção da Chave API
+
+Para obter uma chave API da Perplexity, é necessário:
+
+1. Visitar a [página de configurações da API](https://www.perplexity.ai/settings/api)
+2. Registrar um cartão de crédito (este passo não gera cobranças imediatas)
+3. Gerar uma nova chave API
+
+A chave gerada é um token de acesso de longa duração que pode ser usado até ser manualmente atualizado ou excluído.
+
+## Formas de Autenticação
+
+A API da Perplexity utiliza autenticação baseada em token. Envie a chave API como um token Bearer no cabeçalho Authorization com cada solicitação:
+
+```http
+Authorization: Bearer sua_chave_api_aqui
+```
+
+## Integração com Cliente OpenAI
+
+Uma grande vantagem da API Perplexity é sua compatibilidade com o cliente OpenAI, facilitando a integração em aplicações existentes. Exemplo oficial de uso:
+
+```python
+from openai import OpenAI
+
+# Inicializar cliente com URL base da Perplexity
+client = OpenAI(
+    api_key="sua_chave_api_aqui",
+    base_url="https://api.perplexity.ai"
+)
+
+# Realizar chamada de chat
+response = client.chat.completions.create(
+    model="sonar-pro",
+    messages=[
+        {"role": "system", "content": "Seja preciso e conciso."},
+        {"role": "user", "content": "Quantas estrelas existem em nossa galáxia?"}
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+## Limites de Taxa e Níveis de Uso
+
+Quando seus créditos se esgotam, suas chaves API serão bloqueadas até que você adicione créditos ao seu saldo. Para evitar interrupções no serviço, é possível configurar a opção "Automatic Top Up", que recarrega seu saldo sempre que ele cair abaixo de $2.
+
+## Streaming de Respostas
+
+A API Perplexity também suporta streaming de respostas, permitindo exibir resultados progressivamente ao usuário:
+
+```python
+# Exemplo de streaming
+response_stream = client.chat.completions.create(
+    model="sonar-pro",
+    messages=[
+        {"role": "system", "content": "Seja informativo e útil."},
+        {"role": "user", "content": "Explique o conceito de energia escura no universo."}
+    ],
+    stream=True
+)
+
+# Processar chunks da resposta
+for chunk in response_stream:
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end="")
+```
+
+## Documentação Completa
+
+Para informações mais detalhadas sobre a API, incluindo todos os parâmetros disponíveis e modelos suportados, consulte a [documentação oficial da Perplexity API](https://docs.perplexity.ai/).
+
+---
+
+# Implementação no Sistema EVA & GUARANI
+
+Nossa implementação personalizada no sistema EVA & GUARANI inclui várias otimizações:
+
+## Recursos Adicionais Implementados
+
+- **Estratégia de fallback automática**: Tenta múltiplos modelos em caso de falha
+- **Validação ética de consultas**: Filtra perguntas potencialmente problemáticas
+- **Análise de fontes**: Avalia a confiabilidade das fontes citadas
+- **Detecção de viés**: Identifica potenciais vieses nas respostas
+- **Múltiplos níveis de validação**: minimal, normal e strict
+
+## Hierarquia de Arquivos
+
+```
+EGOS/
+├── services/
+│   └── perplexity_service.py  # Serviço principal
+├── docs/
+│   └── perplexity_usage_guide.md  # Este guia
+└── scripts/
+    ├── check_perplexity_key.py  # Verifica configuração da chave
+    └── test_perplexity_models.py  # Testa disponibilidade dos modelos
+```
+
+## Próximos Passos e Melhorias Futuras
+
+- Implementação de cache para consultas frequentes
+- Sistema de logging aprimorado para análise de uso
+- Interface web para testes interativos
+- Sistema de monitoramento de custos e uso da API
+- Expansão da estratégia de fallback para incluir outros provedores de API
+
+---
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧

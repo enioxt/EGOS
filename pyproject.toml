@@ -1,0 +1,149 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eva_guarani"
+version = "8.2.0"
+description = "EVA & GUARANI - Quantum Unified System"
+readme = "README.md"
+authors = [
+  { name="EVA & GUARANI", email="enioxt@gmail.com" },
+]
+license = { file="LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Intended Audience :: Developers",
+    "Framework :: Pytest",
+]
+dependencies = [
+    "pyyaml>=6.0.1",
+    "colorama>=0.4.6",
+    "rich>=13.7.0",
+    # "langdetect>=1.0.9", # Temporarily removed
+    "argparse>=1.4.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "networkx>=3.2.1",
+    "matplotlib>=3.8.0",
+    "tqdm>=4.66.1",
+    # Development & Code Quality
+    # "black", # Removed, using ruff format
+    "ruff",
+    "pre-commit",
+    "pytest-asyncio"
+]
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    # "black", # Removed
+    "ruff",
+    "pre-commit",
+    "mypy", # Optional: Add mypy for static type checking
+]
+
+[project.urls]
+Homepage = "https://github.com/enioxt/EVA-e-Guarani-EGOS"
+Issues = "https://github.com/enioxt/EVA-e-Guarani-EGOS/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]  # Look for packages in the current directory
+include = ["subsystems*", "tools*", "examples*"] # Include top-level packages (Updated scripts->tools)
+exclude = ["tests*", "*.tests", "*.tests.*", "tests.*"] # Exclude tests
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --cov=subsystems --cov-report=html --cov-report=term"
+testpaths = [
+    "subsystems", # Run tests within all subsystems
+]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+# asyncio_mode = "auto" # For pytest-asyncio if needed
+
+[tool.coverage.run]
+source = ["subsystems"] # Source for coverage analysis
+omit = ["*/tests/*", "*__init__.py", "*/config/*", "*/sandbox/*"] # Omit tests, inits, configs, sandbox
+
+[tool.coverage.report]
+# Report settings (optional)
+show_missing = true
+fail_under = 70 # Optional: Fail if coverage is below 70%
+
+# [tool.black] # REMOVED - Standardizing on ruff format
+# line-length = 100
+# target-version = ["py39"]
+
+[tool.ruff]
+# Settings applicable to all of Ruff (formatter, linter)
+line-length = 100
+# Assume Python 3.9+ features
+target-version = "py39"
+# Exclude paths
+exclude = [
+    ".git",
+    ".pytest_cache",
+    ".venv",
+    "venv",
+    "build",
+    "dist",
+    "logs",
+    "backups",
+    "htmlcov",
+    "experiments",
+    "examples/sandbox", # Exclude sandbox specifically
+    "Researchs", # Keep legacy exclusion for now
+    "docs/historical_changelogs",
+    "external",  # Ignore entire external directory
+    ".cursor",   # Ignore cursor directory
+    ".obsidian", # Ignore obsidian directory
+    ".roo",      # Ignore roo directory
+    ".benchmarks",# Ignore benchmark directory
+    "eva_guarani.egg-info", # Ignore build artifact
+    # Add specific files to ignore if needed
+    "WhatsApp Chat with Mensagens Enio.txt",
+    "openrouter_mcp_implementation_plan.md",
+    "migration_plan.md",
+    "ai_translation_log.txt"
+]
+
+[tool.ruff.format]
+# Options for the ruff formatter (optional, defaults are often good)
+quote-style = "double" # Prefer double quotes
+
+[tool.ruff.lint]
+# Enable Pyflakes (F), pycodestyle (E, W), isort (I), bugbear (B)
+select = ["E", "F", "W", "I", "B"]
+ignore = [
+    "B008", # Ignore function calls in argument defaults (sometimes needed for FastAPI/Pydantic)
+]
+# Allow unused variables in __init__.py
+# ignore-init-module-imports = true # Ruff usually handles this well enough
+# Optional: Add pydantic specific rules if needed later
+# extend-select = ["PD"] # If ruff[pydantic] is installed
+
+[tool.ruff.lint.isort]
+known-first-party = ["subsystems", "tools", "examples"]
+force-sort-within-sections = true
+combine-as-imports = true
+
+[tool.mypy]
+# Optional mypy configuration
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true # Start with this, can tighten later
+exclude = ['venv', '.venv', 'build', 'dist', 'logs', 'backups', 'htmlcov', 'experiments', 'examples']

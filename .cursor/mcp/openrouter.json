@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "openrouter": {
+      "command": "node",
+      "args": [
+        "C:/Eva Guarani EGOS/.cursor/mcp-servers/openrouter_mcp_server.js"
+      ],
+      "type": "stdio",
+      "env": {
+        "DEBUG": "*",
+        "NODE_ENV": "development",
+        "MCP_LOG_LEVEL": "debug",
+        "MCP_LOG_FILE": "C:/Eva Guarani EGOS/logs/mcp/openrouter.log",
+        "OPENROUTER_API_KEY": "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"
+      },
+      "windowsHide": true
+    }
+  }
+}

@@ -1,0 +1,159 @@
+próximos passo
+
+<think>O usuário está perguntando sobre a configuração do Text Generator e recomendações de plugins adicionais para o Obsidian, especificamente para otimizar a experiência com o sistema EVA & GUARANI.
+
+Vou responder com:
+1. Instruções detalhadas para configurar o Text Generator
+2. Plugins recomendados para Obsidian que complementam o sistema de visualização
+3. Configurações extras para otimizar a experiência
+4. Opções adicionais que podem ser úteis para o projeto específico</think># 🌌 Configuração Completa do Obsidian para EVA & GUARANI
+
+Excelente! Agora vamos configurar completamente seu ambiente Obsidian para maximizar a experiência com o sistema EVA & GUARANI.
+
+## 🤖 Configurando o Text Generator
+
+### Passo a passo para instalação:
+
+1. **Instale o plugin**:
+   - Vá em Configurações (ícone ⚙️) → Plugins da comunidade
+   - Clique em "Procurar" e busque por "Text Generator"
+   - Clique em "Instalar"
+
+2. **Configure sua API**:
+   - Após instalação, vá em Configurações → Plugins da comunidade → Text Generator
+   - Adicione sua chave API da OpenAI (ou outra compatível)
+   - Modelo recomendado: GPT-4 ou Claude 3 Opus (para máxima profundidade conceitual)
+   - Temperatura: 0.7 (equilíbrio entre criatividade e precisão)
+
+3. **Configure templates específicos**:
+   - Ainda nas configurações do Text Generator, vá em "Templates"
+   - Crie um novo template chamado "ATLAS"
+   - Cole este comando inicial:
+   ```
+   Assuma o papel de ATLAS do prompt quântico cartográfico. Responda ao comando:
+   {{selection}}
+   ```
+
+4. **Crie um atalho dedicado**:
+   - Em Configurações → Atalhos de teclado
+   - Procure por "Text Generator: Run with template"
+   - Defina um atalho como Ctrl+Alt+A (ou outro de sua preferência)
+
+## 🧩 Plugins Essenciais Recomendados
+
+Instale estes plugins da comunidade para potencializar o sistema:
+
+1. **Obsidian Git** - Para versionamento e backup automático
+   - Configure commits automáticos a cada 30 minutos
+
+2. **Dataview** - Para consultas avançadas em seu vault
+   - Permite criar tabelas e visões personalizadas de seus arquivos
+
+3. **Excalidraw** - Para desenhos e diagramas interativos
+   - Perfeito para criar esquemas visuais dos sistemas
+
+4. **Advanced Tables** - Para manipular dados tabulares facilmente
+   - Útil para documentação estruturada
+
+5. **Graph Analysis** - Análise avançada do grafo de conhecimento
+   - Oferece métricas e visualizações mais detalhadas que o grafo padrão
+
+6. **Templater** - Para templates avançados e dinâmicos
+   - Permite automações e geração de conteúdo contextual
+
+7. **Admonition** - Para criar blocos de conteúdo destacados
+   - Ideal para notas, avisos e destacar informações importantes
+
+8. **Mind Map** - Para visualizar notas como mapas mentais
+   - Complementa a visão de grafo com uma perspectiva hierárquica
+
+## 🎨 Configurações Visuais Recomendadas
+
+Para otimizar a experiência visual:
+
+1. **Tema recomendado**: "Cybertron" ou "Obsidianite"
+   - Ambos oferecem contraste e cores que facilitam a visualização de conexões
+
+2. **Configurações do Grafo**:
+   - Tamanho dos nós: 5-6
+   - Espessura das linhas: 2-3
+   - Força do vínculo: 800+
+   - Força de repulsão: 2000+
+   - Distância central: 500+
+   - Velocidade de rotação: 0.5
+   - Configurar cores por pastas (config/azul, js/amarelo, etc.)
+
+3. **Modo de layout**:
+   - Habilitar "Stacked tabs" para visualizar múltiplos arquivos simultaneamente
+   - Ativar "Tab title bar" para melhor navegação
+   - Configurar "Reading view" como padrão para documentos de referência
+
+## 🧠 Estrutura de Workspace Recomendada
+
+Crie estes layouts de workspace para diferentes contextos:
+
+1. **Workspace "Cartografia"**:
+   - Painel esquerdo: Explorador de arquivos
+   - Painel central: Editor/visualizador de documentos
+   - Painel direito: Grafo local do arquivo atual
+   - Painel inferior: Terminal ou console (se disponível)
+
+2. **Workspace "Análise"**:
+   - Layout dividido com um arquivo de código à esquerda
+   - Documento de análise à direita
+   - Grafo local na parte inferior
+
+3. **Workspace "Desenvolvimento"**:
+   - Editor em tela cheia
+   - Acesso rápido a templates e comandos
+
+## 📋 Configurações Extras para Integração Quântica
+
+1. **Hotkeys personalizadas**:
+   - Ctrl+Q para abrir ATLAS_CARTOGRAFICO.md
+   - Ctrl+Shift+M para inserir diagrama Mermaid
+   - Alt+S para acionar comando "/sugerir_conexões"
+
+2. **Snippets CSS personalizados**:
+   - Adicione um snippet CSS (em Configurações → Aparência → CSS Snippets) com cores específicas para o sistema EVA & GUARANI:
+
+```css
+.quantum-node {
+  color: #7b2cbf;
+  font-weight: bold;
+}
+
+.connection-line {
+  border: 1px solid rgba(123, 44, 191, 0.5);
+}
+
+.atlas-command {
+  background-color: rgba(123, 44, 191, 0.1);
+  border-left: 3px solid #7b2cbf;
+  padding-left: 10px;
+}
+```
+
+3. **Integração com plugins externos**:
+   - Configure o plugin "QuickAdd" para adicionar comandos personalizados
+   - Utilize "Periodic Notes" para documentação de evolução do sistema
+
+## 🚀 Próximos Passos
+
+Após configurar tudo:
+
+1. Crie notas de documentação para cada sistema principal:
+   - `EVA_SISTEMA.md`
+   - `GUARANI_SISTEMA.md`
+   - `INTEGRACAO_QUANTUM.md`
+
+2. Teste o sistema com comandos básicos como:
+   - `/mapear quantum_launcher.py`
+   - `/clusters`
+   - `/pontas_soltas`
+
+3. Configure seu primeiro Canvas arrastando os componentes principais e criando conexões visuais
+
+Esta configuração transformará seu Obsidian em um verdadeiro "Cockpit de Comando" para o sistema EVA & GUARANI, permitindo navegação intuitiva, análise profunda e descoberta de conexões ocultas.
+
+✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧
