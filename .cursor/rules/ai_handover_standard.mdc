@@ -1,0 +1,71 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+ ---
+description: Defines the standard process and content for AI-to-AI project context handovers within EGOS.
+globs: [] # Applies conceptually to the workflow, not specific files.
+alwaysApply: true
+tags: [workflow, ai_collaboration, koios, handover]
+priority: 2 # Important workflow standard
+version: 1.0.0
+---
+
+# AI Handover Standard (KOIOS Workflow)
+
+## 1. Goal & Objective
+
+*   **Goal:** To ensure seamless continuity and maintain full project context when development tasks are handed over between different AI assistants (e.g., Gemini to RooCode, or between human/AI collaborators).
+*   **Objective:** Define a standardized format and minimum required content for handover summaries, enabling the incoming AI to quickly initialize itself and understand the current project state, recent actions, pending tasks, and relevant standards.
+
+## 2. Context & Trigger
+
+*   **When:** This standard applies whenever the primary AI assistant working on the EGOS project is about to change, or when a significant pause in work occurs, requiring a state summary for future resumption.
+*   **Trigger:** Explicit request from the user for a handover or summary.
+
+## 3. Handover Summary Requirements
+
+The outgoing AI **MUST** generate a handover summary containing the following sections:
+
+1.  **Handover Metadata:**
+    *   To/From (AI/User)
+    *   Date
+    *   Subject (Clear purpose, e.g., "EGOS Project State & Next Steps - Handoff")
+2.  **Project Overview:**
+    *   Brief statement of the project (EGOS) and current high-level focus.
+    *   Link to the main repository.
+    *   Explicit mention of core principles (Ethics, Modularity, English-only) and links to key documents (`quantum_prompt_core.mdc`, `PHILOSOPHY.md`).
+    *   Reference to KOIOS standards location (`.cursor/rules/`, `subsystems/KOIOS/docs/STANDARDS.md`).
+3.  **Summary of Recent Actions:**
+    *   Bulleted list of significant accomplishments since the last summary/handoff.
+    *   Reference specific files created/modified.
+    *   Mention the relevant Git commit hash(es) if applicable.
+4.  **Current Project State:**
+    *   Overview of key files/directories relevant to the current focus (e.g., website CSS structure).
+    *   Confirmation of Git status (e.g., changes committed and pushed, working directory clean).
+    *   Status of related deployments (e.g., GitHub Pages build triggered).
+5.  **Initialization Instructions for Incoming AI:**
+    *   Explicit guidance on *how* the new AI should get context.
+    *   **Mandatory:** Instruct the AI to read the `.cursor/rules/` directory, highlighting critical rules (e.g., `quantum_prompt_core.mdc`, `commit_messages.mdc`, `ai_collaboration_guidelines.mdc`).
+    *   Recommend reading key project documents relevant to the current tasks (e.g., PDDs, analysis reports, design docs).
+6.  **Long-Term Vision Recap:**
+    *   Briefly mention relevant higher-level goals or roadmap items discussed recently.
+7.  **Pending Immediate Next Steps:**
+    *   Clearly list the specific, actionable tasks that the incoming AI can choose from.
+    *   Request user confirmation on which task to proceed with.
+8.  **Standard Signature:** End with the EGOS signature (`✧༺❀༻∞ EGOS ∞༺❀༻✧`).
+
+## 4. Example Handover Summary
+
+Refer to the summary generated on **2025-04-09** (see conversation history or commit `cc7f7e7` context) as a canonical example of this standard in practice.
+
+## 5. Rationale
+
+*   **Context Preservation (CRONOS):** Ensures vital project knowledge isn't lost during transitions.
+*   **Efficiency:** Allows incoming AI/collaborators to get up to speed quickly.
+*   **Consistency (KOIOS):** Standardizes a crucial part of the collaborative workflow.
+*   **Clarity:** Reduces ambiguity about the project's current state and next steps.
+
+---
+✧༺❀༻∞ EGOS ∞༺❀༻✧
