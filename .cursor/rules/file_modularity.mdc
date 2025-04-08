@@ -1,5 +1,45 @@
 ---
-description:
-globs:
-alwaysApply: false
+description: 
+globs: 
+alwaysApply: true
 ---
+---
+description: Enforce file modularity and size limits for better maintainability.
+globs: ["**/*.py"]
+alwaysApply: true
+---
+
+# File Modularity & Size Standards (KOIOS)
+
+## Rule
+
+Python files should be kept focused and relatively small to enhance readability, maintainability, testability, and ease of processing by developers and AI tools.
+
+1.  **Single Responsibility:** Aim for modules and classes to adhere to the Single Responsibility Principle (SRP).
+2.  **Size Guideline:** While not a strict limit, strive to keep Python files **under ~300-500 lines of code (LoC)**. Files significantly exceeding this should be considered candidates for refactoring.
+3.  **Refactoring Trigger:** If a file becomes difficult to understand quickly, requires excessive scrolling, or handles too many distinct concerns, it **MUST** be refactored into smaller, more focused modules.
+4.  **Communication:** Newly created smaller modules should communicate through well-defined interfaces (function calls, class interactions within the same subsystem, or Mycelium messages for inter-subsystem communication as per `subsystem_boundaries.mdc`).
+
+## Rationale
+
+Large files are harder to:
+*   **Read and Understand:** Cognitive load increases significantly.
+*   **Maintain:** Changes can have widespread, unintended consequences.
+*   **Test:** Unit testing becomes more complex and brittle.
+*   **Collaborate On:** Merge conflicts become more frequent and harder to resolve.
+*   **Process by AI:** Large files often exceed context limits for AI assistants, hindering analysis, refactoring, and code generation tasks.
+
+Breaking down complex logic into smaller, cohesive modules improves all these aspects and aligns with EGOS principles of Conscious Modularity (NEXUS).
+
+## Example
+
+Instead of a single `data_processor.py` file handling loading, cleaning, validation, transformation, and saving:
+
+**Refactor into:**
+*   `data_loader.py`
+*   `data_cleaner.py`
+*   `data_validator.py` (potentially using ETHIK)
+*   `data_transformer.py`
+*   `data_storage.py`
+
+These modules would then be orchestrated by a higher-level service or function. 
