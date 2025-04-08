@@ -1,0 +1,69 @@
+/* Components: Cards */
+
+.principle-item,
+.subsystem-card,
+.tech-item {
+    background-color: var(--surface-color);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 3px 10px var(--shadow-color);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+/* Shared Card Hover Effect */
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px var(--hover-shadow-color);
+}
+
+.principle-item h3,
+.subsystem-card h3,
+.tech-item h3 {
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.3rem;
+    color: var(--primary-color); /* Use primary color for heading */
+}
+
+/* Specific H3 for subsystems for potentially longer titles */
+.subsystem-card h3 {
+    font-size: 1.2rem;
+}
+
+.principle-item p,
+.subsystem-card p,
+.tech-item p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Specific styling for subsystem cards as links */
+.subsystem-card {
+    display: block; /* Make the whole card clickable */
+    color: inherit; /* Inherit text color */
+    text-decoration: none;
+}
+
+.subsystem-card:hover {
+    text-decoration: none; /* Remove underline on card hover */
+}
+
+.subsystem-card:hover h3 {
+    color: var(--accent-color); /* Change title to accent color on hover */
+}
+
+/* TODO: Add expanded styles for subsystem cards based on v3 prompt */
+.subsystem-card .details {
+    /* Styles for hidden details shown on hover/click */
+    display: none; /* Initially hidden */
+    margin-top: var(--spacing-md);
+    font-size: 0.9rem;
+}
+
+.subsystem-card:hover .details, /* Example: show on hover */
+.subsystem-card.expanded .details { /* Example: show with class */
+    display: block;
+} 

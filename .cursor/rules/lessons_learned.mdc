@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: true
 ---
 
@@ -52,3 +52,4 @@ alwaysApply: true
 *   `[Testing]` `[Linter]` Linter errors related to dynamic imports or complex mocking setups (like `unittest.mock` within pytest) can sometimes be misleading or require specific configuration (`.pylintrc`, `pyproject.toml`) that might not be immediately obvious. Environment consistency is key.
 *   `[Architecture]` `[Mycelium]` While Mycelium promotes decoupling, designing clear message schemas and response patterns upfront is essential to avoid overly 'chatty' interactions or ambiguity between subsystems.
 *   `[Workflow]` `[Git]` Enforcing Conventional Commits via pre-commit hooks helps maintain consistency but requires clear communication and onboarding for the team.
+*   `[Workflow]` `[AI Collaboration]` For complex tasks involving multiple related steps (e.g., implementing a feature across interface, implementation, and test files), outlining a multi-step plan upfront and executing multiple steps per AI turn proved efficient. This involves the AI: 1. Analyzing the goal into sub-tasks, 2. Communicating the plan, 3. Executing feasible steps sequentially, 4. Verifying each step. Improves clarity and reduces back-and-forth.

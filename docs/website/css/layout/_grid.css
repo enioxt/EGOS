@@ -1,0 +1,29 @@
+/* Layout: Grids */
+
+/* Common grid for Principles, Subsystems, Tech */
+.principles-grid,
+.subsystems-grid,
+.tech-grid {
+    display: grid;
+    /* Adjust minmax based on content and desired columns */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+/* Responsive Grid Adjustments */
+@media (max-width: 992px) {
+    .principles-grid,
+    .subsystems-grid,
+    .tech-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .principles-grid,
+    .subsystems-grid,
+    .tech-grid {
+        grid-template-columns: 1fr; /* Stack items on small screens */
+        gap: var(--spacing-lg);
+    }
+} 

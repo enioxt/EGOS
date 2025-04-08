@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: true
+---
+---
 description: Guidelines for effective Human-AI pair programming collaboration within EGOS using Cursor.
 # No specific glob needed, applies conceptually to all interactions.
 alwaysApply: true

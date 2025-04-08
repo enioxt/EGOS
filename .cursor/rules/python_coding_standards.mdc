@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: true
+---
+---
 description:
 globs:
 alwaysApply: true
@@ -196,8 +201,4 @@ class data_processor: # WRONG: Class name should be PascalCase
     # ... (_transform omitted) ...
 ```
 
-<<<<<<< HEAD
 **All Python code must follow KOIOS coding standards for readability, maintainability, and collaboration. Proactively manage line length using the techniques above to prevent E501 errors and improve code clarity.**
-=======
-**All Python code must follow KOIOS coding standards for readability, maintainability, and collaboration. Use appropriate naming conventions, formatting, and documentation patterns.**
->>>>>>> public/main

@@ -1,0 +1,13 @@
+/* Utility: Animations */
+
+.fade-in {
+    /* Consider using JS Intersection Observer for better performance */
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* TODO: Add other reusable animation keyframes or utility classes */ 

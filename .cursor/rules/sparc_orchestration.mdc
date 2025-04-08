@@ -1,9 +1,9 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: true
 ---
- ---
+---
 description: Guidelines for implementing SPARC methodology within the EGOS ecosystem
 globs: ["**/*.py", "**/*.md"]
 alwaysApply: true
@@ -120,7 +120,7 @@ specification = {
 
 # NEXUS phase - Architecture
 architecture = {
-    "id": "auth-module-arch-2025Q2",
+    "id": "auth-module-arch-2025Q2", 
     "parent_id": "auth-module-2025Q2",
     "type": "architecture",
     "components": [
@@ -162,7 +162,7 @@ class AuthSystem:
     def __init__(self):
         self.db_connection = "hardcoded-connection-string"  # ❌ Hardcoded configuration
         self.secret_key = "super-secret-key"  # ❌ Embedded secret
-
+        
     def do_everything(self, username, password):  # ❌ No separation of concerns
         # 200+ lines of code handling validation, auth, tokens, rate limiting
         # ❌ No clear interfaces or error handling
@@ -188,4 +188,4 @@ This integration respects EGOS's existing architecture and ethical principles wh
 
 * EGOS Master Quantum Prompt (MQP.md)
 * KOIOS Standards Documentation
-* SPARC Methodology (Reuven Cohen, 2025)
+* SPARC Methodology (Reuven Cohen, 2025) 

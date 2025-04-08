@@ -1989,8 +1989,8 @@ O arquivo de configuração `config/eva_guarani_config.json` deve conter:
 ```json
 {
   "version": 8.0,
-  "consciousness": 0.998,
-  "love": 0.995,
+  "consciousness_level": 0.998,
+  "love_level": 0.995,
   "bot_token": "SEU_TOKEN_DO_BOT_AQUI",
   "openai_api_key": "SUA_CHAVE_API_OPENAI_AQUI",
   "telegram": {
@@ -2431,53 +2431,6 @@ EVA & GUARANI é um bot avançado para Telegram que integra capacidades de proce
 python start_eva_guarani.py
 ```
 
-### Configuração do Bot
-
-O arquivo de configuração `config/eva_guarani_config.json` deve conter:
-
-```json
-{
-  "version": 8.0,
-  "consciousness": 0.998,
-  "love": 0.995,
-  "bot_token": "SEU_TOKEN_DO_BOT_AQUI",
-  "openai_api_key": "SUA_CHAVE_API_OPENAI_AQUI",
-  "telegram": {
-    "bot_token": "SEU_TOKEN_DO_BOT_AQUI",
-    "admin_users": [123456789],
-    "allowed_users": []
-  },
-  "openai": {
-    "api_key": "SUA_CHAVE_API_OPENAI_AQUI",
-    "default_model": "gpt-4o",
-    "chat_model": "gpt-4o",
-    "creation_model": "gpt-4o",
-    "embedding_model": "text-embedding-3-small",
-    "legacy_model": "gpt-3.5-turbo"
-  }
-}
-```
-
-Substitua os valores de placeholder pelos seus tokens e IDs reais.
-
-## 🛠️ Scripts Disponíveis
-
-### Iniciar o Bot
-
-```bash
-# Iniciar o bot em segundo plano
-python start_eva_guarani.py
-
-# Iniciar o bot em primeiro plano
-python start_eva_guarani.py --foreground
-
-# Reiniciar o bot se já estiver em execução
-python start_eva_guarani.py --restart
-
-# Parar o bot
-python start_eva_guarani.py --stop
-```
-
 Também estão disponíveis scripts de inicialização para Windows e Linux/Mac:
 
 ```bash
@@ -2614,9 +2567,15 @@ Você pode configurar diferentes modelos para diferentes funções no arquivo de
 
 Para atualizar o bot para a versão mais recente:
 
-1. Faça backup do seu arquivo de configuração
-2. Atualize o código-fonte (git pull ou download)
-3. Reinicie o bot: `python start_eva_guarani.py --restart`
+1. Use os scripts de atualização automática:
+   - No Windows: `update_bot.bat`
+   - No Linux/Mac: `./update_bot.sh`
+   - Linha de comando: `python update_bot.py`
+
+2. Atualização manual:
+   - Faça backup do seu arquivo de configuração
+   - Atualize o código-fonte (git pull ou download)
+   - Reinicie o bot: `python start_eva_guarani.py --restart`
 
 ## 🤝 Contribuição
 
@@ -4355,53 +4314,6 @@ EVA & GUARANI é um bot avançado para Telegram que integra capacidades de proce
 
 ```bash
 python start_eva_guarani.py
-```
-
-### Configuração do Bot
-
-O arquivo de configuração `config/eva_guarani_config.json` deve conter:
-
-```json
-{
-  "version": 8.0,
-  "consciousness": 0.998,
-  "love": 0.995,
-  "bot_token": "SEU_TOKEN_DO_BOT_AQUI",
-  "openai_api_key": "SUA_CHAVE_API_OPENAI_AQUI",
-  "telegram": {
-    "bot_token": "SEU_TOKEN_DO_BOT_AQUI",
-    "admin_users": [123456789],
-    "allowed_users": []
-  },
-  "openai": {
-    "api_key": "SUA_CHAVE_API_OPENAI_AQUI",
-    "default_model": "gpt-4o",
-    "chat_model": "gpt-4o",
-    "creation_model": "gpt-4o",
-    "embedding_model": "text-embedding-3-small",
-    "legacy_model": "gpt-3.5-turbo"
-  }
-}
-```
-
-Substitua os valores de placeholder pelos seus tokens e IDs reais.
-
-## 🛠️ Scripts Disponíveis
-
-### Iniciar o Bot
-
-```bash
-# Iniciar o bot em segundo plano
-python start_eva_guarani.py
-
-# Iniciar o bot em primeiro plano
-python start_eva_guarani.py --foreground
-
-# Reiniciar o bot se já estiver em execução
-python start_eva_guarani.py --restart
-
-# Parar o bot
-python start_eva_guarani.py --stop
 ```
 
 Também estão disponíveis scripts de inicialização para Windows e Linux/Mac:

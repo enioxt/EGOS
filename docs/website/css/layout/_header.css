@@ -1,0 +1,45 @@
+/* Layout: Header */
+
+.main-header {
+    /* Using primary color directly as gradient requires both colors */
+    background: linear-gradient(to right, var(--primary-color), #6a11cb); /* Adjust second gradient color if needed */
+    color: var(--text-on-primary);
+    padding: var(--spacing-lg) 5%; /* Use variable, adjust percentage if needed */
+    box-shadow: 0 2px 5px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px; /* Keep max width for now */
+    margin: 0 auto;
+}
+
+.main-nav .logo h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--text-on-primary);
+    font-family: var(--font-heading); /* Ensure heading font */
+}
+
+.main-nav .logo a {
+    color: var(--text-on-primary);
+    text-decoration: none;
+}
+
+/* Responsive Header adjustments */
+@media (max-width: 992px) {
+    .main-nav {
+        /* Stack nav items, handled in _navigation.css */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav .logo {
+        margin-bottom: var(--spacing-md); /* Use variable */
+    }
+} 
