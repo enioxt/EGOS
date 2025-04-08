@@ -57,6 +57,7 @@
 * [DONE] Establish Basic Documentation Standards (Docstrings) (`HIGH`)
 * [DONE] Set up Pre-Commit Hooks (ruff, black) (`HIGH`)
 * [DONE] Define Metadata Schema for MDC Rules (`MEDIUM`)
+* [DONE] **Activate Cursor Agent Mode:** Transitioned from Chat to Agent, enabling direct file/terminal interaction. (`HIGH` - See `docs/ai_integration/cursor_agent_mode.md`)
 * [In Progress] Refactor Subsystems for Metadata Compliance (`MEDIUM`)
 
 ### SPARC Methodology Integration (KOIOS/CORUJA Lead) - Phase 2b
