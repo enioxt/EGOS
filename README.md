@@ -3,13 +3,13 @@
 ## Quantum Unified Master System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Status: Active](https://img.shields.io/badge/status-active-success.svg)](https://github.com/enioxt/EVA-e-Guarani-EGOS)
+[![Status: Active](https://img.shields.io/badge/status-active-success.svg)](https://github.com/enioxt/egos)
 [![Coverage: ?](https://img.shields.io/badge/coverage-TBD-lightgrey.svg)](-) <!-- Placeholder -->
 [![Windows Compatible](https://img.shields.io/badge/OS-Windows-blue.svg)](-)
 
 > "At the intersection of modular analysis, systemic cartography, and quantum ethics, we transcend dimensions of thought with methodological precision and unconditional love, integrating advanced tools for knowledge visualization and evolutionary preservation."
 
-**EGOS** is a unique project aiming to create a highly integrated, modular, and ethically-grounded software ecosystem. Inspired by quantum principles and biological networks, EGOS utilizes interconnected subsystems to achieve complex tasks with resilience, adaptability, and a core focus on ethical considerations defined by the **ETHIK** framework.
+**EGOS** is a unique project aiming to create a highly integrated, modular, and ethically-grounded software ecosystem. **Inspired by blockchain principles of trust, transparency, immutability, and decentralized systems,** EGOS utilizes interconnected subsystems to achieve complex tasks with resilience, adaptability, and a core focus on ethical considerations defined by the **ETHIK** framework.
 
 *(The initial phase and core AI assistant persona are sometimes referred to by the codename 'Eva Guarani').*
 
@@ -23,26 +23,26 @@ EGOS development is guided by:
 
 * **Universal Redemption & Unconditional Love:** Foundational ethical stance.
 * **Sacred Privacy:** Protecting user data is paramount.
-* **Integrated Ethics (ETHIK):** Ethics are woven into the system's fabric, not bolted on.
-* **Conscious Modularity (NEXUS):** Building independent yet interconnected components.
-* **Systemic Cartography (ATLAS):** Mapping and understanding system relationships.
-* **Evolutionary Preservation (CRONOS):** Ensuring system history and state integrity.
+* **Integrated Ethics (ETHIK):** Ethics are woven into the system's fabric, not bolted on, **ensuring verifiable ethical actions and alignment.**
+* **Conscious Modularity (NEXUS):** Building independent yet interconnected components, **enabling resilience and distributed operation akin to nodes in a network.**
+* **Systemic Cartography (ATLAS):** Mapping and understanding system relationships for transparency.
+* **Evolutionary Preservation (CRONOS):** Ensuring system history and state integrity, **providing an immutable-like record of system evolution.**
 * **Context Continuity (CRONOS):** Maintaining context across interactions.
 * **Harmonious Integration (HARMONY):** Ensuring components work together seamlessly, with a focus on Windows compatibility.
-* **Standardization & Knowledge (KOIOS):** Enforcing standards for code, documentation, logging, and managing knowledge assets.
+* **Standardization & Knowledge (KOIOS):** Enforcing standards for code, documentation, logging, and knowledge management, **crucial for system trust and verifiable operations.**
 
 ---
 
 ## subsystems Overview
 
-EGOS is composed of several key subsystems communicating via the **Mycelium Network**:
+EGOS is composed of several key subsystems communicating via the **Mycelium Network (facilitating decentralized, event-driven inter-subsystem communication)**:
 
 * **`ATLAS`**: Systemic cartography & visualization.
 * **`NEXUS`**: Modular analysis, dependency tracking & optimization.
-* **`CRONOS`**: Evolutionary preservation, state management & backups.
-* **`ETHIK`**: Ethical framework validation, data sanitization, policy enforcement, and privacy preservation (investigating Privacy-Preserving Computation - PPC).
+* **`CRONOS`**: Evolutionary preservation, state management & backups **(providing system history integrity)**.
+* **`ETHIK`**: Ethical framework validation, data sanitization, policy enforcement, and privacy preservation **(aiming for verifiable ethical compliance)**.
 * **`HARMONY`**: Cross-platform integration & compatibility layer.
-* **`KOIOS`**: Standardization, logging (including standards for potentially verifiable logs), search, documentation, knowledge management, and potentially integrating external data sources (e.g., Oracles) for validation. **(Recent updates include the successful implementation of foundational standards for project structure, linting, and formatting across subsystems.)**
+* **`KOIOS`**: Standardization, logging (including standards for **potentially verifiable logs**), search, documentation, knowledge management, and potentially integrating external data sources (e.g., Oracles) for validation.
 * **`CORUJA`**: AI orchestration, prompt management, complex interaction handling (including multi-step tasks), monitoring, and alignment considerations. Manages **MCPs** like EVA & GUARANI.
 * **`(Future) ETHICHAIN`**: Blockchain concepts for verifiable ethical actions, trust mechanisms, and potential contribution tokenomics (Conceptual).
 
