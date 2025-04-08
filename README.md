@@ -125,6 +125,7 @@ To fully understand the project's philosophy, architecture, and contribution pro
 * **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md):** Community standards and expectations.
 * **[cursor_initialization.md](.cursor/cursor_initialization.md):** Essential setup guide for the Cursor IDE environment.
 * **[.cursor/rules/](.cursor/rules/):** Directory containing rules that guide EGOS AI interactions and enforce project standards.
+  * **[ai_collaboration_guidelines.mdc](.cursor/rules/ai_collaboration_guidelines.mdc):** **NEW** - Defines best practices for effective Human-AI pair programming within Cursor for the EGOS project.
   * **[git_workflow_standards.mdc](.cursor/rules/git_workflow_standards.mdc):** Detailed procedures for Git workflows, handling merge conflicts, and repository management.
 * **[subsystems/](subsystems/):** Explore individual subsystem directories for their specific READMEs and code.
 
