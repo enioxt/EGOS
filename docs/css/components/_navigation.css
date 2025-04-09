@@ -178,48 +178,71 @@
 }
 
 @media (max-width: 992px) {
+    /* Header container now handles logo and hamburger positioning */
     .main-nav {
-        flex-direction: column;
-        align-items: center;
-        position: relative;
+        /* Remove column direction - let header handle flex */
+        /* flex-direction: column; */ 
+        /* align-items: center; */ 
+        /* position: relative; Removed to simplify */
     }
 
     .hamburger {
         display: flex; /* Show hamburger on mobile */
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+        /* Position relative to the main-header parent in _header.css might be better */
+        /* position: absolute; */
+        /* top: 1rem; */
+        /* right: 1rem; */
+        /* Simpler: Let flexbox handle positioning in the header */
+        order: 3; /* Place hamburger after logo and menu (when hidden) */
     }
 
     .main-nav ul {
+        /* Styles for the revealed mobile menu */
+        display: none; /* Hide menu by default - CRITICAL */
+        position: absolute; /* Position it absolutely relative to header */
+        top: 100%; /* Start below the header */
+        left: 0;
+        right: 0;
+        background-color: var(--primary-color); /* Match header background */
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        padding: var(--spacing-md) 0; /* Add padding */
+        margin-top: 0; /* Remove previous margin */
         width: 100%;
-        margin-top: 1rem;
-        display: none; /* Hide menu by default */
+        box-shadow: 0 4px 8px var(--shadow-color); /* Add shadow */
+        border-top: 1px solid var(--border-color); /* Add separator */
     }
 
     .main-nav.menu-open ul {
-        display: flex; /* Show menu when open */
+        display: flex !important; /* Show menu when open, ensure it overrides */
+    }
+    
+    /* Adjust list items for vertical layout */
+    .main-nav ul li {
+        margin: var(--spacing-sm) 0; 
+        width: 90%; /* Control width */
+        text-align: center;
+    }
+
+    /* Center link content */
+    .main-nav ul li a {
+        justify-content: center; 
+        padding: var(--spacing-md); /* More touch-friendly padding */
+    }
+    
+    /* Ensure language dropdown still works */
+    .lang-dropdown {
+        /* Adjust position if needed, but relative positioning might be okay */
+        right: auto; /* Reset right alignment */
+        left: 50%; /* Center it */
+        transform: translateX(-50%);
+        width: max-content; /* Fit content */
     }
 }
 
-@media (max-width: 768px) {
-    .main-nav ul {
-        flex-direction: column; /* Stack items fully on small screens */
-        align-items: center;
-        margin-top: var(--spacing-md);
-    }
-    .main-nav ul li {
-        margin: var(--spacing-sm) 0;
-        width: 100%;
-        text-align: center;
-    }
-    .main-nav ul li a {
-        justify-content: center; /* Center link content */
-    }
-} 
+/* Keep 768px styles if needed for further refinement, but 992px handles main collapse */
+/* @media (max-width: 768px) { ... } */
+
 /* Floating Chatbot Button Placeholder */
 .chatbot-button {
     position: fixed;
