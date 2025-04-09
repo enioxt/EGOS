@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    /* Optional: Subtle gradient from original */
+    /* background-image: linear-gradient(180deg, var(--background-color) 0%, #f0f2f5 100%); */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color); /* Use accent color for hover */
+    /* text-decoration: underline; Consider adding underline on hover for clarity */
+}
+
+i {
+    margin-right: var(--spacing-xs); /* Use spacing variable */
+} 

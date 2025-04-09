@@ -1,0 +1,26 @@
+/* Layout: Footer */
+
+.main-footer {
+    background-color: #333; /* Keeping dark footer */
+    color: #ccc;
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-xl);
+    margin-top: var(--spacing-xxl);
+}
+
+.main-footer p {
+    margin-bottom: var(--spacing-md);
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.footer-links a {
+    color: #ccc;
+    margin: 0 var(--spacing-md);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #fff;
+} 

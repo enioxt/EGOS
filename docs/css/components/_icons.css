@@ -1,0 +1,29 @@
+/* Components: Icons */
+
+.icon-color {
+    color: var(--accent-color);
+    /* Consider icon size consistency */
+    /* font-size: 1.5rem; Example size */
+}
+
+.tech-item .icon-color { /* Example: Specific icon color for tech items if needed */
+    color: var(--primary-color);
+}
+
+/* Placeholder for LLM integration icons */
+.chatbot-icon-placeholder,
+.contextual-help-icon-placeholder {
+    /* TODO: Style the placeholder icon (size, color, position) */
+    /* Example */
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    cursor: pointer;
+}
+
+.chatbot-icon-placeholder {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    z-index: 999;
+    /* TODO: Add background, padding, border-radius */
+}

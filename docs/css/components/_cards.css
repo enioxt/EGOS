@@ -1,0 +1,150 @@
+/* Components: Cards */
+
+.principle-item,
+.subsystem-card,
+.tech-item {
+    background-color: var(--surface-color);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 3px 10px var(--shadow-color);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+    height: 100%; /* Ensure equal heights */
+    display: flex;
+    flex-direction: column;
+    /* Golden ratio proportions */
+    aspect-ratio: 1/1.618;
+}
+
+/* Shared Card Hover Effect */
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px var(--hover-shadow-color);
+    border-color: rgba(255, 102, 0, 0.2); /* Subtle accent color hint */
+}
+
+.principle-item h3,
+.subsystem-card h3,
+.tech-item h3 {
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem; /* Adjusted for better proportion */
+    color: var(--primary-color); /* Use primary color for heading */
+    position: relative;
+    padding-bottom: var(--spacing-sm);
+}
+
+/* Subtle underline for card headings */
+.principle-item h3::after,
+.subsystem-card h3::after,
+.tech-item h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38px; /* Golden ratio based (61.8px ÷ 1.618) */
+    height: 2px;
+    background-color: var(--accent-color);
+    opacity: 0.7;
+    border-radius: 1px;
+}
+
+/* Specific H3 for subsystems for potentially longer titles */
+.subsystem-card h3 {
+    font-size: 1.2rem;
+}
+
+.principle-item p,
+.subsystem-card p,
+.tech-item p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.618; /* Golden ratio for optimal readability */
+    flex-grow: 1; /* Let paragraph take available space */
+}
+
+/* Icon styling with golden ratio proportions */
+.principle-item i,
+.subsystem-card i,
+.tech-item i {
+    margin-bottom: var(--spacing-md);
+    color: var(--accent-color);
+    /* Create circular background */
+    width: 61.8px;
+    height: 61.8px;
+    line-height: 61.8px;
+    background-color: rgba(255, 102, 0, 0.08);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Specific styling for subsystem cards as links */
+.subsystem-card {
+    display: block; /* Make the whole card clickable */
+    color: inherit; /* Inherit text color */
+    text-decoration: none;
+}
+
+.subsystem-card:hover {
+    text-decoration: none; /* Remove underline on card hover */
+}
+
+.subsystem-card:hover h3 {
+    color: var(--accent-color); /* Change title to accent color on hover */
+}
+
+/* Expandable subsystem card content */
+.subsystem-card .subsystem-content {
+    display: none;
+    margin-top: var(--spacing-md);
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+.subsystem-card.expanded .subsystem-content {
+    display: block;
+}
+
+/* Subsystem header layout */
+.subsystem-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+}
+
+.subsystem-header h3 {
+    flex: 1;
+    margin: 0;
+}
+
+.expand-toggle {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.expand-toggle:hover,
+.expand-toggle:focus {
+    background-color: var(--primary-color);
+}
+
+.subsystem-link {
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.subsystem-link:hover,
+.subsystem-link:focus {
+    color: var(--primary-color);
+}

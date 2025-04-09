@@ -1,0 +1,41 @@
+/* EGOS Website Styles - Main Import File */
+
+/* 
+  Order of imports: 
+  1. Variables
+  2. Reset
+  3. Base styles (body, links, typography)
+  4. Layout (header, footer, sections, grid)
+  5. Components (buttons, cards, navigation, etc.)
+  6. Pages (Specific page styles)
+  7. Utilities (animations, helpers)
+*/
+
+/* Base Styles */
+@import url('base/_variables.css');
+@import url('base/_reset.css');
+@import url('base/_base.css');
+@import url('base/_typography.css');
+
+/* Layout Styles */
+@import url('layout/_header.css');
+@import url('layout/_footer.css');
+@import url('layout/_sections.css');
+@import url('layout/_grid.css');
+
+/* Component Styles */
+@import url('components/_buttons.css');
+@import url('components/_cards.css');
+@import url('components/_navigation.css');
+@import url('components/_icons.css');
+
+/* Page Specific Styles (Placeholder for Quantum Prompts) */
+@import url('pages/_quantum_prompts.css');
+/* Import this only on the relevant page or if globally needed */
+
+/* Utility Styles */
+@import url('utils/_animations.css');
+
+/* Remaining Styles (Should be empty after full refactor) */
+
+/* TODO: Remove any remaining styles below this line after moving them */

@@ -1,0 +1,68 @@
+/* Components: Buttons */
+
+.cta-button {
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: none;
+    border-radius: 50px; /* Fully rounded ends */
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin: var(--spacing-sm);
+    font-family: var(--font-heading); /* Heading font for buttons */
+    text-transform: uppercase; /* Optional: Uppercase for emphasis */
+    letter-spacing: 0.5px; /* Optional: Slight spacing */
+}
+
+.cta-button i {
+    margin-right: var(--spacing-sm); /* Use variable */
+}
+
+.cta-button.primary {
+    background-color: var(--accent-color);
+    color: var(--text-on-accent);
+    box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3); /* Orange shadow */
+}
+
+.cta-button.primary:hover {
+    background-color: #e65c00; /* Darker Orange */
+    color: var(--text-on-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 102, 0, 0.4);
+    text-decoration: none;
+}
+
+.cta-button.secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.cta-button.secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--text-on-primary);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Hero-specific button adjustments */
+.hero-section .cta-button.secondary {
+     color: var(--text-on-primary);
+     border-color: var(--text-on-primary);
+}
+.hero-section .cta-button.secondary:hover {
+     background-color: var(--text-on-primary);
+     color: var(--primary-color);
+}
+
+/* Responsive Button Adjustments */
+@media (max-width: 768px) {
+    .cta-button {
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: 0.9rem;
+    }
+} 

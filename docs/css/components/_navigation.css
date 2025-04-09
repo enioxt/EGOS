@@ -1,0 +1,250 @@
+/* Components: Navigation */
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    /* Removed flex-wrap and justify-content, handled by media queries */
+    gap: calc(var(--spacing-lg) / 1.618); /* Golden ratio based spacing */
+}
+
+.main-nav ul li {
+    margin-left: var(--spacing-md);
+}
+
+.main-nav ul li a {
+    color: var(--text-on-primary);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-family: var(--font-heading); /* Heading font for nav links */
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle hover effect with indicator line */
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover::after,
+.main-nav ul li a:focus::after {
+    width: 61.8%; /* Golden ratio percentage */
+}
+
+.main-nav ul li a i {
+    margin-right: var(--spacing-xs);
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    /* color: #eee; Lighter color not needed with direct white */
+    text-decoration: none;
+}
+
+/* Language Switcher Styling */
+.lang-separator {
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: var(--spacing-md) !important;
+    user-select: none;
+}
+
+.lang-selector {
+    position: relative; /* Establish positioning context */
+}
+
+.lang-dropdown {
+    display: none; /* Hidden by default, toggled by JS */
+    position: absolute;
+    top: 100%; /* Position below the EN link */
+    right: 0; /* Align to the right of the parent */
+    background-color: var(--primary-color); /* Match header background */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: none;
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    list-style: none;
+    min-width: 50px; /* Ensure minimum width */
+    z-index: 1001; /* Above other header content */
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.lang-switch {
+    font-size: 0.8rem;
+    font-weight: 300;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: none;
+    margin-left: var(--spacing-xs) !important;
+    opacity: 0.7;
+    border-radius: var(--border-radius-sm);
+    color: var(--text-on-primary); /* Ensure color */
+    background-color: transparent; /* Ensure transparent background */
+    cursor: pointer; /* Indicate clickability */
+}
+
+.lang-switch:hover,
+.lang-switch:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    text-decoration: none;
+    opacity: 1;
+    color: var(--text-on-primary) !important;
+}
+
+.lang-switch.active {
+    font-weight: 500;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    text-decoration: none;
+    color: var(--text-on-primary) !important;
+    opacity: 1;
+}
+
+.lang-dropdown li {
+    margin: 0;
+}
+
+.lang-dropdown li a {
+    display: block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    color: var(--text-on-primary);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.lang-dropdown li a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    text-decoration: none;
+}
+
+/* Hamburger Menu Button */
+.hamburger {
+    display: none; /* Hidden by default, shown on mobile */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001; /* Above nav */
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-on-primary, #fff);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger open animation (optional) */
+.hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Responsive Navigation */
+@media (max-width: 1200px) {
+    .main-nav ul li {
+        margin-left: var(--spacing-md);
+    }
+    .main-nav ul li a {
+        padding: var(--spacing-sm);
+    }
+    .lang-switch {
+        margin-left: 2px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-nav {
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+
+    .hamburger {
+        display: flex; /* Show hamburger on mobile */
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 1rem;
+        display: none; /* Hide menu by default */
+    }
+
+    .main-nav.menu-open ul {
+        display: flex; /* Show menu when open */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav ul {
+        flex-direction: column; /* Stack items fully on small screens */
+        align-items: center;
+        margin-top: var(--spacing-md);
+    }
+    .main-nav ul li {
+        margin: var(--spacing-sm) 0;
+        width: 100%;
+        text-align: center;
+    }
+    .main-nav ul li a {
+        justify-content: center; /* Center link content */
+    }
+} 
+/* Floating Chatbot Button Placeholder */
+.chatbot-button {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 1002;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.chatbot-button:hover,
+.chatbot-button:focus {
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* TODO: Integrate LLM chatbot interface here in future */
