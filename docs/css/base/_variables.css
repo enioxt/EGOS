@@ -1,33 +1,36 @@
 :root {
-    /* Color Palette (Prompt v3) */
-    --primary-color: #081e36; /* Darker Deep Blue */
-    --accent-color: #FF6600; /* Warm Orange */
-    --background-color: #f8f9fa; /* Very light grey */
-    --surface-color: #ffffff; /* White for cards/surfaces */
-    --text-color: #333; /* Dark grey for text */
-    --text-light: #666; /* Lighter grey text */
-    --border-color: #e0e0e0; /* Light border color */
-    --shadow-color: rgba(0, 0, 0, 0.08); /* Softer shadow */
-    --hover-shadow-color: rgba(0, 0, 0, 0.12); /* Slightly more pronounced hover shadow */
-    --text-on-primary: #ffffff; /* White text on dark blue */
-    --text-on-accent: #ffffff; /* White text on orange */
+    /* Dark Theme Color Palette */
+    --primary-color: #8A2BE2; /* BlueViolet - Mantendo um roxo vibrante */
+    --accent-color: #00BFFF; /* DeepSkyBlue - Um azul claro para contraste */
+    --secondary-color: #483D8B; /* DarkSlateBlue - Um roxo/azul mais escuro para variações */
 
-    /* Typography (Prompt v3) */
+    --background-color: #1a1a1d; /* Cinza muito escuro, quase preto */
+    --background-alternate: #2c2c31; /* Cinza um pouco mais claro para seções alternadas */
+    --card-background: #252528; /* Fundo para cards */
+
+    --text-color: #e1e1e1; /* Cinza claro para texto principal */
+    --text-secondary: #b3b3b3; /* Cinza mais suave para texto secundário */
+    --text-on-primary: #ffffff; /* Branco para texto sobre fundo primário (header) */
+    --link-color: var(--accent-color); /* Usar accent color para links */
+    --link-hover-color: #ffffff; /* Branco para link hover */
+
+    --border-color: #444; /* Cor de borda sutil */
+    --shadow-color: rgba(0, 0, 0, 0.5); /* Sombra mais pronunciada para contraste */
+
+    /* Fonts (Mantendo as atuais) */
     --font-body: 'Inter', sans-serif;
     --font-heading: 'Playfair Display', serif;
 
-    /* Spacing Unit based on Golden Ratio (1:1.618) */
-    --spacing-base: 8px; /* Base unit */
-    --spacing-xs: var(--spacing-base); /* 8px */
-    --spacing-sm: calc(var(--spacing-base) * 1.3); /* ~10px */
-    --spacing-md: calc(var(--spacing-base) * 1.618); /* ~13px - Golden Ratio */
-    --spacing-lg: calc(var(--spacing-base) * 2.618); /* ~21px - Golden Ratio squared */
-    --spacing-xl: calc(var(--spacing-base) * 4.236); /* ~34px - Golden Ratio cubed */
-    --spacing-xxl: calc(var(--spacing-base) * 6.854); /* ~55px - Golden Ratio to 4th power */
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 32px;
+    --spacing-xl: 64px;
 
-    /* Border Radius - also following golden ratio progression */
-    --border-radius-sm: 3px;
-    --border-radius-md: 5px;
-    --border-radius-lg: 8px;
-    --border-radius-xl: 13px;
+    /* Border Radius */
+    --border-radius: 8px;
+
+    /* Max Width */
+    --max-width: 1200px;
 } 
