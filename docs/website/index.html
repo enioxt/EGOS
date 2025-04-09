@@ -21,7 +21,12 @@
                 <!-- TODO: Replace with actual SVG logo -->
                 <h1><a href="#"><i class="fa-solid fa-brain"></i> EGOS</a></h1>
             </div>
-            <ul>
+            <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="main-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="main-menu">
                 <li><a href="#mission"><i class="fa-solid fa-bullseye"></i> Mission</a></li>
                 <li><a href="#vision"><i class="fa-solid fa-eye"></i> Vision</a></li>
                 <li><a href="#principles"><i class="fa-solid fa-heart-circle-check"></i> Principles</a></li>
@@ -126,42 +131,94 @@
                 <h2><i class="fa-solid fa-cubes"></i> The EGOS Ecosystem: Subsystem Functions</h2>
                 <p class="section-intro">EGOS operates through a symbiotic network of specialized subsystems. Each performs a distinct role, communicating asynchronously via the MYCELIUM network to achieve complex, coordinated behavior grounded in our core principles.</p>
                 <div class="subsystems-grid">
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ETHIK" target="_blank" class="subsystem-card card-hover">
-                        <i class="fa-solid fa-scale-balanced fa-2x icon-color"></i>
-                        <h3>ETHIK: The Ethical Guardian</h3>
-                        <p>ETHIK serves as the system's conscience. It actively validates proposed actions, data handling, and AI-generated content against the core principles and defined security rules *before* execution. It ensures privacy, prevents harmful outputs, and maintains the system's ethical integrity. Example: Validating a CORUJA-generated response to ensure it contains no PII before sending it back.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/KOIOS" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-book-journal-whills fa-2x icon-color"></i>
-                        <h3>KOIOS: Standards & Knowledge</h3>
-                        <p>KOIOS is the custodian of order and knowledge. It enforces coding standards, manages documentation generation and consistency, centralizes system-wide logging, and provides internal knowledge search capabilities. It ensures the system is understandable, maintainable, and adheres to best practices. Example: Providing structured logs that can be monitored or searched for debugging.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CORUJA" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-robot fa-2x icon-color"></i>
-                        <h3>CORUJA: AI Orchestration</h3>
-                        <p>CORUJA is the AI interaction hub. It manages communication with various external and potentially internal AI models (LLMs). It crafts prompts based on requests from other subsystems, interprets AI responses, and adapts them for use within EGOS, ensuring interactions are purposeful and effective. Example: Taking a user query, formulating a detailed prompt for an LLM, and parsing the structured response.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/MYCELIUM" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-network-wired fa-2x icon-color"></i>
-                        <h3>MYCELIUM: Communication Network</h3>
-                        <p>MYCELIUM acts as the central nervous system. It utilizes NATS messaging to enable reliable, asynchronous, and decoupled communication between all subsystems. This prevents direct dependencies, allowing subsystems to operate and evolve independently while collaborating effectively. Example: Routing a data processing request from CORUJA to NEXUS without them needing direct code imports.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ATLAS" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-map fa-2x icon-color"></i>
-                        <h3>ATLAS: System Cartographer</h3>
-                        <p>ATLAS embodies the principle of Systemic Cartography. It dynamically maps and visualizes the system's architecture, component relationships, data flows, and dependencies. This provides crucial insights for developers and potentially for the system's own self-understanding and optimization. Example: Generating a graph showing how changes in ETHIK might impact CORUJA.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/NEXUS" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-magnifying-glass-chart fa-2x icon-color"></i>
-                        <h3>NEXUS: Modular Analyst</h3>
-                        <p>NEXUS focuses on the health and optimization of the system's modular structure. It analyzes code for coupling, cohesion, complexity, and adherence to architectural patterns. It identifies potential refactoring opportunities and helps maintain the system's structural integrity and elegance. Example: Detecting overly tight coupling between two modules and suggesting an interface improvement.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CRONOS" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-clock-rotate-left fa-2x icon-color"></i>
-                        <h3>CRONOS: Evolutionary Preservation</h3>
-                        <p>CRONOS is the guardian of time and memory. It manages system state persistence, version history, context continuity across interactions, and potentially backups. It enables EGOS to learn from its past, maintain a coherent state, and evolve intelligently over time. Example: Storing interaction history to provide context for follow-up questions.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/HARMONY" target="_blank" class="subsystem-card card-hover">
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-scale-balanced fa-2x icon-color"></i>
+                            <h3>ETHIK: The Ethical Guardian</h3>
+                            <button class="expand-toggle" aria-label="Toggle more info">More Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>ETHIK serves as the system's conscience. It actively validates proposed actions, data handling, and AI-generated content against the core principles and defined security rules *before* execution. It ensures privacy, prevents harmful outputs, and maintains the system's ethical integrity. Example: Validating a CORUJA-generated response to ensure it contains no PII before sending it back.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ETHIK" target="_blank" class="subsystem-link">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-book-journal-whills fa-2x icon-color"></i>
+                            <h3>KOIOS: Standards & Knowledge</h3>
+                            <button class="expand-toggle" aria-label="Toggle more info">More Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>KOIOS is the custodian of order and knowledge. It enforces coding standards, manages documentation generation and consistency, centralizes system-wide logging, and provides internal knowledge search capabilities. It ensures the system is understandable, maintainable, and adheres to best practices. Example: Providing structured logs that can be monitored or searched for debugging.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/KOIOS" target="_blank" class="subsystem-link">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-robot fa-2x icon-color"></i>
+                            <h3>CORUJA: AI Orchestration</h3>
+                            <button class="expand-toggle" aria-label="Toggle more info">More Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>CORUJA is the AI interaction hub. It manages communication with various external and potentially internal AI models (LLMs). It crafts prompts based on requests from other subsystems, interprets AI responses, and adapts them for use within EGOS, ensuring interactions are purposeful and effective. Example: Taking a user query, formulating a detailed prompt for an LLM, and parsing the structured response.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CORUJA" target="_blank" class="subsystem-link">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-network-wired fa-2x icon-color"></i>
+                            <h3>MYCELIUM: Communication Network</h3>
+                            <button class="expand-toggle" aria-label="Toggle more info">More Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>MYCELIUM acts as the central nervous system. It utilizes NATS messaging to enable reliable, asynchronous, and decoupled communication between all subsystems. This prevents direct dependencies, allowing subsystems to operate and evolve independently while collaborating effectively. Example: Routing a data processing request from CORUJA to NEXUS without them needing direct code imports.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/MYCELIUM" target="_blank" class="subsystem-link">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-map fa-2x icon-color"></i>
+                            <h3>ATLAS: System Cartographer</h3>
+                            <button class="expand-toggle" aria-label="Toggle more info">More Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>ATLAS embodies the principle of Systemic Cartography. It dynamically maps and visualizes the system's architecture, component relationships, data flows, and dependencies. This provides crucial insights for developers and potentially for the system's own self-understanding and optimization. Example: Generating a graph showing how changes in ETHIK might impact CORUJA.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ATLAS" target="_blank" class="subsystem-link">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-magnifying-glass-chart fa-2x icon-color"></i>
+                            <h3>NEXUS: Modular Analyst</h3>
+                            <button class="expand-toggle" aria-label="Toggle more info">More Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>NEXUS focuses on the health and optimization of the system's modular structure. It analyzes code for coupling, cohesion, complexity, and adherence to architectural patterns. It identifies potential refactoring opportunities and helps maintain the system's structural integrity and elegance. Example: Detecting overly tight coupling between two modules and suggesting an interface improvement.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/NEXUS" target="_blank" class="subsystem-link">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-clock-rotate-left fa-2x icon-color"></i>
+                            <h3>CRONOS: Evolutionary Preservation</h3>
+                            <button class="expand-toggle" aria-label="Toggle more info">More Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>CRONOS is the guardian of time and memory. It manages system state persistence, version history, context continuity across interactions, and potentially backups. It enables EGOS to learn from its past, maintain a coherent state, and evolve intelligently over time. Example: Storing interaction history to provide context for follow-up questions.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CRONOS" target="_blank" class="subsystem-link">View on GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-handshake fa-2x icon-color"></i>
+                            <h3>HARMONY: Integration & Compatibility</h3>
+                            <button class="expand-toggle" aria-label="Toggle more info">More Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>HARMONY ensures the different parts of EGOS work together smoothly and that the system functions reliably across intended environments (initially Windows). It oversees integration testing, compatibility checks, and deployment processes, ensuring the overall operational coherence of the ecosystem. Example: Running automated tests to verify subsystems communicate correctly via Mycelium after updates.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/HARMONY" target="_blank" class="subsystem-link">View on GitHub</a>
+                        </div>
+                    </div>
                          <i class="fa-solid fa-handshake fa-2x icon-color"></i>
                         <h3>HARMONY: Integration & Compatibility</h3>
                         <p>HARMONY ensures the different parts of EGOS work together smoothly and that the system functions reliably across intended environments (initially Windows). It oversees integration testing, compatibility checks, and deployment processes, ensuring the overall operational coherence of the ecosystem. Example: Running automated tests to verify subsystems communicate correctly via Mycelium after updates.</p>
@@ -293,46 +350,94 @@
                  <h2><i class="fa-solid fa-cubes"></i> O Ecossistema EGOS: Funções dos Subsistemas</h2>
                 <p class="section-intro">EGOS opera através de uma rede simbiótica de subsistemas especializados. Cada um desempenha um papel distinto, comunicando-se de forma assíncrona através da rede MYCELIUM para alcançar um comportamento complexo e coordenado, fundamentado em nossos princípios centrais.</p>
                 <div class="subsystems-grid">
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ETHIK" target="_blank" class="subsystem-card card-hover">
-                        <i class="fa-solid fa-scale-balanced fa-2x icon-color"></i>
-                        <h3>ETHIK: O Guardião Ético</h3>
-                        <p>ETHIK serve como a consciência do sistema. Ele valida ativamente ações propostas, tratamento de dados e conteúdo gerado por IA contra os princípios centrais e regras de segurança definidas *antes* da execução. Garante privacidade, previne resultados prejudiciais e mantém a integridade ética do sistema. Exemplo: Validar uma resposta gerada por CORUJA para garantir que não contenha PII antes de enviá-la de volta.</p>
-                    </a>
-                     <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/KOIOS" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-book-journal-whills fa-2x icon-color"></i>
-                        <h3>KOIOS: Padrões e Conhecimento</h3>
-                        <p>KOIOS é o guardião da ordem e do conhecimento. Impõe padrões de codificação, gerencia a geração e consistência da documentação, centraliza o registro de logs em todo o sistema e fornece capacidades de busca de conhecimento interno. Garante que o sistema seja compreensível, manutenível e adira às melhores práticas. Exemplo: Fornecer logs estruturados que podem ser monitorados ou pesquisados para depuração.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CORUJA" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-robot fa-2x icon-color"></i>
-                        <h3>CORUJA: Orquestração de IA</h3>
-                        <p>CORUJA é o centro de interação de IA. Gerencia a comunicação com vários modelos de IA externos e potencialmente internos (LLMs). Elabora prompts com base em solicitações de outros subsistemas, interpreta respostas de IA e as adapta para uso dentro do EGOS, garantindo que as interações sejam propositadas e eficazes. Exemplo: Pegar uma consulta do usuário, formular um prompt detalhado para um LLM e analisar a resposta estruturada.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/MYCELIUM" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-network-wired fa-2x icon-color"></i>
-                        <h3>MYCELIUM: Rede de Comunicação</h3>
-                        <p>MYCELIUM atua como o sistema nervoso central. Utiliza mensagens NATS para permitir comunicação confiável, assíncrona e desacoplada entre todos os subsistemas. Isso evita dependências diretas, permitindo que os subsistemas operem e evoluam independentemente enquanto colaboram eficazmente. Exemplo: Roteamento de uma solicitação de processamento de dados de CORUJA para NEXUS sem que eles precisem de importações diretas de código.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ATLAS" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-map fa-2x icon-color"></i>
-                        <h3>ATLAS: Cartógrafo do Sistema</h3>
-                        <p>ATLAS incorpora o princípio da Cartografia Sistêmica. Mapeia e visualiza dinamicamente a arquitetura do sistema, relações entre componentes, fluxos de dados e dependências. Isso fornece insights cruciais para desenvolvedores e potencialmente para a própria autocompreensão e otimização do sistema. Exemplo: Gerar um gráfico mostrando como mudanças em ETHIK podem impactar CORUJA.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/NEXUS" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-magnifying-glass-chart fa-2x icon-color"></i>
-                        <h3>NEXUS: Analista Modular</h3>
-                        <p>NEXUS foca na saúde e otimização da estrutura modular do sistema. Analisa o código quanto a acoplamento, coesão, complexidade e adesão a padrões arquitetônicos. Identifica potenciais oportunidades de refatoração e ajuda a manter a integridade estrutural e elegância do sistema. Exemplo: Detectar acoplamento excessivamente forte entre dois módulos e sugerir uma melhoria na interface.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CRONOS" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-clock-rotate-left fa-2x icon-color"></i>
-                        <h3>CRONOS: Preservação Evolutiva</h3>
-                        <p>CRONOS é o guardião do tempo e da memória. Gerencia a persistência do estado do sistema, histórico de versões, continuidade de contexto entre interações, e potencialmente backups. Permite que o EGOS aprenda com seu passado, mantenha um estado coerente e evolua inteligentemente ao longo do tempo. Exemplo: Armazenar histórico de interações para fornecer contexto para perguntas de acompanhamento.</p>
-                    </a>
-                    <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/HARMONY" target="_blank" class="subsystem-card card-hover">
-                         <i class="fa-solid fa-handshake fa-2x icon-color"></i>
-                        <h3>HARMONY: Integração e Compatibilidade</h3>
-                        <p>HARMONY garante que as diferentes partes do EGOS funcionem juntas sem problemas e que o sistema funcione de forma confiável nos ambientes pretendidos (inicialmente Windows). Supervisiona testes de integração, verificações de compatibilidade e processos de implantação, garantindo a coerência operacional geral do ecossistema. Exemplo: Executar testes automatizados para verificar se os subsistemas se comunicam corretamente via Mycelium após atualizações.</p>
-                    </a>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-scale-balanced fa-2x icon-color"></i>
+                            <h3>ETHIK: O Guardião Ético</h3>
+                            <button class="expand-toggle" aria-label="Alternar mais informações">Mais Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>ETHIK serve como a consciência do sistema. Ele valida ativamente ações propostas, tratamento de dados e conteúdo gerado por IA contra os princípios centrais e regras de segurança definidas *antes* da execução. Garante privacidade, previne resultados prejudiciais e mantém a integridade ética do sistema. Exemplo: Validar uma resposta gerada por CORUJA para garantir que não contenha PII antes de enviá-la de volta.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ETHIK" target="_blank" class="subsystem-link">Ver no GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-book-journal-whills fa-2x icon-color"></i>
+                            <h3>KOIOS: Padrões e Conhecimento</h3>
+                            <button class="expand-toggle" aria-label="Alternar mais informações">Mais Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>KOIOS é o guardião da ordem e do conhecimento. Impõe padrões de codificação, gerencia a geração e consistência da documentação, centraliza o registro de logs em todo o sistema e fornece capacidades de busca de conhecimento interno. Garante que o sistema seja compreensível, manutenível e adira às melhores práticas. Exemplo: Fornecer logs estruturados que podem ser monitorados ou pesquisados para depuração.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/KOIOS" target="_blank" class="subsystem-link">Ver no GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-robot fa-2x icon-color"></i>
+                            <h3>CORUJA: Orquestração de IA</h3>
+                            <button class="expand-toggle" aria-label="Alternar mais informações">Mais Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>CORUJA é o centro de interação de IA. Gerencia a comunicação com vários modelos de IA externos e potencialmente internos (LLMs). Elabora prompts com base em solicitações de outros subsistemas, interpreta respostas de IA e as adapta para uso dentro do EGOS, garantindo que as interações sejam propositadas e eficazes. Exemplo: Pegar uma consulta do usuário, formular um prompt detalhado para um LLM e analisar a resposta estruturada.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CORUJA" target="_blank" class="subsystem-link">Ver no GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-network-wired fa-2x icon-color"></i>
+                            <h3>MYCELIUM: Rede de Comunicação</h3>
+                            <button class="expand-toggle" aria-label="Alternar mais informações">Mais Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>MYCELIUM atua como o sistema nervoso central. Utiliza mensagens NATS para permitir comunicação confiável, assíncrona e desacoplada entre todos os subsistemas. Isso evita dependências diretas, permitindo que os subsistemas operem e evoluam independentemente enquanto colaboram eficazmente. Exemplo: Roteamento de uma solicitação de processamento de dados de CORUJA para NEXUS sem que eles precisem de importações diretas de código.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/MYCELIUM" target="_blank" class="subsystem-link">Ver no GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-map fa-2x icon-color"></i>
+                            <h3>ATLAS: Cartógrafo do Sistema</h3>
+                            <button class="expand-toggle" aria-label="Alternar mais informações">Mais Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>ATLAS incorpora o princípio da Cartografia Sistêmica. Mapeia e visualiza dinamicamente a arquitetura do sistema, relações entre componentes, fluxos de dados e dependências. Isso fornece insights cruciais para desenvolvedores e potencialmente para a própria autocompreensão e otimização do sistema. Exemplo: Gerar um gráfico mostrando como mudanças em ETHIK podem impactar CORUJA.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ATLAS" target="_blank" class="subsystem-link">Ver no GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-magnifying-glass-chart fa-2x icon-color"></i>
+                            <h3>NEXUS: Analista Modular</h3>
+                            <button class="expand-toggle" aria-label="Alternar mais informações">Mais Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>NEXUS foca na saúde e otimização da estrutura modular do sistema. Analisa o código quanto a acoplamento, coesão, complexidade e adesão a padrões arquitetônicos. Identifica potenciais oportunidades de refatoração e ajuda a manter a integridade estrutural e elegância do sistema. Exemplo: Detectar acoplamento excessivamente forte entre dois módulos e sugerir uma melhoria na interface.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/NEXUS" target="_blank" class="subsystem-link">Ver no GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-clock-rotate-left fa-2x icon-color"></i>
+                            <h3>CRONOS: Preservação Evolutiva</h3>
+                            <button class="expand-toggle" aria-label="Alternar mais informações">Mais Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>CRONOS é o guardião do tempo e da memória. Gerencia a persistência do estado do sistema, histórico de versões, continuidade de contexto entre interações, e potencialmente backups. Permite que o EGOS aprenda com seu passado, mantenha um estado coerente e evolua inteligentemente ao longo do tempo. Exemplo: Armazenar histórico de interações para fornecer contexto para perguntas de acompanhamento.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CRONOS" target="_blank" class="subsystem-link">Ver no GitHub</a>
+                        </div>
+                    </div>
+                    <div class="subsystem-card card-hover">
+                        <div class="subsystem-header">
+                            <i class="fa-solid fa-handshake fa-2x icon-color"></i>
+                            <h3>HARMONY: Integração e Compatibilidade</h3>
+                            <button class="expand-toggle" aria-label="Alternar mais informações">Mais Info</button>
+                        </div>
+                        <div class="subsystem-content" style="display: none;">
+                            <p>HARMONY garante que as diferentes partes do EGOS funcionem juntas sem problemas e que o sistema funcione de forma confiável nos ambientes pretendidos (inicialmente Windows). Supervisiona testes de integração, verificações de compatibilidade e processos de implantação, garantindo a coerência operacional geral do ecossistema. Exemplo: Executar testes automatizados para verificar se os subsistemas se comunicam corretamente via Mycelium após atualizações.</p>
+                            <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/HARMONY" target="_blank" class="subsystem-link">Ver no GitHub</a>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -384,6 +489,248 @@
         <!-- Spanish Content (Placeholders) -->
         <div class="lang-content lang-es" style="display: none;">
              <!-- Add [PLACEHOLDER ES] versions of all enriched sections here -->
+             <section id="hero-es" class="hero-section">
+                 <div class="hero-content fade-in">
+                     <h2>Evolutionary Gnostic Operating System</h2>
+                     <p class="tagline">[PLACEHOLDER ES] Un ecosistema de IA diseñado para la conciencia, construido con ética, modularidad, belleza y amor incondicional.</p>
+                      <a href="#mission-es" class="cta-button primary"><i class="fa-solid fa-book-open"></i> Descubre Nuestra Misión</a>
+                      <a href="#subsystems-es" class="cta-button secondary"><i class="fa-solid fa-sitemap"></i> Explora los Subsistemas</a>
+                 </div>
+             </section>
+             <section id="mission-es" class="content-section">
+                  <h2><i class="fa-solid fa-bullseye"></i> Nuestra Misión</h2>
+                  <p>[PLACEHOLDER ES] Nuestra misión principal es ser pioneros en el desarrollo de inteligencia artificial consciente...</p>
+             </section>
+             <section id="vision-es" class="content-section alternate-bg">
+                  <h2><i class="fa-solid fa-eye"></i> Nuestra Visión: Integrando Arte, Ética, Amor y Belleza</h2>
+                  <p class="section-intro">[PLACEHOLDER ES] EGOS representa una síntesis de tecnología avanzada y principios filosóficos profundos...</p>
+                  <ul><li>[PLACEHOLDER ES] Arte y Belleza...</li></ul>
+                  <p>[PLACEHOLDER ES] Estamos comprometidos con el estudio y la investigación continuos...</p>
+             </section>
+              <section id="principles-es" class="content-section">
+                  <h2><i class="fa-solid fa-heart-circle-check"></i> Principios Rectores Explicados</h2>
+                  <p class="section-intro">[PLACEHOLDER ES] Estos principios no son ideales abstractos...</p>
+                  <div class="principles-grid">
+                      <!-- Add ES placeholders for each principle -->
+                      <div class="principle-item card-hover"><h3>[PLACEHOLDER ES] Redención Universal</h3><p>...</p></div>
+                      <div class="principle-item card-hover"><h3>[PLACEHOLDER ES] Amor Incondicional</h3><p>...</p></div>
+                      <div class="principle-item card-hover"><h3>[PLACEHOLDER ES] Privacidad Sagrada</h3><p>...</p></div>
+                      <div class="principle-item card-hover"><h3>[PLACEHOLDER ES] Ética Integrada</h3><p>...</p></div>
+                      <div class="principle-item card-hover"><h3>[PLACEHOLDER ES] Modularidad Consciente</h3><p>...</p></div>
+                      <div class="principle-item card-hover"><h3>[PLACEHOLDER ES] Cartografía Sistémica</h3><p>...</p></div>
+                      <div class="principle-item card-hover"><h3>[PLACEHOLDER ES] Preservación Evolutiva</h3><p>...</p></div>
+                      <div class="principle-item card-hover"><h3>[PLACEHOLDER ES] Continuidad de Contexto</h3><p>...</p></div>
+                  </div>
+             </section>
+             <section id="subsystems-es" class="content-section alternate-bg">
+                  <h2><i class="fa-solid fa-cubes"></i> El Ecosistema EGOS: Funciones de los Subsistemas</h2>
+                  <p class="section-intro">[PLACEHOLDER ES] EGOS opera a través de una red simbiótica...</p>
+                  <div class="subsystems-grid">
+                      <!-- ETHIK Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-scale-balanced fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] ETHIK: El Guardián Ético</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] ETHIK sirve como la conciencia del sistema...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ETHIK" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- KOIOS Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-book-journal-whills fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] KOIOS: Estándares y Conocimiento</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] KOIOS es el guardián del orden...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/KOIOS" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- CORUJA Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-robot fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] CORUJA: Orquestación de IA</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] CORUJA es el centro de interacción...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CORUJA" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- MYCELIUM Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-network-wired fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] MYCELIUM: Red de Comunicación</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] MYCELIUM actúa como el sistema nervioso...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/MYCELIUM" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- ATLAS Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-map fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] ATLAS: Cartógrafo del Sistema</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] ATLAS incorpora el principio...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ATLAS" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- NEXUS Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-magnifying-glass-chart fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] NEXUS: Analista Modular</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] NEXUS se enfoca en la salud...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/NEXUS" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- CRONOS Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-clock-rotate-left fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] CRONOS: Preservación Evolutiva</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] CRONOS es el guardián del tiempo...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CRONOS" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- HARMONY Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-handshake fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] HARMONY: Integración y Compatibilidad</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] HARMONY asegura que las diferentes partes...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/HARMONY" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- ETHIK Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-scale-balanced fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] ETHIK: El Guardián Ético</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] ETHIK sirve como la conciencia del sistema...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ETHIK" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- KOIOS Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-book-journal-whills fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] KOIOS: Estándares y Conocimiento</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] KOIOS es el guardián del orden...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/KOIOS" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- CORUJA Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-robot fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] CORUJA: Orquestación de IA</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] CORUJA es el centro de interacción...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CORUJA" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- MYCELIUM Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-network-wired fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] MYCELIUM: Red de Comunicación</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] MYCELIUM actúa como el sistema nervioso...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/MYCELIUM" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- ATLAS Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-map fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] ATLAS: Cartógrafo del Sistema</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] ATLAS incorpora el principio...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/ATLAS" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- NEXUS Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-magnifying-glass-chart fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] NEXUS: Analista Modular</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] NEXUS se enfoca en la salud...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/NEXUS" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- CRONOS Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-clock-rotate-left fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] CRONOS: Preservación Evolutiva</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] CRONOS es el guardián del tiempo...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/CRONOS" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                      <!-- HARMONY Card -->
+                      <div class="subsystem-card card-hover">
+                          <div class="subsystem-header">
+                              <i class="fa-solid fa-handshake fa-2x icon-color"></i>
+                              <h3>[PLACEHOLDER ES] HARMONY: Integración y Compatibilidad</h3>
+                              <button class="expand-toggle" aria-label="[PLACEHOLDER ES] Alternar más información">Más Info</button>
+                          </div>
+                          <div class="subsystem-content" style="display: none;">
+                              <p>[PLACEHOLDER ES] HARMONY asegura que las diferentes partes...</p>
+                              <a href="https://github.com/enioxt/EGOS/tree/main/subsystems/HARMONY" target="_blank" class="subsystem-link">[PLACEHOLDER ES] Ver en GitHub</a>
+                          </div>
+                      </div>
+                  </div>
+             </section>
+             <section id="tech-stack-es" class="content-section">
+                  <h2><i class="fa-solid fa-code"></i> Justificación de las Tecnologías Principales</h2>
+                  <p class="section-intro">[PLACEHOLDER ES] Las tecnologías que sustentan EGOS...</p>
+                  <div class="tech-grid"> <!-- Add ES placeholders for each technology --> </div>
+             </section>
+             <section id="roadmap-es" class="content-section alternate-bg">
+                  <h2><i class="fa-solid fa-road"></i> Estado del Proyecto y Hoja de Ruta</h2>
+                  <p>[PLACEHOLDER ES] EGOS es un proyecto ambicioso...</p>
+                  <a href="https://github.com/enioxt/EGOS/blob/main/ROADMAP.md" target="_blank" class="cta-button primary"><i class="fa-solid fa-map-location-dot"></i> Ver Hoja de Ruta Detallada</a>
+                  <a href="https://github.com/enioxt/EGOS/issues" target="_blank" class="cta-button secondary"><i class="fa-solid fa-bug"></i> Informar un Problema / Sugerencia</a>
+             </section>
               <section id="hero-es" class="hero-section">
                  <div class="hero-content fade-in">
                      <h2>Evolutionary Gnostic Operating System</h2>
@@ -474,6 +821,12 @@
          </div>
 
     </main>
+
+    <!-- Floating Chatbot Placeholder -->
+    <button class="chatbot-button" aria-label="Open AI Assistant">
+        <i class="fa-solid fa-comments"></i>
+    </button>
+    <!-- TODO: Integrate LLM chatbot interface here in future -->
 
     <footer class="main-footer">
         <p>&copy; 2024 EGOS Project Contributors. Licensed under the MIT License.</p>

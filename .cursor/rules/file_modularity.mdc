@@ -4,8 +4,8 @@ globs:
 alwaysApply: true
 ---
 ---
-description: Enforce file modularity and size limits for better maintainability.
-globs: ["**/*.py"]
+description: Enforce file modularity and size limits for better maintainability and AI processing.
+globs: ["**/*.py"] # Primarily targets Python, but principle applies broadly.
 alwaysApply: true
 ---
 
@@ -13,33 +13,146 @@ alwaysApply: true
 
 ## Rule
 
-Python files should be kept focused and relatively small to enhance readability, maintainability, testability, and ease of processing by developers and AI tools.
+Python files (and source files in general) should be kept focused and relatively small to enhance readability, maintainability, testability, and crucially, ease of processing by developers and AI tools.
 
-1.  **Single Responsibility:** Aim for modules and classes to adhere to the Single Responsibility Principle (SRP).
-2.  **Size Guideline:** While not a strict limit, strive to keep Python files **under ~300-500 lines of code (LoC)**. Files significantly exceeding this should be considered candidates for refactoring.
-3.  **Refactoring Trigger:** If a file becomes difficult to understand quickly, requires excessive scrolling, or handles too many distinct concerns, it **MUST** be refactored into smaller, more focused modules.
-4.  **Communication:** Newly created smaller modules should communicate through well-defined interfaces (function calls, class interactions within the same subsystem, or Mycelium messages for inter-subsystem communication as per `subsystem_boundaries.mdc`).
+1.  **Single Responsibility Principle (SRP):** Aim for modules and classes to have one primary reason to change. Avoid creating "god objects" or utility modules that handle unrelated concerns.
+2.  **Size Guideline:** While not a strict limit, strive to keep Python files **under ~300-500 lines of code (LoC)**. Files significantly exceeding this are strong candidates for refactoring. *Consider this a guideline, not an unbreakable law; focus on logical cohesion.*
+3.  **Refactoring Trigger & Pattern:** If a file becomes difficult to understand quickly, requires excessive scrolling, handles too many distinct concerns, is hard to unit test in isolation, or significantly exceeds the size guideline, it **MUST** be refactored.
+    *   **Identify Cohesive Blocks:** Look for groups of functions or methods that work closely together on a specific sub-problem.
+    *   **Apply Refactoring Patterns:** Use techniques like **Extract Class** (if a group of data and functions belong together) or **Extract Method/Function** (to pull out distinct steps).
+    *   **Break Down:** Refactor the identified blocks into new, smaller, cohesive modules or classes, each adhering to SRP.
+    *   **Ensure Clear Interconnection:** Explicitly define how these new, smaller modules/classes interact.
+        *   Use clear **function/method signatures with type hints** as contracts.
+        *   Pass well-defined data structures (e.g., dataclasses, simple dictionaries) between them, avoiding passing large, complex objects unnecessarily.
+        *   For complex interactions, consider adding **docstrings explaining the collaboration** or even linking to sequence diagrams in architectural documentation.
+        *   *(Recall the pattern applied during the `app.py` refactoring exercise).*
+4.  **Communication Interfaces:** Newly created smaller modules should primarily communicate through:
+    *   Direct function/method calls (within the same subsystem).
+    *   Class instantiation and method invocation (within the same subsystem).
+    *   Well-defined interfaces or abstract base classes.
+    *   For inter-subsystem communication, **strictly** use Mycelium messages as defined in `subsystem_boundaries.mdc`.
 
 ## Rationale
 
-Large files are harder to:
-*   **Read and Understand:** Cognitive load increases significantly.
-*   **Maintain:** Changes can have widespread, unintended consequences.
-*   **Test:** Unit testing becomes more complex and brittle.
-*   **Collaborate On:** Merge conflicts become more frequent and harder to resolve.
-*   **Process by AI:** Large files often exceed context limits for AI assistants, hindering analysis, refactoring, and code generation tasks.
+Large files significantly hinder development velocity and quality:
+*   **Readability & Understanding:** Increased cognitive load makes it harder to grasp the file's purpose and logic.
+*   **Maintainability:** Changes are riskier, with higher potential for unintended side effects. Debugging becomes more complex.
+*   **Testability:** Unit testing becomes difficult or impossible, requiring complex mocking or setup.
+*   **Collaboration:** Higher likelihood of merge conflicts.
+*   **AI Processing:** **Critically**, large files often exceed the context window limits of AI assistants. This severely limits their ability to analyze the code accurately, perform refactoring, generate relevant code, or apply edits correctly using tools like `edit_file`. Smaller, focused files provide clearer context, leading to more accurate and efficient AI assistance.
 
 Breaking down complex logic into smaller, cohesive modules improves all these aspects and aligns with EGOS principles of Conscious Modularity (NEXUS).
 
-## Example
+## Example (Conceptual Python)
 
-Instead of a single `data_processor.py` file handling loading, cleaning, validation, transformation, and saving:
+**Before Refactoring (`monolith_processor.py` > 500 LoC):**
 
-**Refactor into:**
-*   `data_loader.py`
-*   `data_cleaner.py`
-*   `data_validator.py` (potentially using ETHIK)
-*   `data_transformer.py`
-*   `data_storage.py`
+```python
+# monolith_processor.py
+class MonolithProcessor:
+    def __init__(self, config):
+        self.config = config
+        # ... many attributes ...
 
-These modules would then be orchestrated by a higher-level service or function. 
+    def load_data(self, source):
+        # ... complex loading logic ...
+        pass
+
+    def validate_data(self, raw_data):
+        # ... complex validation rules ...
+        pass
+
+    def clean_data(self, validated_data):
+        # ... complex cleaning steps ...
+        pass
+
+    def transform_data(self, cleaned_data):
+        # ... complex transformation logic ...
+        pass
+
+    def save_data(self, transformed_data, target):
+        # ... complex saving logic ...
+        pass
+
+    def process(self, source, target):
+        # Orchestrates all steps within the same class
+        raw = self.load_data(source)
+        validated = self.validate_data(raw)
+        cleaned = self.clean_data(validated)
+        transformed = self.transform_data(cleaned)
+        self.save_data(transformed, target)
+        print("Processing complete.")
+
+# --- Issues ---
+# - Very large file, hard to test steps individually.
+# - Violates SRP (loading, validating, cleaning, transforming, saving).
+# - Difficult for AI to understand or modify specific parts.
+```
+
+**After Refactoring (Multiple smaller files):**
+
+```python
+# data_loader.py
+from typing import Any, Dict
+class DataLoader:
+    def load(self, source: str) -> Any:
+        print(f"Loading data from {source}...")
+        # ... focused loading logic ...
+        return {"raw_data": "example"}
+
+# data_validator.py
+from typing import Any, bool
+# Potentially uses ETHIK rules
+class DataValidator:
+    def validate(self, data: Any) -> bool:
+        print("Validating data...")
+        # ... focused validation logic ...
+        return True # Assume valid for example
+
+# data_transformer.py
+from typing import Any, Dict
+class DataTransformer:
+    def transform(self, data: Any) -> Dict[str, Any]:
+        print("Transforming data...")
+        # ... focused transformation logic (includes cleaning) ...
+        return {"processed_data": data.get("raw_data", "") + "_transformed"}
+
+# data_storage.py
+from typing import Any, Dict
+class DataStorage:
+    def save(self, data: Dict[str, Any], target: str):
+        print(f"Saving data to {target}...")
+        # ... focused saving logic ...
+
+# main_orchestrator.py
+from data_loader import DataLoader
+from data_validator import DataValidator
+from data_transformer import DataTransformer
+from data_storage import DataStorage
+
+class MainOrchestrator:
+    def __init__(self):
+        # Dependencies are clearly defined and potentially injectable
+        self.loader = DataLoader()
+        self.validator = DataValidator()
+        self.transformer = DataTransformer()
+        self.storage = DataStorage()
+
+    def run_pipeline(self, source: str, target: str):
+        """Orchestrates the data processing pipeline."""
+        print("Starting pipeline...")
+        raw_data = self.loader.load(source)
+
+        if self.validator.validate(raw_data):
+            transformed_data = self.transformer.transform(raw_data)
+            self.storage.save(transformed_data, target)
+            print("Pipeline finished successfully.")
+        else:
+            print("Data validation failed. Pipeline stopped.")
+
+# --- Benefits ---
+# - Each file is small and focused (SRP).
+# - Easier to read, test, and maintain each component.
+# - Clear dependencies between components.
+# - AI can process each file easily within context limits.
+```

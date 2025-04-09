@@ -71,11 +71,38 @@
     opacity: 1;
 }
 
-/* Hamburger Menu (Placeholder) */
-.hamburger-menu {
+/* Hamburger Menu Button */
+.hamburger {
     display: none; /* Hidden by default, shown on mobile */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    /* TODO: Add styles for hamburger icon (lines, color, size) */
+    padding: 0;
+    z-index: 1001; /* Above nav */
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-on-primary, #fff);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger open animation (optional) */
+.hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* Responsive Navigation */
@@ -95,19 +122,28 @@
     .main-nav {
         flex-direction: column;
         align-items: center;
+        position: relative;
     }
-    .main-nav ul {
-        margin-top: var(--spacing-lg);
-        justify-content: center;
-        /* Needs further adjustment for hamburger menu interaction */
-        /* display: none; Initially hide for hamburger */
-        width: 100%;
-    }
-    /* TODO: Show hamburger menu */
-    /* .hamburger-menu { display: block; } */
 
-    /* TODO: Styles for when nav is open via hamburger */
-    /* .main-nav.open ul { display: flex; flex-direction: column; ... } */
+    .hamburger {
+        display: flex; /* Show hamburger on mobile */
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 1rem;
+        display: none; /* Hide menu by default */
+    }
+
+    .main-nav.menu-open ul {
+        display: flex; /* Show menu when open */
+    }
 }
 
 @media (max-width: 768px) {
@@ -125,3 +161,31 @@
         justify-content: center; /* Center link content */
     }
 } 
+/* Floating Chatbot Button Placeholder */
+.chatbot-button {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 1002;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.chatbot-button:hover,
+.chatbot-button:focus {
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* TODO: Integrate LLM chatbot interface here in future */

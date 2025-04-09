@@ -9,6 +9,84 @@ document.addEventListener('DOMContentLoaded', () => {
     const langIndicators = document.querySelectorAll('.lang-indicator'); // Select all indicators
     const supportedLangs = ['en', 'pt', 'es', 'fr', 'de', 'ru', 'zh']; // Added new languages
 
+    // Hamburger menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('.main-nav');
+
+    if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('menu-open');
+            hamburger.classList.toggle('open');
+            hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+    }
+
+    // Expandable subsystem cards
+    const expandToggles = document.querySelectorAll('.expand-toggle');
+
+    expandToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const card = toggle.closest('.subsystem-card');
+            if (card) {
+                card.classList.toggle('expanded');
+            }
+        });
+    });
+
+    // Quantum Prompt Generator Button Logic (Placeholders)
+    const generateBtn = document.getElementById('generate-prompt-btn');
+    const clearBtn = document.getElementById('clear-prompt-btn');
+    const copyBtn = document.getElementById('copy-prompt-btn');
+    const saveBtn = document.getElementById('save-prompt-btn');
+    const promptGoalInput = document.getElementById('prompt-goal');
+    const generatedPromptOutput = document.getElementById('generated-prompt');
+
+    if (generateBtn) {
+        generateBtn.addEventListener('click', () => {
+            // TODO: Implement LLM API call logic
+            // 1. Get input from promptGoalInput (and other future inputs)
+            // 2. Construct prompt for 'quasar-alpha'
+            // 3. Call backend API to interact with OpenRouter
+            // 4. Display generated prompt in generatedPromptOutput
+            console.log('Generate Prompt button clicked. Input:', promptGoalInput ? promptGoalInput.value : 'N/A');
+            if (generatedPromptOutput) {
+                generatedPromptOutput.innerHTML = '<p><i>Generating prompt... (LLM integration needed)</i></p>';
+            }
+        });
+    }
+
+    if (clearBtn && promptGoalInput) {
+        clearBtn.addEventListener('click', () => {
+            // TODO: Clear all input fields
+            promptGoalInput.value = '';
+            console.log('Clear button clicked.');
+            if (generatedPromptOutput) {
+                generatedPromptOutput.innerHTML = '<p><i>Your generated prompt will appear here...</i></p>'; // Reset output
+            }
+        });
+    }
+
+    if (copyBtn && generatedPromptOutput) {
+        copyBtn.addEventListener('click', () => {
+            // TODO: Implement copy-to-clipboard functionality
+            const promptText = generatedPromptOutput.textContent || generatedPromptOutput.innerText;
+            navigator.clipboard.writeText(promptText).then(() => {
+                console.log('Prompt copied to clipboard!');
+                // Optional: Show temporary feedback to user
+            }).catch(err => {
+                console.error('Failed to copy prompt: ', err);
+            });
+        });
+    }
+
+    if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+            // TODO: Implement save functionality (e.g., to local storage or user account if available)
+            console.log('Save Prompt button clicked. (Save logic needed)');
+        });
+    }
+
+
     // Function to set the language
     const setLanguage = (lang) => {
         if (!supportedLangs.includes(lang)) {

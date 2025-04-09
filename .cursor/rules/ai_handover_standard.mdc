@@ -3,13 +3,18 @@ description:
 globs: 
 alwaysApply: true
 ---
- ---
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
 description: Defines the standard process and content for AI-to-AI project context handovers within EGOS.
 globs: [] # Applies conceptually to the workflow, not specific files.
 alwaysApply: true
 tags: [workflow, ai_collaboration, koios, handover]
 priority: 2 # Important workflow standard
-version: 1.0.0
+version: 1.2.0
 ---
 
 # AI Handover Standard (KOIOS Workflow)
@@ -35,37 +40,124 @@ The outgoing AI **MUST** generate a handover summary containing the following se
 2.  **Project Overview:**
     *   Brief statement of the project (EGOS) and current high-level focus.
     *   Link to the main repository.
-    *   Explicit mention of core principles (Ethics, Modularity, English-only) and links to key documents (`quantum_prompt_core.mdc`, `PHILOSOPHY.md`).
+    *   Explicit mention of core principles (Ethics, Modularity, English-only) and links to key documents (`quantum_prompt_core.mdc`, `docs/PHILOSOPHY.md`).
     *   Reference to KOIOS standards location (`.cursor/rules/`, `subsystems/KOIOS/docs/STANDARDS.md`).
+    *   **Subsection 3.2.a: Security Considerations (Handling Sensitive Information)**
+        *   State clearly that sensitive data (API keys, passwords, etc.) **MUST NOT** be included directly in the handover summary.
+        *   Reference the standard secure mechanism for retrieving secrets within EGOS (e.g., environment variables, Vault, `.env` files).
 3.  **Summary of Recent Actions:**
     *   Bulleted list of significant accomplishments since the last summary/handoff.
     *   Reference specific files created/modified.
     *   Mention the relevant Git commit hash(es) if applicable.
-4.  **Current Project State:**
-    *   Overview of key files/directories relevant to the current focus (e.g., website CSS structure).
-    *   Confirmation of Git status (e.g., changes committed and pushed, working directory clean).
-    *   Status of related deployments (e.g., GitHub Pages build triggered).
-5.  **Initialization Instructions for Incoming AI:**
+    *   **Include brief rationale** for significant actions (the "why").
+4.  **Assumptions Made:**
+    *   List any significant assumptions made during the preceding work session (e.g., API stability, schema versions, requirement finality).
+5.  **Current Project State:**
+    *   Overview of key files/directories relevant to the current focus.
+    *   **Subsection 3.5.a: Git Status (Structured JSON Recommended)**
+        *   Provide detailed Git state information within a JSON code block:
+            ```json
+            {
+              "branch": "main",
+              "commit_sha": "<output of git rev-parse HEAD>",
+              "is_clean": "<output of git status --porcelain>",
+              "remote_sync_status": "<e.g., up-to-date, ahead X, behind Y>",
+              "recent_log": [
+                { "sha": "<short_sha>", "msg": "<commit msg>" },
+                // ... last 3-5 commits ...
+              ]
+            }
+            ```
+    *   **Subsection 3.5.b: CI/CD Status (Structured JSON Recommended)**
+        *   Provide specific CI/CD run details for the `commit_sha` within a JSON code block:
+            ```json
+            {
+              "pipeline_name": "<e.g., EGOS Main Build & Deploy>",
+              "workflow_run_url": "<URL to specific GitHub Actions run>",
+              "triggering_commit": "<commit_sha>",
+              "conclusion": "<success|failure|cancelled|skipped|timed_out>",
+              "artifacts_url": "<URL to artifacts, if any>",
+              "logs_url": "<URL to logs>"
+            }
+            ```
+    *   **Subsection 3.5.c: Environment Details (Structured YAML Recommended)**
+        *   List key dependencies and configurations relevant to the current focus within a YAML code block:
+            ```yaml
+            dependencies:
+              - service: <service_name>
+                type: <e.g., postgresql, grpc, rest_api>
+                version: "<version>"
+                endpoint: <hostname:port or URL>
+                status: <operational|degraded|down>
+              # ... other dependencies ...
+            configuration_files:
+              - path: <path/to/relevant/config.yaml>
+                notes: <e.g., Contains DB connection strings (via Vault)>
+              # ... other relevant config files ...
+            data_state:
+              - notes: <e.g., Assumes standard test fixtures loaded>
+            ```
+6.  **Known Issues, Risks, and Technical Debt (Structured YAML Recommended)**
+    *   Detail relevant issues, risks, or debt impacting the current focus or next steps within a YAML code block:
+        ```yaml
+        - id: <e.g., ISSUE-123, DEBT-045, RISK-007>
+          type: <Bug|Risk|Technical Debt>
+          description: <Detailed description>
+          severity: <High|Medium|Low>
+          status: <Open|Investigating|Identified|Mitigated>
+          relevant_files:
+            - <path/to/file1.py>
+            # ... other relevant files ...
+          notes: <Optional further context>
+        # ... other items ...
+        ```
+7.  **Initialization Instructions for Incoming AI:**
     *   Explicit guidance on *how* the new AI should get context.
     *   **Mandatory:** Instruct the AI to read the `.cursor/rules/` directory, highlighting critical rules (e.g., `quantum_prompt_core.mdc`, `commit_messages.mdc`, `ai_collaboration_guidelines.mdc`).
     *   Recommend reading key project documents relevant to the current tasks (e.g., PDDs, analysis reports, design docs).
-6.  **Long-Term Vision Recap:**
+    *   **Mandatory Verification:** Instruct the incoming AI to:
+        1.  **Confirm understanding** by re-summarizing the 'Pending Immediate Next Steps' (Section 3.9) and stating the 'commit_sha' reported in Section 3.5.a.
+        2.  **Perform context-specific diagnostic checks** suggested by the handover content (e.g., "Verify read access to file X mentioned in recent actions," "Verify connection to service Y listed in Environment Details").
+    *   **Mandatory Failure Protocol:** If any mandatory verification or diagnostic check fails:
+        1.  Report the specific failure clearly to the user.
+        2.  Halt further task execution.
+        3.  Request user guidance.
+8.  **Long-Term Vision Recap:**
     *   Briefly mention relevant higher-level goals or roadmap items discussed recently.
-7.  **Pending Immediate Next Steps:**
-    *   Clearly list the specific, actionable tasks that the incoming AI can choose from.
+9.  **Pending Immediate Next Steps (Structured YAML Recommended)**
+    *   Clearly list the specific, actionable tasks within a YAML code block, optionally including priority or dependencies:
+        ```yaml
+        - id: TASK-001
+          description: Implement JavaScript for hamburger menu toggle.
+          priority: High
+          relevant_files:
+            - docs/website/js/script.js
+            - docs/website/css/components/_navigation.css
+        - id: TASK-002
+          description: Begin refactoring subsystems/CRONOS/service.py.
+          priority: Medium
+          depends_on: null
+          relevant_files:
+            - subsystems/CRONOS/service.py
+            - docs/code_analysis/large_files_report.md
+        # ... other tasks ...
+        ```
     *   Request user confirmation on which task to proceed with.
-8.  **Standard Signature:** End with the EGOS signature (`✧༺❀༻∞ EGOS ∞༺❀༻✧`).
+10. **Standard Signature:** End with the EGOS signature (`✧༺❀༻∞ EGOS ∞༺❀༻✧`).
 
 ## 4. Example Handover Summary
 
-Refer to the summary generated on **2025-04-09** (see conversation history or commit `cc7f7e7` context) as a canonical example of this standard in practice.
+*(Note: This section should be updated with an example reflecting the v1.2.0 structure, including structured data snippets.)*
+Refer to the summary generated on **2025-04-09** (see conversation history or commit `cc7f7e7` context) as a starting point, but ensure future examples adhere to the full v1.2.0 standard.
 
 ## 5. Rationale
 
-*   **Context Preservation (CRONOS):** Ensures vital project knowledge isn't lost during transitions.
-*   **Efficiency:** Allows incoming AI/collaborators to get up to speed quickly.
-*   **Consistency (KOIOS):** Standardizes a crucial part of the collaborative workflow.
-*   **Clarity:** Reduces ambiguity about the project's current state and next steps.
+*   **Context Preservation (CRONOS):** Ensures vital project knowledge (state, rationale, assumptions, risks, environment) isn't lost during transitions.
+*   **Efficiency:** Allows incoming AI/collaborators to initialize faster and more reliably.
+*   **Consistency (KOIOS):** Standardizes a crucial part of the collaborative workflow with increased detail and structure.
+*   **Clarity & Reduced Ambiguity:** Structured data and explicit sections improve understanding for all parties.
+*   **Robustness:** Mandatory verification and failure protocols prevent errors from misunderstood context.
+*   **Security:** Explicitly addresses handling of sensitive information.
 
 ---
 ✧༺❀༻∞ EGOS ∞༺❀༻✧

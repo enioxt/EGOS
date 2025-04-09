@@ -55,15 +55,56 @@
     color: var(--accent-color); /* Change title to accent color on hover */
 }
 
-/* TODO: Add expanded styles for subsystem cards based on v3 prompt */
-.subsystem-card .details {
-    /* Styles for hidden details shown on hover/click */
-    display: none; /* Initially hidden */
+/* Expandable subsystem card content */
+.subsystem-card .subsystem-content {
+    display: none;
     margin-top: var(--spacing-md);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    text-align: left;
 }
 
-.subsystem-card:hover .details, /* Example: show on hover */
-.subsystem-card.expanded .details { /* Example: show with class */
+.subsystem-card.expanded .subsystem-content {
     display: block;
-} 
+}
+
+/* Subsystem header layout */
+.subsystem-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+}
+
+.subsystem-header h3 {
+    flex: 1;
+    margin: 0;
+}
+
+.expand-toggle {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.expand-toggle:hover,
+.expand-toggle:focus {
+    background-color: var(--primary-color);
+}
+
+.subsystem-link {
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.subsystem-link:hover,
+.subsystem-link:focus {
+    color: var(--primary-color);
+}

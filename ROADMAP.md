@@ -145,6 +145,7 @@
 * [In Progress] Enrich Subsystem READMEs (`MEDIUM`)
 * [Planned] Automate Documentation Generation (from Docstrings/Metadata) (`MEDIUM`)
 * [Planned] Create SPARC Implementation Examples (`MEDIUM`)
+* [Planned] Replicate Expandable Card Structure for Remaining Languages (FR, DE, RU, ZH) in `docs/website/index.html` (`LOW`)
 
 ### Phase 2: MVP Development & Refinement (Focus: Core Functionality)
 

@@ -73,24 +73,38 @@
                 <p>Describe your goal, and let our AI assistant help you craft a powerful Quantum Prompt. <span class="llm-notice">(Note: This feature utilizes the 'quasar-alpha' model via OpenRouter)</span></p>
             </div>
             <div class="prompt-generator-ui">
-                <!-- Placeholder for Generator UI -->
+                <!-- Input Section -->
                 <div class="generator-input">
-                    <label for="prompt-goal">Describe your desired outcome:</label>
-                    <textarea id="prompt-goal" rows="4" placeholder="e.g., 'Generate Python code for a web scraper', 'Explain quantum entanglement simply', 'Write a creative story about AI consciousness'"></textarea>
-                    <!-- TODO: Add more input fields for context, constraints, persona, etc. -->
+                    <label for="prompt-goal">1. Describe your desired outcome:</label>
+                    <textarea id="prompt-goal" name="prompt-goal" rows="4" placeholder="e.g., 'Generate Python code for a web scraper', 'Explain quantum entanglement simply', 'Write a creative story about AI consciousness'"></textarea>
+                    <!-- TODO: Add more structured input fields for context, constraints, persona, format, etc. -->
+                    <!-- Example:
+                    <label for="prompt-context">Optional Context:</label>
+                    <textarea id="prompt-context" name="prompt-context" rows="2" placeholder="Provide background info..."></textarea>
+                    -->
                 </div>
+
+                <!-- Controls Section -->
                 <div class="generator-controls">
-                    <button class="cta-button primary"><i class="fas fa-cogs"></i> Generate Prompt</button>
+                    <button id="generate-prompt-btn" class="cta-button primary"><i class="fas fa-cogs"></i> Generate Prompt</button>
+                    <button id="clear-prompt-btn" class="cta-button secondary"><i class="fas fa-eraser"></i> Clear</button>
+                    <!-- TODO: Implement JS for these buttons -->
                 </div>
+
+                <!-- Output Section -->
                 <div class="generator-output">
-                    <label>Generated Quantum Prompt:</label>
-                    <div class="prompt-output-area">
+                    <label for="generated-prompt">2. Generated Quantum Prompt:</label>
+                    <div id="generated-prompt" class="prompt-output-area" aria-live="polite">
                         <!-- Placeholder for generated prompt -->
-                        <p><i>Your generated prompt will appear here...</i></p>
+                        <p><i>Your generated prompt will appear here after generation...</i></p>
                     </div>
-                    <!-- TODO: Add options to copy, refine, or save the prompt -->
+                    <div class="output-actions">
+                         <button id="copy-prompt-btn" class="cta-button tertiary"><i class="fas fa-copy"></i> Copy</button>
+                         <button id="save-prompt-btn" class="cta-button tertiary"><i class="fas fa-save"></i> Save</button>
+                         <!-- TODO: Implement JS for copy/save functionality -->
+                    </div>
                 </div>
-                 <!-- TODO: Add LLM Integration Logic -->
+                 <!-- TODO: Add LLM Integration Logic (JS to handle button clicks, API calls, and update output) -->
             </div>
         </section>
 

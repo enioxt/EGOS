@@ -44,7 +44,9 @@
 }
 
 .generator-controls {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -57,10 +59,25 @@
     font-family: monospace; /* Monospace font for prompt output */
     white-space: pre-wrap; /* Preserve whitespace */
     color: var(--text-light);
+    line-height: 1.5;
 }
 
 .prompt-output-area p {
     margin: 0;
+}
+
+.output-actions {
+    margin-top: var(--spacing-md);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+}
+
+/* Assuming .cta-button.secondary and .tertiary are defined in _buttons.css */
+/* Add specific overrides if needed */
+.output-actions .cta-button {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
 }
 
 /* Examples Grid */
