@@ -81,6 +81,7 @@ def render_sidebar():
     (simulated) real-time view of the system's status and operation.
     """)
     st.sidebar.header("🔗 Useful Links")
+    st.sidebar.markdown("- [🌐 Official Website](https://enioxt.github.io/egos)")
     st.sidebar.markdown("- [🐙 Main Repository (GitHub)](https://github.com/enioxt/EGOS)")
     st.sidebar.markdown(
         "- [🗺️ Project Roadmap](https://github.com/enioxt/EGOS/blob/main/ROADMAP.md)"

@@ -2,6 +2,8 @@
 
 This dashboard provides a real-time view of the EGOS ecosystem's status, enabling monitoring of all subsystems, key metrics, and system health.
 
+**🌐 [Official Website: https://enioxt.github.io/egos](https://enioxt.github.io/egos)**
+
 ## Features
 
 - **System Status Overview**: Key metrics and status indicators for all subsystems

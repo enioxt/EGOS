@@ -4,6 +4,8 @@ First off, thank you for considering contributing to **EGOS**! Your involvement 
 
 This document provides guidelines for contributing to the project. Please read it carefully to ensure a smooth collaboration process.
 
+**🌐 Official Website: [https://enioxt.github.io/egos](https://enioxt.github.io/egos)**
+
 ## Code of Conduct
 
 By participating in this project, you agree to abide by our [**Code of Conduct**](CODE_OF_CONDUCT.md). Please read it to understand the standards of behavior we expect within our community.

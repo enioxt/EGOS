@@ -2,6 +2,7 @@
 
 **Version:** 1.3
 **Last Updated:** 2025-04-08
+**🌐 Website:** [https://enioxt.github.io/egos](https://enioxt.github.io/egos)
 
 **Primary References:**
 
