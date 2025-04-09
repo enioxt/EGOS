@@ -10,12 +10,18 @@
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid var(--border-color);
+    height: 100%; /* Ensure equal heights */
+    display: flex;
+    flex-direction: column;
+    /* Golden ratio proportions */
+    aspect-ratio: 1/1.618;
 }
 
 /* Shared Card Hover Effect */
 .card-hover:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 18px var(--hover-shadow-color);
+    border-color: rgba(255, 102, 0, 0.2); /* Subtle accent color hint */
 }
 
 .principle-item h3,
@@ -23,8 +29,26 @@
 .tech-item h3 {
     margin-top: var(--spacing-sm);
     margin-bottom: var(--spacing-md);
-    font-size: 1.3rem;
+    font-size: 1.25rem; /* Adjusted for better proportion */
     color: var(--primary-color); /* Use primary color for heading */
+    position: relative;
+    padding-bottom: var(--spacing-sm);
+}
+
+/* Subtle underline for card headings */
+.principle-item h3::after,
+.subsystem-card h3::after,
+.tech-item h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38px; /* Golden ratio based (61.8px ÷ 1.618) */
+    height: 2px;
+    background-color: var(--accent-color);
+    opacity: 0.7;
+    border-radius: 1px;
 }
 
 /* Specific H3 for subsystems for potentially longer titles */
@@ -37,7 +61,23 @@
 .tech-item p {
     font-size: 0.95rem;
     color: var(--text-light);
-    line-height: 1.6;
+    line-height: 1.618; /* Golden ratio for optimal readability */
+    flex-grow: 1; /* Let paragraph take available space */
+}
+
+/* Icon styling with golden ratio proportions */
+.principle-item i,
+.subsystem-card i,
+.tech-item i {
+    margin-bottom: var(--spacing-md);
+    color: var(--accent-color);
+    /* Create circular background */
+    width: 61.8px;
+    height: 61.8px;
+    line-height: 61.8px;
+    background-color: rgba(255, 102, 0, 0.08);
+    border-radius: 50%;
+    display: inline-block;
 }
 
 /* Specific styling for subsystem cards as links */

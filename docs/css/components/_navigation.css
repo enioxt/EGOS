@@ -5,10 +5,11 @@
     display: flex;
     align-items: center;
     /* Removed flex-wrap and justify-content, handled by media queries */
+    gap: calc(var(--spacing-lg) / 1.618); /* Golden ratio based spacing */
 }
 
 .main-nav ul li {
-    margin-left: var(--spacing-lg);
+    margin-left: var(--spacing-md);
 }
 
 .main-nav ul li a {
@@ -16,12 +17,32 @@
     text-decoration: none;
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--border-radius-sm);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease;
     font-weight: 500;
     font-family: var(--font-heading); /* Heading font for nav links */
     display: flex;
     align-items: center;
     white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle hover effect with indicator line */
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover::after,
+.main-nav ul li a:focus::after {
+    width: 61.8%; /* Golden ratio percentage */
 }
 
 .main-nav ul li a i {
@@ -30,7 +51,7 @@
 
 .main-nav ul li a:hover,
 .main-nav ul li a:focus {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.15);
     /* color: #eee; Lighter color not needed with direct white */
     text-decoration: none;
 }
@@ -40,6 +61,27 @@
     color: rgba(255, 255, 255, 0.5);
     margin-left: var(--spacing-md) !important;
     user-select: none;
+}
+
+.lang-selector {
+    position: relative; /* Establish positioning context */
+}
+
+.lang-dropdown {
+    display: none; /* Hidden by default, toggled by JS */
+    position: absolute;
+    top: 100%; /* Position below the EN link */
+    right: 0; /* Align to the right of the parent */
+    background-color: var(--primary-color); /* Match header background */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: none;
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    list-style: none;
+    min-width: 50px; /* Ensure minimum width */
+    z-index: 1001; /* Above other header content */
+    box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .lang-switch {
@@ -57,7 +99,7 @@
 
 .lang-switch:hover,
 .lang-switch:focus {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
     text-decoration: none;
     opacity: 1;
     color: var(--text-on-primary) !important;
@@ -69,6 +111,23 @@
     text-decoration: none;
     color: var(--text-on-primary) !important;
     opacity: 1;
+}
+
+.lang-dropdown li {
+    margin: 0;
+}
+
+.lang-dropdown li a {
+    display: block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    color: var(--text-on-primary);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.lang-dropdown li a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    text-decoration: none;
 }
 
 /* Hamburger Menu Button */

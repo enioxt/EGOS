@@ -56,7 +56,10 @@ if "nats_connection_status" not in st.session_state:
 # --- Theme Toggle ---
 def change_theme():
     """Handle theme toggle."""
-    new_theme = "dark" if st.session_state.theme_toggle else "light"
+    # Determine the new theme based on the current theme
+    current_theme = st.session_state.get("theme", "dark") # Default to dark if somehow not set
+    new_theme = "light" if current_theme == "dark" else "dark"
+
     st.session_state.theme = new_theme
 
     # Log theme change

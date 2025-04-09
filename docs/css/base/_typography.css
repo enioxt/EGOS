@@ -1,0 +1,143 @@
+/* Base Typography Styles */
+
+body {
+    font-family: 'Inter', sans-serif; /* Changed */
+    color: var(--text-primary);
+    line-height: 1.65; /* Slightly increased line height */
+    font-size: 1.05rem; /* Slightly increased base font size */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif; /* Changed */
+    font-weight: 700; /* Bold for headings */
+    color: var(--heading-primary);
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem; /* Example size */
+}
+
+h2 {
+    font-size: 2rem; /* Example size */
+}
+
+h3 {
+    font-size: 1.5rem; /* Example size */
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--link-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+strong, b {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f4f4f4;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 1em;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+/* Specific adjustments for readability */
+.tagline {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.section-intro {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 800px; /* Limit width for readability */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+.principle-item p, .subsystem-content p {
+    font-size: 0.95rem;
+}
+
+/* Base Typography */
+h1, h2, h3 {
+    margin-bottom: var(--spacing-lg);
+    color: var(--primary-color);
+    line-height: 1.3;
+}
+
+h1 {
+    font-size: 2.8rem; /* Consider responsive adjustments later */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    padding-bottom: var(--spacing-md);
+}
+
+/* Subtle underline effect for H2 */
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+}
+
+h3 {
+    /* Color is often component-specific, removed global h3 color */
+}
+
+p {
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-color); /* Ensure default p color */
+}
+
+/* Basic List Styling */
+ul, ol {
+    padding-left: var(--spacing-xl); /* Standard indent */
+    margin-bottom: var(--spacing-lg);
+}
+
+li {
+    margin-bottom: var(--spacing-sm);
+}
+
+strong, b {
+    font-weight: 600; /* Slightly bolder based on Inter weights */
+}
+
+/* Specific list styling moved to components/pages if needed */
+/* Example from #vision moved for modularity */
+/* #vision ul { ... } */ 

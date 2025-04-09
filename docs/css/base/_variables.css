@@ -1,0 +1,33 @@
+:root {
+    /* Color Palette (Prompt v3) */
+    --primary-color: #081e36; /* Darker Deep Blue */
+    --accent-color: #FF6600; /* Warm Orange */
+    --background-color: #f8f9fa; /* Very light grey */
+    --surface-color: #ffffff; /* White for cards/surfaces */
+    --text-color: #333; /* Dark grey for text */
+    --text-light: #666; /* Lighter grey text */
+    --border-color: #e0e0e0; /* Light border color */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* Softer shadow */
+    --hover-shadow-color: rgba(0, 0, 0, 0.12); /* Slightly more pronounced hover shadow */
+    --text-on-primary: #ffffff; /* White text on dark blue */
+    --text-on-accent: #ffffff; /* White text on orange */
+
+    /* Typography (Prompt v3) */
+    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Playfair Display', serif;
+
+    /* Spacing Unit based on Golden Ratio (1:1.618) */
+    --spacing-base: 8px; /* Base unit */
+    --spacing-xs: var(--spacing-base); /* 8px */
+    --spacing-sm: calc(var(--spacing-base) * 1.3); /* ~10px */
+    --spacing-md: calc(var(--spacing-base) * 1.618); /* ~13px - Golden Ratio */
+    --spacing-lg: calc(var(--spacing-base) * 2.618); /* ~21px - Golden Ratio squared */
+    --spacing-xl: calc(var(--spacing-base) * 4.236); /* ~34px - Golden Ratio cubed */
+    --spacing-xxl: calc(var(--spacing-base) * 6.854); /* ~55px - Golden Ratio to 4th power */
+
+    /* Border Radius - also following golden ratio progression */
+    --border-radius-sm: 3px;
+    --border-radius-md: 5px;
+    --border-radius-lg: 8px;
+    --border-radius-xl: 13px;
+} 

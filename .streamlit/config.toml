@@ -1,0 +1,25 @@
+[theme]
+# Primary accent for interactive elements
+primaryColor = "#FF6600"  # From --accent-color
+
+# Background color for the main content area
+backgroundColor = "#f8f9fa"  # From --background-color
+
+# Background color for sidebar and most interactive widgets
+secondaryBackgroundColor = "#ffffff"  # From --surface-color
+
+# Color used for almost all text
+textColor = "#333"  # From --text-color
+
+# Font family for all text in the app, except code blocks
+font = "Inter"  # From --font-body
+
+# Additional custom CSS to match with the website
+[server]
+enableStaticServing = true  # Enable serving static files
+
+[browser]
+gatherUsageStats = false  # Disable usage statistics
+
+[ui]
+hideTopBar = true  # Hide the top bar to make interface cleaner 

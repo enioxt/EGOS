@@ -126,6 +126,7 @@
 * [Planned] Integrate ETHIK Validation into Key Workflows (e.g., CORUJA output) (`HIGH`)
 * [Planned] Refactor `validator.py` into smaller modules (Adhering to `file_modularity.mdc`) (`MEDIUM`)
 * [Planned] Add SPARC Task Validation Rules (`MEDIUM`)
+* `[Planned] Refine ETHIK Authentication Design based on SaaS patterns (MEDIUM)` (See `research/SaaS_Framework_Analysis.md`)
 
 ### Core AI Orchestration (CORUJA Lead)
 
@@ -137,15 +138,61 @@
 * [Planned] Integrate with Mycelium for Task Requests (`CRITICAL`)
 * [Planned] Implement Model Selection for SPARC Tasks (`MEDIUM`)
 
-### Documentation & Website
+### Project Documentation & Open Source Readiness (KOIOS Lead)
 
-* [DONE] Initial Static Website Setup (`MEDIUM`)
-* [DONE] Document SPARC Integration (`HIGH`)
-* [In Progress] Translate Website Placeholders (`LOW`)
-* [In Progress] Enrich Subsystem READMEs (`MEDIUM`)
-* [Planned] Automate Documentation Generation (from Docstrings/Metadata) (`MEDIUM`)
-* [Planned] Create SPARC Implementation Examples (`MEDIUM`)
-* [Planned] Replicate Expandable Card Structure for Remaining Languages (FR, DE, RU, ZH) in `docs/website/index.html` (`LOW`)
+**Goal:** Conduct a comprehensive review and update of all project documentation to ensure clarity, accuracy, and completeness, preparing EGOS for open-source release and external collaboration. **(Critical Prerequisite for effective LLM Integration, especially RAG).**
+**Status:** Planned (Phase 1 Starting)
+**Priority:** HIGH
+
+* **Phase 1: Foundational Analysis & Audit (Immediate Priority - Q2 2025)**
+  * [Planned] **Task 1.1: Deep EGOS System Analysis:** Perform thorough review of EGOS architecture, core module code, data flows, existing APIs, and authentication mechanisms (Ref: LLM Integration Plan I.B).
+  * [Planned] **Task 1.2: Stakeholder Input:** Gather insights from developers/architects on system nuances and potential LLM use cases.
+  * [Planned] **Task 1.3: Documentation Audit:** Assess all existing documentation (`/docs`, `.cursor/rules/`, subsystem docs) for completeness, accuracy, structure, format, and searchability. Identify gaps and inconsistencies.
+  * [Planned] **Task 1.4: Initial EGOS Summary:** Create the concise, high-level EGOS summary document intended for initial LLM context priming (Ref: LLM Integration Plan I.C).
+* **Phase 2: Content Standardization & Enrichment (Q2/Q3 2025)**
+  * [Planned] **Task 2.1: Define Standards:** Establish documentation templates, style guide, and definitive format (e.g., Markdown in repo, potentially feeding a tool like MkDocs).
+  * [Planned] **Task 2.2: Prioritized Content Creation/Revision:** Focus on documenting critical subsystems/features relevant to initial LLM support. Develop clear natural language descriptions, practical examples, diagrams (update/create), and relevant code snippets (Ref: LLM Integration Plan IV.B).
+  * [Planned] **Task 2.3: Structure & Searchability:** Organize documentation logically (e.g., by subsystem) and ensure the chosen format is machine-parsable and ideally searchable (prep for RAG).
+  * [Planned] **Task 2.4: Refine Website Standards:** Review and potentially further refine the enhanced `website_standards.mdc` (v1.1.0) based on feedback from initial website implementation tasks (Phase W1/W2).
+* **Phase 3: Alignment & Maintenance Process (Q3 2025)**
+  * [Planned] **Task 3.1: Code/Doc Alignment:** Verify documentation accurately reflects current implementation logic, interfaces, and KOIOS standards. Update docstrings/comments (`python_documentation.mdc`).
+  * [Planned] **Task 3.2: Establish Maintenance Workflow:** Integrate documentation updates into the standard development lifecycle. Assign ownership.
+* **Phase 4: Open Source Preparation (Q3/Q4 2025)**
+  * [Planned] **Task 4.1:** Create `CONTRIBUTING.md` guidelines.
+  * [Planned] **Task 4.2:** Add appropriate `LICENSE` file.
+  * [Planned] **Task 4.3:** Review repository structure and file organization for external clarity.
+
+### Website Enhancement & LLM Integration (Phased Approach)
+
+**Goal:** Enhance the EGOS project website (`docs/index.html` etc.) by integrating an LLM (initially `quasar-alpha` via OpenRouter, with planned fallbacks) for dynamic user assistance, grounded in project knowledge, while managing risks and costs.
+**Status:** Planned (Phase 1 Starting after Doc Phase 1)
+**Priority:** HIGH
+**Overall Considerations:** Prioritize Server-Side Security, UI Simplicity, Active Cost Control. Acknowledge **significant risks** associated with `openrouter/quasar-alpha` (Alpha status, potential instability/discontinuation, explicit logging policy) requiring mandatory fallback planning.
+
+* **Phase 1: Foundational MVP (Focus: Core Functionality, Security Basics - Q2/Q3 2025)**
+  * [Planned] **Task W1.1: Basic Backend Service:** Implement secure backend endpoint (Python/Node.js aligned with EGOS stack) for chat interaction.
+  * [Planned] **Task W1.2: Secure API Key Handling:** Implement API key storage using **Secrets Manager (preferred)** or Environment Variables. Ensure key is never exposed client-side (Ref: LLM Plan II.D, VI.A).
+  * [Planned] **Task W1.3: Basic OpenRouter Integration:** Connect backend to `quasar-alpha`, using the initial EGOS Summary (from Doc Phase 1.4) as basic context in the system prompt (Ref: LLM Plan V.A, V.C Option A). Implement basic error handling for API calls.
+  * [Planned] **Task W1.4: Simple Chat UI:** Develop and integrate the basic chat interface component into `docs/index.html` (Ref: LLM Plan III.B).
+  * [Planned] **Task W1.5: Basic Rate Limiting:** Implement initial IP-based rate limiting on the backend endpoint (Ref: LLM Plan VI.C).
+  * [Planned] **Task W1.6: Basic Analytics:** Configure GA4 with essential event tracking (`llm_message_sent`, `llm_response_received`) (Ref: LLM Plan VII.B).
+* **Phase 2: Enhancement & Contextualization (Focus: Usefulness, Control, Fallback Prep - Q3/Q4 2025)**
+  * [Planned] **Task W2.1: Documentation Integration (RAG - Keyword):** Implement server-side documentation retrieval using **keyword search** based on the improved documentation (from Doc Phase 2). Inject relevant snippets into LLM prompts (Ref: LLM Plan IV.C Option B - Keyword, V.C). Requires documentation to be indexed.
+  * [Planned] **Task W2.2: System Prompt Refinement:** Iteratively refine the LLM system prompt based on observed behavior and feedback (Ref: LLM Plan V.A).
+  * [Planned] **Task W2.3: Granular Rate Limiting:** Implement User ID-based rate limiting (requires integration with EGOS auth) and stricter usage limits. Use **Redis** or similar for distributed counter storage if backend scales (Ref: LLM Plan VI.C, VI.D, VI.E).
+  * [Planned] **Task W2.4: Cost Monitoring & Web Search:** Implement active cost monitoring. Evaluate and *cautiously* enable web search (`:online`) if deemed necessary, factoring in associated costs and limiting its use (Ref: LLM Plan VI.D, V.B).
+  * [Planned] **Task W2.5: Expanded Analytics:** Implement detailed GA4 event tracking (doc interactions, feedback, errors) and configure Custom Dimensions/Metrics. Optionally implement Hotjar (free tier) for qualitative insights (Ref: LLM Plan VII.B, VII.C).
+  * [Planned] **Task W2.6: Formal Alternative LLM Evaluation:** Systematically evaluate 2-3 alternative models on OpenRouter based on defined criteria (cost, context, performance, reliability) using EGOS-specific tasks. Document findings (Ref: LLM Plan VIII).
+* **Phase 3: Optimization & Resilience (Focus: UX, Cost-Efficiency, Future-Proofing - Q4 2025 / Q1 2026)**
+  * [Planned] **Task W3.1: UI/UX Polishing:** Refine chat UI based on analytics/feedback. Fully implement response **streaming (SSE)** for better perceived responsiveness (Ref: LLM Plan V.D).
+  * [Planned] **Task W3.2: RAG Optimization (Semantic Search - Optional):** If keyword search proves insufficient, investigate and potentially implement semantic search using embeddings and a vector database (Ref: LLM Plan IV.C Option B - Semantic). Assess complexity vs. benefit.
+  * [Planned] **Task W3.3: LLM Parameter Tuning:** Optimize `temperature`, `max_tokens`, etc., for cost, performance, and quality (Ref: LLM Plan V.D).
+  * [Planned] **Task W3.4: Implement Fallback Mechanism:** Build capability in the backend to switch to a pre-evaluated alternative LLM if `quasar-alpha` fails or is deprecated (Ref: LLM Plan VIII.D).
+  * [Planned] **Task W3.5: Migration Strategy:** Develop plan for fully migrating off `quasar-alpha` if necessary.
+  * [Planned] **Task W3.6: Advanced Features (Optional):** Explore features like tool calling if beneficial for EGOS interactions.
+  * [Planned] **Task W3.7 (Parallel): Website Design & UX Improvements** (Refine CSS, add diagram placeholders, implement subtle animations, ensure intuitive navigation based on `research/WebSite Enio Grok e Gemini.txt`).
+    * *Note: Remember to put extra care into the dashboard design. The site and the dashboard must be visually aligned — everything should look beautiful and cohesive. However, don't make major changes to the dashboard, as it already looks good. Just fix the visible issues on the page and review the code again to correct any minor details.*
+  * [Planned] **Task W3.8 (Parallel): User Behavior Analysis (Deferred/Basic)** (Implement basic analytics, defer advanced tools like Hotjar/OpenReplay unless explicitly prioritized later).
 
 ### Phase 2: MVP Development & Refinement (Focus: Core Functionality)
 
@@ -182,9 +229,15 @@
   * **Secure External Access:** Investigate patterns ... for CORUJA agents/tools ... **(See background studies in `research/`)**
   * **Decentralized Automation:** Explore reliable ... mechanisms ... for CORUJA and other subsystems. **(See background studies in `research/`)**
   * **Agent Monitoring & Observability:** Research integration with platforms ... **(See background studies in `research/`)**
+  * `[Planned] Research integrating Clanker API for simplified token creation on Base network (LOW)` (See `research/Clanker_Analysis.md`)
+  * `[Planned] Research alternative contributor reward models inspired by Clanker's creator-centric approach (MEDIUM - R&D)` (See `research/Clanker_Analysis.md`)
+  * `[Planned] Research: AI for Subsystem Configuration Generation (MEDIUM - R&D)` (See `research/SaaS_Framework_Analysis.md`)
+  * `[Planned] Research: 3rd-Party API Integration Strategy (Stripe, S3, etc.) (MEDIUM - R&D)` (See `research/SaaS_Framework_Analysis.md`)
 * **Documentation Maintenance:** Continuously update all documentation (MQP, Roadmap, Strategy, Subsystem READMEs, Docstrings).
 * **KOIOS Standards Evolution:** Refine and expand KOIOS standards based on project needs and best practices.
 * **Community Building & Licensing:** Define and implement strategy.
+* **Deployment Automation (HARMONY Lead):**
+  * `[Planned] Enhance Deployment Automation (Docker, Python scripts) (MEDIUM)` (See `research/SaaS_Framework_Analysis.md`)
 
 ---
 

@@ -9,6 +9,11 @@ globs:
 alwaysApply: true
 ---
 ---
+description: 
+globs: 
+alwaysApply: true
+---
+---
 description: Defines the standard process and content for AI-to-AI project context handovers within EGOS.
 globs: [] # Applies conceptually to the workflow, not specific files.
 alwaysApply: true

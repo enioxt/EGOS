@@ -1,0 +1,69 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: EGOS Website Development Standards
+globs: ["docs/website/*.html", "docs/website/css/**/*.css", "docs/website/js/**/*.js"]
+alwaysApply: true
+priority: 1
+version: 1.0.0
+tags: [website, frontend, koios, standards]
+---
+
+# EGOS Website Development Standards
+
+## 1. Language & Accessibility
+
+- All content, comments, and code **must be in English** (except localized content placeholders).
+- Follow accessibility best practices (semantic HTML5, ARIA labels, contrast).
+
+## 2. Structure & Modularity
+
+- Use **semantic HTML5** with clear sectioning (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`).
+- Organize CSS modularly by components and pages.
+- Organize JS modularly, with clear event listeners and comments.
+
+## 3. Multilingual Support
+
+- Use `.lang-content` divs for each language.
+- Toggle visibility via JS.
+- Use placeholders for untranslated content.
+
+## 4. Styling
+
+- Follow the design concept in `research/WebSite Enio Grok e Gemini.txt`.
+- Color palette: Deep Blue `#0A2342`, Warm Orange `#FF6600`, light backgrounds.
+- Typography: Inter (body), Playfair Display (headings).
+- Emphasize minimalism: whitespace, clear hierarchy, limited color use.
+- Responsive design: mobile-first, media queries, hamburger menu.
+
+## 5. Interactivity
+
+- Implement hamburger menu toggle.
+- Implement expandable subsystem cards.
+- Add placeholders for LLM chatbot and contextual help icons.
+- Add comments for future animations, LLM integration, and advanced interactivity.
+
+## 6. Performance
+
+- Add TODO comments for:
+  - Lazy loading images.
+  - Minifying CSS/JS.
+  - Async/defer script loading.
+- Optimize for fast load times.
+
+## 7. Documentation
+
+- Document all website features and changes in `README.md` and `docs/website/WEBSITE_DESIGN.md`.
+- Update roadmap with all website-related tasks and progress.
+
+## 8. Compliance
+
+- Follow KOIOS standards for code quality, documentation, and commit messages.
+- Align with ETHIK principles (privacy, accessibility, clarity).
+
+---
+
+✧༺❀༻∞ EGOS ∞༺❀༻✧
