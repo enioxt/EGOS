@@ -234,6 +234,8 @@
   * `[Planned] Research alternative contributor reward models inspired by Clanker's creator-centric approach (MEDIUM - R&D)` (See `research/Clanker_Analysis.md`)
   * `[Planned] Research: AI for Subsystem Configuration Generation (MEDIUM - R&D)` (See `research/SaaS_Framework_Analysis.md`)
   * `[Planned] Research: 3rd-Party API Integration Strategy (Stripe, S3, etc.) (MEDIUM - R&D)` (See `research/SaaS_Framework_Analysis.md`)
+  * **[Planned] Task IDE-1: Develop EGOS AI-Integrated Web IDE:** Research and implement a web-based IDE (potentially leveraging VS Code web components or Codespaces APIs) with deep integration of CORUJA for context-aware chat, code generation, and editing, mirroring Cursor's capabilities within the EGOS framework. (`MEDIUM - R&D`, Phase 4/5)
+  * **[Planned] Task IDE-2: Design Simplified Mobile UI for Web IDE:** Create a streamlined mobile-first interface for the EGOS Web IDE, focusing on core review, status checking, and quick interaction functionalities. (`LOW - R&D`, Phase 5)
 * **Documentation Maintenance:** Continuously update all documentation (MQP, Roadmap, Strategy, Subsystem READMEs, Docstrings).
 * **KOIOS Standards Evolution:** Refine and expand KOIOS standards based on project needs and best practices.
 * **Community Building & Licensing:** Define and implement strategy.
