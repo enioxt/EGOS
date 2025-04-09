@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Disallow common virtual environment and cache folders
+Disallow: /.venv/
+Disallow: /__pycache__/
+
+# Disallow specific sensitive or irrelevant paths if needed later
+# Disallow: /config/
+# Disallow: /.cursor/
+
+# Add sitemap later when available
+# Sitemap: https://enioxt.github.io/egos/sitemap.xml 
