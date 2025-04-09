@@ -253,6 +253,35 @@
   * **[Planned] Task AMPLIFY-OUTREACH:** Develop strategy for identifying and engaging potential collaborators and guest blogging opportunities. (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
   * **[Planned] Task DESIGN-VISUAL-GUIDE:** Develop a visual style guide for EGOS (website, docs, presentations) reflecting the "Art" principle. (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
 
+**NEW SECTION: Website Stabilization & QPG Phase 1 (Q2/Q3 2025)**
+
+**Goal:** Stabilize the static website foundation and plan/develop the initial Quantum Prompt Generator (QPG) MVP.
+**Status:** In Progress
+**Priority:** HIGH
+
+* **Phase W1: Website Foundation Stabilization & Enhancement (High Priority)**
+  * **Goal:** Ensure the static website is stable, accessible, maintainable, fully styled (dark theme), and prepared for future integrations.
+  * **Tasks:**
+    * `[Planned] refactor(website/i18n)`: Replace duplicated HTML language blocks with a JavaScript/JSON-based internationalization solution.
+    * `[Planned] fix(website/html)`: Correct HTML semantics (logo `<h1>`, icon ARIA, `target="_blank"` rel attributes, language switcher links, non-semantic separators).
+    * `[Planned] fix(website/a11y)`: Implement missing ARIA attributes (`aria-expanded`, `aria-controls`, necessary `id`s) for interactive elements (subsystem toggles, language dropdown).
+    * `[Planned] feat(website/js)`: Implement core JS functionality for hamburger menu, subsystem toggles, and the new i18n language switcher (including ARIA state management).
+    * `[Planned] feat(website/a11y)`: Ensure full keyboard navigation and visible focus states for all interactive elements (requires CSS/JS).
+    * `[In Progress] style(website/css)`: Complete implementation and refinement of the dark theme across all modular CSS files (`layout`, `components`, `typography`, etc.).
+    * `[Planned] docs(website/content)`: Populate final content and translations using the new i18n system.
+    * `[Planned] feat(website/assets)`: Integrate final visual assets (e.g., SVG logo, favicon).
+    * `[Planned] test(website)`: Conduct thorough testing (responsive design, functionality, accessibility (WCAG AA), cross-browser).
+
+* **Phase QPG1: Quantum Prompt Generator (QPG) - Planning & MVP (Medium Priority - Parallel)**
+  * **Goal:** Plan and develop a Minimum Viable Product (MVP) for the Quantum Prompt Generator SaaS tool, integrated into the website.
+  * **Tasks:**
+    * `[Planned] docs(qpg/planning)`: Define detailed QPG UX/UI flow, select initial LLMs (free/paid tiers), design backend architecture, plan user/credit/payment system (if applicable for MVP).
+    * `[Planned] docs(qpg/legal)`: Draft comprehensive Privacy Policy & Terms of Use addressing data usage/personalization, ensuring ETHIK compliance and user control mechanisms (opt-in/out). (**Requires ETHIK review**).
+    * `[Planned] feat(qpg/backend)`: Develop MVP backend API for prompt processing and LLM integration.
+    * `[Planned] feat(qpg/frontend)`: Develop MVP frontend JS logic within the website's `#prompt-generator` section to interact with the backend API.
+    * `[Planned] chore(qpg/deploy)`: Deploy QPG MVP alongside the website.
+    * `[Planned] chore(qpg/iteration)`: Gather user feedback and plan next iteration based on MVP performance.
+
 ---
 
 ## 🔮 Future Phases (Q4 2025 Onwards)
