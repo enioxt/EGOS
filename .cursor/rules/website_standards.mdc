@@ -1,68 +1,104 @@
 ---
-description: 
-globs: 
-alwaysApply: true
----
----
 description: EGOS Website Development Standards
 globs: ["docs/website/*.html", "docs/website/css/**/*.css", "docs/website/js/**/*.js"]
 alwaysApply: true
 priority: 1
-version: 1.0.0
+version: 1.1.0
 tags: [website, frontend, koios, standards]
 ---
 
-# EGOS Website Development Standards
+# EGOS Website Development Standards (v1.1.0)
+
+## 0. Document Hierarchy & Scope
+
+*   **Purpose:** This document defines the core standards for all EGOS website development.
+*   **Hierarchy:** These Rules establish baseline requirements. Project-specific Design Concepts (like `research/WebSite Enio Grok e Gemini.txt`) provide visual and feature specifications. Task-specific instructions (Prompts) provide implementation details.
+*   **Precedence:** Task instructions must adhere to the Rules and the relevant Design Concept. Where instructions provide greater specificity compatible with the Rules, they should be followed. Core principles in the Rules take precedence in case of conflict. Overarching KOIOS and ETHIK standards always apply.
+*   **Updates:** This document is versioned and subject to updates based on project evolution and best practices.
 
 ## 1. Language & Accessibility
 
 - All content, comments, and code **must be in English** (except localized content placeholders).
-- Follow accessibility best practices (semantic HTML5, ARIA labels, contrast).
+- Follow accessibility best practices rigorously (WCAG AA as a target): semantic HTML5, appropriate ARIA roles/attributes, sufficient color contrast (check ratios), keyboard navigability, focus indicators.
 
-## 2. Structure & Modularity
+## 2. Structure & Architecture
 
-- Use **semantic HTML5** with clear sectioning (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`).
-- Organize CSS modularly by components and pages.
-- Organize JS modularly, with clear event listeners and comments.
+- Use **semantic HTML5** with clear sectioning (`<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<footer>`, etc.).
+- **Architectural Pattern:** Unless a specific Design Concept dictates otherwise (e.g., multi-page app), prefer Single-Page Application (SPA) structures using named anchors for navigation within a single `index.html` for simpler projects. Complex web applications should have their architecture explicitly defined in their design documentation.
+- Organize CSS modularly (e.g., BEM, ITCSS, or component-based) and JS modularly (e.g., ES Modules, specific framework patterns).
 
 ## 3. Multilingual Support
 
-- Use `.lang-content` divs for each language.
-- Toggle visibility via JS.
-- Use placeholders for untranslated content.
+- Use a consistent mechanism for multilingual content (e.g., dedicated CSS classes like `.lang-content` with language codes, data attributes `data-lang="en"`).
+- Toggle visibility via JS based on user selection or browser preferences.
+- Utilize standardized placeholders for untranslated content (see Section 9).
 
-## 4. Styling
+## 4. Styling (CSS)
 
-- Follow the design concept in `research/WebSite Enio Grok e Gemini.txt`.
-- Color palette: Deep Blue `#0A2342`, Warm Orange `#FF6600`, light backgrounds.
-- Typography: Inter (body), Playfair Display (headings).
-- Emphasize minimalism: whitespace, clear hierarchy, limited color use.
-- Responsive design: mobile-first, media queries, hamburger menu.
+- **Adherence to Design Concept:** Strictly follow the visual direction (layout, minimalism, feel) defined in the project-specific Design Concept (e.g., `research/WebSite Enio Grok e Gemini.txt`).
+- **Color Palette:** Implement the defined primary, accent, and background colors consistently. Ensure high contrast ratios meet accessibility guidelines.
+- **Typography:** Utilize the specified fonts (e.g., Inter for body, Playfair Display for headings) with a clear and consistent typographic scale (h1-h6, p, small) to establish visual hierarchy.
+- **Layout:** Employ modern CSS layout techniques like **Flexbox and Grid** for building responsive and maintainable layouts.
+- **Responsiveness:** Implement a **mobile-first** approach with well-defined breakpoints using media queries.
+- **Interactive States:** Define clear CSS styles for `hover`, `focus`, `active`, and potentially `visited` states for all interactive elements (links, buttons, form inputs, cards) to provide visual feedback.
 
-## 5. Interactivity
+## 5. Baseline Interactivity (JavaScript)
 
-- Implement hamburger menu toggle.
-- Implement expandable subsystem cards.
-- Add placeholders for LLM chatbot and contextual help icons.
-- Add comments for future animations, LLM integration, and advanced interactivity.
+- **Core Navigation:** Ensure essential navigation elements (e.g., mobile hamburger menu toggle) are functional.
+- **Basic Feedback:** Implement basic interactive feedback defined in the Design Concept (e.g., expand/collapse for cards on hover/click, modal dialog triggers).
+- **Modularity:** Organize JS code into modules/functions with clear responsibilities.
+- **Event Listeners:** Use efficient and clearly defined event listeners.
+- **Comments:** Add clear comments explaining complex logic, assumptions, and placeholders for future functionality (see Section 9).
 
-## 6. Performance
+## 6. Representing Complex Information / Subsystems
 
-- Add TODO comments for:
-  - Lazy loading images.
-  - Minifying CSS/JS.
-  - Async/defer script loading.
-- Optimize for fast load times.
+- **Consistency:** Strive for consistent patterns when representing similar types of complex information (e.g., system components, data flows, timelines).
+- **Design Concept Driven:** Primarily follow the specific visualization methods (diagrams, flowcharts, maps, dashboards) and structural representations defined in the project's Design Concept or task instructions.
+- **Placeholder Usage:** Use standardized placeholders (see Section 9) where specific visualizations or complex content are not yet implemented.
+- **Future Consideration:** A dedicated EGOS Component Library or Design System may be developed later to standardize these representations further.
 
-## 7. Documentation
+## 7. Core Feature UI Patterns (e.g., LLM Integration)
 
-- Document all website features and changes in `README.md` and `docs/website/WEBSITE_DESIGN.md`.
-- Update roadmap with all website-related tasks and progress.
+- **Standardization:** Implement recurring core features using consistent, predefined UI patterns to ensure a predictable user experience.
+- **LLM Access:**
+    - **Chatbot:** Use a floating action button/icon, consistently placed (e.g., bottom-right), as the primary access point, unless the Design Concept specifies otherwise.
+    - **Contextual Help:** Use a subtle, standardized icon (e.g., '?', info symbol) placed consistently within relevant content sections to trigger context-specific LLM assistance.
+- **Reference Design Concept:** Always refer to the specific Design Concept for the exact styling and behavior of these standard patterns.
 
-## 8. Compliance
+## 8. Content Guidelines
 
-- Follow KOIOS standards for code quality, documentation, and commit messages.
-- Align with ETHIK principles (privacy, accessibility, clarity).
+- **Tone & Style:** Maintain a consistent tone aligned with EGOS principles: **Human, accessible, inspiring, clear, ethical, reflecting depth without excessive jargon.** Adhere to any project-specific Content Style Guide if available.
+- **Source:** Base initial content on authoritative project documents (e.g., README, PHILOSOPHY.md, subsystem docs) as specified in task instructions.
+- **Clarity & Accuracy:** Ensure all textual content is clear, concise, accurate, and easy to understand for the target audience.
+
+## 9. Placeholder Conventions
+
+- **Purpose:** Use placeholders consistently to mark areas where content, assets, or functionality will be added later.
+- **Method:** Employ a combination of:
+    - **HTML Comments:** `<!-- TODO: [Description of missing element/content] -->` or `<!-- PLACEHOLDER: [Asset type/name] -->`
+    - **CSS Classes:** Use dedicated classes like `.placeholder`, `.placeholder--image`, `.placeholder--diagram`, `.placeholder--llm-trigger`, `.placeholder--icon`. Style these classes minimally to indicate their presence and reserve layout space if necessary.
+    - **Placeholder Text:** Use meaningful placeholder text (e.g., `[Brief description of subsystem X functionality here...]`, `[Contact Email Address]`) that simulates the intended content tone.
+    - **JS Comments:** `// TODO: Implement [feature name] logic here` or `// PLACEHOLDER: API call for [data type]`
+- **Scope:** Apply placeholders for visual assets (logos, icons, illustrations), complex content components (diagrams, charts, timelines), text content, external links, LLM triggers, and future JS/CSS logic.
+
+## 10. Performance Requirements
+
+- **Goal:** Optimize for fast load times and a smooth user experience (target high Lighthouse scores).
+- **Implementation Timing:** Critical performance optimizations **must be addressed** before merging to the main branch or as part of the build/deployment process, not deferred indefinitely.
+- **Required Techniques (Apply where appropriate):**
+    - **Image Optimization:** Use appropriate formats (WebP, AVIF), compress images, and implement lazy loading (`loading="lazy"` attribute).
+    - **Minification:** Minify CSS and JavaScript files.
+    - **Script Loading:** Use `async` or `defer` attributes for non-critical JavaScript.
+    - **Reduce Requests:** Bundle CSS/JS where feasible.
+    - **Caching:** Leverage browser caching effectively.
+    - **Code Efficiency:** Write efficient CSS selectors and JavaScript code.
+
+## 11. Documentation & Compliance
+
+- **Inline Documentation:** Write clear, well-commented code (HTML, CSS, JS) explaining structure, logic, placeholders, and future intentions.
+- **Formal Documentation:** Update relevant formal project documents (e.g., `README.md`, `docs/website/WEBSITE_DESIGN.md` or equivalent) to reflect website status and design decisions.
+- **Roadmap:** Update the project roadmap (`ROADMAP.md`, `docs/CRONOS_ROADMAP_UPDATES.md`) with website-related tasks and progress.
+- **Compliance:** Strictly adhere to overarching KOIOS standards (code quality, commit messages, etc.) and ETHIK principles (privacy, accessibility, clarity, ethical content).
 
 ---
 

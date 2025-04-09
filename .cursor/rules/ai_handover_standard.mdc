@@ -1,6 +1,11 @@
 ---
 description: 
 globs: 
+alwaysApply: false
+---
+---
+description: 
+globs: 
 alwaysApply: true
 ---
 ---
@@ -19,7 +24,7 @@ globs: [] # Applies conceptually to the workflow, not specific files.
 alwaysApply: true
 tags: [workflow, ai_collaboration, koios, handover]
 priority: 2 # Important workflow standard
-version: 1.2.0
+version: 1.3.0
 ---
 
 # AI Handover Standard (KOIOS Workflow)
@@ -55,6 +60,7 @@ The outgoing AI **MUST** generate a handover summary containing the following se
     *   Reference specific files created/modified.
     *   Mention the relevant Git commit hash(es) if applicable.
     *   **Include brief rationale** for significant actions (the "why").
+    *   **If possible, link to related GitHub Issues, PRs, or discussions** for context.
 4.  **Assumptions Made:**
     *   List any significant assumptions made during the preceding work session (e.g., API stability, schema versions, requirement finality).
 5.  **Current Project State:**
@@ -85,6 +91,7 @@ The outgoing AI **MUST** generate a handover summary containing the following se
               "logs_url": "<URL to logs>"
             }
             ```
+        *   **If possible, report the actual conclusion of the latest relevant CI/CD run** (success/failure), not just a link.
     *   **Subsection 3.5.c: Environment Details (Structured YAML Recommended)**
         *   List key dependencies and configurations relevant to the current focus within a YAML code block:
             ```yaml
@@ -94,6 +101,7 @@ The outgoing AI **MUST** generate a handover summary containing the following se
                 version: "<version>"
                 endpoint: <hostname:port or URL>
                 status: <operational|degraded|down>
+                start_instructions: <e.g., "Run `docker-compose up mycelium`" or "Start with `python run_nats.py`">
               # ... other dependencies ...
             configuration_files:
               - path: <path/to/relevant/config.yaml>

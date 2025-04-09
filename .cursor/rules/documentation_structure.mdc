@@ -1,6 +1,96 @@
 ---
-description: 
-globs: 
+description: Defines the standard structure for organizing documentation within the EGOS project.
+globs: ["docs/**", "README.md", "CONTRIBUTING.md", "LICENSE"]
 alwaysApply: true
+tags: [koios, documentation, structure]
+priority: 2
+version: 1.0.0
 ---
- 
+
+# Documentation Structure Standard (KOIOS)
+
+## Rule
+
+All project documentation MUST be organized according to the following structure to ensure clarity, discoverability, and separation of concerns:
+
+1.  **Root Level Documentation:**
+    *   `README.md`: High-level project overview, setup instructions, and entry point.
+    *   `CONTRIBUTING.md`: Guidelines for contributors.
+    *   `LICENSE`: Project license file.
+    *   `CHANGELOG.md`: Manually updated or auto-generated log of changes.
+    *   `ROADMAP.md`: High-level project goals, phases, and task tracking.
+
+2.  **`docs/` Directory:** This directory serves **two primary purposes**: hosting the public-facing website (served by GitHub Pages) and containing internal project documentation.
+    *   **Website Files (Root of `docs/`):**
+        *   `index.html`: Main landing page for the GitHub Pages site.
+        *   `css/`: Directory containing all website CSS files (modularly organized: `base/`, `layout/`, `components/`, `utils/`).
+        *   `js/`: Directory containing website JavaScript files.
+        *   `images/`: Directory containing images used *only* by the website.
+        *   *Other website-specific assets* (e.g., fonts, favicons if not linked externally).
+    *   **Internal Project Documentation (`docs/project_documentation/`):**
+        *   This subdirectory MUST contain all other detailed project documentation not directly part of the website or root-level files.
+        *   **Examples:**
+            *   `MQP.md` (Master Quantum Prompt)
+            *   `STRATEGY.md`
+            *   `ARCHITECTURE.md`
+            *   `PHILOSOPHY.md`
+            *   `WEBSITE_DESIGN.md`
+            *   `subsystem_guides/` (Detailed guides per subsystem)
+            *   `research/`
+            *   `code_analysis/`
+            *   `standards_details/` (If KOIOS standards need more space than rules)
+            *   *Any other internal design docs, reports, analyses, etc.*
+
+3.  **Subsystem Documentation:**
+    *   Each subsystem directory (e.g., `subsystems/ETHIK/`) MAY contain a `docs/` subfolder for documentation specific to that subsystem's *internal* implementation or detailed design, if not covered in the central `docs/project_documentation/`.
+
+## Rationale
+
+*   **Clarity:** Separates public-facing website code/assets from internal project knowledge.
+*   **Discoverability:** Makes it easier to find specific types of documentation.
+*   **GitHub Pages Compatibility:** Keeps website files at the expected root of the `docs/` directory for seamless deployment without extra build steps.
+*   **Maintainability:** Reduces clutter in the main `docs/` directory and groups related internal documents.
+*   **KOIOS Alignment:** Standardizes a critical aspect of project organization.
+
+## Example Structure Snapshot
+
+```
+EGOS/
+├── .github/
+├── .cursor/
+│   └── rules/
+│       └── documentation_structure.mdc
+│       └── ...
+├── docs/
+│   ├── index.html
+│   ├── css/
+│   │   ├── base/
+│   │   └── ...
+│   ├── js/
+│   │   └── script.js
+│   ├── images/
+│   │   └── logo.png
+│   └── project_documentation/
+│       ├── MQP.md
+│       ├── ROADMAP.md
+│       ├── ARCHITECTURE.md
+│       ├── research/
+│       └── ...
+├── egos_dashboard/
+├── subsystems/
+│   ├── ETHIK/
+│   │   ├── core/
+│   │   └── docs/ (Optional: ETHIK-specific internal docs)
+│   └── ...
+├── tests/
+├── .gitignore
+├── LICENSE
+├── README.md
+├── CONTRIBUTING.md
+├── requirements.txt
+└── ...
+```
+
+**Adhere strictly to this structure for all documentation files.**
+
+✧༺❀༻∞ EGOS ∞༺❀༻✧ 
