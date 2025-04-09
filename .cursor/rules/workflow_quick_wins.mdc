@@ -1,0 +1,41 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+ ---
+description: Defines the 'Quick Wins First' workflow for integrating analysis insights.
+globs: [] # Applies conceptually to workflow
+alwaysApply: true
+tags: [workflow, koios, continuous_improvement]
+priority: 2
+version: 1.0.0
+---
+
+# Workflow Standard: Quick Wins First (KOIOS)
+
+## Rule
+
+When analyzing documents (e.g., research findings, strategy papers, analysis reports) that suggest both immediate, low-effort improvements ("quick wins") and longer-term strategic tasks:
+
+1.  **Identify Quick Wins:** Explicitly identify actionable improvements that are:
+    *   Clearly beneficial (e.g., align with existing standards, fix obvious minor issues).
+    *   Low-effort to implement (e.g., metadata updates, minor configuration changes, creating basic standard files).
+    *   Do not require significant architectural changes or complex dependencies.
+2.  **Implement Quick Wins Immediately:** Implement these identified quick wins within the current workflow/session *before* proceeding to document the longer-term items.
+3.  **Verify Quick Wins:** Commit and (if applicable) push the changes related to the quick wins.
+4.  **Document Long-Term Tasks:** After implementing and verifying the quick wins, add the related, more substantial tasks derived from the analysis to the relevant planning document (e.g., `ROADMAP.md`), assigning appropriate priorities, phases, and dependencies.
+
+## Rationale
+
+This workflow pattern ensures that actionable, low-hanging fruit improvements identified during analysis are captured and implemented promptly, delivering immediate value and preventing them from getting lost in longer-term planning backlogs. It promotes continuous improvement and iterative refinement, ensuring the project benefits from insights quickly while still formally tracking larger strategic initiatives. This aligns with agile principles and the EGOS goal of efficient, adaptive evolution.
+
+## Example
+
+*   **Analysis:** Reviewing `research/EGOS Ethical Marketing Strategy_.txt`.
+*   **Quick Wins Identified:** Enhance website `<title>` tag, add `robots.txt`.
+*   **Action 1:** Implement title tag change and create `robots.txt`. Commit & Push.
+*   **Action 2:** Add longer-term tasks (Schema.org implementation, Content Strategy, etc.) identified in the marketing strategy to `ROADMAP.md`. Commit & Push.
+
+---
+✧༺❀༻∞ EGOS ∞༺❀༻✧

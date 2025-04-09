@@ -66,11 +66,11 @@
 * [DONE] Create SPARC Orchestration Rule (`.cursor/rules/sparc_orchestration.mdc`) (`HIGH`)
 * [DONE] Implement Basic SPARC Task Registry in CORUJA (`HIGH`)
 * [DONE] Define Mycelium Message Formats for SPARC Tasks (`HIGH`)
-* [In Progress] Document SPARC-EGOS Subsystem Mapping (`MEDIUM`)
-* [Planned] Implement Model Selection Based on Task Type (`MEDIUM`)
-* [Planned] Integrate SPARC with CrewManager (`MEDIUM`)
-* [Planned] Create Boomerang Task Handlers (`HIGH`)
-* [Planned] Define SPARC Task Schema Validation (`LOW`)
+* [In Progress] Document SPARC-EGOS Subsystem Mapping (`MEDIUM`) - ID: `SPARC-MAPPING`
+* [Planned] Implement Model Selection Based on Task Type (`MEDIUM`) - ID: `CORUJA-MODEL-SELECT`, `depends_on: [CORUJA-ARCH]`
+* [Planned] Integrate SPARC with CrewManager (`MEDIUM`) - ID: `SPARC-CREW-INTEGRATE`, `depends_on: [CORUJA-ARCH]`
+* [Planned] Create Boomerang Task Handlers (`HIGH`) - ID: `SPARC-BOOMERANG`, `depends_on: [CORUJA-ARCH]`
+* [Planned] Define SPARC Task Schema Validation (`LOW`) - ID: `SPARC-SCHEMA-VALID`
 
 ### System Standardization (KOIOS Lead)
 
@@ -90,10 +90,10 @@
 * [DONE] Implement `KoiosLogger` for Dashboard Interactions (`HIGH`)
 * [DONE] Link Dashboard to Main Website (`LOW`)
 * [DONE] Improve Light Theme Contrast (`LOW`)
-* [Planned] Refine Dashboard UI/UX based on feedback (`MEDIUM`)
-* [Planned] Integrate Real NATS Client (post-Mycelium stabilization) (`HIGH`)
-* [Planned] Deploy Dashboard (e.g., Streamlit Cloud) (`MEDIUM`)
-* [Planned] Add SPARC Task Visualization (`MEDIUM`)
+* [Planned] Refine Dashboard UI/UX based on feedback (`MEDIUM`) - ID: `DASHBOARD-UI-REFINE`
+* [Planned] Integrate Real NATS Client (post-Mycelium stabilization) (`HIGH`) - ID: `DASHBOARD-NATS-CLIENT`, `depends_on: [MYCELIUM-RELIABLE]`
+* [Planned] Deploy Dashboard (e.g., Streamlit Cloud) (`MEDIUM`) - ID: `DASHBOARD-DEPLOY`, `depends_on: [DASHBOARD-NATS-CLIENT]`
+* [Planned] Add SPARC Task Visualization (`MEDIUM`) - ID: `DASHBOARD-SPARC-VIZ`, `depends_on: [DASHBOARD-NATS-CLIENT]`
 
 ### CORUJA Subsystem (Phase 2b)
 
@@ -117,27 +117,27 @@
 
 * [In Progress] Finalize Core NATS Message Schemas (`CRITICAL`)
 * [In Progress] Define SPARC Task Message Formats (`HIGH`)
-* [Planned] Implement Reliable Message Handling (ACKs, Retries) (`HIGH`)
-* [Planned] Develop Test Suite for Mycelium (`HIGH`)
+* [Planned] Implement Reliable Message Handling (ACKs, Retries) (`HIGH`) - ID: `MYCELIUM-RELIABLE`
+* [Planned] Develop Test Suite for Mycelium (`HIGH`) - ID: `MYCELIUM-TEST-SUITE`, `depends_on: [MYCELIUM-RELIABLE]`
 
 ### Ethical Framework (ETHIK Lead)
 
 * [In Progress] Implement Core Validation Rules (PII, Security Patterns) (`CRITICAL`)
-* [Planned] Define ETHIK API/Message Interface (`HIGH`)
-* [Planned] Integrate ETHIK Validation into Key Workflows (e.g., CORUJA output) (`HIGH`)
-* [Planned] Refactor `validator.py` into smaller modules (Adhering to `file_modularity.mdc`) (`MEDIUM`)
-* [Planned] Add SPARC Task Validation Rules (`MEDIUM`)
-* `[Planned] Refine ETHIK Authentication Design based on SaaS patterns (MEDIUM)` (See `research/SaaS_Framework_Analysis.md`)
+* [Planned] Define ETHIK API/Message Interface (`HIGH`) - ID: `ETHIK-API`
+* [Planned] Integrate ETHIK Validation into Key Workflows (e.g., CORUJA output) (`HIGH`) - ID: `ETHIK-INTEGRATION`, `depends_on: [ETHIK-API, MYCELIUM-RELIABLE]`
+* [Planned] Refactor `validator.py` into smaller modules (Adhering to `file_modularity.mdc`) (`MEDIUM`) - ID: `ETHIK-REFACTOR`
+* [Planned] Add SPARC Task Validation Rules (`MEDIUM`) - ID: `ETHIK-SPARC-RULES`, `depends_on: [ETHIK-API]`
+* `[Planned] Refine ETHIK Authentication Design based on SaaS patterns (MEDIUM)` - ID: `ETHIK-AUTH-DESIGN` (See `research/SaaS_Framework_Analysis.md`)
 
 ### Core AI Orchestration (CORUJA Lead)
 
 * [DONE] Basic SPARC Task Registry Implementation (`HIGH`)
 * [DONE] Define SPARC Message Formats (`HIGH`)
-* [Planned] Design Core CORUJA Architecture (`CRITICAL`)
-* [Planned] Implement Basic LLM Interaction Handler (`CRITICAL`)
-* [Planned] Define Standard Prompt Templates (`HIGH`)
-* [Planned] Integrate with Mycelium for Task Requests (`CRITICAL`)
-* [Planned] Implement Model Selection for SPARC Tasks (`MEDIUM`)
+* [Planned] Design Core CORUJA Architecture (`CRITICAL`) - ID: `CORUJA-ARCH`
+* [Planned] Implement Basic LLM Interaction Handler (`CRITICAL`) - ID: `CORUJA-LLM-HANDLER`, `depends_on: [CORUJA-ARCH]`
+* [Planned] Define Standard Prompt Templates (`HIGH`) - ID: `CORUJA-PROMPT-TEMPLATES`, `depends_on: [CORUJA-ARCH]`
+* [Planned] Integrate with Mycelium for Task Requests (`CRITICAL`) - ID: `CORUJA-MYCELIUM-INTEGRATION`, `depends_on: [CORUJA-ARCH, MYCELIUM-RELIABLE]`
+* [Planned] Implement Model Selection for SPARC Tasks (`MEDIUM`) - ID: `CORUJA-MODEL-SELECT`, `depends_on: [CORUJA-ARCH]` (Note: Duplicate ID used, consistent with SPARC section)
 
 ### Project Documentation & Open Source Readiness (KOIOS Lead)
 
@@ -241,6 +241,17 @@
 * **Community Building & Licensing:** Define and implement strategy.
 * **Deployment Automation (HARMONY Lead):**
   * `[Planned] Enhance Deployment Automation (Docker, Python scripts) (MEDIUM)` (See `research/SaaS_Framework_Analysis.md`)
+* **Marketing & Outreach (KOIOS/Strategy Lead):**
+  * **[Planned] Task WEB-SEO-SCHEMA:** Implement Schema.org structured data (JSON-LD) for relevant types on `docs/index.html` and future content pages. (`MEDIUM`, Phase 3/4, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
+  * **[Planned] Task WEB-SEO-TECH:** Conduct technical SEO audit and implement optimizations (page speed, minification, image optimization, sitemap). (`MEDIUM`, Phase 3/4, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
+  * **[Planned] Task WEB-SEO-LINKING:** Develop and implement internal linking strategy for website/documentation. (`LOW`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
+  * **[Planned] Task CONTENT-STRATEGY:** Develop and execute a detailed content marketing plan (blog posts, deep dives, essays) based on the ethical marketing strategy. (`HIGH`, Phase 2b/3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
+  * **[Planned] Task CONTENT-FORMATS:** Explore and implement creative content formats (visualizations, interactives, videos). (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
+  * **[Planned] Task COMMUNITY-ENGAGEMENT:** Develop specific plans for authentic engagement on target platforms (GitHub, Reddit, Mastodon, etc.). (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
+  * **[Planned] Task AMPLIFY-DIRECTORIES:** Systematically submit EGOS to relevant OSS/AI project directories (when ready for broader visibility). (`MEDIUM`, Phase 3/4, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
+  * **[Planned] Task AMPLIFY-ACADEMIC:** Develop strategy for academic dissemination (arXiv, conferences) if applicable based on research outputs. (`LOW`, R&D, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
+  * **[Planned] Task AMPLIFY-OUTREACH:** Develop strategy for identifying and engaging potential collaborators and guest blogging opportunities. (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
+  * **[Planned] Task DESIGN-VISUAL-GUIDE:** Develop a visual style guide for EGOS (website, docs, presentations) reflecting the "Art" principle. (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
 
 ---
 
