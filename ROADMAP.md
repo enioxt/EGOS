@@ -6,7 +6,7 @@
 
 **Primary References:**
 
-* `docs/MQP.md` (Master Quantum Prompt v8.2)
+* `docs/MQP.md` (Master Quantum Prompt v9.0 "Full Moon Blueprint")
 * `research/EGOS_ GitHub Project Search_.txt` (Contextual Study)
 * `.cursor/rules/sparc_orchestration.mdc` (SPARC Integration)
 
@@ -14,7 +14,7 @@
 
 ## Guiding Principles
 
-* Adherence to MQP v8.2 (ETHIK, KOIOS, HARMONY, CRONOS)
+* Adherence to MQP v9.0 "Full Moon Blueprint" (ETHIK, KOIOS, HARMONY, CRONOS)
 * Modularity & Decoupling via Subsystems (MYCELIUM)
 * Structured Problem Solving via SPARC Methodology
 * Iterative Development (Phased Approach)

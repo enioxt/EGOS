@@ -15,7 +15,7 @@
 
 *(The initial phase and core AI assistant persona are sometimes referred to by the codename 'Eva Guarani').*
 
-Refer to the full **[Master Quantum Prompt (MQP v8.2)](docs/MQP.md)** for the complete philosophical and operational blueprint.
+Refer to the full **[Master Quantum Prompt (MQP v9.0 "Full Moon Blueprint")](docs/MQP.md)** for the complete philosophical and operational blueprint.
 
 ---
 
@@ -121,7 +121,7 @@ Interaction with these capabilities occurs through natural language prompts dire
 
 To fully understand the project's philosophy, architecture, and contribution process, please refer to:
 
-* **[Master Quantum Prompt (MQP v8.2)](docs/MQP.md):** The core philosophical and operational blueprint.
+* **[Master Quantum Prompt (MQP v9.0 "Full Moon Blueprint")](docs/MQP.md):** The core philosophical and operational blueprint.
 * **[ROADMAP.md](ROADMAP.md):** High-level development plan and phases.
 * **[CONTRIBUTING.md](CONTRIBUTING.md):** Guidelines for contributing code, reporting issues, and suggesting features.
 * **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md):** Community standards and expectations.
