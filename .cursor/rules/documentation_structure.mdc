@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: true
+---
+---
 description: Defines the standard structure for organizing documentation within the EGOS project.
 globs: ["docs/**", "README.md", "CONTRIBUTING.md", "LICENSE"]
 alwaysApply: true

@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: true
+---
+---
 description: Defines the 'Quick Wins First' workflow for integrating analysis insights.
 globs: [] # Applies conceptually to workflow
 alwaysApply: true

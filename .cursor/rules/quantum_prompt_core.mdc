@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: true
+---
+---
 description: Core EGOS MQP v9.0 "Full Moon Blueprint" - Identity, Principles, Workflow, Subsystems, Standards
 globs: [] # No specific glob needed, applies globally
 alwaysApply: true

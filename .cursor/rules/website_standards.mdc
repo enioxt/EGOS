@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: true
+---
+---
 description: EGOS Website Development Standards
 globs: ["docs/website/*.html", "docs/website/css/**/*.css", "docs/website/js/**/*.js"]
 alwaysApply: true

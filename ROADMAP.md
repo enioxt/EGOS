@@ -304,8 +304,10 @@
 * **Advanced ATLAS:** Dynamic system visualization with SPARC task relationships.
 * **Advanced NEXUS:** Automated refactoring suggestions based on SPARC specifications.
 * **Community Building & Expansion:** Plugins, contributions, SPARC templates.
+    * `[Planned] feat(community/ethik_rewards)`: Design and implement the $ETHIK token reward system for contributors, integrating with GitHub actions/webhooks if possible. Define contribution metrics and reward structure. (`MEDIUM`, Phase 4)
 * **Further AI Integration:** Explore deeper self-awareness, meta-learning in SPARC tasks.
 * **Website Maturity:** Develop dedicated subsystem pages, complete translations, add SPARC methodology documentation.
+    * `[Planned] feat(website/genki_dama)`: Design and implement the "Genki Dama" page featuring specific artwork and donation addresses (Solana, BTC, EVM). Ensure minimal text and focus on artistic/mysterious appeal. (`LOW`, Phase 4)
 
 ### Cross-Cutting / Ongoing
 
