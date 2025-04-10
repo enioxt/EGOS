@@ -220,6 +220,9 @@
 ### Ongoing / Cross-Cutting Concerns
 
 * **Research & Development:**
+  * `[Planned] Research: Visualization Techniques`. Investigate libraries (D3.js, Three.js, Cytoscape.js) & methods for interactive ATLAS/MYCELIUM visualization. (`MEDIUM`, Phase 2b/3) - ID: `RESEARCH-VISUALIZATION`
+  * `[Planned] Research: $ETHIK Integration Architecture`. Define secure technical approach (frontend/backend/API) for token display & reward logic. (`MEDIUM`, Phase 3) - ID: `RESEARCH-ETHIK-ARCH`
+  * `[Planned] Research: WCAG for Complex Interactions`. Investigate accessibility standards for custom visualizations & Web3 elements. (`MEDIUM`, Phase 3) - ID: `RESEARCH-WCAG`
   * Mycelium Network Design & Prototyping.
   * **Advanced AI Orchestration Techniques:** Explore enhancements to SPARC methodology ... **(See background studies in `research/`)**
   * Advanced ETHIK Mechanisms (bias detection, explainability).
@@ -253,27 +256,47 @@
   * **[Planned] Task AMPLIFY-OUTREACH:** Develop strategy for identifying and engaging potential collaborators and guest blogging opportunities. (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
   * **[Planned] Task DESIGN-VISUAL-GUIDE:** Develop a visual style guide for EGOS (website, docs, presentations) reflecting the "Art" principle. (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
 
-**NEW SECTION: Website Stabilization & QPG Phase 1 (Q2/Q3 2025)**
+**NEW SECTION: Website Design & Foundation (Q2/Q3 2025)**
 
-**Goal:** Stabilize the static website foundation and plan/develop the initial Quantum Prompt Generator (QPG) MVP.
+**Goal:** Define the core visual identity and information architecture, stabilize the static website foundation, and prepare for advanced feature integration (QPG, LLM Chat).
 **Status:** In Progress
 **Priority:** HIGH
 
-* **Phase W1: Website Foundation Stabilization & Enhancement (High Priority)**
-  * **Goal:** Ensure the static website is stable, accessible, maintainable, fully styled (dark theme), and prepared for future integrations.
+* **Phase WD: Website Design Definition (High Priority Prerequisite)**
+  * **Goal:** Generate concrete, EGOS-aligned design directives before major styling implementation.
+  * **Status:** DONE
   * **Tasks:**
-    * `[Planned] refactor(website/i18n)`: Replace duplicated HTML language blocks with a JavaScript/JSON-based internationalization solution.
-    * `[Planned] fix(website/html)`: Correct HTML semantics (logo `<h1>`, icon ARIA, `target="_blank"` rel attributes, language switcher links, non-semantic separators).
+    * `[DONE] feat(website/design): Generate Core Design Directives`. Based on EGOS principles, subsystems, target UX, Grok/GPT analysis, strategic goals, and internal analysis (`research/EGOS design GROK.txt`). Defines visual themes, metaphors, mood boards, palettes, typography, layout principles, and visual representations for abstract concepts. (`HIGH`, Q2 2025) - ID: `WEBSITE-DESIGN-DIRECTIVES`
+    * `[Planned] docs(website/design)`: Document the chosen design directives (from `research/EGOS design GROK.txt`) into a formal design guide (e.g., `docs/website/DESIGN_GUIDE.md`). (`HIGH`, Q2 2025) - ID: `WEBSITE-DESIGN-DOC`, `depends_on: [WEBSITE-DESIGN-DIRECTIVES]`
+
+* **Phase WIA: Website Information Architecture (High Priority - NEW)**
+  * **Goal:** Define the website's structure, navigation, and basic user flow based on core content and the adopted design directives.
+  * **Status:** In Progress
+  * **Depends On:** `WEBSITE-DESIGN-DIRECTIVES`
+  * **Tasks:**
+    * `[In Progress] docs(website/ia): Define Sitemap`. List main pages/sections (Home, Philosophy, Principles, Subsystems, Community/$ETHIK, Roadmap, Genki Dama, Feedback, etc.). (`HIGH`, Q2 2025) - ID: `WEBSITE-SITEMAP`
+    * `[Planned] docs(website/ia): Define Navigation Structure`. Plan top navigation, footer links, and key internal linking strategy. (`HIGH`, Q2 2025) - ID: `WEBSITE-NAVIGATION`, `depends_on: [WEBSITE-SITEMAP]`
+    * `[Planned] docs(website/ia): Outline Key User Flows`. Map basic journeys for target personas (researcher, contributor, curious visitor). (`MEDIUM`, Q2 2025) - ID: `WEBSITE-USERFLOWS`, `depends_on: [WEBSITE-SITEMAP]`
+
+* **Phase W1: Website Foundation Stabilization & Enhancement (High Priority)**
+  * **Goal:** Ensure the static website is stable, accessible, maintainable, **fully styled according to Design Directives and IA**, and prepared for future integrations.
+  * **Depends On:** `WEBSITE-DESIGN-DIRECTIVES`, `WEBSITE-NAVIGATION`
+  * **Status:** Partially Done
+  * **Tasks:**
+    * `[DONE] refactor(website/i18n)`: Implement JavaScript/JSON-based internationalization solution.
+    * `[DONE] feat(website/js)`: Implement core JS functionality for i18n language switcher (including ARIA state management).
+    * `[Planned] fix(website/html)`: Correct HTML semantics (logo `<h1>`, icon ARIA, `target="_blank"` rel attributes, language switcher links, non-semantic separators) based on IA.
     * `[Planned] fix(website/a11y)`: Implement missing ARIA attributes (`aria-expanded`, `aria-controls`, necessary `id`s) for interactive elements (subsystem toggles, language dropdown).
-    * `[Planned] feat(website/js)`: Implement core JS functionality for hamburger menu, subsystem toggles, and the new i18n language switcher (including ARIA state management).
-    * `[Planned] feat(website/a11y)`: Ensure full keyboard navigation and visible focus states for all interactive elements (requires CSS/JS).
-    * `[In Progress] style(website/css)`: Complete implementation and refinement of the dark theme across all modular CSS files (`layout`, `components`, `typography`, etc.).
-    * `[Planned] docs(website/content)`: Populate final content and translations using the new i18n system.
-    * `[Planned] feat(website/assets)`: Integrate final visual assets (e.g., SVG logo, favicon).
+    * `[Planned] feat(website/js)`: Implement/Refine JS for hamburger menu, subsystem toggles based on final design and IA.
+    * `[Planned] feat(website/a11y)`: Ensure full keyboard navigation and visible focus states for all interactive elements.
+    * `[Planned] style(website/css)`: Implement and refine styling (including dark theme) across all modular CSS files based on the **finalized Design Directives and IA**. (`HIGH`) - ID: `WEBSITE-STYLING`, `depends_on: [WEBSITE-DESIGN-DIRECTIVES, WEBSITE-NAVIGATION]`
+    * `[Planned] docs(website/content)`: Populate final content and translations using the i18n system, organized according to IA.
+    * `[Planned] feat(website/assets)`: Integrate final visual assets (e.g., SVG logo, favicon) based on Design Directives.
     * `[Planned] test(website)`: Conduct thorough testing (responsive design, functionality, accessibility (WCAG AA), cross-browser).
 
 * **Phase QPG1: Quantum Prompt Generator (QPG) - Planning & MVP (Medium Priority - Parallel)**
   * **Goal:** Plan and develop a Minimum Viable Product (MVP) for the Quantum Prompt Generator SaaS tool, integrated into the website.
+  * **Status:** Planned
   * **Tasks:**
     * `[Planned] docs(qpg/planning)`: Define detailed QPG UX/UI flow, select initial LLMs (free/paid tiers), design backend architecture, plan user/credit/payment system (if applicable for MVP).
     * `[Planned] docs(qpg/legal)`: Draft comprehensive Privacy Policy & Terms of Use addressing data usage/personalization, ensuring ETHIK compliance and user control mechanisms (opt-in/out). (**Requires ETHIK review**).
@@ -304,10 +327,10 @@
 * **Advanced ATLAS:** Dynamic system visualization with SPARC task relationships.
 * **Advanced NEXUS:** Automated refactoring suggestions based on SPARC specifications.
 * **Community Building & Expansion:** Plugins, contributions, SPARC templates.
-    * `[Planned] feat(community/ethik_rewards)`: Design and implement the $ETHIK token reward system for contributors, integrating with GitHub actions/webhooks if possible. Define contribution metrics and reward structure. (`MEDIUM`, Phase 4)
+  * `[Planned] feat(community/ethik_rewards)`: Design and implement the $ETHIK token reward system for contributors, integrating with GitHub actions/webhooks if possible. Define contribution metrics and reward structure. (`MEDIUM`, Phase 4)
 * **Further AI Integration:** Explore deeper self-awareness, meta-learning in SPARC tasks.
 * **Website Maturity:** Develop dedicated subsystem pages, complete translations, add SPARC methodology documentation.
-    * `[Planned] feat(website/genki_dama)`: Design and implement the "Genki Dama" page featuring specific artwork and donation addresses (Solana, BTC, EVM). Ensure minimal text and focus on artistic/mysterious appeal. (`LOW`, Phase 4)
+  * `[Planned] feat(website/genki_dama)`: Design and implement the "Genki Dama" page featuring specific artwork and donation addresses (Solana, BTC, EVM). Ensure minimal text and focus on artistic/mysterious appeal. (`LOW`, Phase 4)
 
 ### Cross-Cutting / Ongoing
 
@@ -328,6 +351,10 @@
 * KOIOS Standards: `subsystems/KOIOS/docs/STANDARDS.md` & `.cursor/rules/`
 * SPARC Orchestration: `.cursor/rules/sparc_orchestration.mdc`
 * GitHub Project Search & Analysis: `research/EGOS_ GitHub Project Search_.txt`
+* Website Strategic Guide: `research/Criaçao de site com IA.txt`
+* Consolidated Design Analysis: `research/EGOS design GROK.txt`
+* Design Directives Summary: `research/Análise e Refinamento do Projeto EGOS_.txt`
+* (Future) Website Design Guide: `docs/website/DESIGN_GUIDE.md`
 * (Future) MVP Definition: `docs/strategy/MVP_Definition.md`
 * (Future) Mycelium Topics: `subsystems/MYCELIUM/docs/topics.md`
 * (Future) SPARC Implementation Guide: `docs/methodology/SPARC_GUIDE.md`
