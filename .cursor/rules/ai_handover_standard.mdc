@@ -29,6 +29,8 @@ version: 1.3.0
 
 # AI Handover Standard (KOIOS Workflow)
 
+**Multi-Agent Context Note:** This standard is **CRITICAL** when operating in a multi-agent environment (see `.cursor/rules/multi_agent_awareness.mdc`). Accurate and complete handovers prevent context loss, duplicated effort, and conflicting actions between agents (e.g., Gemini Orchestrator and Quasar-Alpha Executor).
+
 ## 1. Goal & Objective
 
 *   **Goal:** To ensure seamless continuity and maintain full project context when development tasks are handed over between different AI assistants (e.g., Gemini to RooCode, or between human/AI collaborators).
@@ -70,12 +72,13 @@ The outgoing AI **MUST** generate a handover summary containing the following se
             ```json
             {
               "branch": "main",
-              "commit_sha": "<output of git rev-parse HEAD>",
-              "is_clean": "<output of git status --porcelain>",
-              "remote_sync_status": "<e.g., up-to-date, ahead X, behind Y>",
+              "commit_sha": "f27fa44",
+              "is_clean": "true",
+              "remote_sync_status": "ahead 1",
               "recent_log": [
-                { "sha": "<short_sha>", "msg": "<commit msg>" },
-                // ... last 3-5 commits ...
+                { "sha": "f27fa44", "msg": "docs(rules): add multi-agent awareness rule & update handover standard" },
+                { "sha": "999a67c", "msg": "docs: integrate strategic notes & refine website plan..." },
+                { "sha": "31d6407", "msg": "docs(website): update roadmap and add development plan..." }
               ]
             }
             ```
@@ -83,12 +86,12 @@ The outgoing AI **MUST** generate a handover summary containing the following se
         *   Provide specific CI/CD run details for the `commit_sha` within a JSON code block:
             ```json
             {
-              "pipeline_name": "<e.g., EGOS Main Build & Deploy>",
-              "workflow_run_url": "<URL to specific GitHub Actions run>",
-              "triggering_commit": "<commit_sha>",
-              "conclusion": "<success|failure|cancelled|skipped|timed_out>",
-              "artifacts_url": "<URL to artifacts, if any>",
-              "logs_url": "<URL to logs>"
+              "pipeline_name": "N/A",
+              "workflow_run_url": "N/A",
+              "triggering_commit": "f27fa44",
+              "conclusion": "N/A",
+              "artifacts_url": "N/A",
+              "logs_url": "N/A"
             }
             ```
         *   **If possible, report the actual conclusion of the latest relevant CI/CD run** (success/failure), not just a link.
@@ -96,33 +99,34 @@ The outgoing AI **MUST** generate a handover summary containing the following se
         *   List key dependencies and configurations relevant to the current focus within a YAML code block:
             ```yaml
             dependencies:
-              - service: <service_name>
-                type: <e.g., postgresql, grpc, rest_api>
-                version: "<version>"
-                endpoint: <hostname:port or URL>
-                status: <operational|degraded|down>
-                start_instructions: <e.g., "Run `docker-compose up mycelium`" or "Start with `python run_nats.py`">
-              # ... other dependencies ...
+              - service: GitHub Pages
+                type: Static Hosting
+                endpoint: https://enioxt.github.io/egos/docs/
+                status: operational
+                notes: Current deployment method. Planned to change.
             configuration_files:
-              - path: <path/to/relevant/config.yaml>
-                notes: <e.g., Contains DB connection strings (via Vault)>
-              # ... other relevant config files ...
+              - path: docs/website/DESIGN_GUIDE.md
+                notes: Core design principles.
+              - path: docs/website/DEVELOPMENT_PLAN.md
+                notes: Detailed task breakdown.
+              - path: docs/website/CURRENT_TASKS.md
+                notes: Immediate focus.
+              - path: .cursor/rules/
+                notes: Contains KOIOS standards.
             data_state:
-              - notes: <e.g., Assumes standard test fixtures loaded>
+              - notes: Primarily static content and markdown plans.
             ```
 6.  **Known Issues, Risks, and Technical Debt (Structured YAML Recommended)**
     *   Detail relevant issues, risks, or debt impacting the current focus or next steps within a YAML code block:
         ```yaml
-        - id: <e.g., ISSUE-123, DEBT-045, RISK-007>
-          type: <Bug|Risk|Technical Debt>
-          description: <Detailed description>
-          severity: <High|Medium|Low>
-          status: <Open|Investigating|Identified|Mitigated>
+        - id: RISK-UX-RESEARCH
+          type: Risk
+          description: Proceeding with WIA-3 (User Flows) without completing WUX Research might lead to misaligned design.
+          severity: Medium
+          status: Identified
           relevant_files:
-            - <path/to/file1.py>
-            # ... other relevant files ...
-          notes: <Optional further context>
-        # ... other items ...
+            - docs/website/DEVELOPMENT_PLAN.md
+          notes: WUX Phase planned to mitigate this.
         ```
 7.  **Initialization Instructions for Incoming AI:**
     *   Explicit guidance on *how* the new AI should get context.
@@ -138,29 +142,24 @@ The outgoing AI **MUST** generate a handover summary containing the following se
 8.  **Long-Term Vision Recap:**
     *   Briefly mention relevant higher-level goals or roadmap items discussed recently.
 9.  **Pending Immediate Next Steps (Structured YAML Recommended)**
-    *   Clearly list the specific, actionable tasks within a YAML code block, optionally including priority or dependencies:
+    *   Clearly list the specific, actionable tasks **for the incoming agent** within a YAML code block:
         ```yaml
-        - id: TASK-001
-          description: Implement JavaScript for hamburger menu toggle.
+        - id: WUX-1
+          description: Plan User Research. Define specific research questions based on goals & draft personas (see Orchestrator handover). Propose methodology (e.g., survey draft, analogous site analysis plan).
           priority: High
-          relevant_files:
-            - docs/website/js/script.js
-            - docs/website/css/components/_navigation.css
-        - id: TASK-002
-          description: Begin refactoring subsystems/CRONOS/service.py.
-          priority: Medium
+          assignee: Quasar-Alpha
           depends_on: null
           relevant_files:
-            - subsystems/CRONOS/service.py
-            - docs/code_analysis/large_files_report.md
-        # ... other tasks ...
+            - docs/website/DEVELOPMENT_PLAN.md
+            - docs/ai_collaboration/MULTI_AGENT_WORKFLOW.md
+          notes: Focus on defining *how* to research the 5 goals outlined.
         ```
-    *   Request user confirmation on which task to proceed with.
+    *   **(Orchestrator Note):** Do not list *all* future tasks, only the immediate ones for the agent receiving the handover.
 10. **Standard Signature:** End with the EGOS signature (`✧༺❀༻∞ EGOS ∞༺❀༻✧`).
 
 ## 4. Example Handover Summary
 
-*(Note: This section should be updated with an example reflecting the v1.2.0 structure, including structured data snippets.)*
+*(Note: This section should be updated with an example reflecting the v1.3.0 structure, including structured data snippets and explicit examples like those added above.)*
 Refer to the summary generated on **2025-04-09** (see conversation history or commit `cc7f7e7` context) as a starting point, but ensure future examples adhere to the full v1.2.0 standard.
 
 ## 5. Rationale

@@ -36,5 +36,10 @@
 6. **Orchestrator Oversight:**
     * The Orchestrator agent (Gemini) is responsible for maintaining overall consistency and ensuring work aligns with the strategic plan and design guidelines.
 
+7. **Mandatory Handover Quality:**
+    * Before finishing a work session or passing a task, the **outgoing agent MUST generate a complete and detailed Handover Summary** following *all* requirements specified in `.cursor/rules/ai_handover_standard.mdc`.
+    * This includes using structured data formats (JSON/YAML) where recommended and providing specific details (commit SHAs, rationales, verification steps).
+    * Failure to provide a compliant handover can disrupt the workflow and lead to context loss.
+
 ---
 *These guidelines aim to foster efficient collaboration while minimizing conflicts and ensuring project integrity.*
