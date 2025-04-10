@@ -1,7 +1,8 @@
 # EGOS Website Design Guide v1.0
 
 **Status:** Initial Draft
-**Source Analysis:** `research/EGOS design GROK.txt`, `research/Análise e Refinamento do Projeto EGOS_.txt`
+**Source Analysis:** `research/EGOS design GROK.txt`, `research/Análise e Refinamento do Projeto EGOS_.txt`, `research/Criaçao de site com IA.txt`
+**Related Plans:** `docs/website/DEVELOPMENT_PLAN.md`, `ROADMAP.md`
 **Date:** 2025-04-09
 
 **Purpose:** This document outlines the core design directives and visual identity for the EGOS project website, aiming to reflect its unique philosophy of ethical, conscious, modular AI combined with art, beauty, and unconditional love.
@@ -86,9 +87,15 @@
 ## 10. Accessibility (WCAG AA Target)
 
 * Ensure all design choices (color, typography, layout, interaction) meet WCAG AA guidelines.
-* Provide text alternatives for non-text content.
-* Ensure keyboard navigability and visible focus states.
-* Design interactive elements and custom visualizations accessibly (Requires research `RESEARCH-WCAG`).
+* Provide text alternatives for non-text content (e.g., `alt` text for images, descriptions for complex visualizations).
+* Ensure keyboard navigability and visible focus states for all interactive elements.
+* Design interactive elements and custom visualizations accessibly (Requires research `RESEARCH-WCAG`). Verify with tools like WAVE and Axe.
+
+## 11. Content Strategy Notes (Ref: Task WCS-1)
+
+* Employ storytelling to make philosophical concepts engaging.
+* Consider including links to external resources (e.g., UNESCO Ethics of AI) to add depth and credibility.
+* Plan for dynamic content updates (Blog/News section via Headless CMS).
 
 ---
-*This guide provides the initial direction. Visual design prototypes (Figma) and technical research will further refine these concepts.*
+*This guide provides the initial direction. Visual design prototypes (Figma), UX research (Phase WUX), and technical research (Phase WR) will further refine these concepts.*

@@ -239,17 +239,16 @@
   * `[Planned] Research: 3rd-Party API Integration Strategy (Stripe, S3, etc.) (MEDIUM - R&D)` (See `research/SaaS_Framework_Analysis.md`)
   * **[Planned] Task IDE-1: Develop EGOS AI-Integrated Web IDE:** Research and implement a web-based IDE (potentially leveraging VS Code web components or Codespaces APIs) with deep integration of CORUJA for context-aware chat, code generation, and editing, mirroring Cursor's capabilities within the EGOS framework. (`MEDIUM - R&D`, Phase 4/5)
   * **[Planned] Task IDE-2: Design Simplified Mobile UI for Web IDE:** Create a streamlined mobile-first interface for the EGOS Web IDE, focusing on core review, status checking, and quick interaction functionalities. (`LOW - R&D`, Phase 5)
-* **Documentation Maintenance:** Continuously update all documentation (MQP, Roadmap, Strategy, Subsystem READMEs, Docstrings).
+* **Documentation Maintenance:** Continuously update all documentation (MQP, Roadmap, Strategy, Subsystem READMEs, Docstrings, Website Dev Plan, Design Guide).
 * **KOIOS Standards Evolution:** Refine and expand KOIOS standards based on project needs and best practices.
 * **Community Building & Licensing:** Define and implement strategy.
 * **Deployment Automation (HARMONY Lead):**
-  * `[Planned] Enhance Deployment Automation (Docker, Python scripts) (MEDIUM)` (See `research/SaaS_Framework_Analysis.md`)
+  * `[Planned] Enhance Deployment Automation (Docker, Python scripts, CI/CD with GitHub Actions)`. (`MEDIUM`)
 * **Marketing & Outreach (KOIOS/Strategy Lead):**
+  * **[Planned] Task CONTENT-STRATEGY:** Develop and execute a detailed content marketing plan (blog posts, deep dives, essays) based on the ethical marketing strategy and WCS-1. (`HIGH`, Phase 2b/3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
   * **[Planned] Task WEB-SEO-SCHEMA:** Implement Schema.org structured data (JSON-LD) for relevant types on `docs/index.html` and future content pages. (`MEDIUM`, Phase 3/4, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
   * **[Planned] Task WEB-SEO-TECH:** Conduct technical SEO audit and implement optimizations (page speed, minification, image optimization, sitemap). (`MEDIUM`, Phase 3/4, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
   * **[Planned] Task WEB-SEO-LINKING:** Develop and implement internal linking strategy for website/documentation. (`LOW`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
-  * **[Planned] Task CONTENT-STRATEGY:** Develop and execute a detailed content marketing plan (blog posts, deep dives, essays) based on the ethical marketing strategy. (`HIGH`, Phase 2b/3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
-  * **[Planned] Task CONTENT-FORMATS:** Explore and implement creative content formats (visualizations, interactives, videos). (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
   * **[Planned] Task COMMUNITY-ENGAGEMENT:** Develop specific plans for authentic engagement on target platforms (GitHub, Reddit, Mastodon, etc.). (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
   * **[Planned] Task AMPLIFY-DIRECTORIES:** Systematically submit EGOS to relevant OSS/AI project directories (when ready for broader visibility). (`MEDIUM`, Phase 3/4, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
   * **[Planned] Task AMPLIFY-ACADEMIC:** Develop strategy for academic dissemination (arXiv, conferences) if applicable based on research outputs. (`LOW`, R&D, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
@@ -267,7 +266,7 @@
   * **Status:** DONE
   * **Tasks:**
     * `[DONE] feat(website/design): Generate Core Design Directives`. Based on EGOS principles, subsystems, target UX, Grok/GPT analysis, strategic goals, and internal analysis (`research/EGOS design GROK.txt`). Defines visual themes, metaphors, mood boards, palettes, typography, layout principles, and visual representations for abstract concepts. (`HIGH`, Q2 2025) - ID: `WEBSITE-DESIGN-DIRECTIVES`
-    * `[Planned] docs(website/design)`: Document the chosen design directives (from `research/EGOS design GROK.txt`) into a formal design guide (e.g., `docs/website/DESIGN_GUIDE.md`). (`HIGH`, Q2 2025) - ID: `WEBSITE-DESIGN-DOC`, `depends_on: [WEBSITE-DESIGN-DIRECTIVES]`
+    * `[DONE] docs(website/design)`: Document the chosen design directives (from `research/EGOS design GROK.txt`) into a formal design guide (`docs/website/DESIGN_GUIDE.md`). (`HIGH`, Q2 2025) - ID: `WEBSITE-DESIGN-DOC`, `depends_on: [WEBSITE-DESIGN-DIRECTIVES]`
 
 * **Phase WIA: Website Information Architecture (High Priority - NEW)**
   * **Goal:** Define the website's structure, navigation, and basic user flow based on core content and the adopted design directives.
@@ -277,6 +276,18 @@
     * `[In Progress] docs(website/ia): Define Sitemap`. List main pages/sections (Home, Philosophy, Principles, Subsystems, Community/$ETHIK, Roadmap, Genki Dama, Feedback, etc.). (`HIGH`, Q2 2025) - ID: `WEBSITE-SITEMAP`
     * `[Planned] docs(website/ia): Define Navigation Structure`. Plan top navigation, footer links, and key internal linking strategy. (`HIGH`, Q2 2025) - ID: `WEBSITE-NAVIGATION`, `depends_on: [WEBSITE-SITEMAP]`
     * `[Planned] docs(website/ia): Outline Key User Flows`. Map basic journeys for target personas (researcher, contributor, curious visitor). (`MEDIUM`, Q2 2025) - ID: `WEBSITE-USERFLOWS`, `depends_on: [WEBSITE-SITEMAP]`
+
+* **Phase WUX: User Experience Research (Status: Planned - Parallel)**
+  * **Goal:** Deepen understanding of target audience needs and refine UX strategy.
+  * `[Planned]` **Task WUX-1:** Conduct User Research (Surveys/Interviews) with target personas (e.g., "Contribuidor Técnico", "Pesquisador Ética em IA"). (`MEDIUM`)
+  * `[Planned]` **Task WUX-2:** Develop Detailed Personas based on research. (`MEDIUM`)
+  * `[Planned]` **Task WUX-3:** Refine User Journeys based on personas and research. (`MEDIUM`)
+
+* **Phase WCS: Content Strategy & Creation (Status: Planned - Parallel)**
+  * **Goal:** Develop the narrative and content plan for the website.
+  * `[Planned]` **Task WCS-1:** Develop Content Strategy (Storytelling, Educational Resources - UNESCO ref, Blog/News plan, Tone of Voice). (`MEDIUM`)
+  * `[Planned]` **Task WCS-2:** Write/Adapt Final Website Copy (aligned with Tone, IA, Design, Content Strategy). (`HIGH`)
+  * `[Planned]` **Task WCS-3:** Source/Create Final Imagery & Assets (Illustrations, Icons, Photos - align with Design Guide). (`MEDIUM`)
 
 * **Phase W1: Website Foundation Stabilization & Enhancement (High Priority)**
   * **Goal:** Ensure the static website is stable, accessible, maintainable, **fully styled according to Design Directives and IA**, and prepared for future integrations.
@@ -354,7 +365,8 @@
 * Website Strategic Guide: `research/Criaçao de site com IA.txt`
 * Consolidated Design Analysis: `research/EGOS design GROK.txt`
 * Design Directives Summary: `research/Análise e Refinamento do Projeto EGOS_.txt`
-* (Future) Website Design Guide: `docs/website/DESIGN_GUIDE.md`
+* Website Design Guide: `docs/website/DESIGN_GUIDE.md`
+* Website Development Plan: `docs/website/DEVELOPMENT_PLAN.md`
 * (Future) MVP Definition: `docs/strategy/MVP_Definition.md`
 * (Future) Mycelium Topics: `subsystems/MYCELIUM/docs/topics.md`
 * (Future) SPARC Implementation Guide: `docs/methodology/SPARC_GUIDE.md`
