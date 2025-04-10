@@ -17,6 +17,10 @@
 
 Refer to the full **[Master Quantum Prompt (MQP v9.0 "Full Moon Blueprint")](docs/MQP.md)** for the complete philosophical and operational blueprint.
 
+**Development Approach Note:** This project utilizes a multi-agent AI collaboration model within the Cursor IDE, coordinated by an Orchestrator (Gemini 2.5 Pro) and supported by Task Executors (e.g., Quasar-Alpha). Key project documents (`ROADMAP.md`, `docs/website/DEVELOPMENT_PLAN.md`, `docs/website/DESIGN_GUIDE.md`) and rules (`.cursor/rules/`) guide this process. See `docs/ai_collaboration/MULTI_AGENT_WORKFLOW.md` for details.
+
+The technical approach for the primary public-facing website involves a **Modern JavaScript Framework (Next.js/SvelteKit)** and a **Headless CMS**.
+
 ---
 
 ## ✨ Core Principles
@@ -127,9 +131,16 @@ To fully understand the project's philosophy, architecture, and contribution pro
 * **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md):** Community standards and expectations.
 * **[cursor_initialization.md](.cursor/cursor_initialization.md):** Essential setup guide for the Cursor IDE environment.
 * **[.cursor/rules/](.cursor/rules/):** Directory containing rules that guide EGOS AI interactions and enforce project standards.
-  * **[ai_collaboration_guidelines.mdc](.cursor/rules/ai_collaboration_guidelines.mdc):** **NEW** - Defines best practices for effective Human-AI pair programming within Cursor for the EGOS project.
+  * **[ai_collaboration_guidelines.mdc](.cursor/rules/ai_collaboration_guidelines.mdc):** Defines best practices for effective Human-AI pair programming within Cursor for the EGOS project.
+  * **[multi_agent_awareness.mdc](.cursor/rules/multi_agent_awareness.mdc):** **NEW** - Defines standards for multi-agent collaboration within this workspace.
+  * **[ai_handover_standard.mdc](.cursor/rules/ai_handover_standard.mdc):** **CRITICAL** - Defines the mandatory standard for handing over context between agents/sessions.
   * **[git_workflow_standards.mdc](.cursor/rules/git_workflow_standards.mdc):** Detailed procedures for Git workflows, handling merge conflicts, and repository management.
+  * **[website_standards.mdc](.cursor/rules/website_standards.mdc):** Standards specifically for website development.
 * **[subsystems/](subsystems/):** Explore individual subsystem directories for their specific READMEs and code.
+* **[docs/website/](docs/website/):** Key website planning documents:
+    * **[DESIGN_GUIDE.md](docs/website/DESIGN_GUIDE.md):** Core visual and conceptual guidelines.
+    * **[DEVELOPMENT_PLAN.md](docs/website/DEVELOPMENT_PLAN.md):** Detailed phases and tasks for website build.
+    * **[CURRENT_TASKS.md](docs/website/CURRENT_TASKS.md):** Tracking immediate website development focus.
 
 ---
 
