@@ -223,6 +223,9 @@
   * `[Planned] Research: Visualization Techniques`. Investigate libraries (D3.js, Three.js, Cytoscape.js) & methods for interactive ATLAS/MYCELIUM visualization. (`MEDIUM`, Phase 2b/3) - ID: `RESEARCH-VISUALIZATION`
   * `[Planned] Research: $ETHIK Integration Architecture`. Define secure technical approach (frontend/backend/API) for token display & reward logic. (`MEDIUM`, Phase 3) - ID: `RESEARCH-ETHIK-ARCH`
   * `[Planned] Research: WCAG for Complex Interactions`. Investigate accessibility standards for custom visualizations & Web3 elements. (`MEDIUM`, Phase 3) - ID: `RESEARCH-WCAG`
+  * `[Planned] Research: Agent Frameworks`. Investigate Empyreal SDK and CrewAI for potential integration with EGOS subsystems (MYCELIUM, ETHIK). (`MEDIUM` - R&D) - ID: `RESEARCH-AGENTS-FRAMEWORKS`
+  * `[Planned] Research: External Insights`. Analyze insights from Hesamation (X) and Kaggle (Prompt Eng.) for roadmap/workflow improvements. (`LOW` - R&D) - ID: `RESEARCH-EXTERNAL-INSIGHTS`
+  * `[Planned] Research: Product Strategy & Market Fit`. Compare EGOS approach with platforms like GitLab/Vercel; analyze market for 'ethical AI tools'. (`MEDIUM` - R&D) - ID: `RESEARCH-PRODUCT-STRATEGY`
   * Mycelium Network Design & Prototyping.
   * **Advanced AI Orchestration Techniques:** Explore enhancements to SPARC methodology ... **(See background studies in `research/`)**
   * Advanced ETHIK Mechanisms (bias detection, explainability).
@@ -239,6 +242,7 @@
   * `[Planned] Research: 3rd-Party API Integration Strategy (Stripe, S3, etc.) (MEDIUM - R&D)` (See `research/SaaS_Framework_Analysis.md`)
   * **[Planned] Task IDE-1: Develop EGOS AI-Integrated Web IDE:** Research and implement a web-based IDE (potentially leveraging VS Code web components or Codespaces APIs) with deep integration of CORUJA for context-aware chat, code generation, and editing, mirroring Cursor's capabilities within the EGOS framework. (`MEDIUM - R&D`, Phase 4/5)
   * **[Planned] Task IDE-2: Design Simplified Mobile UI for Web IDE:** Create a streamlined mobile-first interface for the EGOS Web IDE, focusing on core review, status checking, and quick interaction functionalities. (`LOW - R&D`, Phase 5)
+
 * **Documentation Maintenance:** Continuously update all documentation (MQP, Roadmap, Strategy, Subsystem READMEs, Docstrings, Website Dev Plan, Design Guide).
 * **KOIOS Standards Evolution:** Refine and expand KOIOS standards based on project needs and best practices.
 * **Community Building & Licensing:** Define and implement strategy.
@@ -254,6 +258,10 @@
   * **[Planned] Task AMPLIFY-ACADEMIC:** Develop strategy for academic dissemination (arXiv, conferences) if applicable based on research outputs. (`LOW`, R&D, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
   * **[Planned] Task AMPLIFY-OUTREACH:** Develop strategy for identifying and engaging potential collaborators and guest blogging opportunities. (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
   * **[Planned] Task DESIGN-VISUAL-GUIDE:** Develop a visual style guide for EGOS (website, docs, presentations) reflecting the "Art" principle. (`MEDIUM`, Phase 3, Ref: `research/EGOS Ethical Marketing Strategy_.txt`)
+
+* **Governance & Workflow (KOIOS Lead - NEW)**
+  * `[Planned] docs(governance): Define AI Collaboration Pipeline`. Document Quasar -> Gemini -> Human Review workflow in `docs/GOVERNANCE.md`. (`HIGH`, Phase 2b) - ID: `GOVERNANCE-PIPELINE`
+  * `[Planned] chore(workflow): Automate Handover Notifications`. Explore GitHub Actions to notify team members on handovers/reviews. (`LOW`, Phase 3) - ID: `WORKFLOW-NOTIFY`
 
 **NEW SECTION: Website Design & Foundation (Q2/Q3 2025)**
 

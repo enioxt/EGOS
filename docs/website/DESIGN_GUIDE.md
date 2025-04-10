@@ -1,7 +1,7 @@
 # EGOS Website Design Guide v1.0
 
 **Status:** Initial Draft
-**Source Analysis:** `research/EGOS design GROK.txt`, `research/Análise e Refinamento do Projeto EGOS_.txt`, `research/Criaçao de site com IA.txt`
+**Source Analysis:** `research/EGOS design GROK.txt`, `research/Análise e Refinamento do Projeto EGOS_.txt`, `research/Criaçao de site com IA.txt`, `research/Analise site design.txt`
 **Related Plans:** `docs/website/DEVELOPMENT_PLAN.md`, `ROADMAP.md`
 **Date:** 2025-04-09
 

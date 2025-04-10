@@ -1,4 +1,8 @@
 // EGOS Website JavaScript
+
+// TODO: Minify JS before production
+// TODO: Use async/defer script loading
+// TODO: Add animations for subsystem diagrams and transitions
 // Add interactivity here when needed.
 
 console.log("EGOS Website JS Loaded");

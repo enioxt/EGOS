@@ -1,21 +1,26 @@
 :root {
     /* Dark Theme Color Palette */
-    --primary-color: #8A2BE2; /* BlueViolet - Mantendo um roxo vibrante */
-    --accent-color: #00BFFF; /* DeepSkyBlue - Um azul claro para contraste */
-    --secondary-color: #483D8B; /* DarkSlateBlue - Um roxo/azul mais escuro para variações */
+    --primary-color: #0A2342; /* Deep Blue */
+    --accent-color: #FF6600;  /* Warm Orange */
+    --secondary-color: #0A2342; /* Same as primary for now */
 
-    --background-color: #1a1a1d; /* Cinza muito escuro, quase preto */
-    --background-alternate: #2c2c31; /* Cinza um pouco mais claro para seções alternadas */
-    --card-background: #252528; /* Fundo para cards */
+    --background-color: #f9f9f9; /* Light background */
+    --background-alternate: #ffffff; /* White for alternate sections */
+    --card-background: #ffffff; /* White cards */
 
-    --text-color: #e1e1e1; /* Cinza claro para texto principal */
-    --text-secondary: #b3b3b3; /* Cinza mais suave para texto secundário */
-    --text-on-primary: #ffffff; /* Branco para texto sobre fundo primário (header) */
-    --link-color: var(--accent-color); /* Usar accent color para links */
-    --link-hover-color: #ffffff; /* Branco para link hover */
+    --text-color: #222; /* Dark text */
+    --text-secondary: #666; /* Lighter dark text */
+    --text-on-primary: #ffffff; /* White text on primary background */
+    --link-color: var(--accent-color); /* Accent color for links */
+    --link-hover-color: #0A2342; /* Deep blue on hover */
 
-    --border-color: #444; /* Cor de borda sutil */
-    --shadow-color: rgba(0, 0, 0, 0.5); /* Sombra mais pronunciada para contraste */
+    --border-color: #ccc; /* Light border */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    --hover-shadow-color: rgba(0, 0, 0, 0.2); /* Hover shadow */
+
+    /* TODO: Optimize font loading */
+    /* TODO: Minify CSS before production */
+    /* TODO: Add animations for subsystem diagrams and transitions */
 
     /* Fonts (Mantendo as atuais) */
     --font-body: 'Inter', sans-serif;
