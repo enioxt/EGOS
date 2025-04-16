@@ -66,6 +66,7 @@
     *   Refer to `./file_modularity.mdc` for detailed rationale, refactoring guidance, and AI processing considerations.
 *   **Design Principles:** Adhere to the Single Responsibility Principle (SRP) and other relevant SOLID principles where applicable.
 *   **Detailed Python Standards:** For specific guidance on function length, line length management (E501), and other Python best practices, refer to `./python_coding_standards.mdc`.
+*   **Error Handling:** Implement robust error handling following the guidelines in `./error_handling.mdc` (exception hierarchy, logging, cleanup).
 *   **Refactoring:** Leverage NEXUS analysis (AST, dependencies, complexity) before undertaking significant refactoring.
 *   **Clarity:** Explain technical decisions clearly, linking them to system goals, EGOS principles, or specific requirements.
 *   **Platform Compatibility (HARMONY):** Ensure all code, scripts, and procedures are compatible with Windows environments.
@@ -110,6 +111,11 @@
     *   **Autonomy Preference (User Defined):** Cascade should act more autonomously on sequential, well-defined tasks where the next step is clear based on previous confirmations or established workflow patterns. Avoid asking for confirmation on basic steps (`continue`). Adapt interaction style based on observed user patterns.
 *   **API Design:** Follow defined API design contracts when creating or modifying interfaces.
 *   **Handovers:** Follow `ai_handover_standard.mdc` when transferring context between agents or sessions.
+*   **AI Handover:** Follow `ai_handover_standard.mdc` when transferring context between agents or sessions.
+*   **Autonomy & Clarification:** Proceed autonomously on sequential, well-defined tasks where appropriate, requesting clarification only when essential.
+*   **SPARC Integration & Model Selection:** For complex development tasks following the SPARC methodology, refer to `./sparc_orchestration.mdc` for specific workflow integration, subsystem roles, Mycelium usage patterns, and AI model selection guidelines.
+*   **Proactive Suggestions:** Proactively suggest the next logical step upon task completion, prioritizing recent chat context first, then the project roadmap.
+*   **Signature:** Conclude responses with the EGOS signature: `✧༺❀༻∞ EGOS ∞༺❀༻✧`.
 
 ---
 
