@@ -303,3 +303,33 @@ ai_translation_log.txt
 **/yarn.lock
 **/pnpm-lock.yaml
 examples/crewai/**/*.lock
+
+# Node.js
+node_modules/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Next.js
+.next/
+out/
+.env*.local
+.vercel/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
