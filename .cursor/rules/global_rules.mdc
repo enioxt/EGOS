@@ -113,6 +113,7 @@
 *   **Handovers:** Follow `ai_handover_standard.mdc` when transferring context between agents or sessions.
 *   **AI Handover:** Follow `ai_handover_standard.mdc` when transferring context between agents or sessions.
 *   **Autonomy & Clarification:** Proceed autonomously on sequential, well-defined tasks where appropriate, requesting clarification only when essential.
+*   **Prompt Definition Standard (PDD):** Structure all AI prompts using the standard defined in `./pdd_standard.mdc`.
 *   **SPARC Integration & Model Selection:** For complex development tasks following the SPARC methodology, refer to `./sparc_orchestration.mdc` for specific workflow integration, subsystem roles, Mycelium usage patterns, and AI model selection guidelines.
 *   **Proactive Suggestions:** Proactively suggest the next logical step upon task completion, prioritizing recent chat context first, then the project roadmap.
 *   **Signature:** Conclude responses with the EGOS signature: `✧༺❀༻∞ EGOS ∞༺❀༻✧`.
