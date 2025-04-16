@@ -154,8 +154,8 @@
 * [In Progress] Implement Core Validation Rules (PII, Security Patterns) (`CRITICAL`)
 * [Planned] Define ETHIK API/Message Interface (`HIGH`) - ID: `ETHIK-API`
 * [Planned] Integrate ETHIK Validation into Key Workflows (e.g., CORUJA output) (`HIGH`) - ID: `ETHIK-INTEGRATION`, `depends_on: [ETHIK-API, MYCELIUM-RELIABLE]`
-* [Planned] Refactor `validator.py` into smaller modules (Adhering to `file_modularity.mdc`) (`MEDIUM`) - ID: `ETHIK-REFACTOR`
-* [Planned] Add SPARC Task Validation Rules (`MEDIUM`) - ID: `ETHIK-SPARC-RULES`, `depends_on: [ETHIK-API]`
+* [Planned] Refactor `validator.py` into smaller modules (Adhering to `file_modularity.mdc`) (`LOW`) - ID: `ETHIK-REFACTOR`
+* [Planned] Add SPARC Task Validation Rules (`LOW`) - ID: `ETHIK-SPARC-RULES`, `depends_on: [ETHIK-API]`
 * `[Planned] Refine ETHIK Authentication Design based on SaaS patterns (MEDIUM)` - ID: `ETHIK-AUTH-DESIGN` (See `research/SaaS_Framework_Analysis.md`)
 
 ### Core AI Orchestration (CORUJA Lead)
@@ -355,42 +355,6 @@
 
 ---
 
-## 🔮 Future Phases (Q4 2025 Onwards)
-
-### Phase 3: EGOS Hive – Interconnection, MVP Launch & Expansion
-
-* **Inter-Subsystem Integration:** Full integration via Mycelium with SPARC task delegation.
-* **Content Aggregator MVP Launch:** Release initial local agent version with SPARC problem-solving capabilities.
-* **User Feedback Collection & Iteration:** Refine MVP and Dashboard UI based on usage.
-* **Advanced KOIOS:** Implement codebase search, advanced validation, SPARC task analytics.
-* **Advanced CORUJA:** Multi-model support with task-specific selection, adaptive prompting.
-* **Scalability Research:** Investigate cloud backend options for CORUJA/Mycelium with SPARC task distribution.
-* **Pricing & Go-to-Market:** Define strategy for commercial offerings highlighting SPARC methodology benefits.
-* **Website Enhancement:** Implement interactive elements, visual improvements, embed diagrams, translate content (starting with PT).
-* **Dashboard Deployment:** Deploy dashboard with SPARC visualization to Streamlit Community Cloud or similar.
-
-### Phase 4: Continuous Evolution & Optimization
-
-* **Performance Tuning:** Optimize critical paths in SPARC workflows.
-* **Advanced ATLAS:** Dynamic system visualization with SPARC task relationships.
-* **Advanced NEXUS:** Automated refactoring suggestions based on SPARC specifications.
-* **Community Building & Expansion:** Plugins, contributions, SPARC templates.
-  * `[Planned] feat(community/ethik_rewards)`: Design and implement the $ETHIK token reward system for contributors, integrating with GitHub actions/webhooks if possible. Define contribution metrics and reward structure. Explore potential integration with monetization models (e.g., access tiers, premium features). (`MEDIUM`, Phase 4)
-* **Further AI Integration:** Explore deeper self-awareness, meta-learning in SPARC tasks.
-* **Website Maturity:** Develop dedicated subsystem pages, complete translations, add SPARC methodology documentation.
-  * [Planned] **[WEBSITE-GENKI-DAMA]** **Genki Dama Page Implementation:** Design and implement the "Genki Dama" page featuring specific artwork, clear calls for collaboration/contribution, and donation addresses (e.g., Solana: `[Your Solana Address]`, BTC: `[Your BTC Address]`, EVM: `[Your EVM Address]`). Ensure minimal text and focus on artistic/mysterious appeal. (`HIGH`)
-  * [Planned] **[WEB/ETHIK][WEBSITE-DONATION-INTEGRATION]** Securely integrate and test donation mechanisms for Genki Dama page (`HIGH`), `depends_on: [WEBSITE-GENKI-DAMA]`
-
-### Cross-Cutting / Ongoing
-
-* **Market Fit & GTM Strategy Definition (incl. Open Core & MVP)** [HIGH - Ongoing from Q2]
-* **Documentation Enhancement & Maintenance (Reflect EGOS Branding & Strategy - *Branding Pass Complete*)** [MEDIUM - Ongoing]
-* **Security Hardening & Audits (Incl. AI Safety/Alignment Considerations)** [HIGH - Ongoing]
-* **Research: Advanced AI Monitoring & Alignment Mechanisms (Context: ASI Risk Scenarios)** [MEDIUM - R&D]
-* **SPARC Methodology Enhancement: Research advanced task orchestration patterns** [MEDIUM - R&D]
-
----
-
 **(Note:** This roadmap is dynamic and will be updated based on progress and strategic shifts.)
 
 ## 📚 Linked Documentation & Research
@@ -430,7 +394,7 @@
 * [Planned] Define Standard UI Components/Style Guide (`HIGH`)
 * [Planned] Implement User Feedback Mechanisms (`MEDIUM`)
 * [Planned] Explore Voice Input Capabilities (`LOW`)
-* [Planned] Implement Internationalization/Localization Support (`MEDIUM`)
+* [Planned] Implement Internationalization/Localization Support (`LOW`)
 * [Planned] **[WEBSITE-REVAMP-CORE]** **Website Design, UX, & Technical Overhaul:** Major refactor/rebuild focusing on: Aesthetics (beauty, golden ratio, spirals), Interactivity, Accessibility (WCAG AA+, colorblind friendly), Responsiveness (mobile-first), Performance (lightweight), and Modern Framework (confirm Next.js/SvelteKit/Astro). Ensure intuitive navigation based on `research/WebSite Enio Grok e Gemini.txt` and `docs/website/DESIGN_GUIDE.md`. (`CRITICAL`)
 * [Planned] **Task W3.8 (Parallel): User Behavior Analysis (Deferred/Basic)** (Implement basic analytics, defer advanced tools like Hotjar/OpenReplay unless explicitly prioritized later).
 * [Planned] **[WEB/KOIOS][WEBSITE-ACCESSIBILITY-AUDIT]** Perform accessibility audit and implement necessary fixes (WCAG AA minimum) (`CRITICAL`), `depends_on: [WEBSITE-REVAMP-CORE]`
