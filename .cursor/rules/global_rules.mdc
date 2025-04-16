@@ -144,6 +144,7 @@
     *   Log the external command executed and its outcome (e.g., in commit message, task tracker).
     *   **Safety First:** AI must never auto-run potentially unsafe commands (destructive, mutating state, external calls, installs) without explicit, informed human approval for that specific command instance, even if the user asks. Refer to safety protocols if needed.
 *   **Strategic Analysis:** For tasks involving strategic planning, market analysis, or major architectural decisions, follow the process defined in `./strategic_analysis_workflow.mdc`.
+*   **Analysis Integration (Quick Wins):** When processing analysis results, implement low-effort improvements immediately before documenting longer-term tasks, as per `./workflow_quick_wins.mdc`.
 *   **External Command Execution:** If automated command execution fails, attempt execution using a configured external system terminal (e.g., PowerShell). Log the external command and outcome appropriately.
 
 ✧༺❀༻∞ EGOS ∞༺❀༻✧
