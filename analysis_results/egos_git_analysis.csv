@@ -1,0 +1,6 @@
+Filepath,FirstCommitDate,LastCommitDate,LifespanDays
+.cursor/check_log.bat,2025-04-08T15:15:57-03:00,2025-04-08T15:15:57-03:00,0.0
+.cursor/rules/ai_handover_standard.mdc,2025-04-08T20:00:48-03:00,2025-04-10T10:38:25-03:00,1.61
+README.md,2025-04-08T15:15:57-03:00,2025-04-10T11:12:37-03:00,1.83
+docs/css/base/_typography.css,2025-04-09T11:13:36-03:00,2025-04-09T18:04:28-03:00,0.29
+... (truncated for brevity; full CSV should be restored from backup or script output)
