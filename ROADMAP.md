@@ -60,6 +60,25 @@
 * [DONE] Define Metadata Schema for MDC Rules (`MEDIUM`)
 * [DONE] **Activate Cursor Agent Mode:** Transitioned from Chat to Agent, enabling direct file/terminal interaction. (`HIGH` - See `docs/ai_integration/cursor_agent_mode.md`)
 * [In Progress] Refactor Subsystems for Metadata Compliance (`MEDIUM`)
+* [Planned] [KOIOS][DOC-RU-01] Document Rationale for File Handling Rules (`Existence Check`, `Comprehensive Search`) in KOIOS standards (`MEDIUM`)
+* [Planned] [KOIOS][DOC-BP-FS-01] Add "Best Practices for File Search/Creation" section to relevant documentation (`LOW`)
+* [Planned] [KOIOS][KOIOS-LESSONS-01] Create/Maintain "Lessons Learned" log for AI Collaboration & Onboarding (`LOW`)
+* [Planned] [KOIOS/NEXUS][DOC-HTA-USAGE-01] Document `analyze_git_history.py` script usage and examples (`LOW`)
+* [Planned] [KOIOS][DOC-README-HTA-01] Update main `README.md` to mention historical analysis capability and link report (`LOW`)
+* [Planned] [KOIOS][DOC-CONTRIB-AI-01] Update `CONTRIBUTING.md` (or create if needed) with latest AI collaboration rules (`LOW`)
+* [Planned] [KOIOS][KOIOS-DOC-AUDIT-01] Perform Periodic Review of `.mdc` rules and `docs/` for consistency and alignment (`MEDIUM` - Recurring)
+
+### 📈 Analysis & Insights (NEXUS Lead)
+
+* [DONE] [NEXUS/KOIOS][TASK-HTA-01] Implement Historical File Lifespan Analysis (Script, CSV, Report) (`HIGH`)
+* [Planned] [SPARC/HARMONY/KOIOS][HTA-02] Automate Git History Analysis via CI/CD (GitHub Actions) (`MEDIUM`) (Ref: Evolutionary Preservation)
+* [Planned] [CORUJA/KOIOS][HTA-DASH-01a] Select Visualization Tool for HTA Dashboard (`MEDIUM`)
+* [Planned] [CORUJA/KOIOS][HTA-DASH-01b] Implement HTA Dashboard Integration (`MEDIUM`) `depends_on: [HTA-DASH-01a]`
+* [Planned] [NEXUS/KOIOS][HTA-REFINE-01] Review and Refine HTA Script and Report (Performance, Clarity, Artistry) (`LOW`)
+
+### 🛡️ Security & Compliance (ETHIK Lead)
+
+* [Planned] [ETHIK/HARMONY][SEC-AUDIT-01] Perform Periodic Security & License Audit (incl. `pip-audit`, license checks, sensitive data review) (`HIGH` - Recurring)
 
 ### SPARC Methodology Integration (KOIOS/CORUJA Lead) - Phase 2b
 
