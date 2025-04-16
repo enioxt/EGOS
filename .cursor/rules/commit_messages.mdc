@@ -1,9 +1,4 @@
 ---
-description:
-globs:
-alwaysApply: true
----
----
 description: Guidelines for writing Git commit messages following Conventional Commits
 # No specific glob needed, applies conceptually to the commit process
 alwaysApply: true # Setting to true as it's a core standard
@@ -11,94 +6,12 @@ alwaysApply: true # Setting to true as it's a core standard
 
 # Commit Message Standards (KOIOS / Conventional Commits)
 
-## Rule
+**Primary Reference:** The mandatory standard for Git commit messages (Conventional Commits) is defined in the central EGOS rules file:
 
-All Git commit messages **MUST** adhere to the Conventional Commits specification (v1.0.0). This structure makes commits easier to read, enables automated changelog generation, and helps integrate with CI/CD workflows.
+*   **`./global_rules.mdc` (Section 5 - Version Control & Commits)**
 
-The basic format is:
+Please refer to that document for the authoritative standard.
 
-```
-<type>[optional scope]: <description>
+This file is retained for context discovery, but the primary source of truth is `global_rules.mdc`.
 
-[optional body]
-
-[optional footer(s)]
-```
-
-## Key Components
-
-*   **Type:** Must be one of the following:
-    *   `feat`: A new feature for the user.
-    *   `fix`: A bug fix for the user.
-    *   `build`: Changes affecting the build system or external dependencies (e.g., `requirements.txt`, `pyproject.toml`, Dockerfile).
-    *   `chore`: Other changes that don't modify `src` or `test` files (e.g., updating build tasks, package manager configs).
-    *   `ci`: Changes to CI configuration files and scripts (e.g., GitHub Actions).
-    *   `docs`: Documentation only changes (e.g., README, subsystem docs, docstrings *only*).
-    *   `perf`: A code change that improves performance.
-    *   `refactor`: A code change that neither fixes a bug nor adds a feature.
-    *   `revert`: Reverts a previous commit.
-    *   `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc).
-    *   `test`: Adding missing tests or correcting existing tests.
-*   **Scope (Optional):** A noun describing the section of the codebase affected (e.g., `KOIOS`, `NEXUS`, `CRONOS.Backup`, `Mycelium`, `deps`, `config`). Use a consistent scope.
-*   **Description:** A concise summary of the change in the imperative, present tense ("change" not "changed" or "changes"). Not capitalized, no period at the end.
-*   **Body (Optional):** A more detailed explanation of the changes, rationale, and context. Use blank lines to separate paragraphs.
-*   **Footer(s) (Optional):** Used for referencing issues (e.g., `Refs: #123`, `Closes: #456`) or indicating breaking changes (`BREAKING CHANGE: <description>`).
-
-## Examples
-
-### Correct Usage
-
-```
-feat(NEXUS): add dependency analysis capability
-
-Implements the core logic for analyzing inter-file dependencies
-using AST parsing within the NEXUS subsystem.
-
-Resolves: #42
-```
-
-```
-fix(CRONOS): correct backup cleanup logic for retention days
-
-The previous logic did not correctly calculate the cutoff date.
-This commit fixes the timedelta calculation.
-```
-
-```
-docs(KOIOS): update logging standards documentation
-
-Adds examples for KoiosLogger usage and clarifies module-level logger instantiation.
-```
-
-```
-refactor(ETHIK): simplify rule application logic in Sanitizer
-
-Replaces nested loops with a more direct iteration approach,
-improving readability without changing behavior.
-```
-
-```
-build(deps): upgrade MyceliumInterface dependency to v1.1.0
-```
-
-```
-test(NEXUS): add tests for workspace analysis edge cases
-```
-
-### Incorrect Usage
-
-```
-# ❌ Missing type
-Updated the backup manager
-
-# ❌ Vague description, past tense
-fixed a bug
-
-# ❌ Type not conventional
-improvement(NEXUS): made analysis faster
-
-# ❌ Description capitalized, ends with period.
-feat(KOIOS): Add search system.
-```
-
-**Follow the Conventional Commits format for all commits.**
+✧༺❀༻∞ EGOS ∞༺❀༻✧

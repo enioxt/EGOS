@@ -88,6 +88,7 @@
 *   **Clean History:** Strive for a clean, meaningful commit history. Rebase interactively for local cleanup before pushing complex feature branches (if applicable per workflow).
 *   **Pre-Commit Hooks:** Resolve any issues flagged by pre-commit hooks (e.g., `ruff`) before committing. Use `git commit --no-verify` sparingly and only with justification and follow-up tasks.
 *   **Local-First Development:** **MANDATORY:** Modify and test code locally before pushing to the remote repository.
+*   **Detailed Procedures:** For detailed step-by-step procedures on handling merge conflicts, pre-commit hook failures, and repository management, refer to `./git_workflow_standards.mdc`.
 *   **Branching Strategy:** (Define specific branching strategy if not default GitHub flow - e.g., GitFlow).
 *   **No Sensitive Data:** Ensure no sensitive data (secrets, keys, PII) is ever committed to the repository.
 
