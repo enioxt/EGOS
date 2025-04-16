@@ -63,6 +63,7 @@
     *   Keep files focused on a single responsibility.
     *   Target file length < 500 lines as a guideline; refactor larger files.
     *   Use configuration files/environment variables for settings; avoid hardcoding values.
+    *   Refer to `./file_modularity.mdc` for detailed rationale, refactoring guidance, and AI processing considerations.
 *   **Design Principles:** Adhere to the Single Responsibility Principle (SRP) and other relevant SOLID principles where applicable.
 *   **Detailed Python Standards:** For specific guidance on function length, line length management (E501), and other Python best practices, refer to `./python_coding_standards.mdc`.
 *   **Refactoring:** Leverage NEXUS analysis (AST, dependencies, complexity) before undertaking significant refactoring.
