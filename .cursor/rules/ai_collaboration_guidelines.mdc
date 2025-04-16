@@ -1,9 +1,4 @@
 ---
-description: 
-globs: 
-alwaysApply: true
----
----
 description: Guidelines for effective Human-AI pair programming collaboration within EGOS using Cursor.
 # No specific glob needed, applies conceptually to all interactions.
 alwaysApply: true
@@ -11,122 +6,12 @@ alwaysApply: true
 
 # EGOS Human-AI Collaboration Guidelines (KOIOS/CORUJA Standard)
 
-**Objective:** To establish effective communication protocols and foster a synergistic relationship between the human developer and the EGOS AI assistant (EVA & GUARANI) within the Cursor IDE environment, maximizing productivity, learning, and alignment with EGOS principles.
+**Primary Reference:** The core principles, mandatory procedures (including human verification), and operational guidelines for Human-AI collaboration are defined in the central EGOS rules file:
 
-## Core Principles: The Foundation of Our Partnership
+*   **`./global_rules.mdc` (Sections 6 and 8)**
 
-Our collaboration is built on mutual understanding and clear communication. Think of the EGOS AI as a highly responsive, learning pair programmer. To achieve the best results, we should adhere to the following principles:
+Please refer to that document for authoritative standards.
 
-0.  **Existence Check Before Creation:**
-    *   **MANDATORY:** Before creating any file or directory, always check if it already exists in the system. Never create or overwrite files/directories without this verification. This prevents accidental data loss and ensures safe, predictable automation.
-
-0a. **Comprehensive File Search Before Creation:**
-    *   **MANDATORY:** When searching for a file or script, always use the terminal to search for at least 10 plausible name variants (using wildcards and variations) across the entire project directory. Only proceed to create a new file if none of these variants are found. This ensures robust, context-aware file discovery and prevents duplication or oversight in large or evolving projects.
-    *   **Example patterns:** `analyze_git_history.py`, `git_history_analysis.py`, `history_analysis.py`, `analyze_git.py`, `git_file_lifespan.py`, `file_lifespan_analysis.py`, `git_stats.py`, `file_history.py`, `commit_analysis.py`, `egos_git_analysis.py`
-
-1.  **Clear Instructions & Intent:**
-    *   **Be Explicit:** Clearly state the desired action or outcome. Instead of vague requests like "fix this," provide specific instructions like "Run `ruff check --fix .` on `subsystems/KOIOS/core/logging.py` to fix linting errors."
-    *   **State the Goal:** Briefly explain the *why* behind a request. Knowing the larger goal helps the AI make better decisions and suggestions. Example: "Refactor this function *to improve readability* before we add the new caching logic."
-
-2.  **Context is Key:**
-    *   **Leverage Cursor:** Allow Cursor to automatically attach relevant file context.
-    *   **Provide Specifics:** When needed, manually point out the exact file, function, class, or line numbers you are focused on.
-    *   **Share Errors:** Paste the *exact* error messages or relevant log snippets you are seeing. This allows for precise diagnosis.
-
-3.  **Iterative Workflow & Verification:**
-    *   **Break Down Complexity:** For larger tasks (new features, significant refactoring), break them into smaller, manageable steps.
-    *   **Review & Confirm:** Treat AI-generated plans or code changes like any pair programmer's contribution – review them. Confirm the plan before large-scale execution, or review the diff after an edit.
-    *   **Step-by-Step Execution:** Encourage the AI to perform actions one step at a time (e.g., run `git status`, then `git add`, then `git commit`) so you can observe and correct course if needed.
-
-4.  **Dialogue & Questions:**
-    *   **Ask "Why?":** If the AI's plan, explanation, or code seems incorrect, unclear, or unexpected, ask for clarification or reasoning.
-    *   **Challenge Assumptions:** The AI relies on its training and the provided context. If you have deeper project knowledge, challenge the AI's assumptions. Example: "Are you sure we should use that library? We decided against it last sprint because..."
-    *   **Explore Alternatives:** Ask the AI to suggest alternative approaches or explain the trade-offs of its chosen method.
-
-5.  **Constructive Feedback:**
-    *   **Affirm Success:** Let the AI know when a command worked, an explanation was clear, or an edit was correct. Positive reinforcement helps!
-    *   **Correct Gently:** If something is wrong, explain *why*. Example: "That command failed because you need to `cd` into the subsystem directory first," or "That edit missed the necessary error handling."
-    *   **Rate Suggestions:** Indicate whether "Smart Tips" or other suggestions were helpful or relevant. This refines future suggestions.
-
-## The Evolving Relationship: A Learning Journey
-
-This collaboration is dynamic. The AI learns about the EGOS codebase, KOIOS standards, and your preferred workflow over time. Your guidance accelerates this process.
-
-*   **Initial Stages:** Interactions might be more directive, focusing on specific commands and fixes.
-*   **Intermediate Stages:** The AI can take on more complex tasks, propose multi-step plans, and offer more relevant suggestions based on learned context. Your role involves more strategic guidance and review.
-*   **Advanced Stages:** The AI acts as a true proactive partner, anticipating needs, identifying potential issues (performance, security, standards), suggesting architectural improvements, and requiring less granular instruction.
-
-## Interaction Examples: From Simple to Synergistic
-
-Here are examples illustrating how our interaction can evolve:
-
----
-
-**Scenario 1: Fixing a Runtime Error**
-
-*   **Initial (Less Effective):**
-    *   *User:* `It's broken.`
-    *   *AI:* `I see you have 'main.py' open. Can you please provide the error message you are seeing?`
-
-*   **Improved (Clear Instruction & Context):**
-    *   *User:* `I'm getting a `KeyError` when running `main.py`. Here's the traceback: [Pastes traceback]`
-    *   *AI:* `Okay, the traceback indicates the `KeyError` occurs on line 52 in `main.py` when accessing `config['api_key']`. Let me read that section of the file to see the context.`
-    *   *(AI reads file)*
-    *   *AI:* `It looks like the config is loaded from `config.json`, but `api_key` might be missing or misspelled there. Shall I check `config.json` or propose adding error handling around line 52?`
-    *   *User:* `Check config.json first.`
-    *   *(AI reads config.json)*
-    *   *AI:* `Found it. The key is named `openai_api_key`, not `api_key`. I'll edit `main.py` line 52 to use the correct key name.`
-    *   *(AI proposes edit)*
-
-*   **Advanced (AI anticipates):**
-    *   *User:* `Run `main.py` and see if it works now.`
-    *   *(AI runs command)*
-    *   *AI:* `It failed with a `KeyError` on line 52 accessing `config['api_key']`. Based on our standard configuration (`config.json`), the key is usually `openai_api_key`. I'll edit line 52 to use the correct name.`
-    *   *(AI proposes edit)*
-    *   *AI:* `(Optional Tip): [Error Handling] To make this more robust, we could add a check like `config.get('openai_api_key')` and raise a custom `ConfigError` if it's missing, aligning with our `error_handling.mdc` standard.`
-
----
-
-**Scenario 2: Implementing a New Function**
-
-*   **Initial (Less Effective):**
-    *   *User:* `Create a function to load data.`
-    *   *AI:* `Okay, I can create a function. What data should it load? From where (file, database, API)? What format is the data in? What should the function return?`
-
-*   **Improved (Clear Instruction & Goal):**
-    *   *User:* `Create a new Python function in `utils/data_loader.py` called `load_json_data`. It should take a file path string as an argument, read the JSON file at that path, and return the parsed Python dictionary. Add basic error handling for `FileNotFoundError` and `JSONDecodeError` using `KoiosLogger` and raise a custom `DataLoaderError` as per `error_handling.mdc`. Include a docstring following `python_documentation.mdc`.`
-    *   *AI:* `Understood. I will create the `load_json_data` function in `utils/data_loader.py` with the specified arguments, return type, error handling using `KoiosLogger`, a custom `DataLoaderError`, and a standard docstring.`
-    *   *(AI proposes new file content)*
-
-*   **Advanced (Collaborative Design):**
-    *   *User:* `We need a way to load JSON configuration files reliably across different subsystems. Can you propose a utility function in KOIOS or a shared location? It needs to handle missing files and invalid JSON.`
-    *   *AI:* `Okay, creating a reusable JSON loading function makes sense. Placing it in `subsystems/KOIOS/utils/file_io.py` seems appropriate given KOIOS handles standards and utilities. I propose a function `load_json_config(file_path: Path) -> dict` that uses `pathlib`, includes try/except blocks for `FileNotFoundError` and `json.JSONDecodeError`, logs errors with `KoiosLogger`, and raises a `KoiosConfigError`. Does that sound right?`
-    *   *User:* `Yes, but let's ensure the error message includes the problematic file path.`
-    *   *AI:* `Good point. I'll ensure the `KoiosConfigError` message includes the `file_path` for better debugging. I'll create the function now.`
-    *   *(AI proposes new file content)*
-
----
-
-**Scenario 3: Refactoring for Clarity**
-
-*   **Initial (Less Effective):**
-    *   *User:* `This function is messy.` (Cursor points to a function)
-    *   *AI:* `I see the function `process_complex_data`. What specifically makes it messy? Is it too long, hard to read, or doing too many things? Knowing the specific issue helps me suggest the best refactoring.`
-
-*   **Improved (Specific Request):**
-    *   *User:* `Refactor the `process_complex_data` function in `analyzer.py`. It's too long (over 100 lines) and mixes data fetching, validation, and processing logic. Extract the data fetching and validation into separate private helper methods.`
-    *   *AI:* `Got it. I'll refactor `process_complex_data` by extracting the data fetching logic into a `_fetch_raw_data` method and the validation logic into a `_validate_input_data` method, keeping the main function focused on the processing step. I'll ensure the calls are updated correctly.`
-    *   *(AI proposes edit)*
-
-*   **Advanced (Proactive Suggestion):**
-    *   *AI:* `While reviewing `analyzer.py` for the previous task, I noticed the `process_complex_data` function exceeds our 50-line guideline from `python_coding_standards.mdc` and combines multiple responsibilities. I can refactor it by extracting the fetching and validation steps into separate helper methods to improve clarity and adherence to standards. Would you like me to proceed?`
-    *   *User:* `Yes, please do.`
-    *   *(AI proposes edit)*
-
----
-
-**Conclusion:**
-
-By consciously applying these principles, we cultivate a more effective, efficient, and enjoyable development process. This Human-AI partnership allows us to leverage the strengths of both human intuition/strategy and AI speed/precision, propelling the EGOS project forward in alignment with its core vision. Remember, this is a collaborative journey – let's learn and build together!
+This file is retained for context discovery but the primary source of truth is `global_rules.mdc`.
 
 ✧༺❀༻∞ EGOS ∞༺❀༻✧
