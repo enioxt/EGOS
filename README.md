@@ -127,39 +127,14 @@ To fully understand the project's philosophy, architecture, and contribution pro
 
 * **[Master Quantum Prompt (MQP v9.0 "Full Moon Blueprint")](docs/MQP.md):** The core philosophical and operational blueprint.
 * **[ROADMAP.md](ROADMAP.md):** High-level development plan and phases.
-* **[CONTRIBUTING.md](CONTRIBUTING.md):** Guidelines for contributing code, reporting issues, and suggesting features.
-* **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md):** Community standards and expectations.
-* **[cursor_initialization.md](.cursor/cursor_initialization.md):** Essential setup guide for the Cursor IDE environment.
-* **[.cursor/rules/](.cursor/rules/):** Directory containing rules that guide EGOS AI interactions and enforce project standards.
-  * **[ai_collaboration_guidelines.mdc](.cursor/rules/ai_collaboration_guidelines.mdc):** Defines best practices for effective Human-AI pair programming within Cursor for the EGOS project.
-  * **[multi_agent_awareness.mdc](.cursor/rules/multi_agent_awareness.mdc):** **NEW** - Defines standards for multi-agent collaboration within this workspace.
-  * **[ai_handover_standard.mdc](.cursor/rules/ai_handover_standard.mdc):** **CRITICAL** - Defines the mandatory standard for handing over context between agents/sessions.
-  * **[git_workflow_standards.mdc](.cursor/rules/git_workflow_standards.mdc):** Detailed procedures for Git workflows, handling merge conflicts, and repository management.
-  * **[website_standards.mdc](.cursor/rules/website_standards.mdc):** Standards specifically for website development.
+* **[docs/](docs/):** The main directory for all project documentation, including strategy, methodology, and subsystem details.
 * **[subsystems/](subsystems/):** Explore individual subsystem directories for their specific READMEs and code.
-* **[docs/website/](docs/website/):** Key website planning documents:
-    * **[DESIGN_GUIDE.md](docs/website/DESIGN_GUIDE.md):** Core visual and conceptual guidelines.
-    * **[DEVELOPMENT_PLAN.md](docs/website/DEVELOPMENT_PLAN.md):** Detailed phases and tasks for website build.
-    * **[CURRENT_TASKS.md](docs/website/CURRENT_TASKS.md):** Tracking immediate website development focus.
-
----
-
-## ✅ Running Tests
-
-Unit tests are crucial for ensuring system integrity. Use the provided PowerShell scripts in the project root:
-
-```powershell
-# Run tests for a specific subsystem (e.g., ATLAS)
-.\test_atlas.ps1
-
-# Run tests with verbose output
-.\test_atlas.ps1 -Verbose
-
-# Run tests with coverage report
-.\test_atlas.ps1 -Coverage
-```
-
-*(Refer to project root for all available `test_*.ps1` scripts)*
+* **[STRATEGIC_THINKING/](STRATEGIC_THINKING/):** Contains structured prompts, AI-generated analyses, and related research links supporting strategic decision-making.
+* **[research/](research/):** Holds background studies, competitive analysis, and external resources.
+* **[CONTRIBUTING.md](CONTRIBUTING.md):** Guidelines for contributing to the project.
+* **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md):** Community standards and expectations.
+* **[LICENSE](LICENSE):** Project licensing information.
+* **[.cursor/rules/](.cursor/rules/):** Directory containing specific operational rules and standards for AI collaboration and project workflows.
 
 ---
 
@@ -180,6 +155,7 @@ Unit tests are crucial for ensuring system integrity. Use the provided PowerShel
 │   │   └── README.md
 │   └── ...                 # Other subsystems (CRONOS, CORUJA, ETHIK, HARMONY, KOIOS, MYCELIUM, NEXUS)
 ├── scripts/                # Utility and automation scripts
+├── tools/                  # Supporting tools or utilities (distinct from scripts)
 ├── tests/                  # Global or integration tests (if any)
 ├── .gitignore
 ├── LICENSE                 # Project License (e.g., MIT)
