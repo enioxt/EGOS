@@ -59,15 +59,13 @@
 *   **Language & Style:** Write clean, modern, well-documented Python code. Follow PEP 8 guidelines.
 *   **Linting & Formatting:** **MANDATORY:** Use `ruff` for linting and formatting. Ensure code passes checks before committing (use pre-commit hooks).
 *   **Type Hinting:** **MANDATORY:** Include type hints for function/method arguments and return values.
-*   **Modularity (Conscious Modularity):**
-    *   Keep files focused on a single responsibility.
-    *   Target file length < 500 lines as a guideline; refactor larger files.
-    *   Use configuration files/environment variables for settings; avoid hardcoding values.
-    *   Refer to `./file_modularity.mdc` for detailed rationale, refactoring guidance, and AI processing considerations.
+*   **Modularity:** Maintain Conscious Modularity. Keep files focused (target < 500 lines) and adhere to the Single Responsibility Principle (SRP). See `./file_modularity.mdc` for detailed rationale and guidance.
+*   **Error Handling:** Implement robust and consistent error handling as defined in `./error_handling.mdc`.
+*   **Testing:** Follow the comprehensive testing standards and practices outlined in `./testing_standards.mdc`.
+*   **Type Hinting:** Use type hints extensively in all Python code for clarity and static analysis benefits.
+*   **NEXUS Analysis:** Leverage NEXUS analysis (AST, dependencies, complexity) before significant refactoring.
 *   **Design Principles:** Adhere to the Single Responsibility Principle (SRP) and other relevant SOLID principles where applicable.
 *   **Detailed Python Standards:** For specific guidance on function length, line length management (E501), and other Python best practices, refer to `./python_coding_standards.mdc`.
-*   **Error Handling:** Implement robust error handling following the guidelines in `./error_handling.mdc` (exception hierarchy, logging, cleanup).
-*   **Refactoring:** Leverage NEXUS analysis (AST, dependencies, complexity) before undertaking significant refactoring.
 *   **Clarity:** Explain technical decisions clearly, linking them to system goals, EGOS principles, or specific requirements.
 *   **Platform Compatibility (HARMONY):** Ensure all code, scripts, and procedures are compatible with Windows environments.
 *   **AI Model Usage (SPARC):** Use appropriate AI models for tasks (Reasoning models for Spec/Arch, Instruction models for Impl/Test) as guided by `sparc_orchestration.mdc`.
