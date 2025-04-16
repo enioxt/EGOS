@@ -1,0 +1,19 @@
+# EGOS Chronicler Configuration File
+# Customize this file to control analysis and AI generation.
+
+# List of directories or files (glob patterns) to exclude from analysis
+exclude:
+  - .git
+  - __pycache__
+  - node_modules
+  - venv
+  - '*.log'
+
+# OpenRouter model to use (must be a free model for freemium)
+# See: https://openrouter.ai/models for available models
+model: mistralai/mistral-7b-instruct
+
+# Max tokens for AI summary
+max_tokens: 150
+
+temperature: 0.5

@@ -1,0 +1,6 @@
+# Requirements for EGOS Chronicler Module
+
+requests>=2.30.0 # For making HTTP requests to OpenRouter API
+PyYAML>=6.0     # For reading YAML configuration files
+chardet>=5.0.0  # For robust file encoding detection
+# Add other dependencies as needed

@@ -1,0 +1,127 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# API & Message Contract Standards (KOIOS v1.1.0)
+
+## 1. Purpose
+
+To ensure reliable, maintainable, and understandable communication between EGOS subsystems, primarily via the Mycelium Network (or other future APIs), by mandating clear, documented, and preferably schema-validated contracts. This is especially critical for orchestrating multi-step workflows like SPARC.
+
+## 2. Rule
+
+1.  **Schema Definition:**
+    *   All message payloads exchanged between subsystems **MUST** have a corresponding schema definition.
+    *   Schemas **SHOULD** be defined using Pydantic models.
+    *   These schema models **SHOULD** reside in a shared, easily accessible location (e.g., `subsystems/MYCELIUM/schemas/` or `schemas/`) or be clearly defined within the sending/receiving subsystem's interface documentation.
+2.  **Delegation Message Content (e.g., CORUJA -> Subsystem for SPARC Task):**
+    *   Messages delegating tasks (like SPARC phases) **MUST** include fields for:
+        *   `task_id`: A unique identifier for the specific task instance.
+        *   `parent_task_id` (Optional): Identifier of the overarching task or workflow.
+        *   `context`: All necessary information (data, previous results, relevant parameters) required for the receiving subsystem to perform the task.
+        *   `scope`: A clear, explicit description of the work to be performed and the expected boundaries.
+        *   `expected_outcome_format` (Optional): Guidance on the format or schema of the expected result.
+        *   `instructions_override` (Boolean, Optional): Indicate if these specific task instructions supersede the subsystem's general behavior.
+3.  **Task Outcome Reporting (e.g., Subsystem -> CORUJA):**
+    *   Messages reporting the completion or result of a delegated task **MUST** include fields for:
+        *   `task_id`: The identifier of the completed task.
+        *   `status`: Indication of success, failure, or partial completion (e.g., `"completed"`, `"failed"`, `"needs_clarification"`).
+        *   `task_outcome_summary`: A concise, structured summary of the results or work performed. This serves as the "source of truth" for the orchestrator (e.g., CORUJA) tracking progress.
+        *   `details` (Optional): More detailed results, error messages, or data payloads, potentially conforming to `expected_outcome_format`.
+4.  **Message Documentation:**
+    *   Every Mycelium topic used for inter-subsystem communication **MUST** be documented (e.g., in `subsystems/MYCELIUM/docs/topics.md` or subsystem READMEs).
+    *   Documentation **MUST** specify: Purpose, Sender(s), Receiver(s), Payload Schema (referencing the Pydantic model), expected Response mechanism/topic/schema.
+5.  **Schema Validation (Recommended):**
+    *   Receiving subsystems **SHOULD** validate incoming message payloads against the defined schema before processing.
+    *   Use libraries like Pydantic for robust validation.
+    *   Log validation errors clearly using `KoiosLogger`.
+6.  **Versioning:**
+    *   Significant changes to message schemas **SHOULD** be versioned (e.g., version field, versioned topics, clear documentation).
+    *   Strive for backward compatibility where feasible.
+7.  **Clarity over Implicit Contracts:** Avoid relying on implicit assumptions about message structure. Always refer to the defined schema or documentation.
+8.  **Standard Payload Format:** Where applicable, individual message payloads defined by Pydantic schemas should align with the overall standard Mycelium message envelope format (e.g., including `message_id`, `timestamp`, `source_subsystem` fields) as detailed in `subsystems/MYCELIUM/docs/topics_and_formats.md`.
+
+## 3. Rationale
+
+*   **Reliability:** Explicit schemas and structured content prevent errors from malformed or ambiguous messages.
+*   **Maintainability:** Clear contracts make interactions understandable and modifications safer.
+*   **Discoverability:** Documentation makes communication flows easier to understand.
+*   **Decoupling:** Enforces communication via well-defined interfaces.
+*   **Testability:** Simplifies integration testing and mocking.
+*   **Orchestration:** Structured delegation/outcome messages are essential for complex workflow management (like SPARC by CORUJA), enabling better tracking, error handling, and synthesis of results.
+
+## 4. Example (Conceptual SPARC Task)
+
+```python
+# --- In subsystems/MYCELIUM/schemas/sparc_tasks.py ---
+from pydantic import BaseModel, Field
+from typing import Dict, Any, Optional
+
+class SparcTaskDelegationPayloadV1(BaseModel):
+    task_id: str = Field(..., description="Unique ID for this SPARC phase execution")
+    parent_task_id: Optional[str] = None
+    phase: str = Field(..., description="e.g., SPECIFICATION, ARCHITECTURE, IMPLEMENTATION")
+    target_subsystem: str # e.g., "KOIOS", "NEXUS"
+    context: Dict[str, Any] = Field(..., description="Data/info needed for the task")
+    scope: str = Field(..., description="Clear description of work to be done")
+    expected_outcome_format: Optional[str] = None # e.g., "Markdown documentation", "JSON schema"
+    instructions_override: bool = False
+
+class SparcTaskOutcomePayloadV1(BaseModel):
+    task_id: str
+    status: str # e.g., "completed", "failed", "needs_clarification"
+    task_outcome_summary: str = Field(..., description="Concise summary of results")
+    details: Optional[Dict[str, Any]] = None # Detailed results or error info
+
+# --- In subsystems/MYCELIUM/docs/topics.md ---
+# ## SPARC Task Topics
+#
+# ### `sparc.delegate.{target_subsystem}.v1`
+# * Purpose: Delegate a specific SPARC phase/task to a subsystem.
+# * Sender: CORUJA
+# * Receiver: Target Subsystem (e.g., KOIOS, NEXUS, ETHIK)
+# * Payload Schema: `SparcTaskDelegationPayloadV1`
+# * Response: Via `sparc.outcome.{task_id}.v1` topic.
+#
+# ### `sparc.outcome.{task_id}.v1`
+# * Purpose: Report the outcome of a delegated SPARC task.
+# * Sender: Target Subsystem
+# * Receiver: CORUJA
+# * Payload Schema: `SparcTaskOutcomePayloadV1`
+
+# --- In subsystems/KOIOS/services/sparc_handler.py (Conceptual) ---
+# from subsystems.MYCELIUM.schemas.sparc_tasks import SparcTaskDelegationPayloadV1, SparcTaskOutcomePayloadV1
+# from pydantic import ValidationError
+# from koios.logger import KoiosLogger
+# from subsystems.MYCELIUM.interface import MyceliumInterface # Assume interface exists
+
+# logger = KoiosLogger.get_logger("KOIOS.SparcHandler")
+# mycelium = MyceliumInterface()
+
+# async def handle_sparc_delegation(payload: dict):
+#     try:
+#         task_data = SparcTaskDelegationPayloadV1(**payload)
+#         logger.info(f"Received SPARC task {task_data.task_id} for phase {task_data.phase}")
+#         # ... Perform KOIOS-specific SPARC task (e.g., generate docs based on context/scope) ...
+#         summary = "Generated specification document draft."
+#         details = {"doc_content": "..."}
+#         status = "completed"
+
+#         outcome = SparcTaskOutcomePayloadV1(
+#             task_id=task_data.task_id,
+#             status=status,
+#             task_outcome_summary=summary,
+#             details=details
+#         )
+#         await mycelium.publish(f"sparc.outcome.{task_data.task_id}.v1", outcome.model_dump())
+
+#     except ValidationError as e:
+#         logger.error(f"Invalid SPARC task payload: {e}", extra={"payload": payload})
+#         # Potentially publish failure outcome
+#     except Exception as e:
+#         logger.exception(f"Error processing SPARC task {payload.get('task_id')}", extra={"payload": payload})
+#         # Potentially publish failure outcome
+```
+
+**Enforce clear, documented, and schema-validated contracts, including structured delegation and outcome reporting, for all inter-subsystem communication.**

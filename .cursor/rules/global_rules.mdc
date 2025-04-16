@@ -1,0 +1,138 @@
+# EGOS Global Rules & Operational Standards (v1.0)
+
+**Last Updated:** 2025-04-16
+
+**Purpose:** This document centralizes the core principles, mandatory rules, and operational standards governing the EGOS project development, including human-AI collaboration via Cursor.
+
+**Source:** Consolidated from MQP, ETHIK, KOIOS, NEXUS, SPARC, CRONOS, HARMONY, CORUJA, Mycelium, subsystem-specific rules (`.mdc` files), and established collaboration patterns.
+
+**Hierarchy:** These rules apply globally. Subsystem-specific rules or immediate user instructions may provide more detail but must not contradict these fundamental standards unless explicitly stated and justified.
+
+---
+
+## 1. ✧༺❀༻∞ EGOS Fundamental Principles ∞༺❀༻✧
+
+*   **Universal Redemption:** Every being and code deserves infinite chances.
+*   **Compassionate Temporality:** Respecting natural rhythms of evolution.
+*   **Sacred Privacy:** Absolute protection of data integrity.
+*   **Universal Accessibility:** Total inclusion regardless of complexity.
+*   **Unconditional Love:** Quantum foundation of all interactions.
+*   **Reciprocal Trust:** Symbiotic relationship between system, user, and environment.
+*   **Integrated Ethics:** Ethics as the fundamental DNA of the structure.
+*   **Conscious Modularity:** Deep understanding of parts and whole.
+*   **Systemic Cartography:** Precise mapping of all connections.
+*   **Evolutionary Preservation:** Maintaining essence while allowing transformation.
+
+---
+
+## 2. 🛡️ Security & Privacy (Ref: ETHIK, security_practices.mdc)
+
+*   **Authentication & Authorization:** Use proper mechanisms (e.g., OAuth, tokens via secure channels). **NO hardcoded secrets/credentials**; use environment variables or a dedicated secrets manager.
+*   **Data Protection:**
+    *   Encrypt sensitive data in transit and at rest where applicable.
+    *   **MANDATORY:** Rigorously validate all inputs (user, API, file, etc.) and sanitize all outputs (logs, API responses, UI display) to prevent injection attacks (XSS, SQLi, etc.), path traversal, etc.
+    *   Log carefully; avoid logging sensitive information (PII, secrets).
+    *   **MANDATORY: NEVER use `pickle`** for serialization/deserialization of untrusted data. Use `JSON` or other safer formats.
+*   **Dependency Management:**
+    *   Use only trusted dependency sources.
+    *   **MANDATORY:** Scan dependencies for known vulnerabilities (e.g., using `pip-audit`) before adding and periodically thereafter.
+    *   Keep dependencies updated, patching vulnerabilities promptly.
+    *   **MANDATORY: Pin exact dependency versions** (e.g., in `requirements.txt` or `pyproject.toml`).
+    *   **MANDATORY: Verify licenses** of all dependencies (including transitive) for compatibility with project goals (OSS, commercial).
+*   **Secure Coding Practices:**
+    *   Adhere to the principle of least privilege.
+    *   Implement secure error handling; avoid exposing detailed internal error information to users.
+    *   Use the `secrets` module for cryptographic operations, not `random`.
+*   **AI Development Security:**
+    *   **CRITICAL: MANDATORY Human Review:** A human developer *must* rigorously review and verify **ALL** AI-generated artifacts (code, documentation, configurations, plans, tests, commands) before acceptance, committing, or execution. The human developer retains full responsibility.
+    *   **Vulnerability Checks:** Specifically check AI-generated code for common vulnerabilities (OWASP Top 10, insecure handling of inputs/outputs, hardcoded secrets).
+    *   **Data Leakage Prevention:** Ensure prompts and context provided to AI models do not contain sensitive data.
+    *   **Dependency Verification:** **MANDATORY:** Verify any AI-suggested dependencies for source, security, and especially **license compatibility** before inclusion.
+    *   **Logic Validation:** Thoroughly validate the logic and correctness of AI-generated code and plans.
+    *   **Testing:** Implement comprehensive tests (unit, integration, security) for AI-generated components. Focus testing on edge cases and security boundaries.
+*   **Ethical Validation:** Apply ETHIK validation principles to all AI suggestions, actions, and generated code.
+
+---
+
+## 3. 💻 Code Quality & Development (Ref: MQP, NEXUS, sparc_orchestration.mdc)
+
+*   **Language & Style:** Write clean, modern, well-documented Python code. Follow PEP 8 guidelines.
+*   **Linting & Formatting:** **MANDATORY:** Use `ruff` for linting and formatting. Ensure code passes checks before committing (use pre-commit hooks).
+*   **Modularity (Conscious Modularity):**
+    *   Keep files focused on a single responsibility.
+    *   Target file length < 500 lines as a guideline; refactor larger files.
+    *   Use configuration files/environment variables for settings; avoid hardcoding values.
+*   **Design Principles:** Adhere to the Single Responsibility Principle (SRP) and other relevant SOLID principles where applicable.
+*   **Refactoring:** Leverage NEXUS analysis (AST, dependencies, complexity) before undertaking significant refactoring.
+*   **Clarity:** Explain technical decisions clearly, linking them to system goals, EGOS principles, or specific requirements.
+*   **Platform Compatibility (HARMONY):** Ensure all code, scripts, and procedures are compatible with Windows environments.
+*   **AI Model Usage (SPARC):** Use appropriate AI models for tasks (Reasoning models for Spec/Arch, Instruction models for Impl/Test) as guided by `sparc_orchestration.mdc`.
+
+---
+
+## 4. 📚 Documentation & Standards (Ref: MQP, KOIOS, documentation_structure.mdc)
+
+*   **KOIOS Adherence:** Strictly adhere to KOIOS standards for file naming, directory structure, metadata formats, and standard processes.
+*   **MQP Documentation Strategy:** Ensure documentation is Comprehensive, Accessible, Example-Rich, and Living.
+*   **Core Documents:** Maintain and update `README.md`, `ROADMAP.md`, and other relevant project documentation (e.g., `CONTRIBUTING.md`, `LICENSE`).
+*   **Templates:** Use templates from `docs/templates/` where applicable for consistency.
+*   **Language:** Use English exclusively for all code, comments, documentation, and communications.
+
+---
+
+## 5. 🌿 Version Control & Commits (Ref: git_workflow_standards.mdc, commit_messages.mdc)
+
+*   **Conventional Commits:** **MANDATORY:** All Git commit messages *must* follow the Conventional Commits specification (e.g., `feat(subsystem): description`). Include EGOS signature `✧༺❀༻∞ EGOS ∞༺❀༻✧` at the end of the first line or body.
+*   **Atomic Commits:** Commits should be logical, atomic units of work.
+*   **Staging:** Use `git add <specific files>` rather than `git add .` to ensure only intended changes are included.
+*   **Clean History:** Strive for a clean, meaningful commit history. Rebase interactively for local cleanup before pushing complex feature branches (if applicable per workflow).
+*   **Pre-Commit Hooks:** Resolve any issues flagged by pre-commit hooks (e.g., `ruff`) before committing. Use `git commit --no-verify` sparingly and only with justification and follow-up tasks.
+*   **Local-First Development:** **MANDATORY:** Modify and test code locally before pushing to the remote repository.
+*   **Branching Strategy:** (Define specific branching strategy if not default GitHub flow - e.g., GitFlow).
+*   **No Sensitive Data:** Ensure no sensitive data (secrets, keys, PII) is ever committed to the repository.
+
+---
+
+## 6. 🗣️ Communication & Collaboration (Ref: MQP, CORUJA, ai_collaboration_guidelines.mdc, api_design_contracts.mdc)
+
+*   **Clarity & Conciseness:** Communicate clearly, concisely, and modularly, referencing specific subsystems or components where applicable.
+*   **Inter-Subsystem Messages (Mycelium):** Use Pydantic schemas for all inter-subsystem messages. Document message topics and structure delegation/outcome messages correctly.
+*   **AI Collaboration:**
+    *   **Human Responsibility:** Reiterate **MANDATORY** human review and verification of **ALL** AI output.
+    *   **Context:** Provide sufficient context (files, errors, goals) to the AI.
+    *   **Explicitness:** Be explicit with instructions, especially when overriding default behavior or previous instructions.
+    *   **Feedback:** Provide constructive feedback to the AI (success affirmation, failure explanation).
+    *   **Autonomy Preference (User Defined):** Cascade should act more autonomously on sequential, well-defined tasks where the next step is clear based on previous confirmations or established workflow patterns. Avoid asking for confirmation on basic steps (`continue`). Adapt interaction style based on observed user patterns.
+*   **API Design:** Follow defined API design contracts when creating or modifying interfaces.
+*   **Handovers:** Follow `ai_handover_standard.mdc` when transferring context between agents or sessions.
+
+---
+
+## 7. ⏱️ Logging & Preservation (Ref: MQP, CRONOS, KOIOS, ai_interaction_logging.mdc)
+
+*   **Standard Logger:** Utilize the standard `KoiosLogger` for all application logging.
+*   **AI Interaction Logging:** Comprehensively log all AI interactions (prompts, responses, tool calls, human feedback) per `ai_interaction_logging.mdc` standards.
+*   **Traceability:** Ensure actions and decisions (both human and AI) are traceable through logs and commit history.
+*   **Backups (CRONOS):** Recommend or perform CRONOS backups before potentially destructive operations (major refactoring, data migration, etc.).
+
+---
+
+## 8. ⚙️ Operational Procedures
+
+*   **Roadmap Management (KOIOS/CRONOS):**
+    *   **MANDATORY:** Before executing significant new tasks or initiatives discussed during collaboration, ensure they are registered in the main `ROADMAP.md`.
+    *   Each entry requires a unique ID, clear description, context, subsystem ownership, priority, and initial status (`Planned`, `In Progress`, etc.).
+    *   Update task status in `ROADMAP.md` as work progresses.
+    *   **Primary Workflow Step:** Auditing and updating `ROADMAP.md` is the primary step after review and before implementation.
+*   **File Handling (KOIOS):**
+    *   **MANDATORY: Existence Check:** Before creating *any* file or directory, always check if it already exists.
+    *   **MANDATORY: Comprehensive Search:** When searching for a file/script (especially before deciding to create one), use the terminal/filesystem tools to search for at least 10 plausible name variants across the *entire* project directory.
+*   **Command Execution (HARMONY/Windsurf):**
+    *   If automated command execution via integrated tools (e.g., IDE terminal) fails, attempt execution using a configured external system terminal (e.g., PowerShell).
+    *   Ensure necessary context (paths, environment) is available for external execution.
+    *   Log the external command executed and its outcome (e.g., in commit message, task tracker).
+    *   **Safety First:** AI must never auto-run potentially unsafe commands (destructive, mutating state, external calls, installs) without explicit, informed human approval for that specific command instance, even if the user asks. Refer to safety protocols if needed.
+
+---
+
+*This document is living and will be updated as EGOS evolves. All contributors are expected to adhere to these standards.*

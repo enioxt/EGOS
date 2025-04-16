@@ -1,0 +1,77 @@
+# pdd_id: coruja_zendesk_ticket_analysis_v1
+# description: >
+#   Analyzes a Zendesk ticket text to determine its category, sentiment,
+#   and provide a brief summary. This PDD invokes a specialized multi-agent
+#   handler simulating a CrewAI process.
+# version: "1.0"
+#
+# parameters:
+#   - ticket_id: Unique identifier for the ticket (string, required).
+#   - ticket_subject: Subject line of the ticket (string, optional).
+#   - ticket_text: The full text content of the customer's message (string, required).
+#   # - customer_id: Optional customer identifier for context (string, optional).
+#   # - existing_tags: Optional list of existing tags on the ticket (list[string], optional).
+#
+# template: |
+#   Goal: Analyze Zendesk Ticket ${ticket_id} for categorization and sentiment.
+#   Input Text: ${ticket_text}
+#   ---
+#   Process Outline (Conceptual Crew):
+#   1.  Agent [Categorizer]: Analyze Input Text to determine the primary category
+#       (e.g., "Billing", "Technical Support", "Feature Request", "Bug Report", "General Inquiry").
+#       Consider subject: ${ticket_subject}.
+#   2.  Agent [SentimentAnalyzer]: Analyze Input Text for sentiment (Positive, Negative, Neutral)
+#       and provide a confidence score (0.0 to 1.0).
+#   3.  Agent [Summarizer]: Provide a concise one-sentence summary of the core issue described
+#       in the Input Text.
+#   4.  Agent [Compiler]: Combine outputs into the final structured response format.
+#   ---
+#   # Note: This template section describes the *intended* multi-step process
+#   # for the specialized handler, not a direct LLM prompt.
+#
+# handler_type: specialized_crew # New field to indicate non-standard handling
+# handler_reference: zendesk_analysis_crew_v1 # Identifier for the specific handler/crew
+#
+# model_config:
+#   # Configuration specific to the handler/crew can go here
+#   # Example (hypothetical):
+#   # categorizer_model: "gemini-pro"
+#   # sentiment_model: "gemini-pro"
+#   # crew_process_mode: "sequential" # or "hierarchical"
+#   temperature: 0.2 # Low temp for analytical tasks within the crew
+#
+# response_format:
+#   type: json
+#   schema:
+#     type: object
+#     properties:
+#       ticket_id:
+#         type: string
+#         description: The original ticket ID provided.
+#       category:
+#         type: string
+#         description: The determined category of the ticket.
+#         enum: ["Billing", "Technical Support", "Feature Request", "Bug Report", "General Inquiry", "Other"]
+#       sentiment_label:
+#         type: string
+#         description: The overall sentiment label.
+#         enum: ["Positive", "Negative", "Neutral"]
+#       sentiment_score:
+#         type: number
+#         format: float
+#         description: Confidence score for the sentiment label (0.0 to 1.0).
+#       summary:
+#         type: string
+#         description: A concise one-sentence summary of the ticket's core issue.
+#     required:
+#       - ticket_id
+#       - category
+#       - sentiment_label
+#       - sentiment_score
+#       - summary
+#
+# ethik_guidelines:
+#   pii_handling: redact_if_strict # Input check before crew execution
+#   sentiment_bias_check: enabled # Post-check on final output
+#   forbidden_topics: []
+#   compliance_profile: standard_customer_service

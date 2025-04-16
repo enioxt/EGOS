@@ -1,0 +1,26 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+**Version:** 1.0
+**Version:** 1.1.0
+
+**Owner:** KOIOS Team
+**Last Updated:** 2025-04-15
+**Last Updated:** 2024-07-26
+
+// ... existing code ...
+*   **Metadata:** Use `tags` effectively for categorization and discovery.
+*   **ETHIK:** Carefully define relevant `ethik_guidelines` (e.g., `pii_handling`, `bias_mitigation_ref`).
+*   **Handlers:** Use `handler_type: specialized_crew` and `handler_reference` only when the prompt requires processing by a specific multi-agent handler instead of direct LLM execution.
+*   **Response Format:** Define the expected `response_format` (especially `json` schemas) rigorously to ensure predictable outputs from CORUJA.
+*   **(Optional) Include Examples:** For complex prompts, consider adding an `examples:` section within the PDD YAML (at the root level, similar to `metadata`). Each example could show sample input parameters and the expected output, aiding understanding and testing.
+*   **(Optional) Describe Reasoning Str0ategy:** For prompts designed to elicit complex reasoning (e.g., analysis, planning), consider adding a `reasoning_strategy:` field (string, perhaps within `metadata`) briefly describing the intended approach (e.g., "Chain-of-Thought", "Step-by-step deduction", "Analogy-based", **"Tree-of-Thoughts-BFS", "Graph-of-Thoughts-Aggregate", "PanelGPT-Debate"**). This helps guide AI behavior and prompt refinement.
+
+## 6. Template
+
+// ... existing code ...
+
+*   **v1.0 (2025-04-15):** Formalized standard as a KOIOS rule based on initial draft and `pdd_schema.py`.
+*   **v1.1.0 (2024-07-26):** Added best practice suggestions for optional `examples` and `reasoning_strategy` fields to enhance prompt clarity and effectiveness, inspired by advanced prompting techniques.

@@ -17,6 +17,13 @@ alwaysApply: true
 
 Our collaboration is built on mutual understanding and clear communication. Think of the EGOS AI as a highly responsive, learning pair programmer. To achieve the best results, we should adhere to the following principles:
 
+0.  **Existence Check Before Creation:**
+    *   **MANDATORY:** Before creating any file or directory, always check if it already exists in the system. Never create or overwrite files/directories without this verification. This prevents accidental data loss and ensures safe, predictable automation.
+
+0a. **Comprehensive File Search Before Creation:**
+    *   **MANDATORY:** When searching for a file or script, always use the terminal to search for at least 10 plausible name variants (using wildcards and variations) across the entire project directory. Only proceed to create a new file if none of these variants are found. This ensures robust, context-aware file discovery and prevents duplication or oversight in large or evolving projects.
+    *   **Example patterns:** `analyze_git_history.py`, `git_history_analysis.py`, `history_analysis.py`, `analyze_git.py`, `git_file_lifespan.py`, `file_lifespan_analysis.py`, `git_stats.py`, `file_history.py`, `commit_analysis.py`, `egos_git_analysis.py`
+
 1.  **Clear Instructions & Intent:**
     *   **Be Explicit:** Clearly state the desired action or outcome. Instead of vague requests like "fix this," provide specific instructions like "Run `ruff check --fix .` on `subsystems/KOIOS/core/logging.py` to fix linting errors."
     *   **State the Goal:** Briefly explain the *why* behind a request. Knowing the larger goal helps the AI make better decisions and suggestions. Example: "Refactor this function *to improve readability* before we add the new caching logic."

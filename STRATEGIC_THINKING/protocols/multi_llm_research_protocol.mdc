@@ -1,0 +1,55 @@
+# EGOS Multi-LLM External Research Protocol v1.0
+
+**Protocol ID:** `PROTO-RES-MULTI-LLM-01`
+
+**Purpose:** To define a standardized, sequential workflow for conducting in-depth external research using multiple specialized Large Language Models (LLMs) to maximize insight quality, validation, and relevance for EGOS strategic decision-making.
+
+**Owning Subsystem:** KOIOS (Knowledge & Learning)
+
+**Applicability:** This protocol should be invoked via a standard trigger prompt when comprehensive external research is required, particularly for topics involving emerging trends, technical validation, or requiring diverse perspectives.
+
+**Workflow Steps:**
+
+1.  **Phase 1: Signal Mining & Trend Spotting (LLM: Grok 3 or similar Social-Focused Model)**
+    *   **Input:** Specific research question/topic, keywords, optional constraints (timeframe, specific platforms like X.com).
+    *   **Objective:** Identify relevant recent discussions, emerging tools, key opinions, developer sentiment, and cutting-edge trends from social media, forums, and relevant online communities.
+    *   **Process:** Formulate queries targeting social signals and developer chatter. Extract key themes, links, representative quotes, and potential leads for deeper investigation.
+    *   **Output:** Structured summary of social signals, key links/threads, emerging terms/tools.
+
+2.  **Phase 2: Information Structuring & Refinement (LLM: ChatGPT-4o or similar Clarity-Focused Model)**
+    *   **Input:** Output from Phase 1, original research question, findings from previous internal studies (e.g., `Estudo CodeTime.txt`).
+    *   **Objective:** Synthesize the raw findings from Phase 1, integrate with existing knowledge, structure the information logically, improve clarity and readability, and identify initial gaps or contradictions.
+    *   **Process:** Organize social signals, refine language, draft initial sections of the research report based on the `external_research_prompt_template.md` structure, cross-reference with internal knowledge.
+    *   **Output:** A structured, well-written draft research document incorporating Phase 1 findings.
+
+3.  **Phase 3: Deep Validation & Insight Contrast (LLM: Gemini 2.5 Pro + DeepResearch or similar Validation-Focused Model)**
+    *   **Input:** Output from Phase 2 (draft report), original research question.
+    *   **Objective:** Critically evaluate the claims and findings in the draft report, validate information against authoritative sources (academic papers, technical docs, reputable analysis), provide contrasting viewpoints, and deepen the analysis with verifiable data.
+    *   **Process:** Use advanced search capabilities (like DeepResearch) to find corroborating or conflicting evidence for key points in the draft. Check source credibility. Add depth, nuance, and citations.
+    *   **Output:** An enhanced research report with validated claims, added depth, cited sources, and identified discrepancies or areas of uncertainty.
+
+4.  **Phase 4: System Integration & Contextualization (LLM: Local Model within IDE - e.g., Rocode, Cursor's model, or future EGOS-native LLM)**
+    *   **Input:** Output from Phase 3 (validated report).
+    *   **Objective:** Integrate the research findings directly into the EGOS project context. This may involve updating documentation, creating roadmap tasks, suggesting code modifications, or generating summaries tailored for specific subsystems (e.g., SPARC tasks).
+    *   **Process:** Parse the validated report. Identify actionable insights relevant to specific EGOS files or subsystems. Generate appropriate updates or task definitions.
+    *   **Output:** Specific file updates, new task definitions (e.g., for `ROADMAP.md` or subsystem backlogs), contextual summaries.
+
+**Trigger Prompt (Conceptual - Store separately, e.g., in KOIOS/templates/prompts.md):**
+
+```
+Activate EGOS Multi-LLM Research Protocol (PROTO-RES-MULTI-LLM-01).
+
+Research Question: [Your Specific Question Here]
+
+Keywords: [Optional: Comma-separated keywords]
+Timeframe Constraint: [Optional: e.g., Last 6 months]
+Source Constraints: [Optional: e.g., Avoid blogs, Prioritize academic papers]
+Existing Internal Context: [Optional: Link to relevant internal files like research notes or roadmap items]
+
+Execute all phases sequentially and provide the final integrated output (Phase 4).
+```
+
+**Governance:**
+
+*   This protocol will be reviewed and updated periodically by the KOIOS subsystem maintainers based on LLM advancements and operational feedback.
+*   All outputs generated through this protocol are subject to MANDATORY human review and validation before final acceptance or integration into EGOS, as per `ai_collaboration_guidelines.mdc`.

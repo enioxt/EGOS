@@ -1,0 +1,59 @@
+# Example EGOS Prompt Design Document (PDD)
+# Purpose: Generate a Python docstring for a given function/method.
+
+id: "generate_python_docstring" # Matches filename stem
+name: "Generate Python Function Docstring"
+
+description: |
+  Takes Python code containing a function or method signature and its body (optional)
+  and generates a concise, well-formatted docstring following KOIOS standards
+  (PEP 257, Google Style preferably).
+  Identifies parameters, return types (if possible), and summarizes function purpose.
+
+version: "1.0"
+
+parameters:
+  - function_code # The Python code snippet containing the function
+  - style_preference # Optional: e.g., 'google', 'numpy', 'default'
+
+template: |
+  Analyze the following Python code snippet and generate a concise, accurate docstring for the function/method defined within it.
+
+  **Code Snippet:**
+  ```python
+  {{function_code}}
+  ```
+
+  **Instructions:**
+  1.  Identify the function/method name, parameters (including type hints if present), and return type hint (if present).
+  2.  Infer the primary purpose of the function from its name, parameters, and body (if provided).
+  3.  Generate a docstring that includes:
+      *   A brief summary line explaining the function's purpose.
+      *   (Optional) A more detailed explanation if necessary.
+      *   An `Args:` section detailing each parameter with its inferred type and description.
+      *   A `Returns:` section describing the return value and its inferred type.
+      *   (Optional) A `Raises:` section if potential exceptions can be inferred.
+  4.  Format the docstring according to standard Python conventions (PEP 257).
+  5.  If a `style_preference` of '{{style_preference}}' is provided and recognized (e.g., 'google', 'numpy'), format the Args/Returns/Raises sections accordingly. Otherwise, use a standard, clear format.
+  6.  Focus on clarity, conciseness, and accuracy. Do not invent information not present or clearly inferable from the code.
+
+  **Output only the generated docstring, enclosed in triple quotes (`"""`).**
+
+# --- Optional Fields Below ---
+
+metadata:
+  author: "EGOS AI Assistant (Initial Draft)"
+  created_date: "2025-04-05"
+  last_updated: "2025-04-05"
+  tags:
+    - code-generation
+    - python
+    - docstring
+    - documentation
+    - koios
+  related_pdds:
+    - analyze_code_complexity # Hypothetical related PDD
+
+ethik_guidelines:
+  pii_handling: "error_if_present" # Code snippets shouldn't contain PII
+  output_tone: "neutral" # Docstrings should be objective
