@@ -369,7 +369,8 @@
   * `[Planned] feat(community/ethik_rewards)`: Design and implement the $ETHIK token reward system for contributors, integrating with GitHub actions/webhooks if possible. Define contribution metrics and reward structure. (`MEDIUM`, Phase 4)
 * **Further AI Integration:** Explore deeper self-awareness, meta-learning in SPARC tasks.
 * **Website Maturity:** Develop dedicated subsystem pages, complete translations, add SPARC methodology documentation.
-  * `[Planned] feat(website/genki_dama)`: Design and implement the "Genki Dama" page featuring specific artwork and donation addresses (Solana, BTC, EVM). Ensure minimal text and focus on artistic/mysterious appeal. (`LOW`, Phase 4)
+  * [Planned] **[WEBSITE-GENKI-DAMA]** **Genki Dama Page Implementation:** Design and implement the "Genki Dama" page featuring specific artwork, clear calls for collaboration/contribution, and donation addresses (e.g., Solana: `[Your Solana Address]`, BTC: `[Your BTC Address]`, EVM: `[Your EVM Address]`). Ensure minimal text and focus on artistic/mysterious appeal. (`HIGH`)
+  * [Planned] **[WEB/ETHIK][WEBSITE-DONATION-INTEGRATION]** Securely integrate and test donation mechanisms for Genki Dama page (`HIGH`), `depends_on: [WEBSITE-GENKI-DAMA]`
 
 ### Cross-Cutting / Ongoing
 
@@ -398,3 +399,34 @@
 * (Future) MVP Definition: `docs/strategy/MVP_Definition.md`
 * (Future) Mycelium Topics: `subsystems/MYCELIUM/docs/topics.md`
 * (Future) SPARC Implementation Guide: `docs/methodology/SPARC_GUIDE.md`
+
+---
+
+### Monitoring & Dashboard (ATLAS/KOIOS)
+
+* [DONE] Basic Streamlit Dashboard Setup (`MEDIUM`)
+* [DONE] Implement Modular UI Components (`MEDIUM`)
+* [DONE] Add Dark/Light Theme Toggle (`LOW`)
+* [DONE] Integrate Mock NATS Client for Demo (`HIGH`)
+* [DONE] Implement `KoiosLogger` for Dashboard Interactions (`HIGH`)
+* [DONE] Link Dashboard to Main Website (`LOW`)
+* [DONE] Improve Light Theme Contrast (`LOW`)
+* [Planned] Refine Dashboard UI/UX based on feedback (`MEDIUM`) - ID: `DASHBOARD-UI-REFINE`
+* [Planned] Integrate Real NATS Client (post-Mycelium stabilization) (`HIGH`) - ID: `DASHBOARD-NATS-CLIENT`, `depends_on: [MYCELIUM-RELIABLE]`
+* [Planned] Deploy Dashboard (e.g., Streamlit Cloud) (`MEDIUM`) - ID: `DASHBOARD-DEPLOY`, `depends_on: [DASHBOARD-NATS-CLIENT]`
+* [Planned] Add SPARC Task Visualization (`MEDIUM`) - ID: `DASHBOARD-SPARC-VIZ`, `depends_on: [DASHBOARD-NATS-CLIENT]`
+
+### 🗣️ User Interaction & Frontend (CORUJA Lead / Website)
+
+* [Planned] Define Standard UI Components/Style Guide (`HIGH`)
+* [Planned] Implement User Feedback Mechanisms (`MEDIUM`)
+* [Planned] Explore Voice Input Capabilities (`LOW`)
+* [Planned] Implement Internationalization/Localization Support (`MEDIUM`)
+* [Planned] **[WEBSITE-REVAMP-CORE]** **Website Design, UX, & Technical Overhaul:** Major refactor/rebuild focusing on: Aesthetics (beauty, golden ratio, spirals), Interactivity, Accessibility (WCAG AA+, colorblind friendly), Responsiveness (mobile-first), Performance (lightweight), and Modern Framework (confirm Next.js/SvelteKit/Astro). Ensure intuitive navigation based on `research/WebSite Enio Grok e Gemini.txt` and `docs/website/DESIGN_GUIDE.md`. (`CRITICAL`)
+* [Planned] **Task W3.8 (Parallel): User Behavior Analysis (Deferred/Basic)** (Implement basic analytics, defer advanced tools like Hotjar/OpenReplay unless explicitly prioritized later).
+* [Planned] **[WEB/KOIOS][WEBSITE-ACCESSIBILITY-AUDIT]** Perform accessibility audit and implement necessary fixes (WCAG AA minimum) (`CRITICAL`), `depends_on: [WEBSITE-REVAMP-CORE]`
+
+### Website Maturity:
+
+* [Planned] **[WEBSITE-GENKI-DAMA]** **Genki Dama Page Implementation:** Design and implement the "Genki Dama" page featuring specific artwork, clear calls for collaboration/contribution, and donation addresses (e.g., Solana: `[Your Solana Address]`, BTC: `[Your BTC Address]`, EVM: `[Your EVM Address]`). Ensure minimal text and focus on artistic/mysterious appeal. (`HIGH`)
+* [Planned] **[WEB/ETHIK][WEBSITE-DONATION-INTEGRATION]** Securely integrate and test donation mechanisms for Genki Dama page (`HIGH`), `depends_on: [WEBSITE-GENKI-DAMA]`
