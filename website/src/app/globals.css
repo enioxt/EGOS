@@ -10,9 +10,12 @@
 /*  }
 } */
 
+/* Remove body rule - styles applied in layout.tsx */
+/*
 body {
   @apply font-sans bg-egos-light-gray text-neutral-900 antialiased;
   /* Apply Inter font via layout.tsx font variable */
   /* Set default text color (adjust dark mode later) */
   /* Set default background color */
-}
+/*}
+*/

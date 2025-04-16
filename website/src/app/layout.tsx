@@ -14,6 +14,10 @@ const playfair = Playfair_Display({
   display: 'swap',
 });
 
+// Import layout components
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+
 export const metadata: Metadata = {
   title: "EGOS Project",
   description: "Quantum Unified Master System - Exploring Ethical AI",
@@ -26,16 +30,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="flex flex-col min-h-screen">
-        <header className="bg-egos-blue text-white p-4 shadow-md">
-          Header Placeholder
-        </header>
+      <body className="flex flex-col min-h-screen bg-egos-light-gray text-neutral-900 antialiased">
+        {/* Apply base text/bg here instead of globals.css body */} 
+        <Header /> {/* Use Header component */}
         <main className="flex-grow container mx-auto p-4 md:p-6 lg:p-8">
           {children}
         </main>
-        <footer className="bg-neutral-200 text-neutral-700 text-center p-4 mt-auto">
-          Footer Placeholder 2025 EGOS
-        </footer>
+        <Footer /> {/* Use Footer component */}
       </body>
     </html>
   );
