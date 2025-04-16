@@ -77,6 +77,7 @@
 *   **KOIOS Adherence:** Strictly adhere to KOIOS standards for file naming, directory structure, metadata formats, and standard processes.
 *   **MQP Documentation Strategy:** Ensure documentation is Comprehensive, Accessible, Example-Rich, and Living.
 *   **Core Documents:** Maintain and update `README.md`, `ROADMAP.md`, and other relevant project documentation (e.g., `CONTRIBUTING.md`, `LICENSE`).
+*   **Python Docstrings:** **MANDATORY:** All public Python modules, classes, functions, and methods must have docstrings. Refer to `./python_documentation.mdc` for details on structure and content.
 *   **Templates:** Use templates from `docs/templates/` where applicable for consistency.
 *   **Language:** Use English exclusively for all code, comments, documentation, and communications.
 
