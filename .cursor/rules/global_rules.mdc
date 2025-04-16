@@ -58,11 +58,13 @@
 
 *   **Language & Style:** Write clean, modern, well-documented Python code. Follow PEP 8 guidelines.
 *   **Linting & Formatting:** **MANDATORY:** Use `ruff` for linting and formatting. Ensure code passes checks before committing (use pre-commit hooks).
+*   **Type Hinting:** **MANDATORY:** Include type hints for function/method arguments and return values.
 *   **Modularity (Conscious Modularity):**
     *   Keep files focused on a single responsibility.
     *   Target file length < 500 lines as a guideline; refactor larger files.
     *   Use configuration files/environment variables for settings; avoid hardcoding values.
 *   **Design Principles:** Adhere to the Single Responsibility Principle (SRP) and other relevant SOLID principles where applicable.
+*   **Detailed Python Standards:** For specific guidance on function length, line length management (E501), and other Python best practices, refer to `./python_coding_standards.mdc`.
 *   **Refactoring:** Leverage NEXUS analysis (AST, dependencies, complexity) before undertaking significant refactoring.
 *   **Clarity:** Explain technical decisions clearly, linking them to system goals, EGOS principles, or specific requirements.
 *   **Platform Compatibility (HARMONY):** Ensure all code, scripts, and procedures are compatible with Windows environments.
