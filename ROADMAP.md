@@ -71,7 +71,7 @@
 ### 📈 Analysis & Insights (NEXUS Lead)
 
 * [DONE] [NEXUS/KOIOS][TASK-HTA-01] Implement Historical File Lifespan Analysis (Script, CSV, Report) (`HIGH`)
-* [Planned] [SPARC/HARMONY/KOIOS][HTA-02] Automate Git History Analysis via CI/CD (GitHub Actions) (`MEDIUM`) (Ref: Evolutionary Preservation)
+* [DONE] [SPARC/HARMONY/KOIOS][HTA-02] Automate Git History Analysis via CI/CD (GitHub Actions) (`MEDIUM`) (Ref: Evolutionary Preservation)
 * [Planned] [CORUJA/KOIOS][HTA-DASH-01a] Select Visualization Tool for HTA Dashboard (`MEDIUM`)
 * [Planned] [CORUJA/KOIOS][HTA-DASH-01b] Implement HTA Dashboard Integration (`MEDIUM`) `depends_on: [HTA-DASH-01a]`
 * [Planned] [NEXUS/KOIOS][HTA-REFINE-01] Review and Refine HTA Script and Report (Performance, Clarity, Artistry) (`LOW`)
