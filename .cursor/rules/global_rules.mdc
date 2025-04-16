@@ -63,6 +63,7 @@
 *   **Error Handling:** Implement robust and consistent error handling as defined in `./error_handling.mdc`.
 *   **Testing:** Follow the comprehensive testing standards and practices outlined in `./testing_standards.mdc`.
 *   **Type Hinting:** Use type hints extensively in all Python code for clarity and static analysis benefits.
+*   **Website Development:** For work related to the EGOS website (HTML, CSS, JS), adhere to the standards defined in `./website_standards.mdc`.
 *   **NEXUS Analysis:** Leverage NEXUS analysis (AST, dependencies, complexity) before significant refactoring.
 *   **Design Principles:** Adhere to the Single Responsibility Principle (SRP) and other relevant SOLID principles where applicable.
 *   **Detailed Python Standards:** For specific guidance on function length, line length management (E501), and other Python best practices, refer to `./python_coding_standards.mdc`.
