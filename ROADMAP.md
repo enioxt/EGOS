@@ -47,6 +47,15 @@
 
 ---
 
+## 💰 Monetization & Product Strategy (STRAT Lead)
+
+*   **[STRAT-GTM-DEFINE]** **Define Go-To-Market Strategy:** Define strategy including target audience, value proposition, potential open-core model, and initial pricing exploration for defined MVPs. Leverage `docs/STRATEGY.md`, `research/`, and market analysis results. (`HIGH`) `Status: Planned`
+*   **[MVP-DEFINE-SPARC-SVC]** **Define MVP - SPARC Service:** Define MVP for a 'SPARC-based Project Analysis & Refactoring Service', outlining core features, target outcomes, required subsystems, and potential delivery model. (`HIGH`) `Status: Planned`, `linked_doc: docs/strategy/MVP_Definition.md`
+*   **[MVP-DEFINE-QPG]** **Define MVP - Quantum Prompt Generator (QPG):** Define MVP for the QPG as a potential standalone tool or premium feature, including core functionality, target user, and integration points. (`HIGH`) `Status: Planned`, `linked_doc: docs/strategy/MVP_Definition.md`
+*   **[MARKET-ANALYSIS-MVP1]** **Conduct Initial Market Analysis:** Conduct analysis for defined MVPs (SPARC Service, QPG), identifying competitors, pricing models, and target segments. (`MEDIUM`) `Status: Planned`, `depends_on: [MVP-DEFINE-SPARC-SVC], [MVP-DEFINE-QPG]`
+
+---
+
 ## 🧭 Current Phase: Phase 2 - Foundation, Standardization & Initial Capabilities (Q2-Q3 2025)
 
 ### Core Standardization & Refactoring (KOIOS Lead)
@@ -366,7 +375,7 @@
 * **Advanced ATLAS:** Dynamic system visualization with SPARC task relationships.
 * **Advanced NEXUS:** Automated refactoring suggestions based on SPARC specifications.
 * **Community Building & Expansion:** Plugins, contributions, SPARC templates.
-  * `[Planned] feat(community/ethik_rewards)`: Design and implement the $ETHIK token reward system for contributors, integrating with GitHub actions/webhooks if possible. Define contribution metrics and reward structure. (`MEDIUM`, Phase 4)
+  * `[Planned] feat(community/ethik_rewards)`: Design and implement the $ETHIK token reward system for contributors, integrating with GitHub actions/webhooks if possible. Define contribution metrics and reward structure. Explore potential integration with monetization models (e.g., access tiers, premium features). (`MEDIUM`, Phase 4)
 * **Further AI Integration:** Explore deeper self-awareness, meta-learning in SPARC tasks.
 * **Website Maturity:** Develop dedicated subsystem pages, complete translations, add SPARC methodology documentation.
   * [Planned] **[WEBSITE-GENKI-DAMA]** **Genki Dama Page Implementation:** Design and implement the "Genki Dama" page featuring specific artwork, clear calls for collaboration/contribution, and donation addresses (e.g., Solana: `[Your Solana Address]`, BTC: `[Your BTC Address]`, EVM: `[Your EVM Address]`). Ensure minimal text and focus on artistic/mysterious appeal. (`HIGH`)
