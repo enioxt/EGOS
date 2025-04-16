@@ -115,8 +115,8 @@
 
 ## 7. ⏱️ Logging & Preservation (Ref: MQP, CRONOS, KOIOS, ai_interaction_logging.mdc)
 
-*   **Standard Logger:** Utilize the standard `KoiosLogger` for all application logging.
-*   **AI Interaction Logging:** Comprehensively log all AI interactions (prompts, responses, tool calls, human feedback) per `ai_interaction_logging.mdc` standards.
+*   **Standard Logger:** Utilize the standard `KoiosLogger` for all application logging. Refer to `./python_logging.mdc` for specific implementation standards (levels, context, exceptions, structured logging).
+*   **AI Interaction Logging:** Comprehensively log all AI interactions (prompts, responses, tool calls, human feedback) per `ai_interaction_logging.mdc`.
 *   **Traceability:** Ensure actions and decisions (both human and AI) are traceable through logs and commit history.
 *   **Backups (CRONOS):** Recommend or perform CRONOS backups before potentially destructive operations (major refactoring, data migration, etc.).
 
