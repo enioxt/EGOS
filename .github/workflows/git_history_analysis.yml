@@ -1,0 +1,42 @@
+name: Git History Analysis
+
+on:
+  workflow_dispatch: # Allows manual triggering
+  schedule:
+    - cron: '0 3 * * 0' # Run every Sunday at 3 AM UTC
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Permission needed to write analysis results back to the repo
+
+    steps:
+      - name: Checkout full repository history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Need full history for git log commands
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11' # Or specify the version used by your project
+
+      - name: Run analysis script
+        run: python scripts/analyze_git_history.py
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Check for changes
+        id: git_status
+        run: echo "::set-output name=changes::$(git status --porcelain analysis_results/egos_git_analysis.csv)"
+
+      - name: Commit and push analysis results
+        if: steps.git_status.outputs.changes
+        run: |
+          git add analysis_results/egos_git_analysis.csv
+          git commit -m "chore(analysis): update historical file lifespan data [skip ci]"
+          git push
