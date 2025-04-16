@@ -59,6 +59,7 @@
 * [DONE] Set up Pre-Commit Hooks (ruff, black) (`HIGH`)
 * [DONE] Define Metadata Schema for MDC Rules (`MEDIUM`)
 * [DONE] **Activate Cursor Agent Mode:** Transitioned from Chat to Agent, enabling direct file/terminal interaction. (`HIGH` - See `docs/ai_integration/cursor_agent_mode.md`)
+* [DONE] **Consolidate `.cursor/rules`:** Reviewed all `.cursor/rules/*.mdc` files, consolidating or linking them into `global_rules.mdc` as the central source of truth for project standards. (`HIGH`)
 * [In Progress] Refactor Subsystems for Metadata Compliance (`MEDIUM`)
 * [Planned] [KOIOS][DOC-RU-01] Document Rationale for File Handling Rules (`Existence Check`, `Comprehensive Search`) in KOIOS standards (`MEDIUM`)
 * [Planned] [KOIOS][DOC-BP-FS-01] Add "Best Practices for File Search/Creation" section to relevant documentation (`LOW`)
