@@ -43,6 +43,37 @@ export const Roadmap = () => {
   const [showContribution, setShowContribution] = useState(false);
   const [visibleCount, setVisibleCount] = useState(5);
 
+  // Define priority order
+  const priorityOrder: { [key: string]: number } = {
+    'Critical': 1,
+    'High': 2,
+    'Medium': 3,
+    'Low': 4,
+    'Unknown': 5, // Treat Unknown like Low or last
+  };
+
+  // Define status order
+  const statusOrder: { [key: string]: number } = {
+    'In Progress': 1,
+    'Blocked': 2,
+    'To Do': 3, // Assuming 'To Do' exists or is similar to Planned
+    'Planned': 3, // Group Planned and To Do
+    'Done': 4,
+  };
+
+  // Sort tasks
+  const sortedTasks = [...roadmapTasks].sort((a, b) => {
+    const statusDiff = (statusOrder[a.status] ?? 99) - (statusOrder[b.status] ?? 99);
+    if (statusDiff !== 0) {
+      return statusDiff;
+    }
+    // If statuses are the same, sort by priority
+    const priorityDiff = (priorityOrder[a.priority] ?? 99) - (priorityOrder[b.priority] ?? 99);
+    return priorityDiff;
+  });
+
+  const totalTasks = sortedTasks.length;
+
   const handleTaskClick = (task: Task) => {
     setSelectedTask(task);
     setShowContribution(true);
@@ -53,7 +84,7 @@ export const Roadmap = () => {
   };
 
   const handleShowMore = () => {
-    setVisibleCount(prevCount => Math.min(prevCount + 5, roadmapTasks.length));
+    setVisibleCount(prevCount => Math.min(prevCount + 5, totalTasks));
   };
 
   return (
@@ -78,7 +109,7 @@ export const Roadmap = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-border bg-card">
-              {roadmapTasks.slice(0, visibleCount).map((item, index) => (
+              {sortedTasks.slice(0, visibleCount).map((item, index) => (
                 <tr 
                   key={index} 
                   className="hover:bg-muted/50 transition-colors cursor-pointer" 
@@ -97,10 +128,10 @@ export const Roadmap = () => {
 
         {/* Show More / View Full Buttons */}
         <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
-          {visibleCount < roadmapTasks.length && (
+          {visibleCount < totalTasks && (
             <Button variant="outline" onClick={handleShowMore}>
               <PlusCircle className="mr-2 h-4 w-4" />
-              Ver Mais ({roadmapTasks.length - visibleCount} restantes)
+              Ver Mais ({totalTasks - visibleCount} restantes)
             </Button>
           )}
           <Link href="/roadmap" passHref>
