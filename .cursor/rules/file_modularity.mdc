@@ -1,13 +1,37 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: (Describe rule purpose - Guidelines for maintaining file modularity and adhering to the Single Responsibility Principle)
+globs: ["**/*.py"]
+alwaysApply: false
 ---
----
-description: Enforce file modularity and size limits for better maintainability and AI processing.
-globs: ["**/*.py"] # Primarily targets Python, but principle applies broadly.
-alwaysApply: true
----
+# File Modularity Standard (KOIOS Standard)
+
+## Rule
+
+Adhere to the Single Responsibility Principle (SRP) at the file level. Keep files focused on a single purpose or closely related set of functionalities. Aim for files under 500 lines of code (LOC) as a guideline, not a strict limit. Use NEXUS analysis before significant refactoring.
+
+## Rationale
+
+-   **Readability:** Smaller, focused files are easier to understand.
+-   **Maintainability:** Changes are localized, reducing the risk of unintended side effects.
+-   **Testability:** Easier to write unit tests for specific functionalities.
+-   **Reusability:** Modular components can be reused more easily.
+-   **Collaboration:** Reduces merge conflicts when multiple developers work on different features.
+
+## Examples
+
+### Correct Usage
+
+-   A file solely dedicated to user authentication logic.
+-   A file containing Pydantic models for a specific data domain.
+-   A file defining database interaction functions for a particular table/entity.
+
+### Incorrect Usage
+
+-   A single large file containing UI components, API logic, and database access.
+-   Mixing unrelated utility functions in one file.
+-   Exceeding the 500 LOC guideline significantly without a strong justification (e.g., unavoidable boilerplate).
+
+**Strive for concise, focused files adhering to SRP.**
 
 # File Modularity & Size Standards (KOIOS)
 
@@ -155,4 +179,3 @@ class MainOrchestrator:
 # - Easier to read, test, and maintain each component.
 # - Clear dependencies between components.
 # - AI can process each file easily within context limits.
-```

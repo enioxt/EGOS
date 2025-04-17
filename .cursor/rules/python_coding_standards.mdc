@@ -1,6 +1,6 @@
 ---
-description: 
-globs: 
+description: (Describe rule purpose - Core Python coding standards and best practices for the EGOS project)
+globs: ["**/*.py"]
 alwaysApply: true
 ---
 ---

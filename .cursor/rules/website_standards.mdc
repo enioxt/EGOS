@@ -1,7 +1,7 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: Standards for the EGOS project website, covering technology stack, UI/UX, accessibility, and content
+globs: ["website/**/*.tsx", "website/**/*.css", "website/**/*.mdx"]
+alwaysApply: false
 ---
 ---
 description: EGOS Website Development Standards
@@ -105,6 +105,43 @@ tags: [website, frontend, koios, standards]
 - **Roadmap:** Update the project roadmap (`ROADMAP.md`, `docs/CRONOS_ROADMAP_UPDATES.md`) with website-related tasks and progress.
 - **Compliance:** Strictly adhere to overarching KOIOS standards (code quality, commit messages, etc.) and ETHIK principles (privacy, accessibility, clarity, ethical content).
 
+## 12. Website Standards (KOIOS Standard)
+
+### Rule
+
+Specify Next.js, Tailwind CSS, adherence to WCAG accessibility guidelines, consistent branding, content guidelines for clarity and accuracy, and performance optimization.
+
+### Rationale
+
+Ensures a positive user experience, accessibility for all users (Universal Accessibility), maintainability, performance, and consistent project representation.
+
+### Examples
+
+#### Correct Usage
+
+-   Using semantic HTML5 elements (`<nav>`, `<main>`, `<article>`).
+-   Providing alt text for all images.
+-   Ensuring sufficient color contrast.
+-   Using responsive design principles (Tailwind breakpoints).
+-   Optimizing images and leveraging Next.js image component.
+-   Keeping components modular and reusable.
+
+#### Incorrect Usage
+
+-   Using `<div>` for everything instead of semantic elements.
+-   Missing alt text for images.
+-   Hardcoding styles instead of using Tailwind utility classes.
+-   Poor color contrast ratios.
+-   Large, unoptimized images impacting load times.
+-   Inconsistent layout or branding across pages.
+
+**Build the website following modern web standards, accessibility guidelines, and the chosen tech stack.**
+
 ---
+description: 
+globs: 
+alwaysApply: true
+---
+# EGOS Website Development Standards (v1.1.0)
 
 ✧༺❀༻∞ EGOS ∞༺❀༻✧

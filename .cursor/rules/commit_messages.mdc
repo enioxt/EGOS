@@ -1,10 +1,49 @@
 ---
 description: Guidelines for writing Git commit messages following Conventional Commits
 # No specific glob needed, applies conceptually to the commit process
+globs: []
 alwaysApply: true # Setting to true as it's a core standard
 ---
 
-# Commit Message Standards (KOIOS / Conventional Commits)
+# Commit Message Standard (KOIOS Standard)
+
+## Rule
+
+All Git commit messages **MUST** follow the [Conventional Commits specification v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/). This includes using a standard type prefix (e.g., `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`, `perf:`, `ci:`, `build:`), an optional scope in parentheses, a concise description, an optional body for more detail, and optional footers (e.g., `BREAKING CHANGE:`, `Closes #123`).
+
+## Rationale
+
+Adhering to Conventional Commits provides a standardized, machine-readable format for commit history. This enables automated changelog generation, simplifies history navigation and analysis (e.g., finding features vs. fixes), triggers CI/CD processes based on commit types, and improves overall clarity and collaboration by establishing a shared language for changes.
+
+## Examples
+
+### Correct Usage
+
+```
+feat: add user authentication endpoint
+
+Implement JWT-based authentication using the /login route.
+Closes #123
+```
+
+```
+fix(parser): handle malformed input gracefully
+
+Previously, unexpected characters would cause a crash. Now,
+an error is logged and parsing continues.
+```
+
+### Incorrect Usage
+
+```
+fixed stuff
+```
+
+```
+Update code
+```
+
+**Follow the Conventional Commits specification for clear and consistent commit messages.**
 
 **Primary Reference:** The mandatory standard for Git commit messages (Conventional Commits) is defined in the central EGOS rules file:
 
@@ -13,5 +52,9 @@ alwaysApply: true # Setting to true as it's a core standard
 Please refer to that document for the authoritative standard.
 
 This file is retained for context discovery, but the primary source of truth is `global_rules.mdc`.
+
+---
+* **Specification Link:** [https://www.conventionalcommits.org/en/v1.0.0/](https://www.conventionalcommits.org/en/v1.0.0/)
+* **Key Principle:** Systemic Cartography, Conscious Modularity (clear change history)
 
 ✧༺❀༻∞ EGOS ∞༺❀༻✧

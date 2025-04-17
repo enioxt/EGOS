@@ -1,1 +1,28 @@
- 
+ ---
+description: Guidelines for designing systems and agents aware of other agents in the EGOS ecosystem
+globs: [] # Applies conceptually
+alwaysApply: true
+---
+# Multi-Agent Awareness Standard (KOIOS Standard)
+
+## Rule
+
+Guidelines for agents to discover, interact with, and adapt to the presence and capabilities of other agents via Mycelium or other mechanisms.
+
+## Rationale
+
+Enables dynamic collaboration, task delegation, and emergent system behavior.
+
+## Examples
+
+### Correct Usage
+
+-   An agent querying Mycelium for available services before attempting a task.
+-   An agent adjusting its strategy based on the reported load of other agents.
+
+### Incorrect Usage
+
+-   Hardcoding assumptions about other agents' availability or capabilities.
+-   Ignoring messages or signals from other agents.
+
+**Design agents to be aware of and interact effectively within the multi-agent environment.**

@@ -1,7 +1,7 @@
 ---
-description:
-globs:
-alwaysApply: true
+description: (Describe rule purpose - Standards for error handling and reporting within the EGOS system)
+globs: ["**/*.py"]
+alwaysApply: false
 ---
 ---
 description: Error handling guidelines and best practices for EGOS development

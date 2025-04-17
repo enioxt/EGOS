@@ -65,6 +65,37 @@ export const Roadmap = () => {
   const { inProgress, planned, completed } = groupAndSortTasks(roadmapTasks);
   const allTasks = [...inProgress, ...planned, ...completed];
 
+  // Define priority order
+  const priorityOrder: { [key: string]: number } = {
+    'Critical': 1,
+    'High': 2,
+    'Medium': 3,
+    'Low': 4,
+    'Unknown': 5, // Treat Unknown like Low or last
+  };
+
+  // Define status order
+  const statusOrder: { [key: string]: number } = {
+    'In Progress': 1,
+    'Blocked': 2,
+    'To Do': 3, // Assuming 'To Do' exists or is similar to Planned
+    'Planned': 3, // Group Planned and To Do
+    'Done': 4,
+  };
+
+  // Sort tasks
+  const sortedTasks = [...roadmapTasks].sort((a, b) => {
+    const statusDiff = (statusOrder[a.status] ?? 99) - (statusOrder[b.status] ?? 99);
+    if (statusDiff !== 0) {
+      return statusDiff;
+    }
+    // If statuses are the same, sort by priority
+    const priorityDiff = (priorityOrder[a.priority] ?? 99) - (priorityOrder[b.priority] ?? 99);
+    return priorityDiff;
+  });
+
+  const totalTasks = sortedTasks.length;
+
   const handleTaskClick = (task: Task) => {
     setSelectedTask(task);
     setShowContribution(true);
@@ -75,7 +106,11 @@ export const Roadmap = () => {
   };
 
   const handleShowMore = () => {
+feat/roadmap-updates
+    setVisibleCount(prevCount => Math.min(prevCount + 5, totalTasks));
+
     setVisibleCount(prevCount => Math.min(prevCount + 5, allTasks.length));
+main
   };
 
   const handleKeyDown = useCallback((event: KeyboardEvent) => {
@@ -130,7 +165,11 @@ export const Roadmap = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-border bg-card">
+feat/roadmap-updates
+              {sortedTasks.slice(0, visibleCount).map((item, index) => (
+
               {allTasks.slice(0, visibleCount).map((item, index) => (
+main
                 <tr 
                   key={index} 
                   className={`hover:bg-muted/50 transition-colors cursor-pointer ${item.status === 'Completed' || item.status === 'DONE' ? 'opacity-60' : ''}`} 
@@ -149,10 +188,17 @@ export const Roadmap = () => {
 
         {/* Show More / View Full Buttons */}
         <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
+feat/roadmap-updates
+          {visibleCount < totalTasks && (
+            <Button variant="outline" onClick={handleShowMore}>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Ver Mais ({totalTasks - visibleCount} restantes)
+
           {visibleCount < allTasks.length && (
             <Button variant="outline" onClick={handleShowMore}>
               <PlusCircle className="mr-2 h-4 w-4" />
               Ver Mais ({allTasks.length - visibleCount} restantes)
+main
             </Button>
           )}
           <Link href="/roadmap" passHref>

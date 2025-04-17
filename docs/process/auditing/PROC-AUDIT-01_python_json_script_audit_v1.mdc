@@ -1,0 +1,60 @@
+# Process: Python & JSON Script Audit (PROC-AUDIT-01)
+
+**Objective:**
+Conduct a comprehensive audit of all Python (.py), JSON (.json), and relevant shell scripts in the EGOS project to ensure they are functional, well-structured, appropriately located, and compliant with KOIOS/EGOS standards.
+
+---
+
+## Methodology
+- Used automated tools (`find_by_name`, `git log`, `view_file`) to discover scripts across the project.
+- Excluded non-essential directories (`.git`, `.venv`, `__pycache__`, etc.).
+- Focused first on core system scripts, then config/docs, then application modules, then examples.
+- Assessed each file for:
+  - Recency (via git log)
+  - Location appropriateness
+  - Structure and standards compliance
+  - Need for refactor or removal
+
+---
+
+## Findings by Area
+
+### 1. scripts/
+- **analyze_git_history.py**: Recently updated. Refactored for docstrings, type hints, and error handling.
+- **validation/validate_roadmap_tasks.py**: New/uncommitted. Validates and auto-corrects ROADMAP.md task format.
+
+### 2. Root Config & Docs
+- **config/api_keys.example.json**: Recent. Properly located.
+- **docs/locales/en.json, pt.json**: Recent. Used for i18n.
+
+### 3. egos-terminal/
+- **package.json, tsconfig.json, etc.**: Standard Node.js/TS configs. Some files uncommitted.
+
+### 4. egos_dashboard/
+- **app.py, src/**: Streamlit dashboard. Model of modularity, logging, config, and i18n. Uses nats_mock for dev.
+
+### 5. examples/
+- **CrewAI templates**: Located in `examples/`, appear to be for demonstration. Recency check pending.
+
+---
+
+## Actions Taken
+- Refactored `analyze_git_history.py` for standards alignment.
+- Created this process documentation.
+
+---
+
+## Next Steps
+1. Complete recency check on example scripts.
+2. Commit refactored scripts and new documentation using Conventional Commit standards.
+3. Manually review and update ROADMAP.md for KOIOS compliance.
+4. Decide on handling of new/uncommitted files (e.g., validation script, egos-terminal/package.json).
+
+---
+
+## Notes
+- This process should be repeated after major refactors or before releases.
+- See KOIOS documentation for standards.
+- For automation/generalization, see memory 310463f3.
+
+✧༺❀༻∞ EGOS ∞༺❀༻✧

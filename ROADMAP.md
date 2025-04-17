@@ -60,6 +60,56 @@
 
 ### Core Standardization & Refactoring (KOIOS Lead)
 
+feat/roadmap-updates
+* [DONE] Standardize Project Structure & Basic READMEs (`CRITICAL`)
+* [DONE] Implement Conventional Commit Standards (`HIGH`)
+* [DONE] Define Core Python Coding Standards (PEP8, Typing) (`HIGH`)
+* [DONE] Implement Logging Standards (`HIGH`)
+* [DONE] Establish Basic Documentation Standards (Docstrings) (`HIGH`)
+* [DONE] Set up Pre-Commit Hooks (ruff, black) (`HIGH`)
+* [DONE] Define Metadata Schema for MDC Rules (`MEDIUM`)
+* [DONE] **Activate Cursor Agent Mode:** Transitioned from Chat to Agent, enabling direct file/terminal interaction. (`HIGH` - See `docs/ai_integration/cursor_agent_mode.md`)
+* [DONE] **Consolidate `.cursor/rules`:** Reviewed all `.cursor/rules/*.mdc` files, consolidating or linking them into `global_rules.mdc` as the central source of truth for project standards. (`HIGH`)
+* [In Progress] Refactor Subsystems for Metadata Compliance (`MEDIUM`)
+* [Planned] [KOIOS][DOC-RU-01] Document Rationale for File Handling Rules (`Existence Check`, `Comprehensive Search`) in KOIOS standards (`MEDIUM`)
+* [Planned] [KOIOS][DOC-BP-FS-01] Add "Best Practices for File Search/Creation" section to relevant documentation (`LOW`)
+* [Planned] [KOIOS/NEXUS][DOC-HTA-USAGE-01] Document `analyze_git_history.py` script usage and examples (`LOW`)
+* [Planned] [KOIOS][DOC-README-HTA-01] Update main `README.md` to mention historical analysis capability and link report (`LOW`)
+* [Planned] [KOIOS][DOC-CONTRIB-AI-01] Update `CONTRIBUTING.md` (or create if needed) with latest AI collaboration rules (`LOW`)
+* [Planned] [KOIOS][KOIOS-DOC-AUDIT-01] Perform Periodic Review of `.mdc` rules and `docs/` for consistency and alignment (`MEDIUM` - Recurring)
+
+### 📈 Analysis & Insights (NEXUS Lead)
+
+* [DONE] [NEXUS/KOIOS][TASK-HTA-01] Implement Historical File Lifespan Analysis (Script, CSV, Report) (`HIGH`)
+* [DONE] [SPARC/HARMONY/KOIOS][HTA-02] Automate Git History Analysis via CI/CD (GitHub Actions) (`MEDIUM`) (Ref: Evolutionary Preservation)
+* [Planned] [CORUJA/KOIOS][HTA-DASH-01a] Select Visualization Tool for HTA Dashboard (`MEDIUM`)
+* [Planned] [CORUJA/KOIOS][HTA-DASH-01b] Implement HTA Dashboard Integration (`MEDIUM`) `depends_on: [HTA-DASH-01a]`
+* [Planned] [NEXUS/KOIOS][HTA-REFINE-01] Review and Refine HTA Script and Report (Performance, Clarity, Artistry) (`LOW`)
+
+### 🛡️ Security & Compliance (ETHIK Lead)
+
+* [Planned] [ETHIK/HARMONY][SEC-AUDIT-01] Perform Periodic Security & License Audit (incl. `pip-audit`, license checks, sensitive data review) (`HIGH` - Recurring)
+
+### SPARC Methodology Integration (KOIOS/CORUJA Lead) - Phase 2b
+
+* [DONE] Create SPARC Orchestration Rule (`.cursor/rules/sparc_orchestration.mdc`) (`HIGH`)
+* [DONE] Implement Basic SPARC Task Registry in CORUJA (`HIGH`)
+* [DONE] Define Mycelium Message Formats for SPARC Tasks (`HIGH`)
+* [In Progress] Document SPARC-EGOS Subsystem Mapping (`MEDIUM`) - ID: `SPARC-MAPPING`
+* [Planned] Implement Model Selection Based on Task Type (`MEDIUM`) - ID: `CORUJA-MODEL-SELECT`, `depends_on: [CORUJA-ARCH]`
+* [Planned] Integrate SPARC with CrewManager (`MEDIUM`) - ID: `SPARC-CREW-INTEGRATE`, `depends_on: [CORUJA-ARCH]`
+* [Planned] Create Boomerang Task Handlers (`HIGH`) - ID: `SPARC-BOOMERANG`, `depends_on: [CORUJA-ARCH]`
+* [Planned] Define SPARC Task Schema Validation (`LOW`) - ID: `SPARC-SCHEMA-VALID`
+
+### System Standardization (KOIOS Lead)
+
+**Description**: Implement and enforce KOIOS standards across the codebase. Includes directory structure migration, naming conventions, metadata validation. **(Branding alignment complete).**
+**Status**: In Progress
+**Priority**: CRITICAL
+**Owner**: KOIOS Team / All Contributors
+**Related Docs**: `docs/STANDARDS_*.md`, `subsystems/KOIOS/README.md`
+**ETA**: Ongoing Q2 2025
+
 * **In Progress**
   * [In Progress] Refactor Subsystems for Metadata Compliance (`MEDIUM`)
 * **Planned**
@@ -80,6 +130,7 @@
   * ✅ [DONE] Define Metadata Schema for MDC Rules (`MEDIUM`)
   * ✅ [DONE] **Activate Cursor Agent Mode:** Transitioned from Chat to Agent, enabling direct file/terminal interaction. (`HIGH` - See `docs/ai_integration/cursor_agent_mode.md`)
   * ✅ [DONE] **Consolidate `.cursor/rules`:** Reviewed all `.cursor/rules/*.mdc` files, consolidating or linking them into `global_rules.mdc` as the central source of truth for project standards. (`HIGH`)
+main
 
 ### Monitoring & Dashboard (ATLAS/KOIOS)
 
@@ -170,11 +221,19 @@
     * [Planned] **Task 1.2: Stakeholder Input:** Gather insights from developers/architects on system nuances and potential LLM use cases.
     * [Planned] **Task 1.4: Initial EGOS Summary:** Create the concise, high-level EGOS summary document intended for initial LLM context priming (Ref: LLM Integration Plan I.C).
 * **Phase 2: Content Standardization & Enrichment (Q2/Q3 2025)**
+feat/roadmap-updates
+  * [Planned] **Task 2.1: Define Standards:** Establish documentation templates, style guide, and definitive format (e.g., Markdown in repo, potentially feeding a tool like MkDocs).
+  * [Planned] **Task 2.2: Prioritized Content Creation/Revision:** Focus on documenting critical subsystems/features relevant to initial LLM support. Develop clear natural language descriptions, practical examples, diagrams (update/create), and relevant code snippets (Ref: LLM Integration Plan IV.B).
+  * [Planned] **Task 2.3: Structure & Searchability:** Organize documentation logically (e.g., by subsystem) and ensure the chosen format is machine-parsable and ideally searchable (prep for RAG).
+  * [Planned] **Task 2.4: Refine Website Standards:** Review and potentially further refine the enhanced `website_standards.mdc` (v1.1.0) based on feedback from initial website implementation tasks (Phase W1/W2).
+  * [Planned] **[KOIOS-DOC-QPG-01]** **Document Quantum Prompt Generator:** Create documentation covering the QPG component's architecture, frontend usage, backend API interaction (if applicable), configuration, and contribution guidelines. (`MEDIUM`, Phase 2) `Status: Planned` `Subsystems: [KOIOS, WEBSITE]` `Principles: Comprehensive Documentation` `depends_on: [WEBSITE-QPG-IMPL-01]`
+
   * **Planned**
     * [Planned] **Task 2.1: Define Standards:** Establish documentation templates, style guide, and definitive format (e.g., Markdown in repo, potentially feeding a tool like MkDocs).
     * [Planned] **Task 2.2: Prioritized Content Creation/Revision:** Focus on documenting critical subsystems/features relevant to initial LLM support. Develop clear natural language descriptions, practical examples, diagrams (update/create), and relevant code snippets (Ref: LLM Integration Plan IV.B).
     * [Planned] **Task 2.3: Structure & Searchability:** Organize documentation logically (e.g., by subsystem) and ensure the chosen format is machine-parsable and ideally searchable (prep for RAG).
     * [Planned] **Task 2.4: Refine Website Standards:** Review and potentially further refine the enhanced `website_standards.mdc` (v1.1.0) based on feedback from initial website implementation tasks (Phase W1/W2).
+main
 * **Phase 3: Alignment & Maintenance Process (Q3 2025)**
   * **Planned**
     * [Planned] **Task 3.1: Code/Doc Alignment:** Verify documentation accurately reflects current implementation logic, interfaces, and KOIOS standards. Update docstrings/comments (`python_documentation.mdc`).
@@ -501,6 +560,83 @@
 
 ### Website Maturity:
 
+feat/roadmap-updates
+* [Planned] **[WEBSITE-GENKI-DAMA]** **Genki Dama Page Implementation:** Design and implement the "Genki Dama" page featuring specific artwork, clear calls for collaboration/contribution, and donation addresses (e.g., Solana: `[Your Solana Address]`, BTC: `[Your BTC Address]`, EVM: `[Your EVM Address]`). Ensure minimal text and focus on artistic/mysterious appeal. (`HIGH`)
+* [Planned] **[WEB/ETHIK][WEBSITE-DONATION-INTEGRATION]** Securely integrate and test donation mechanisms for Genki Dama page (`HIGH`), `depends_on: [WEBSITE-GENKI-DAMA]`
+
+## 🚀 EGOS DevKit Extension (Developer Experience Enhancement)
+
+**Goal:** Enhance the VS Code development experience specifically for the EGOS project by creating a custom extension (`egos-devkit`) that complements the existing Windsurf extension and provides shortcuts, automations, and contextual information tailored to EGOS workflows and standards.
+**Status:** Planned
+**Priority:** MEDIUM
+**Owner:** Developer Experience Team / Initial: [Your Name/Handle]
+**Related Docs:** Extension codebase (to be created)
+
+*   **Phase 0: Research & Definition (Status: Completed - 2025-04-17)**
+    *   `[DONE]` **Task EXT-DEF-01:** Define goal: Complement Windsurf, customize VS Code for EGOS.
+    *   `[DONE]` **Task EXT-DEF-MVP-01:** Define MVP features: Terminal command execution, basic Webview placeholder.
+    *   `[CRITICAL]` **Task EXT-CHECK-WINDSURF-API-01:** Re-confirm Windsurf API status for potential deeper integration (Ongoing Check).
+
+*   **Phase 1: Skeleton & Core Setup (Status: Planned - Est: 1-2 days)**
+    *   `[Planned]` **Task EXT-INIT-01:** Initialize VS Code Extension project (`egos-devkit`) using `yo code` (TypeScript).
+    *   `[Planned]` **Task EXT-STRUCTURE-01:** Create basic file structure (`src/extension.ts`, `src/commands/`, `src/panels/`).
+    *   `[Planned]` **Task EXT-PACKAGE-JSON-01:** Configure `package.json` (name, activation events, contribution points).
+    *   `[Planned]` **Task EXT-LINT-FORMAT-01:** Setup ESLint/Prettier.
+
+*   **Phase 2: MVP Feature Implementation (Status: Planned - Est: 2-4 days)**
+    *   `[Planned]` **Task EXT-CMD-TERMINAL-01:** Implement reliable `executeTerminalCommand`.
+    *   `[Planned]` **Task EXT-CMD-PALETTE-01:** Ensure command visibility in Command Palette.
+    *   `[Planned]` **Task EXT-PANEL-WEBVIEW-01:** Implement basic Webview View placeholder panel.
+    *   `[Planned]` **Task EXT-TEST-BASIC-01:** Manually test MVP features.
+
+*   **Phase 3: Refinement & Integration (Status: Planned - Est: Ongoing)**
+    *   `[Planned]` **Task EXT-ADD-SHORTCUT-01:** Add optional keyboard shortcut for terminal command.
+    *   `[Planned]` **Task EXT-INTEGRATE-API-X:** Plan/implement integration with specific APIs (e.g., GitHub, EGOS backend, potentially Windsurf commands if feasible).
+    *   `[Planned]` **Task EXT-ENHANCE-UX-01:** Improve UI/UX based on usage.
+
+---
+
+## 📐 Structure & Best Practices
+
+* **Clear Sections**: Group tasks by Phase or Category.
+* **Priority Tags**: `CRITICAL`, `HIGH`, `MEDIUM`, `LOW`.
+* **Status Indicators**: `Planned`, `In Progress`, `Completed`, `Blocked`, `DONE`.
+* **Responsibility**: Assign owner or team where applicable.
+* **Linked Issues/PRs/Docs**: Reference relevant GitHub items or documentation.
+* **Dates (Optional)**: Target quarters or specific deadlines.
+* **References**: Use `(See analysis in research/)` to link tasks to the GitHub project study.
+
+---
+
+### Monitoring & Dashboard (ATLAS/KOIOS)
+
+* [DONE] Basic Streamlit Dashboard Setup (`MEDIUM`)
+* [DONE] Implement Modular UI Components (`MEDIUM`)
+* [DONE] Add Dark/Light Theme Toggle (`LOW`)
+* [DONE] Integrate Mock NATS Client for Demo (`HIGH`)
+* [DONE] Implement `KoiosLogger` for Dashboard Interactions (`HIGH`)
+* [DONE] Link Dashboard to Main Website (`LOW`)
+* [DONE] Improve Light Theme Contrast (`LOW`)
+* [Planned] Refine Dashboard UI/UX based on feedback (`MEDIUM`) - ID: `DASHBOARD-UI-REFINE`
+* [Planned] Integrate Real NATS Client (post-Mycelium stabilization) (`HIGH`) - ID: `DASHBOARD-NATS-CLIENT`, `depends_on: [MYCELIUM-RELIABLE]`
+* [Planned] Deploy Dashboard (e.g., Streamlit Cloud) (`MEDIUM`) - ID: `DASHBOARD-DEPLOY`, `depends_on: [DASHBOARD-NATS-CLIENT]`
+* [Planned] Add SPARC Task Visualization (`MEDIUM`) - ID: `DASHBOARD-SPARC-VIZ`, `depends_on: [DASHBOARD-NATS-CLIENT]`
+
+### 🗣️ User Interaction & Frontend (CORUJA Lead / Website)
+
+* [Planned] Define Standard UI Components/Style Guide (`HIGH`)
+* [Planned] Implement User Feedback Mechanisms (`MEDIUM`)
+* [Planned] Explore Voice Input Capabilities (`LOW`)
+* [Planned] Implement Internationalization/Localization Support (`LOW`)
+* [Planned] **[WEBSITE-REVAMP-CORE]** **Website Design, UX, & Technical Overhaul:** Major refactor/rebuild focusing on: Aesthetics (beauty, golden ratio, spirals), Interactivity, Accessibility (WCAG AA+, colorblind friendly), Responsiveness (mobile-first), Performance (lightweight), and Modern Framework (confirm Next.js/SvelteKit/Astro). Ensure intuitive navigation based on `research/WebSite Enio Grok e Gemini.txt` and `docs/website/DESIGN_GUIDE.md`. (`CRITICAL`)
+* [Planned] **Task W3.8 (Parallel): User Behavior Analysis (Deferred/Basic)** (Implement basic analytics, defer advanced tools like Hotjar/OpenReplay unless explicitly prioritized later).
+* [Planned] **[WEB/KOIOS][WEBSITE-ACCESSIBILITY-AUDIT]** Perform accessibility audit and implement necessary fixes (WCAG AA minimum) (`CRITICAL`), `depends_on: [WEBSITE-REVAMP-CORE]`
+
+### Website Maturity:
+
+* [Planned] **[WEBSITE-GENKI-DAMA]** **Genki Dama Page Implementation:** Design and implement the "Genki Dama" page featuring specific artwork, clear calls for collaboration/contribution, and donation addresses (e.g., Solana: `[Your Solana Address]`, BTC: `[Your BTC Address]`, EVM: `[Your EVM Address]`). Ensure minimal text and focus on artistic/mysterious appeal. (`HIGH`)
+* [Planned] **[WEB/ETHIK][WEBSITE-DONATION-INTEGRATION]** Securely integrate and test donation mechanisms for Genki Dama page (`HIGH`), `depends_on: [WEBSITE-GENKI-DAMA]`
+
 * **Planned**
   * [Planned] **[WEBSITE-GENKI-DAMA]** **Genki Dama Page Implementation:** Design and implement the "Genki Dama" page featuring specific artwork, clear calls for collaboration/contribution, and donation addresses (e.g., Solana: `[Your Solana Address]`, BTC: `[Your BTC Address]`, EVM: `[Your EVM Address]`). Ensure minimal text and focus on artistic/mysterious appeal. (`HIGH`)
   * [Planned] **[WEB/ETHIK][WEBSITE-DONATION-INTEGRATION]** Securely integrate and test donation mechanisms for Genki Dama page (`HIGH`), `depends_on: [WEBSITE-GENKI-DAMA]`
@@ -517,3 +653,4 @@
   * [Planned] [ETHIK] Integrate LLM Features with ETHIK Token/Rewards System (`MEDIUM`) - ID: `LLM-ETHIK-INTEGRATE`, `depends_on: [ETHIK-CLAIM-01, LLM-CHAT-INTERFACE]`
 
 ```
+main

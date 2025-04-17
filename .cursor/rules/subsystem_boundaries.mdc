@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: (Describe rule purpose - Guidelines for defining clear boundaries and responsibilities between EGOS subsystems)
+globs: [] # Applies conceptually
 alwaysApply: true
 ---
 ---
@@ -57,13 +57,13 @@ class AnalyzerService:
 ```python
 # In subsystems/NEXUS/core/analyzer.py (Example - DO NOT DO THIS)
 
-# ❌ Incorrect: Direct import from ETHIK's core implementation
+# Incorrect: Direct import from ETHIK's core implementation
 # from subsystems.ETHIK.core.validator import EthikValidator
 
 class Analyzer:
     def analyze(self, code_snippet: str):
         """Analyzes code and tries to validate directly."""
-        # ❌ Incorrect: Directly instantiating/calling another subsystem's core component
+        # Incorrect: Directly instantiating/calling another subsystem's core component
         # validator = EthikValidator()
         # is_valid = validator.validate(code_snippet)
         # ...

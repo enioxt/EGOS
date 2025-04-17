@@ -20,6 +20,8 @@ There are many ways to contribute:
 *   **Improving Documentation:** Enhance READMEs, add docstrings, write tutorials, or correct typos.
 *   **Submitting Feedback:** Share your experience using EGOS and suggest improvements.
 
+feat/roadmap-updates
+
 ## Using the Website Roadmap
 
 The primary way to discover, understand, and contribute to EGOS tasks is through the interactive roadmap on the [official website](https://enioxt.github.io/egos) (or your local deployment). On the roadmap page, you can:
@@ -33,6 +35,7 @@ The primary way to discover, understand, and contribute to EGOS tasks is through
 
 This modular approach ensures clarity, accessibility, and alignment with EGOS standards. Always refer to the roadmap first before opening issues or submitting pull requests.
 
+main
 ## Reporting Bugs
 
 Before creating a bug report, please check existing issues to see if someone has already reported it. If not, create a new issue and include:
@@ -60,14 +63,22 @@ Use GitHub Issues to suggest enhancements. Provide:
     git clone <your-fork-url>
     cd Eva-Guarani-EGOS
     ```
+feat/roadmap-updates
+3.  **Set Up Environment:** Follow the [Installation steps in the main project README.md](../../README.md#installation). Ensure all dependencies are correctly installed.
+
 3.  **Set Up Environment:** Follow the [Installation steps in the README](README.md#installation).
+main
 4.  **Create a Branch:** Create a new branch for your feature or bugfix:
     ```bash
     git checkout -b <branch-name>
     # Examples: feature/add-atlas-mermaid-export, fix/koios-logger-bug
     ```
 5.  **Make Changes:** Implement your code or documentation changes.
+feat/roadmap-updates
+6.  **Follow Standards:** Adhere to the **KOIOS** standards for code style, naming, logging, error handling, and documentation. Refer to the primary [KOIOS Standards Documentation](docs/core_materials/standards/README.md) and specific rules in `.cursor/rules/` or `docs/core_materials/standards/`. **When creating or modifying core AI prompts, document them using the [PDD Template](docs/templates/PDD_Template.md).**
+
 6.  **Follow Standards:** Adhere to the KOIOS standards for code style, naming, logging, and error handling. Refer to relevant `.mdc` rules or documentation in `docs/STANDARDS_*.md`. **When creating or modifying core AI prompts, document them using the [PDD Template](docs/templates/PDD_Template.md).**
+main
 7.  **Write/Update Tests:** Ensure your changes are covered by unit tests. Aim to maintain or increase test coverage. Run tests using the provided PowerShell scripts (e.g., `.\test_<subsystem>.ps1 -Coverage`).
 8.  **Commit Changes:** Use clear and descriptive commit messages following the Conventional Commits format (see `commit_messages.mdc` rule). Reference related issues (e.g., `feat: Add Mermaid export to ATLASCore (closes #42)`).
     ```bash
@@ -85,6 +96,19 @@ Use GitHub Issues to suggest enhancements. Provide:
     *   Ensure all automated checks (CI/CD, linters - if configured) pass.
 11. **Code Review:** Project maintainers will review your PR. Be responsive to feedback and make necessary adjustments.
 
+feat/roadmap-updates
+## AI Collaboration Workflow
+
+EGOS leverages AI coding assistants (like Cascade) to accelerate development. When collaborating with AI:
+
+*   **Follow Guidelines:** Adhere strictly to the [AI Collaboration Guidelines](.cursor/rules/ai_collaboration_guidelines.mdc).
+*   **Human Review MANDATORY:** All AI-generated output (code, documentation, plans, tests) **MUST** be reviewed and verified by a human developer. The developer retains full responsibility for the final committed code.
+*   **Handover Standards:** Use the [AI Handover Standard](.cursor/rules/ai_handover_standard.mdc) when transferring context between sessions or agents.
+*   **Clarity:** Provide clear, concise instructions and context to the AI.
+*   **Verification:** Treat AI suggestions as proposals; verify their correctness, security, and alignment with project standards before integration.
+
+
+main
 ## Standard Commit & Push Workflow (Main Branch)
 
 To ensure your local changes are correctly synchronized with the `main` branch on GitHub, follow these steps **in order**. For standard commits of completed work, refer specifically to procedure **EGOS-GIT-COMMIT-01** in the [Git Workflow Standards](.cursor/rules/git_workflow_standards.mdc).

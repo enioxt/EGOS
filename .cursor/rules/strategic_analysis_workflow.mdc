@@ -1,9 +1,33 @@
 ---
-description: 
-globs: 
+description: Workflow for conducting strategic analysis within EGOS, involving ATLAS and NEXUS for comprehensive decision-making.
+globs: [] # Applies conceptually
 alwaysApply: true
 ---
 # Strategic Analysis Workflow (KOIOS Standard)
+
+## Rule
+
+Detail the process for analyzing project goals, market trends, technical feasibility, and resource allocation, involving ATLAS for goal setting and NEXUS for feasibility/dependency analysis.
+
+## Rationale
+
+Ensures strategic decisions are data-driven, aligned with EGOS principles, and consider technical constraints and opportunities.
+
+## Examples
+
+### Correct Usage
+
+-   Using ATLAS to define Objectives and Key Results (OKRs) for a new feature.
+-   Leveraging NEXUS to analyze the codebase impact and dependencies of a proposed architectural change.
+-   Documenting analysis findings in a structured report linked in the `ROADMAP.md`.
+
+### Incorrect Usage
+
+-   Making strategic decisions without systematic analysis.
+-   Ignoring feasibility analysis from NEXUS.
+-   Failing to align strategic initiatives with core EGOS principles.
+
+**Follow the defined workflow for robust strategic analysis.**
 
 ## 1. Purpose
 

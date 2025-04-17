@@ -1,12 +1,17 @@
 ---
-description:
-globs:
+description: Standards for Python logging within EGOS, likely using KoiosLogger
+globs: ["**/*.py"]
 alwaysApply: true
 ---
+# Python Logging Standard (KOIOS Standard)
 
-# EGOS Python Logging Standards (KOIOS)
+## Rule
 
-These guidelines align with `subsystems/KOIOS/docs/STANDARDS.md`, Section 10.
+Specify usage of KoiosLogger, structured logging, appropriate levels, and context inclusion.
+
+## Rationale
+
+Emphasizes observability, debugging, performance monitoring, and traceability.
 
 ## Core Principles:
 
@@ -29,7 +34,49 @@ These guidelines align with `subsystems/KOIOS/docs/STANDARDS.md`, Section 10.
 8.  **Exceptions:** Log exceptions using `logger.exception("Error occurred: ...")` or `logger.error("...", exc_info=True)` to automatically include traceback information.
 9.  **Mycelium Integration (Future):** Important logs (e.g., WARNING, ERROR, CRITICAL) may be configured (via `KoiosLogger`) to be emitted as `log.<source_node>.<level>` events on the Mycelium network for system-wide visibility.
 
-## Examples:
+## Examples
+
+### Correct Usage
+
+```python
+from core.logging import KoiosLogger
+
+logger = KoiosLogger.get_logger(__name__)
+
+def process_user_request(user_id: str, request_data: dict):
+    logger.info("Processing user request", extra={"user_id": user_id, "request_size": len(request_data)})
+    try:
+        # ... processing logic ...
+        result = perform_operation(request_data)
+        logger.debug("Operation successful", extra={"user_id": user_id, "result_summary": result.summary()})
+        return result
+    except Exception as e:
+        logger.error("Failed to process user request", exc_info=True, extra={"user_id": user_id})
+        # Re-raise or handle error
+        raise
+
+```
+
+### Incorrect Usage
+
+```python
+import logging
+
+# Using standard logger directly without structure
+logging.basicConfig(level=logging.INFO)
+
+def old_process(user):
+    print(f"Processing user {user}") # Using print for logging
+    try:
+        # ...
+        logging.info("Done processing") # Lacks context (user_id, etc.)
+    except Exception as e:
+        # Log message doesn't capture the exception details well
+        logging.error(f"Error processing user {user}: {e}")
+
+```
+
+### Original Example
 
 ```python
 import logging
@@ -65,6 +112,9 @@ def perform_backup(name: str, job_id: str):
         )
         # Consider raising a specific application error
         # raise BackupError(f"Critical failure during backup {name}") from e
+
 ```
 
 **Note:** When modifying or adding logging, ensure it follows these principles and prepares for the future `KoiosLogger` integration and structured logging patterns.
+
+**Use the standard KoiosLogger for structured, contextualized logging.**

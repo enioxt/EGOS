@@ -1,7 +1,7 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: (Describe rule purpose - Standards for project documentation structure and content)
+globs: ["**/docs/**/*.md", "*.md"]
+alwaysApply: false
 ---
 ---
 description: Defines the standard structure for organizing documentation within the EGOS project.
@@ -56,6 +56,21 @@ All project documentation MUST be organized according to the following structure
 *   **GitHub Pages Compatibility:** Keeps website files at the expected root of the `docs/` directory for seamless deployment without extra build steps.
 *   **Maintainability:** Reduces clutter in the main `docs/` directory and groups related internal documents.
 *   **KOIOS Alignment:** Standardizes a critical aspect of project organization.
+
+## Examples
+
+### Correct Usage
+
+-   Creating a new process document in `subsystems/KOIOS/docs/`.
+-   Adding metadata block to a `.md` file.
+-   Indexing the new document in `process_index.md`.
+-   Using templates from `docs/templates/`.
+
+### Incorrect Usage
+
+-   Placing subsystem-specific docs outside its `docs/` folder.
+-   Creating documentation without the standard metadata block.
+-   Forgetting to add a new process to `process_index.md`.
 
 ## Example Structure Snapshot
 
