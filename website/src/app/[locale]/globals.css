@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Re-apply variables if needed, or rely on Tailwind config */
+    /* Example: --foreground-rgb: 0, 0, 0; */
+  }
+
+  /* Remove dark mode theme variables if Tailwind handles it */
+  /* @media (prefers-color-scheme: dark) {
+    :root {
+      --foreground-rgb: 255, 255, 255;
+      --background-start-rgb: 0, 0, 0;
+      --background-end-rgb: 0, 0, 0;
+    }
+  } */
+
+  body {
+    /* Apply base font from Tailwind config */
+    @apply font-sans bg-background text-text;
+    /* Add smooth scrolling */
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    /* Apply serif font from Tailwind config */
+    @apply font-serif;
+  }
+}
+
+/* Add component layers or custom utilities if necessary */

@@ -1,21 +1,72 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Remove default :root variables if Inter font covers base sizing/color */
-/* Keep dark mode variables if needed, adjust colors later */
-/* @media (prefers-color-scheme: dark) {
+/* Add CSS Variables inspired by lovable/index.css but using EGOS palette */
+@layer base {
   :root {
-    /* Define dark theme neutrals based on EGOS palette later */
-    /* --background: #0a0a0a; */
-    /* --foreground: #ededed; */
-/*  }
-} */
+    /* EGOS Palette Mapping */
+    --background: 0 0% 98%; /* #f9f9f9 */
+    --foreground: 0 0% 13%; /* #222222 */
+    --primary: 212 77% 15%; /* #0A2342 */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
+    --accent: 25 100% 50%; /* #FF6600 */
+    --accent-foreground: 0 0% 100%; /* White text on orange */
 
-/* Remove body rule - styles applied in layout.tsx */
-/*
-body {
-  @apply font-sans bg-egos-light-gray text-neutral-900 antialiased;
-  /* Apply Inter font via layout.tsx font variable */
-  /* Set default text color (adjust dark mode later) */
-  /* Set default background color */
-/*}
-*/
+    /* Baseline from lovable/shadcn - can be adjusted later */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%; /* Match foreground */
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%; /* Match foreground */
+    --secondary: 210 40% 96.1%; /* Light gray */
+    --secondary-foreground: 212 77% 15%; /* Primary blue */
+    --muted: 210 40% 96.1%; /* Light gray */
+    --muted-foreground: 215.4 16.3% 46.9%; /* Grayish */
+    --destructive: 0 84.2% 60.2%; /* Red */
+    --destructive-foreground: 0 0% 98%; /* Light gray */
+    --border: 214.3 31.8% 91.4%; /* Light gray border */
+    --input: 214.3 31.8% 91.4%; /* Light gray input bg */
+    --ring: 212 77% 15%; /* Primary blue for rings */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Define dark theme overrides - TBD/Adjust later, using lovable's as placeholder for now */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Adjust primary/accent for dark mode */
+    --primary: 210 40% 98%; /* Light primary text/elements */
+    --primary-foreground: 212 77% 15%; /* Dark background for primary elements */
+    --accent: 25 100% 50%; /* Orange accent - might need adjustment */
+    --accent-foreground: 0 0% 13%; /* Dark text on orange */
+
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%; /* Lighter ring for dark */
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+    /* Add font smoothing if desired */
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}

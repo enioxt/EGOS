@@ -333,3 +333,6 @@ yarn-error.log*
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Shadcn/UI specific exceptions
+!website/src/lib/utils.ts

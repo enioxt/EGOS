@@ -1,42 +1,36 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, EB_Garamond } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: '--font-inter',
-  display: 'swap',
-});
+// Import Components
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: '--font-playfair',
-  display: 'swap',
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
+const garamond = EB_Garamond({ 
+  subsets: ['latin'],
+  weight: ['400', '700'], // Include weights used
+  variable: '--font-garamond'
 });
-
-// Import layout components
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: "EGOS Project",
-  description: "Quantum Unified Master System - Exploring Ethical AI",
+  description: "Evolving Generative Operating System - An open-source framework for conscious AI development.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="flex flex-col min-h-screen bg-egos-light-gray text-neutral-900 antialiased">
-        {/* Apply base text/bg here instead of globals.css body */} 
-        <Header /> {/* Use Header component */}
-        <main className="flex-grow container mx-auto p-4 md:p-6 lg:p-8">
+    <html lang="en" className={`${inter.variable} ${garamond.variable}`}> 
+      <body className="bg-background text-foreground font-sans">
+        <Header />
+        <main className="pt-16"> {/* Padding-top based on fixed header height */}
           {children}
         </main>
-        <Footer /> {/* Use Footer component */}
+        <Footer />
       </body>
     </html>
   );
