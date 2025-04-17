@@ -39,6 +39,17 @@ EGOS development is guided by:
 
 ---
 
+## ✨ Website & Dashboard Integration
+
+The EGOS website (see `website/` directory) is built with Next.js and features:
+- **Integrated Monitoring Dashboard:** Accessible at `/dashboard`, this page embeds the live EGOS Monitoring Dashboard via iframe, using the Streamlit Cloud deployment ([https://egosos.streamlit.app/](https://egosos.streamlit.app/)).
+- **Interactive Roadmap:** The main page displays a modular, interactive roadmap. Contributors can click on tasks to open a detailed modal with contribution instructions, acceptance criteria, and direct links to relevant GitHub issues or code.
+- **Contribution Flow:** Contributors are encouraged to use the website’s roadmap/modal as the primary way to discover, understand, and contribute to project tasks. Each modal provides links to GitHub for further discussion or code review.
+
+Refer to the [CONTRIBUTING.md](CONTRIBUTING.md) for more details on the contribution workflow.
+
+---
+
 ## subsystems Overview
 
 EGOS is composed of several key subsystems communicating via the **Mycelium Network (facilitating decentralized, event-driven inter-subsystem communication)**:

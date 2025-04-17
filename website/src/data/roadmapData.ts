@@ -8,6 +8,7 @@ export interface Task {
   phase?: string;
   description?: string;
   details: string;
+  link?: string; // GitHub URL for code or issue
 }
 
 export const roadmapTasks: Task[] = [
@@ -58,8 +59,8 @@ export const roadmapTasks: Task[] = [
   { id: 'CORUJA-ACCESSIBILITY-01', title: 'Perform Accessibility Audit (WCAG)', status: 'Planned', priority: 'MEDIUM', subsystem: 'CORUJA/ETHIK', phase: '2', details: '[Planned] [CORUJA/ETHIK][CORUJA-ACCESSIBILITY-01] Perform Accessibility Audit (WCAG) (`MEDIUM`)' },
   { id: 'CORUJA-WEB-INIT-01', title: 'Initialize Website Project (Next.js)', status: 'DONE', priority: 'CRITICAL', subsystem: 'CORUJA/HARMONY', phase: '2', details: '[DONE] [CORUJA/HARMONY][CORUJA-WEB-INIT-01] Initialize Website Project (Next.js) (`CRITICAL`)' },
   { id: 'CORUJA-WEB-FOOTER-LINKS-01', title: 'Implement Comprehensive Footer Links', status: 'DONE', priority: 'HIGH', subsystem: 'CORUJA/KOIOS', phase: '2', details: '[DONE] [CORUJA/KOIOS][CORUJA-WEB-FOOTER-LINKS-01] Implement Comprehensive Footer Links (`HIGH`)' },
-  { id: 'CORUJA-WEB-ROADMAP-01', title: 'Implement Interactive Roadmap Display', status: 'In Progress', priority: 'HIGH', subsystem: 'CORUJA/KOIOS', phase: '2', details: '[In Progress] [CORUJA/KOIOS][CORUJA-WEB-ROADMAP-01] Implement Interactive Roadmap Display (`HIGH`)' },
-  { id: 'CORUJA-WEB-CONTRIB-MODAL-01', title: 'Implement Contribution Modal/Guidance', status: 'In Progress', priority: 'HIGH', subsystem: 'CORUJA/KOIOS/AI', phase: '2', details: '[In Progress] [CORUJA/KOIOS/AI][CORUJA-WEB-CONTRIB-MODAL-01] Implement Contribution Modal/Guidance (`HIGH`)' },
+  { id: 'CORUJA-WEB-ROADMAP-01', title: 'Implement Interactive Roadmap Display', status: 'In Progress', priority: 'HIGH', subsystem: 'CORUJA/KOIOS', phase: '2', details: '[In Progress] [CORUJA/KOIOS][CORUJA-WEB-ROADMAP-01] Implement Interactive Roadmap Display (`HIGH`)', link: 'https://github.com/enioxt/egos/blob/main/website/src/components/Roadmap.tsx' },
+  { id: 'CORUJA-WEB-CONTRIB-MODAL-01', title: 'Implement Contribution Modal/Guidance', status: 'In Progress', priority: 'HIGH', subsystem: 'CORUJA/KOIOS/AI', phase: '2', details: '[In Progress] [CORUJA/KOIOS/AI][CORUJA-WEB-CONTRIB-MODAL-01] Implement Contribution Modal/Guidance (`HIGH`)', link: 'https://github.com/enioxt/egos/blob/main/website/src/components/Roadmap.tsx#L113' },
   { id: 'CORUJA-WEB-LLM-API-01', title: 'Develop Backend API for LLM Interaction', status: 'Planned', priority: 'HIGH', subsystem: 'MYCELIUM/AI', phase: '3', details: '[Planned] [MYCELIUM/AI][CORUJA-WEB-LLM-API-01] Develop Backend API for LLM Interaction (`HIGH`)' },
   { id: 'CORUJA-WEB-LLM-UI-01', title: 'Integrate LLM Chat Interface into Modal', status: 'Planned', priority: 'HIGH', subsystem: 'CORUJA/AI', phase: '3', details: '[Planned] [CORUJA/AI][CORUJA-WEB-LLM-UI-01] Integrate LLM Chat Interface into Modal (`HIGH`) `depends_on: [CORUJA-WEB-LLM-API-01, CORUJA-WEB-CONTRIB-MODAL-01]`' },
 

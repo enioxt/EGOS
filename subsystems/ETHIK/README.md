@@ -7,6 +7,15 @@
 
 ETHIK is the ethical framework and validation subsystem for the **EGOS** project. Its purpose is to ensure that all system operations, data handling, and AI interactions adhere to predefined ethical principles and standards.
 
+## Role in Dynamic Roadmap Sync & EGOS Interconnection
+
+ETHIK is responsible for:
+- Auditing all roadmap sync actions for security, privacy, and ethical compliance.
+- Validating that all inter-subsystem communication and roadmap updates adhere to EGOS ethical standards.
+- Collaborating with KOIOS, MYCELIUM, and CRONOS to ensure a verifiable, ethical, and secure sync process.
+
+Cross-reference: See ROADMAP.md sections "Dynamic Roadmap Sync & Mycelium Interconnection" and "Technical Implementation Plan: Dynamic Roadmap Sync (Phase 1)".
+
 ## Core Components
 
 * **`EthikValidator` (`core/validator.py`):** Responsible for validating actions, data, or configurations against a set of ethical rules and principles.

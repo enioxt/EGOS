@@ -36,6 +36,15 @@ CORUJA (Cognitive Orchestration, Reasoning, Understanding, & Action) is the cent
 
 Its primary goal is to provide a standardized, efficient, and ethically-aware interface to diverse AI capabilities, leveraging documented prompts (PDDs) and integrating ETHIK checks.
 
+## Role in Dynamic Roadmap Sync & EGOS Interconnection
+
+CORUJA is responsible for:
+- Orchestrating the UI/UX for roadmap sync and task modal display on the website.
+- Implementing and managing PR automation and contributor workflow for roadmap changes.
+- Collaborating with KOIOS, MYCELIUM, and CRONOS to ensure a seamless, user-friendly, and transparent sync process.
+
+Cross-reference: See ROADMAP.md sections "Dynamic Roadmap Sync & Mycelium Interconnection" and "Technical Implementation Plan: Dynamic Roadmap Sync (Phase 1)".
+
 ## 2. Core Responsibilities (Phase 1 Focus - Multi-Agent Enhanced with SPARC)
 
 *   **Model Interaction:** Provide a standardized interface (`ModelInterface`) to communicate with various supported LLMs. Abstract away model-specific API details.

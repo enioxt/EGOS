@@ -28,6 +28,7 @@
     --input: 214.3 31.8% 91.4%; /* Light gray input bg */
     --ring: 212 77% 15%; /* Primary blue for rings */
     --radius: 0.5rem;
+    --footer-background: 220 16% 94%; /* #f3f4f6 - light gray for footer */
   }
 
   .dark {
@@ -62,6 +63,7 @@
     --border: 217.2 32.6% 15.5%; /* Slightly darker than 17.5% */
     --input: 217.2 32.6% 15.5%; /* Slightly darker than 17.5% */
     --ring: 212.7 26.8% 83.9%; /* Lighter ring for dark */
+    --footer-background: 220 13% 14%; /* #20232a - dark gray for footer */
   }
 }
 

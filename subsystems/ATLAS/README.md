@@ -30,6 +30,17 @@ EGOS development is guided by:
 
 ---
 
+## Role in Dynamic Roadmap Sync & EGOS Interconnection
+
+ATLAS is responsible for:
+- Visualizing roadmap sync status, history, and inter-subsystem connections.
+- Providing dashboards and visual tools to monitor the health and state of the roadmap and sync events.
+- Collaborating with KOIOS, MYCELIUM, and CRONOS to ensure that all roadmap and sync data is accessible and understandable.
+
+Cross-reference: See ROADMAP.md sections "Dynamic Roadmap Sync & Mycelium Interconnection" and "Technical Implementation Plan: Dynamic Roadmap Sync (Phase 1)".
+
+---
+
 ##  subsystems Overview
 
 EGOS is composed of several key subsystems communicating via the **Mycelium Network**:
