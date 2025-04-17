@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowDownNarrowWide, Clock, CheckCircle, AlertCircle, PauseCircle, X, ExternalLink, Github, PlusCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -38,10 +38,32 @@ const getPriorityBadge = (priority: string) => {
   }
 };
 
+// Helper function to group and sort tasks
+const groupAndSortTasks = (tasks: Task[]) => {
+  const inProgress = tasks.filter(t => t.status === 'In Progress').sort((a, b) => priorityOrder(a.priority) - priorityOrder(b.priority));
+  const planned = tasks.filter(t => t.status === 'Planned').sort((a, b) => priorityOrder(a.priority) - priorityOrder(b.priority));
+  const completed = tasks.filter(t => t.status === 'Completed' || t.status === 'DONE').sort((a, b) => priorityOrder(a.priority) - priorityOrder(b.priority));
+  return { inProgress, planned, completed };
+};
+
+const priorityOrder = (priority: string) => {
+  switch(priority) {
+    case 'CRITICAL': return 1;
+    case 'HIGH': return 2;
+    case 'MEDIUM': return 3;
+    case 'LOW': return 4;
+    default: return 5;
+  }
+};
+
 export const Roadmap = () => {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [showContribution, setShowContribution] = useState(false);
   const [visibleCount, setVisibleCount] = useState(5);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const { inProgress, planned, completed } = groupAndSortTasks(roadmapTasks);
+  const allTasks = [...inProgress, ...planned, ...completed];
 
   const handleTaskClick = (task: Task) => {
     setSelectedTask(task);
@@ -53,8 +75,38 @@ export const Roadmap = () => {
   };
 
   const handleShowMore = () => {
-    setVisibleCount(prevCount => Math.min(prevCount + 5, roadmapTasks.length));
+    setVisibleCount(prevCount => Math.min(prevCount + 5, allTasks.length));
   };
+
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      handleCloseModal();
+    }
+  }, []);
+
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      const backdrop = document.querySelector('.fixed.inset-0.z-50');
+      if (event.target === backdrop) {
+        handleCloseModal();
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (showContribution) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showContribution, handleKeyDown, handleClickOutside]);
 
   return (
     <section id="roadmap" className="py-16 bg-background">
@@ -65,26 +117,26 @@ export const Roadmap = () => {
             Acompanhe o progresso do desenvolvimento do EGOS e as próximas etapas planejadas.
           </p>
         </div>
-        
+
         <div className="overflow-x-auto rounded-lg shadow">
           <table className="min-w-full divide-y divide-border">
             <thead className="bg-muted/50">
               <tr className="border-b transition-colors hover:bg-muted/50">
                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Status</th>
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Subsystem(s)</th>
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Task ID</th>
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Priority</th>
-                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Description</th>
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Subsistema(s)</th>
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">ID</th>
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Prioridade</th>
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Descrição</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border bg-card">
-              {roadmapTasks.slice(0, visibleCount).map((item, index) => (
+              {allTasks.slice(0, visibleCount).map((item, index) => (
                 <tr 
                   key={index} 
-                  className="hover:bg-muted/50 transition-colors cursor-pointer" 
+                  className={`hover:bg-muted/50 transition-colors cursor-pointer ${item.status === 'Completed' || item.status === 'DONE' ? 'opacity-60' : ''}`} 
                   onClick={() => handleTaskClick(item)}
                 >
-                  <td className="p-4 align-middle">{getStatusIcon(item.status)} {item.status}</td>
+                  <td className="p-4 align-middle">{getStatusIcon(item.status)} {item.status === 'DONE' ? 'Completed' : item.status}</td>
                   <td className="p-4 align-middle">{item.subsystem}</td>
                   <td className="p-4 align-middle font-mono text-sm">{item.id}</td>
                   <td className="p-4 align-middle">{getPriorityBadge(item.priority)}</td>
@@ -97,10 +149,10 @@ export const Roadmap = () => {
 
         {/* Show More / View Full Buttons */}
         <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
-          {visibleCount < roadmapTasks.length && (
+          {visibleCount < allTasks.length && (
             <Button variant="outline" onClick={handleShowMore}>
               <PlusCircle className="mr-2 h-4 w-4" />
-              Ver Mais ({roadmapTasks.length - visibleCount} restantes)
+              Ver Mais ({allTasks.length - visibleCount} restantes)
             </Button>
           )}
           <Link href="/roadmap" passHref>
@@ -113,42 +165,68 @@ export const Roadmap = () => {
 
         {/* Contribution Modal */}
         {showContribution && selectedTask && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-            <div className="relative w-full max-w-2xl rounded-lg bg-card p-6 shadow-lg">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+            <div ref={modalRef} className="relative w-full max-w-xl rounded-2xl bg-neutral-900 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 border border-border shadow-2xl p-8 mx-2 animate-fade-in">
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="absolute right-4 top-4 rounded-full" 
+                className="absolute right-4 top-4 rounded-full text-muted-foreground hover:text-foreground" 
                 onClick={handleCloseModal}
               >
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
               </Button>
-              <h3 className="text-lg font-semibold mb-4">Task Details: {selectedTask.id}</h3>
-              <p className="mb-2"><strong className="text-muted-foreground">Title:</strong> {selectedTask.title}</p>
-              <p className="mb-2"><strong className="text-muted-foreground">Status:</strong> {getStatusIcon(selectedTask.status)} {selectedTask.status}</p>
-              <p className="mb-2"><strong className="text-muted-foreground">Priority:</strong> {getPriorityBadge(selectedTask.priority)}</p>
-              <p className="mb-2"><strong className="text-muted-foreground">Subsystem:</strong> {selectedTask.subsystem}</p>
-              <p className="mb-4 whitespace-pre-wrap"><strong className="text-muted-foreground">Details:</strong> {selectedTask.details}</p>
-              
-              {/* Placeholder for LLM Integration & Contribution Guide */}
-              <div className="mt-4 rounded border p-4 bg-muted/30">
-                <h4 className="font-medium mb-2">Contribution Guide & AI Assistant</h4>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Ready to contribute? Click the link below to view the relevant files on GitHub. 
-                  Use the AI assistant (coming soon!) for guidance on implementation, understanding dependencies, 
-                  or adhering to project principles.
-                </p>
-                {/* Example GitHub link - Needs to be dynamic based on task context */}
-                <Button variant="outline" size="sm" asChild>
-                  <a href={`https://github.com/enioxt/egos/issues?q=is%3Aissue+is%3Aopen+label%3A${selectedTask.id}`} target="_blank" rel="noopener noreferrer">
-                    <Github className="mr-2 h-4 w-4" /> View/Discuss on GitHub
-                  </a>
-                </Button>
-                 {/* Placeholder for AI Chat Interface */}
-                 <div className="mt-3 text-center text-xs text-muted-foreground">[AI Assistant Interface Placeholder]</div>
+              <h3 className="text-xl font-bold mb-4 text-foreground">Detalhes da Tarefa: <span className="font-mono text-base text-blue-300">{selectedTask.id}</span></h3>
+              <div className="mb-3 flex flex-wrap gap-4 items-center text-sm">
+                <span className="font-medium text-muted-foreground">Status:</span> {getStatusIcon(selectedTask.status)} <span className="text-blue-400">{selectedTask.status === 'DONE' ? 'Completed' : selectedTask.status}</span>
+                <span className="font-medium text-muted-foreground">Prioridade:</span> {getPriorityBadge(selectedTask.priority)}
+                {selectedTask.phase && <><span className="font-medium text-muted-foreground">Fase:</span> <span className="text-purple-300">{selectedTask.phase}</span></>}
               </div>
-
-              {/* Optional: Add direct link to related docs or code if parseable from details */}
+              <div className="mb-2 text-sm"><span className="font-medium text-muted-foreground">Subsistema(s):</span> <span className="text-foreground">{selectedTask.subsystem || '-'}</span></div>
+              <div className="mb-2 text-lg font-semibold text-foreground"><span className="">Título:</span> {selectedTask.title}</div>
+              <div className="mb-2 text-sm"><span className="font-medium text-muted-foreground">Descrição:</span> <span className="text-foreground">{selectedTask.description || '-'}</span></div>
+              <div className="mb-2 whitespace-pre-wrap text-sm"><span className="font-medium text-muted-foreground">Detalhes:</span> <span className="text-foreground">{selectedTask.details}</span></div>
+              <div className="mb-2 text-sm"><span className="font-medium text-muted-foreground">Dependências:</span> <span className="italic text-muted-foreground">(Preencher se houver)</span></div>
+              <div className="mb-2 text-sm"><span className="font-medium text-muted-foreground">Princípios Relacionados:</span> <span className="italic text-muted-foreground">(Preencher se houver)</span></div>
+              <div className="mb-2 text-sm"><span className="font-medium text-muted-foreground">Stack Recomendada:</span> <span className="italic text-muted-foreground">(Ex: Next.js, Tailwind, Node.js, Pinecone, OpenAI API)</span></div>
+              <div className="mb-2 text-sm"><span className="font-medium text-muted-foreground">Tempo Estimado (IA):</span> <span className="italic text-muted-foreground">(Ex: 1-2h)</span> <span className="ml-4 font-medium text-muted-foreground">Tempo Estimado (Humano):</span> <span className="italic text-muted-foreground">(Ex: 2-4h)</span></div>
+              <div className="mb-2 text-sm"><span className="font-medium text-muted-foreground">Rastreamento de Tempo:</span> <span className="italic text-muted-foreground">(Preencher quando disponível)</span></div>
+              <div className="mb-2 text-sm"><span className="font-medium text-muted-foreground">Recompensa / ETHIK:</span> <span className="italic text-muted-foreground">(Ex: 10 ETHIK tokens)</span></div>
+              <div className="my-4 rounded-xl border border-border p-4 bg-neutral-800 bg-gradient-to-br from-neutral-800 via-neutral-900 to-neutral-800">
+                <h4 className="font-semibold mb-2 text-blue-200 flex items-center gap-2"><PanelRight className="h-5 w-5" /> Como Contribuir</h4>
+                <ol className="list-decimal ml-5 text-sm mb-3 text-foreground">
+                  <li>
+                    Leia o <a href="/roadmap" className="underline text-blue-400 hover:text-blue-200" target="_blank">roadmap completo</a> para entender o contexto e as prioridades.
+                  </li>
+                  <li>
+                    Leia as <a href={selectedTask.link || 'https://github.com/enioxt/egos#roadmap'} className="underline text-blue-400 hover:text-blue-200" target="_blank">instruções completas e critérios de aceitação</a> no GitHub.
+                  </li>
+                  <li>
+                    Siga as <a href="https://github.com/enioxt/egos/blob/main/CONTRIBUTING.md" className="underline text-blue-400 hover:text-blue-200" target="_blank">regras do sistema EGOS</a> (contribuição, padrões, ética).
+                  </li>
+                </ol>
+                <div className="mb-2 flex items-center gap-2 text-sm">
+                  <span className="font-medium text-muted-foreground">Critérios de Aceitação:</span>
+                  <span className="italic text-muted-foreground">(Descreva claramente o que define a tarefa como concluída, conforme o roadmap e GitHub)</span>
+                </div>
+                <div className="mb-2 flex items-center gap-2 text-sm">
+                  <span className="font-medium text-muted-foreground">Regras EGOS:</span>
+                  <span className="italic text-muted-foreground">(Padrões, ética, acessibilidade, documentação, segurança, etc.)</span>
+                </div>
+                {selectedTask.link ? (
+                  <Button variant="outline" size="sm" asChild className="mt-2">
+                    <a href={selectedTask.link} target="_blank" rel="noopener noreferrer">
+                      <Github className="mr-2 h-4 w-4" /> Ver Código ou Discussão no GitHub
+                    </a>
+                  </Button>
+                ) : (
+                  <Button variant="outline" size="sm" asChild className="mt-2">
+                    <a href="/roadmap" target="_blank" rel="noopener noreferrer">
+                      <ArrowRight className="mr-2 h-4 w-4" /> Ver Roadmap Completo
+                    </a>
+                  </Button>
+                )}
+                <div className="mt-3 text-center text-xs text-muted-foreground">[AI Assistant Interface Placeholder]</div>
+              </div>
             </div>
           </div>
         )}

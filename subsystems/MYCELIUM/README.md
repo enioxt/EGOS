@@ -3,6 +3,16 @@
 **Version:** 0.3 # Updated version
 **Last Updated:** 2025-04-02
 
+## Role in Dynamic Roadmap Sync & EGOS Interconnection
+
+MYCELIUM is responsible for:
+- Acting as the event bus for roadmap updates and all inter-subsystem communication.
+- Emitting and subscribing to roadmap update events so that all subsystems stay in sync.
+- Facilitating event-driven architecture for EGOS, ensuring real-time updates and modularity.
+- Working closely with KOIOS, CRONOS, SYNC, and CORUJA to implement and log all roadmap sync actions.
+
+Cross-reference: See ROADMAP.md sections "Dynamic Roadmap Sync & Mycelium Interconnection" and "Technical Implementation Plan: Dynamic Roadmap Sync (Phase 1)".
+
 ## Core Vision
 
 The Mycelium Network is the core communication and integration fabric of the EGOS system. Inspired by natural mycelial networks, it enables seamless, adaptive, and resilient information flow between all subsystems, fostering emergent collaboration and collective intelligence.

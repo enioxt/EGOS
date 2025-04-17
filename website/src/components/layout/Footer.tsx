@@ -6,7 +6,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-background border-t border-border py-12 mt-12">
+    <footer className="bg-footer-background border-t border-border py-12 mt-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
@@ -21,7 +21,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <a 
-                  href="https://github.com/enioxt/EGOS"
+                  href="https://github.com/enioxt/egos"
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
@@ -32,7 +32,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://t.me/EGOSproject"
+                  href="https://t.me/ethikin"
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
@@ -43,7 +43,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://github.com/enioxt/EGOS/discussions"
+                  href="https://github.com/enioxt/egos/discussions"
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
@@ -60,7 +60,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <a 
-                  href="https://github.com/enioxt/EGOS/wiki"
+                  href="https://github.com/enioxt/egos/wiki"
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
@@ -71,7 +71,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://github.com/enioxt/EGOS/blob/main/CONTRIBUTING.md"
+                  href="https://github.com/enioxt/egos/blob/main/CONTRIBUTING.md"
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
@@ -82,7 +82,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://github.com/enioxt/EGOS#roadmap"
+                  href="https://github.com/enioxt/egos#roadmap"
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"

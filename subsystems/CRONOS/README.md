@@ -4,6 +4,15 @@
 
 CRONOS is the backup and state preservation subsystem of the EGOS project. It provides robust functionality for creating, managing, and restoring backups of the entire project or specific modules.
 
+## Role in Dynamic Roadmap Sync & EGOS Interconnection
+
+CRONOS is responsible for:
+- Logging all roadmap sync events and preserving the evolutionary history of roadmap and subsystem changes.
+- Ensuring that all changes and sync actions are auditable and traceable.
+- Collaborating with MYCELIUM, KOIOS, and SYNC to guarantee state integrity and historical record.
+
+Cross-reference: See ROADMAP.md sections "Dynamic Roadmap Sync & Mycelium Interconnection" and "Technical Implementation Plan: Dynamic Roadmap Sync (Phase 1)".
+
 ## Core Components
 
 ### BackupManager

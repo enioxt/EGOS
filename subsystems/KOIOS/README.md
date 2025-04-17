@@ -26,6 +26,16 @@ metadata:
 **Version:** 0.1 (Initial Structure)
 **Status:** Active Development
 
+## Role in Dynamic Roadmap Sync & Mycelium Interconnection
+
+KOIOS is responsible for:
+- Defining and enforcing documentation structure and standards for the EGOS roadmap and subsystem interconnection.
+- Implementing and maintaining the parser that converts ROADMAP.md into structured JSON for the website and other subsystems.
+- Ensuring all roadmap and documentation updates comply with KOIOS/EGOS modularity and transparency principles.
+- Collaborating with MYCELIUM, CRONOS, CORUJA, and others to ensure seamless, event-driven roadmap sync.
+
+Cross-reference: See ROADMAP.md sections "Dynamic Roadmap Sync & Mycelium Interconnection" and "Technical Implementation Plan: Dynamic Roadmap Sync (Phase 1)".
+
 ## 1. Overview
 
 KOIOS (Knowledge, Order, Integration, & Operational Standards) is the central nervous system for standardization, documentation, logging, and knowledge management within the EVA & GUARANI Operational System (EGOS).
