@@ -4,7 +4,31 @@ description: Guidelines for effective Human-AI pair programming collaboration wi
 alwaysApply: true
 ---
 
-# EGOS Human-AI Collaboration Guidelines (KOIOS/CORUJA Standard)
+# AI Collaboration Guidelines (KOIOS Standard)
+
+## Rule
+
+(To be defined based on existing content)
+
+## Rationale
+
+(To be defined)
+
+## Examples
+
+### Correct Usage
+
+```
+(Add correct example)
+```
+
+### Incorrect Usage
+
+```
+(Add incorrect example)
+```
+
+**Follow these guidelines for effective AI collaboration.**
 
 **Primary Reference:** The core principles, mandatory procedures (including human verification), and operational guidelines for Human-AI collaboration are defined in the central EGOS rules file:
 

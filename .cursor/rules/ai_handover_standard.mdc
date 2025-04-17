@@ -1,4 +1,35 @@
 ---
+description: (Describe rule purpose - Standard for handing over context between AI agents or sessions)
+globs: []
+alwaysApply: true
+---
+# AI Handover Standard (KOIOS Standard)
+
+## Rule
+
+(To be defined based on existing content)
+
+## Rationale
+
+(To be defined)
+
+## Examples
+
+### Correct Usage
+
+```
+(Add correct example)
+```
+
+### Incorrect Usage
+
+```
+(Add incorrect example)
+```
+
+**Adhere to this standard for seamless context transfer.**
+
+---
 description: 
 globs: 
 alwaysApply: true
