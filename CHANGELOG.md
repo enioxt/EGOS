@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic README and documentation placeholders.
 
 ### Changed
+- Standardized the structure of `.cursor/rules/*.mdc` files to comply with `MDC_RULES_STANDARD.md` (added frontmatter description, standard H1, standard H2 sections: Rule, Rationale, Examples).
 - **`README.md`:** Overhauled to reflect current project state, focus on Cursor IDE development workflow, remove inaccurate installation/usage sections, and add links to key resources.
 - **`.gitignore`:**
     - Removed ignore rules for `.cursor/` directory to track essential setup files.

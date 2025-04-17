@@ -280,6 +280,10 @@ temp_files/
 subsystem_unification.log
 *.egg-info/
 
+# EGOS Specific Untracked (Added)
+subsystems/KOIOS/docs/project_diagnostic_llm_report.md
+ROADMAP_standardized.md
+
 # Keep research/manual logs, but ignore generated backups/logs
 node_modules
 node_modules

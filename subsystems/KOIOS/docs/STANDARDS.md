@@ -14,12 +14,12 @@ This document, maintained by the KOIOS subsystem, defines the mandatory coding, 
 These standards are guided by the following core principles:
 
 * **Clarity & Readability:** Code and documentation should be easy to understand.
-* **Consistency:** Uniform practices across all subsystems make the codebase predictable.
+* **Discoverability & Integration:** Reference the new project diagnostic standard for discoverability and integration with KOIOS processes.
 * **Maintainability:** Standards facilitate future modifications, debugging, and refactoring.
 * **Interoperability:** Defined structures and protocols (like Mycelium) enable seamless subsystem interaction.
 * **Testability:** Code should be structured to allow for effective unit and integration testing.
 * **Ethical Alignment (ETHIK):** Standards should support and not conflict with the project's ethical guidelines.
-* **AI-Readability:** Structures and documentation formats should be chosen to optimize interaction with AI development assistants.
+* **AI-Readiness:** Structures and documentation formats should be chosen to optimize interaction with AI development assistants.
 * **Cleanliness:** The project structure should remain organized, avoiding clutter and temporary files in core areas.
 
 ## 3. Language
@@ -188,4 +188,21 @@ These guidelines apply specifically to AI agents (like EVA & GUARANI) interactin
 * **Context Persistence & Model Switching:** Adherence to KOIOS standards, including PAV, is expected of any AI agent operating within the EGOS context. While the agent framework (e.g., Cursor) aims to maintain operational context across sessions or model switches, this persistence cannot be universally guaranteed, especially when using external model aggregators. It is recommended to **briefly verify key operational guidelines** with the agent after significant changes to the underlying model or environment if context continuity is uncertain. The documented KOIOS standards remain the source of truth for expected behavior.
 * **(Future: Add other operational refinements here, e.g., Terminal CWD strategy, Python execution path, File Access Strategy)**
 
-✧༺❀༻∞ KOIOS - EGOS Standards Authority ∞༺❀༻✧
+## Rule: Planning, Skeleton, and Interconnection for New Initiatives
+- Whenever proposing a new tool, subsystem, or project:
+  - **Plan First:** Draft a clear, documented plan outlining goals, scope, and integration points.
+  - **Create the Skeleton:** Immediately scaffold the full directory structure, with `README.md`, initial documentation, and a `ROADMAP.md` or equivalent for tracking.
+  - **Interconnect:** Ensure all new entities are referenced or linked in existing documentation, and that Mycelium (or another messaging/contract system) is used for cross-subsystem awareness.
+  - **Never Lose Track:** All new initiatives must be discoverable and traceable from the main roadmap and standards, with explicit pointers for seamless context resumption.
+- This rule guarantees that all new work is visible, documented, and connected—preventing orphaned or forgotten efforts and making it easy to resume or onboard at any time.
+
+## Rule: Process Documentation and Integration
+- **Indexing:** All official process documents MUST be listed and described in the `KOIOS/docs/process_index.md` file for central discoverability.
+- **Mycelium Integration:** All documented processes, especially those with associated automation scripts (like diagnostics or propagation tools), MUST integrate with the Mycelium Network. Each process document must specify:
+    - Relevant Mycelium topics (subscribed or published).
+    - Message contracts used.
+    - How the process reports status or coordinates via Mycelium.
+- **Cross-Referencing:** Process documents should cross-reference each other and the index where relevant.
+
+## Project Diagnostics
+{{ ... }}

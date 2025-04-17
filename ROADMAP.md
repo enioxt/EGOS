@@ -131,6 +131,9 @@ feat/roadmap-updates
   * ✅ [DONE] **Activate Cursor Agent Mode:** Transitioned from Chat to Agent, enabling direct file/terminal interaction. (`HIGH` - See `docs/ai_integration/cursor_agent_mode.md`)
   * ✅ [DONE] **Consolidate `.cursor/rules`:** Reviewed all `.cursor/rules/*.mdc` files, consolidating or linking them into `global_rules.mdc` as the central source of truth for project standards. (`HIGH`)
 main
+=======
+*   **[Sub-Task][DONE] MDC Rules Structural Compliance:** Applied standard structure (frontmatter description, standard H1 title, H2 sections: Rule, Rationale, Examples) to all `.cursor/rules/*.mdc` files identified by initial `validate_mdc_rules.py` run. Content population for placeholders is pending. (`HIGH`)
+>>>>>>> Stashed changes
 
 ### Monitoring & Dashboard (ATLAS/KOIOS)
 
@@ -563,6 +566,42 @@ main
 feat/roadmap-updates
 * [Planned] **[WEBSITE-GENKI-DAMA]** **Genki Dama Page Implementation:** Design and implement the "Genki Dama" page featuring specific artwork, clear calls for collaboration/contribution, and donation addresses (e.g., Solana: `[Your Solana Address]`, BTC: `[Your BTC Address]`, EVM: `[Your EVM Address]`). Ensure minimal text and focus on artistic/mysterious appeal. (`HIGH`)
 * [Planned] **[WEB/ETHIK][WEBSITE-DONATION-INTEGRATION]** Securely integrate and test donation mechanisms for Genki Dama page (`HIGH`), `depends_on: [WEBSITE-GENKI-DAMA]`
+
+## 📐 Structure & Best Practices
+
+* **Clear Sections**: Group tasks by Phase or Category.
+* **Priority Tags**: `CRITICAL`, `HIGH`, `MEDIUM`, `LOW`.
+* **Status Indicators**: `Planned`, `In Progress`, `Completed`, `Blocked`, `DONE`.
+* **Responsibility**: Assign owner or team where applicable.
+* **Linked Issues/PRs/Docs**: Reference relevant GitHub items or documentation.
+* **Dates (Optional)**: Target quarters or specific deadlines.
+* **References**: Use `(See analysis in research/)` to link tasks to the GitHub project study.
+
+---
+
+### Monitoring & Dashboard (ATLAS/KOIOS)
+
+* [DONE] Basic Streamlit Dashboard Setup (`MEDIUM`)
+* [DONE] Implement Modular UI Components (`MEDIUM`)
+* [DONE] Add Dark/Light Theme Toggle (`LOW`)
+* [DONE] Integrate Mock NATS Client for Demo (`HIGH`)
+* [DONE] Implement `KoiosLogger` for Dashboard Interactions (`HIGH`)
+* [DONE] Link Dashboard to Main Website (`LOW`)
+* [DONE] Improve Light Theme Contrast (`LOW`)
+* [Planned] Refine Dashboard UI/UX based on feedback (`MEDIUM`) - ID: `DASHBOARD-UI-REFINE`
+* [Planned] Integrate Real NATS Client (post-Mycelium stabilization) (`HIGH`) - ID: `DASHBOARD-NATS-CLIENT`, `depends_on: [MYCELIUM-RELIABLE]`
+* [Planned] Deploy Dashboard (e.g., Streamlit Cloud) (`MEDIUM`) - ID: `DASHBOARD-DEPLOY`, `depends_on: [DASHBOARD-NATS-CLIENT]`
+* [Planned] Add SPARC Task Visualization (`MEDIUM`) - ID: `DASHBOARD-SPARC-VIZ`, `depends_on: [DASHBOARD-NATS-CLIENT]`
+
+### 🗣️ User Interaction & Frontend (CORUJA Lead / Website)
+
+* [Planned] Define Standard UI Components/Style Guide (`HIGH`)
+* [Planned] Implement User Feedback Mechanisms (`MEDIUM`)
+* [Planned] Explore Voice Input Capabilities (`LOW`)
+* [Planned] Implement Internationalization/Localization Support (`LOW`)
+* [Planned] **[WEBSITE-REVAMP-CORE]** **Website Design, UX, & Technical Overhaul:** Major refactor/rebuild focusing on: Aesthetics (beauty, golden ratio, spirals), Interactivity, Accessibility (WCAG AA+, colorblind friendly), Responsiveness (mobile-first), Performance (lightweight), and Modern Framework (confirm Next.js/SvelteKit/Astro). Ensure intuitive navigation based on `research/WebSite Enio Grok e Gemini.txt` and `docs/website/DESIGN_GUIDE.md`. (`CRITICAL`)
+* [Planned] **Task W3.8 (Parallel): User Behavior Analysis (Deferred/Basic)** (Implement basic analytics, defer advanced tools like Hotjar/OpenReplay unless explicitly prioritized later).
+* [Planned] **[WEB/KOIOS][WEBSITE-ACCESSIBILITY-AUDIT]** Perform accessibility audit and implement necessary fixes (WCAG AA minimum) (`CRITICAL`), `depends_on: [WEBSITE-REVAMP-CORE]`
 
 ## 🚀 EGOS DevKit Extension (Developer Experience Enhancement)
 
