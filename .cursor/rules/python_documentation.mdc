@@ -1,101 +1,84 @@
 ---
-description:
-globs:
+description: (Describe rule purpose - Standards for documenting Python code within EGOS, including docstrings and type hints)
+globs: ["**/*.py"]
 alwaysApply: true
 ---
----
-description: Enforce documentation standards (docstrings) for Python code
-globs: ["subsystems/**/*.py"]
-# Exclude test files and __init__ files from strict docstring requirement
-exclude_globs: ["**/tests/**/*.py", "**/__init__.py"]
-alwaysApply: true # Core KOIOS standard
----
-
-# Python Documentation Standards (Docstrings - KOIOS)
+# Python Documentation Standard (KOIOS Standard)
 
 ## Rule
 
-All **public** modules, classes, functions, and methods **MUST** have a docstring explaining their purpose, arguments (if any), and return values (if any).
-
-*   **Module Docstrings:** Explain the overall purpose of the module.
-*   **Class Docstrings:** Explain the purpose and basic usage of the class.
-*   **Function/Method Docstrings:** Explain what the function/method does, its parameters (`Args:` section), and what it returns (`Returns:` section). Use standard formats like Google Style or reStructuredText; consistency within the project is key.
-
-Private functions/methods (prefixed with `_`) are **encouraged** to have docstrings, especially if their logic is complex, but it's not strictly mandatory if their purpose is clear from context or internal comments.
+Use Google-style docstrings for all modules, classes, functions, and methods. Include type hints for all function signatures and important variables. Ensure docstrings clearly explain purpose, arguments, return values, and any raised exceptions.
 
 ## Rationale
 
-Consistent documentation is **essential** for code understanding, maintainability, and collaboration. Docstrings allow tools (like `help()`, IDEs, documentation generators) to provide context automatically. Adhering to this standard is a core part of KOIOS.
+-   **Readability & Understanding:** Clear docstrings and type hints make code easier to comprehend for humans and AI.
+-   **Maintainability:** Easier to modify and extend well-documented code.
+-   **Automated Documentation:** Tools like Sphinx can generate documentation from docstrings.
+-   **Static Analysis:** Type hints enable better static analysis and error detection.
 
 ## Examples
 
-### Correct Usage (Function with Docstring)
+### Correct Usage
 
 ```python
-def calculate_metrics(data: list[float], threshold: float = 0.5) -> dict[str, float]:
-    """Calculates key metrics from a list of data points.
+from typing import List, Optional
+
+def process_data(data: List[int], threshold: Optional[float] = None) -> float:
+    """Processes a list of integers and returns their average.
 
     Args:
-        data: A list of numerical data points.
-        threshold: The threshold value for certain metric calculations.
+        data: A list of integers to process.
+        threshold: An optional float. If provided, only numbers above
+                   this threshold are included in the average.
 
     Returns:
-        A dictionary containing calculated metrics like 'mean', 'max',
-        and 'above_threshold_count'.
+        The calculated average as a float.
+
+    Raises:
+        ValueError: If the input data list is empty after filtering.
     """
-    # ... implementation ...
-    metrics = {}
-    # ... calculation logic ...
-    return metrics
-```
+    if threshold is not None:
+        filtered_data = [x for x in data if x > threshold]
+    else:
+        filtered_data = data
 
-### Correct Usage (Class with Docstring)
+    if not filtered_data:
+        raise ValueError("Input data is empty after applying threshold.")
 
-```python
+    return sum(filtered_data) / len(filtered_data)
+
 class DataProcessor:
-    """Processes raw input data into a standardized format.
+    """A class responsible for processing datasets.
 
-    Handles data cleaning, validation, and transformation according
-    to predefined rules.
+    Attributes:
+        cache_enabled: A boolean indicating if caching is active.
     """
-
-    def __init__(self, config: dict):
-        """Initializes the DataProcessor with a configuration dictionary."""
-        self.config = config
-        # ... setup ...
-
-    def process_batch(self, batch: list) -> list:
-        """Processes a batch of raw data items.
+    def __init__(self, cache_enabled: bool = True):
+        """Initializes the DataProcessor.
 
         Args:
-            batch: A list of raw data items to process.
-
-        Returns:
-            A list of processed data items in the standard format.
+            cache_enabled: Sets the initial state of the cache.
         """
-        processed = []
-        # ... processing logic ...
-        return processed
+        self.cache_enabled: bool = cache_enabled
 ```
 
-### Incorrect Usage (Missing Docstrings)
+### Incorrect Usage
 
 ```python
-# ❌ Missing module docstring
-import os
+# Missing docstring and type hints
+def calculate(a, b):
+    # Does some calculation
+    return a + b
 
-# ❌ Missing class docstring
-class DataHelper:
+# Incomplete docstring
+def my_func(param1):
+    """Does something."""
+    pass
 
-    # ❌ Missing method docstring
-    def load_data(self, source_path):
-        # ... implementation ...
-        pass
-
-# ❌ Missing function docstring
-def utility_function(param1, param2):
-    # ... implementation ...
-    return param1 + param2
+# Missing type hints
+class BadClass:
+    def __init__(self, value):
+        self.value = value
 ```
 
-**Ensure all public elements are documented with appropriate docstrings.**
+**Write clear, comprehensive Google-style docstrings and use type hints consistently.**

@@ -14,4 +14,32 @@ Please refer to that document for authoritative standards, including rules on au
 
 This file is retained for context discovery, but the primary source of truth is `global_rules.mdc`.
 
+## Rule
+
+(To be defined - Consolidate security best practices, including dependency scanning, secrets management, input validation, secure defaults, least privilege, and regular audits.)
+
+## Rationale
+
+(To be defined - Emphasizes protecting user data (Sacred Privacy), maintaining system integrity, building trust (Reciprocal Trust), and preventing vulnerabilities.)
+
+## Examples
+
+### Correct Usage
+
+-   Using environment variables or a secrets manager for API keys.
+-   Validating and sanitizing all user inputs (e.g., using Pydantic).
+-   Running `pip-audit` or similar tools regularly.
+-   Implementing role-based access control (RBAC).
+-   Performing security code reviews.
+
+### Incorrect Usage
+
+-   Hardcoding credentials in source code.
+-   Trusting user input without validation.
+-   Using outdated dependencies with known vulnerabilities.
+-   Granting excessive permissions to services or users.
+-   Ignoring security warnings from linters or scanners.
+
+**Prioritize security throughout the development lifecycle.**
+
 ✧༺❀༻∞ EGOS ∞༺❀༻✧

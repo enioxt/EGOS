@@ -1,64 +1,53 @@
 ---
-description: (Describe rule purpose - Standard for handing over context between AI agents or sessions)
-globs: []
+description: Defines the standard process and content for AI-to-AI or AI-to-Human project context handovers within EGOS.
+globs: [] # Applies conceptually to the workflow, not specific files.
 alwaysApply: true
+tags: [workflow, ai_collaboration, koios, handover, context]
+priority: 1 # Critical workflow standard
+version: 1.4.0 # Reflects consolidation
 ---
 # AI Handover Standard (KOIOS Standard)
 
 ## Rule
 
-(To be defined based on existing content)
+When development context is transferred (between AI agents, sessions, or human/AI), a structured handover summary **MUST** be generated. This summary **MUST** include: Metadata, Project Overview (linking key standards/docs), Recent Actions (with rationale/links), Current Project State (including structured Git/CI/Environment status), Known Issues/Risks, Explicit Initialization Instructions (with verification steps) for the incoming agent, and Pending Immediate Next Steps.
 
 ## Rationale
 
-(To be defined)
+Ensures seamless continuity and preserves vital project context (state, rationale, assumptions, risks) during transitions (CRONOS). Improves efficiency and reliability for incoming AI/collaborators. Standardizes a critical workflow step (KOIOS), especially vital in multi-agent scenarios to prevent context loss, duplication, or conflicts. Structured data enhances clarity and reduces ambiguity.
 
 ## Examples
 
-### Correct Usage
+### Correct Usage (Snippet: Structured Git Status)
 
+```markdown
+**Subsection 3.5.a: Git Status (Structured JSON Recommended)**
+Provide detailed Git state information within a JSON code block:
+```json
+{
+  "branch": "main",
+  "commit_sha": "f27fa44",
+  "is_clean": "true",
+  "remote_sync_status": "ahead 1",
+  "recent_log": [
+    { "sha": "f27fa44", "msg": "docs(rules): add multi-agent awareness rule & update handover standard" },
+    { "sha": "999a67c", "msg": "docs: integrate strategic notes & refine website plan..." },
+    { "sha": "31d6407", "msg": "docs(website): update roadmap and add development plan..." }
+  ]
+}
 ```
-(Add correct example)
 ```
 
-### Incorrect Usage
+### Incorrect Usage (Vague Handover)
 
+```markdown
+Okay, I did some stuff on the docs. The code is on main. You take over.
+# VIOLATION: Lacks structure, required sections (State, Next Steps, Init Instructions), and detail.
 ```
-(Add incorrect example)
-```
 
-**Adhere to this standard for seamless context transfer.**
+**Refer to the detailed specification below for the full required structure.**
 
----
-description: 
-globs: 
-alwaysApply: true
----
----
-description: 
-globs: 
-alwaysApply: true
----
----
-description: 
-globs: 
-alwaysApply: true
----
----
-description: 
-globs: 
-alwaysApply: true
----
----
-description: Defines the standard process and content for AI-to-AI project context handovers within EGOS.
-globs: [] # Applies conceptually to the workflow, not specific files.
-alwaysApply: true
-tags: [workflow, ai_collaboration, koios, handover]
-priority: 2 # Important workflow standard
-version: 1.3.0
----
-
-# AI Handover Standard (KOIOS Workflow)
+# AI Handover Standard (KOIOS Workflow) - Detailed Specification
 
 **Multi-Agent Context Note:** This standard is **CRITICAL** when operating in a multi-agent environment (see `.cursor/rules/multi_agent_awareness.mdc`). Accurate and complete handovers prevent context loss, duplicated effort, and conflicting actions between agents (e.g., Gemini Orchestrator and Quasar-Alpha Executor).
 

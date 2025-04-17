@@ -1,14 +1,8 @@
 ---
-description:
-globs:
-alwaysApply: false
----
----
 description: Standards and procedures for effective Git workflow, especially for challenging situations like merge conflicts and pre-commit hook failures.
 globs: ["**/.git*"]
 alwaysApply: true # This is a core workflow standard
 ---
-
 # Git Workflow Standards (KOIOS Standard)
 
 ## Rule
@@ -22,6 +16,15 @@ Follow these structured procedures when working with Git, especially in challeng
 3. **Prioritization:** Focus on critical files first, especially those causing merge conflicts.
 4. **Separation of Concerns:** Divide large problematic merges into multiple smaller commits when appropriate.
 5. **Documentation:** Use meaningful commit messages that document the issue resolved.
+
+## Rationale
+
+Standardized Git workflows are crucial for:
+* **Code Quality & Stability:** Ensuring changes are isolated, reviewed, and tested before integration.
+* **Collaboration:** Providing a consistent process for multiple developers (human and AI) to contribute effectively.
+* **Traceability:** Maintaining a clean, understandable commit history for easier debugging and auditing.
+* **CI/CD Integration:** Enabling reliable automated build, test, and deployment pipelines.
+* **Conflict Minimization:** Reducing the frequency and complexity of merge conflicts through structured branching.
 
 ## Standard Local Commit Workflow
 

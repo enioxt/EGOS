@@ -1,8 +1,34 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: (Describe rule purpose - Standard format and content for Process Definition Documents (PDDs) within EGOS)
+globs: ["**/docs/processes/*.md", "**/docs/*.pdd.md"]
+alwaysApply: false
 ---
+# Process Definition Document (PDD) Standard (KOIOS Standard)
+
+## Rule
+
+(To be defined - Specify required sections, structure, and content for PDDs, likely including Purpose, Scope, Inputs, Outputs, Steps, Roles, Metrics, Mycelium Integration.)
+
+## Rationale
+
+(To be defined - Ensures clarity, consistency, maintainability, and discoverability of defined processes across EGOS.)
+
+## Examples
+
+### Correct Usage
+
+-   Creating a new `.md` file in `subsystems/<SubSystem>/docs/processes/` following the PDD template.
+-   Clearly defining inputs, outputs, and steps for a process.
+-   Specifying Mycelium topics used or events published/subscribed to.
+
+### Incorrect Usage
+
+-   Creating process documentation without adhering to the standard PDD structure.
+-   Leaving critical sections like Inputs/Outputs or Steps undefined.
+-   Failing to document Mycelium integration points.
+
+**Use the standard PDD format for all process documentation.**
+
 **Version:** 1.0
 **Version:** 1.1.0
 

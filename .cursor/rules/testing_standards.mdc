@@ -1,13 +1,72 @@
 ---
-description:
-globs:
+description: (Describe rule purpose - Standards for testing within the EGOS project, covering unit, integration, and end-to-end tests)
+globs: ["**/tests/**/*.py"]
 alwaysApply: true
 ---
----
-description: Define testing standards and best practices for EGOS.
-globs: ["tests/**/*.py", "**/test_*.py"]
-alwaysApply: true # Essential for code quality
----
+# Testing Standards (KOIOS Standard)
+
+## Rule
+
+(To be defined - Specify use of pytest, required coverage levels, test structure (e.g., Arrange-Act-Assert), mocking practices, and integration with CI/CD.)
+
+## Rationale
+
+(To be defined - Ensures code reliability, prevents regressions, facilitates refactoring, and validates functionality against requirements.)
+
+## Examples
+
+### Correct Usage (Unit Test Example)
+
+```python
+import pytest
+from subsystems.MY_SUBSYSTEM.core.calculator import add
+
+def test_add_positive_numbers():
+    # Arrange
+    num1 = 5
+    num2 = 10
+    expected = 15
+
+    # Act
+    result = add(num1, num2)
+
+    # Assert
+    assert result == expected
+
+def test_add_negative_number():
+    # Arrange
+    num1 = -5
+    num2 = 10
+    expected = 5
+
+    # Act
+    result = add(num1, num2)
+
+    # Assert
+    assert result == expected
+
+@pytest.mark.parametrize("num1, num2, expected", [
+    (0, 0, 0),
+    (100, -100, 0),
+    (-5, -5, -10)
+])
+def test_add_various_numbers(num1, num2, expected):
+    # Arrange (parameters)
+    # Act
+    result = add(num1, num2)
+    # Assert
+    assert result == expected
+
+```
+
+### Incorrect Usage
+
+-   Writing tests without clear Arrange-Act-Assert sections.
+-   Tests that depend on external services without proper mocking.
+-   Large, complex tests covering too much functionality (should be broken down).
+-   Ignoring failing tests or low test coverage.
+
+**Write comprehensive tests using pytest and follow best practices.**
 
 # Testing Standards & Best Practices (HARMONY/KOIOS Standard)
 

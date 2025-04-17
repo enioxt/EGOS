@@ -1,8 +1,34 @@
 ---
-description: 
-globs: 
+description: Process for capturing and disseminating lessons learned during the EGOS project
+globs: [] # Applies conceptually
 alwaysApply: true
 ---
+
+# Lessons Learned Process (KOIOS Standard)
+
+## Rule
+
+Process for documenting insights, failures, successes, and improvements encountered during development, reviews, or incidents.
+
+## Rationale
+
+Emphasizes continuous improvement, knowledge sharing, preventing repeated mistakes, and refining processes.
+
+## Examples
+
+### Correct Usage
+
+-   Documenting a root cause analysis after a deployment failure in a dedicated `lessons_learned/<YYYY-MM-DD>-<topic>.md` file.
+-   Adding a key insight from a code review to a relevant section in the knowledge base.
+-   Updating a standard (`.mdc` rule) based on a learned best practice.
+
+### Incorrect Usage
+
+-   Not documenting significant learnings.
+-   Keeping lessons learned siloed within a team or individual.
+-   Failing to integrate lessons into actionable process improvements.
+
+**Capture and share lessons learned to foster continuous improvement.**
 
 # Lessons Learned (Internal Knowledge Base)
 

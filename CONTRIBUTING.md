@@ -47,14 +47,14 @@ Use GitHub Issues to suggest enhancements. Provide:
     git clone <your-fork-url>
     cd Eva-Guarani-EGOS
     ```
-3.  **Set Up Environment:** Follow the [Installation steps in the README](README.md#installation).
+3.  **Set Up Environment:** Follow the [Installation steps in the main project README.md](../../README.md#installation). Ensure all dependencies are correctly installed.
 4.  **Create a Branch:** Create a new branch for your feature or bugfix:
     ```bash
     git checkout -b <branch-name>
     # Examples: feature/add-atlas-mermaid-export, fix/koios-logger-bug
     ```
 5.  **Make Changes:** Implement your code or documentation changes.
-6.  **Follow Standards:** Adhere to the KOIOS standards for code style, naming, logging, and error handling. Refer to relevant `.mdc` rules or documentation in `docs/STANDARDS_*.md`. **When creating or modifying core AI prompts, document them using the [PDD Template](docs/templates/PDD_Template.md).**
+6.  **Follow Standards:** Adhere to the **KOIOS** standards for code style, naming, logging, error handling, and documentation. Refer to the primary [KOIOS Standards Documentation](docs/core_materials/standards/README.md) and specific rules in `.cursor/rules/` or `docs/core_materials/standards/`. **When creating or modifying core AI prompts, document them using the [PDD Template](docs/templates/PDD_Template.md).**
 7.  **Write/Update Tests:** Ensure your changes are covered by unit tests. Aim to maintain or increase test coverage. Run tests using the provided PowerShell scripts (e.g., `.\test_<subsystem>.ps1 -Coverage`).
 8.  **Commit Changes:** Use clear and descriptive commit messages following the Conventional Commits format (see `commit_messages.mdc` rule). Reference related issues (e.g., `feat: Add Mermaid export to ATLASCore (closes #42)`).
     ```bash
@@ -71,6 +71,16 @@ Use GitHub Issues to suggest enhancements. Provide:
     *   Explain the changes and the reasoning behind them.
     *   Ensure all automated checks (CI/CD, linters - if configured) pass.
 11. **Code Review:** Project maintainers will review your PR. Be responsive to feedback and make necessary adjustments.
+
+## AI Collaboration Workflow
+
+EGOS leverages AI coding assistants (like Cascade) to accelerate development. When collaborating with AI:
+
+*   **Follow Guidelines:** Adhere strictly to the [AI Collaboration Guidelines](.cursor/rules/ai_collaboration_guidelines.mdc).
+*   **Human Review MANDATORY:** All AI-generated output (code, documentation, plans, tests) **MUST** be reviewed and verified by a human developer. The developer retains full responsibility for the final committed code.
+*   **Handover Standards:** Use the [AI Handover Standard](.cursor/rules/ai_handover_standard.mdc) when transferring context between sessions or agents.
+*   **Clarity:** Provide clear, concise instructions and context to the AI.
+*   **Verification:** Treat AI suggestions as proposals; verify their correctness, security, and alignment with project standards before integration.
 
 ## Standard Commit & Push Workflow (Main Branch)
 

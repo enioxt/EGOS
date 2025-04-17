@@ -1,15 +1,9 @@
 ---
-description:
-globs:
-alwaysApply: true
----
----
-description: Guidelines for logging AI interactions (e.g., MCPs, CORUJA) within EGOS.
+description: (Describe rule purpose - Guidelines for comprehensive logging of AI interactions)
 globs: ["**/mcp/*.py", "**/core/coruja_*.py", "**/interfaces/ai_*.py"]
 alwaysApply: false
 ---
-
-# AI Interaction Logging Standards (KOIOS & Future Opik Integration)
+# AI Interaction Logging Standard (KOIOS Standard)
 
 ## Rule
 
@@ -36,7 +30,9 @@ Detailed logging of AI interactions is **crucial** for:
 *   **Optimization:** Analyzing prompt effectiveness and identifying areas for improvement.
 *   **Future Integration:** Preparing for potential integration with specialized AI tracing and evaluation platforms like Comet Opik (See Roadmap Item: KOIOS - Integration Points).
 
-## Example (Conceptual - within an MCP handler)
+## Examples
+
+### Correct Usage
 
 ```python
 from koios.logger import KoiosLogger
@@ -82,6 +78,18 @@ async def handle_request(payload: dict):
         )
         # Handle error appropriately
         raise
+```
+
+### Incorrect Usage
+
+```python
+# Missing structured logging
+print("Calling AI...")
+response = call_ai("Summarize")
+print(f"Got response: {response[:50]}...")
+
+# Missing key context in logs
+logger.info("AI call done.") # Lacks model, task context, cost etc.
 ```
 
 **Thoroughly log all AI interaction details (prompts, responses, context) to facilitate debugging, evaluation, and potential future integration with specialized tools like Comet Opik.**

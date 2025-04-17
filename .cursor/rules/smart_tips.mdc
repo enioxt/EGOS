@@ -1,0 +1,178 @@
+---
+description: (Describe rule purpose - Collection of helpful tips and tricks for working within the EGOS ecosystem)
+globs: [] # Applies conceptually
+alwaysApply: true
+---
+# Smart Tips for EGOS (KOIOS Standard)
+
+## Rule
+
+Refer to these tips for efficient and effective development within the EGOS framework. Contribute new tips as they are discovered.
+
+## Rationale
+
+(To be defined - Emphasizes knowledge sharing, efficiency, and leveraging best practices discovered by the team.)
+
+## Objective:
+
+Enrich the user experience with optional, contextualized tips based on interaction history and best practices, fostering continuous learning and system improvement.
+
+## Rules:
+
+1.  **Contextual Offerings:** After successfully completing a primary task, analyze the context, user history, and KOIOS standards to identify opportunities for relevant, optional suggestions or improvements.
+2.  **Clarity & Actionability:** Present tips concisely and clearly. Ensure they suggest a concrete, understandable action or point of consideration.
+3.  **Identification:** Clearly label tips as optional using phrasing like `(Optional Tip):`, `(Optional but recommended):`, or `(Bonus Tip):`.
+4.  **Relevance:** Ensure tips are directly related to the completed task or the user's current workflow/context. Avoid random or irrelevant suggestions.
+5.  **Non-Intrusive:** Offer tips as helpful additions, not requirements. The user is free to disregard them without consequence.
+6.  **Timeliness:** Offer tips immediately after task completion when the context is fresh, not later in the conversation.
+7.  **Progressive Learning:** Focus on immediate next-level knowledge rather than advanced concepts that may overwhelm.
+8.  **Auto-Implementation:** When a tip is clearly beneficial and straightforward (like adding documentation links or minor improvements), implement it directly *only* if explicitly authorized by the user.
+9.  **Tip Categories:** When possible, align tips with one of the defined categories (Development, Documentation, KOIOS Standards, Security, Performance, User Experience).
+10. **(Future - KOIOS/CRONOS):** Log offered tips and user uptake (if possible to determine) to analyze effectiveness and potentially personalize future suggestions.
+
+## Tip Categories
+
+### Development Tips
+*   Code improvements (readability, maintainability)
+*   Testing approaches
+*   Design pattern suggestions
+*   Error handling recommendations
+
+### Documentation Tips
+*   Docstring improvements
+*   README updates
+*   Cross-referencing opportunities
+*   Explanatory comment recommendations
+
+### KOIOS Standards Tips
+*   Naming convention alignment
+*   Directory structure recommendations
+*   Logging practice improvements
+*   Metadata format optimization
+
+### Security Tips
+*   Data validation suggestions
+*   PII handling improvements
+*   Input sanitization opportunities
+*   Authentication/authorization considerations
+
+### Performance Tips
+*   Optimization suggestions
+*   Memory management improvements
+*   Caching opportunities
+*   Algorithmic alternatives
+
+### User Experience Tips
+*   Error messaging improvements
+*   CLI interface enhancements
+*   Help text recommendations
+*   Configuration simplifications
+
+## Examples:
+
+> "[Development] Directory moved successfully. (Optional Tip): Consider renaming the folder 'CrewAI' to 'crewai' (lowercase) for consistent project naming conventions."
+
+> "[Security] ETHIK checker implemented successfully. (Bonus Tip): You could enhance this implementation by adding regex patterns for common Brazilian CPF formats (`###.###.###-##`) to improve PII detection for your target region."
+
+> "[Development] Test cases written successfully. (Optional Tip): Consider adding parameterized tests with `pytest.mark.parametrize` to test multiple input scenarios without duplicating test code."
+
+> "[KOIOS Standards] CORUJA handler created. (Optional but recommended): When using `KoiosLogger` in AI model interfaces, consider adding logging for both prompts sent to and responses received from external AI services for better debugging and auditability."
+
+## Common Tips by Subsystem
+
+### CRONOS
+*   Use `KoiosLogger` instead of standard logging for system state captures.
+*   Consider adding backup verification steps for critical operations.
+*   Use absolute paths with proper Windows formatting (`C:\Eva Guarani EGOS\`).
+*   Implement retention policies for data with temporal relevance.
+*   Add checksums and integrity verification for backup files.
+*   Consider implementing a backup rotation strategy based on importance.
+*   Add backup status notifications to the Mycelium network.
+
+### ETHIK
+*   Add regex patterns for Brazilian-specific PII (CPF, RG, etc.).
+*   Consider implementing context-aware filtering based on content purpose.
+*   Balance strictness with usability in content moderation.
+*   Include rationale with any content rejection for better user experience.
+*   Implement tiered PII detection (low, medium, high sensitivity).
+*   Consider adding sanitization options beyond simple detection.
+*   Add an audit log for ETHIK decisions with appropriate privacy controls.
+*   Implement optional explanations for content decisions.
+
+### KOIOS
+*   Keep documentation synchronized with implementation.
+*   Use standardized error codes across the system.
+*   Consider adding context-specific search capabilities to documentation.
+*   Maintain consistent formatting in all documentation files.
+*   Implement versioning for critical documentation components.
+*   Consider adding automatic documentation verification.
+*   Use documentation templates for standardization.
+*   Add implementation guidance with examples in docstrings.
+
+### CORUJA
+*   Log both prompts and responses for AI interactions.
+*   Implement temperature controls for deterministic vs. creative outputs.
+*   Consider implementing prompt templates with standardized sections.
+*   Use structured output parsers for consistent handling of AI responses.
+*   Add monitoring mechanisms for AI interactions.
+*   Implement retry logic for transient AI service failures.
+*   Consider adding a local fallback for critical AI functions.
+*   Implement response validation against expected schemas.
+*   Consider adding cost tracking for external AI service calls.
+
+### NEXUS
+*   Consider dependency visualization for complex module relationships.
+*   Use consistent module interface patterns across the system.
+*   Implement lazy loading for performance-critical components.
+*   Add clear boundary documentation between subsystems.
+*   Consider implementing a module registration system.
+*   Add versioning for module interfaces.
+*   Implement compatibility checking between modules.
+*   Consider a unified error handling approach across modules.
+
+### ATLAS
+*   Use standardized mapping conventions for all system visualizations.
+*   Implement drill-down capabilities for complex system maps.
+*   Consider adding timeline views for evolutionary changes.
+*   Use consistent color coding schemes across all visualizations.
+*   Add export capabilities for maps in various formats.
+*   Consider implementing filter controls for complex visualizations.
+*   Add documentation annotations directly on visualizations.
+*   Implement linking between visualizations and code components.
+
+### MYCELIUM
+*   Implement standardized message serialization.
+*   Add retry mechanisms for message delivery.
+*   Consider implementing message prioritization.
+*   Use clearly defined topic naming conventions.
+*   Implement security controls for sensitive message topics.
+*   Add monitoring for message flow and performance.
+*   Consider implementing message versioning.
+*   Design for backward compatibility in message formats.
+
+## Implementation Guidance:
+
+*   Include no more than one tip per completed task to avoid overwhelming the user.
+*   For coding suggestions, consider the user's demonstrated skill level and EGOS knowledge.
+*   Prioritize tips that align with KOIOS standards and project goals.
+*   When applicable, reference specific documentation or subsystem features where the user can learn more.
+*   Use tip categories consistently to help users identify areas for improvement.
+*   For complex tips, include a small example or snippet when possible.
+*   Always respect the user's decision to ignore or implement tips.
+*   Use progressive disclosure - offer simple tips first before more advanced ones.
+
+### Tip: Leveraging Mycelium for Discovery
+Instead of hardcoding service locations, query Mycelium for available nodes offering the required capability.
+
+```python
+# Example: Find nodes capable of 'text_summarization'
+async def find_summarizers(mycelium_interface):
+    nodes = await mycelium_interface.discover_nodes(capability="text_summarization")
+    return nodes
+```
+
+### Tip: Using KoiosLogger Context
+Add structured context to your logs for better filtering and analysis in tools like Datadog or Grafana.
+
+```python
+logger.info("Task completed", extra={"task_id": task.id, "user_id": user.id, "duration_ms": 55})

@@ -1,8 +1,39 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: (Describe rule purpose - Identification and implementation of quick wins or simple improvements in EGOS workflows)
+globs: [] # Applies conceptually
+alwaysApply: false
+tags: [workflow, koios, continuous_improvement]
+priority: 2
+version: 1.0.0
 ---
+
+# Workflow Quick Wins Standard (KOIOS Standard)
+
+## Rule
+
+(To be defined - Define the process for identifying, documenting (e.g., in ROADMAP.md with a specific tag), and implementing simple, high-impact improvements to development or operational workflows.)
+
+## Rationale
+
+(To be defined - Promotes continuous improvement, efficiency, and reduces friction in daily tasks by addressing low-hanging fruit.)
+
+## Examples
+
+### Correct Usage
+
+-   Identifying a repetitive manual step and suggesting a simple script to automate it.
+-   Adding a helpful alias or command to the project's setup guide.
+-   Improving the clarity of a frequently used template.
+-   Documenting the quick win with a clear description and justification in the `ROADMAP.md`.
+
+### Incorrect Usage
+
+-   Proposing large refactors as 'quick wins'.
+-   Implementing changes without documenting them.
+-   Ignoring small workflow frictions.
+
+**Actively look for and implement small workflow improvements.**
+
 ---
 description: Defines the 'Quick Wins First' workflow for integrating analysis insights.
 globs: [] # Applies conceptually to workflow

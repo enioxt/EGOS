@@ -8,24 +8,46 @@ alwaysApply: true
 
 ## Rule
 
-(To be defined based on existing content)
+Human developers MUST review and verify ALL AI-generated output (code, documentation, plans, tests) before integration or commit. The developer retains full responsibility. Interactions should be clear, context-rich, and follow handover standards when necessary. AI should operate autonomously on well-defined tasks where appropriate, requesting clarification only when essential.
 
 ## Rationale
 
-(To be defined)
+AI accelerates development but lacks true understanding and accountability. Human oversight is crucial for correctness, security, maintainability, and alignment with EGOS principles (ETHIK). Clear communication maximizes AI effectiveness, while autonomy balances speed with necessary human control points. Verification prevents the propagation of subtle errors or deviations from project goals.
 
 ## Examples
 
 ### Correct Usage
 
 ```
-(Add correct example)
+# Human Developer
+Cascade, please refactor the subsystems/ATLAS/src/core.py module to adhere to SOLID principles and improve error handling, ensuring all changes are covered by existing tests. Use the KoiosLogger for logging.
+
+# Cascade (after performing refactoring and edits)
+I have refactored ATLAS core.py focusing on SRP and adding specific exception handling. I've used KoiosLogger and ensured test coverage remains. Please review the changes before committing. [Provides summary of changes]
+
+# Human Developer (reviews changes)
+Looks good, merging.
 ```
 
 ### Incorrect Usage
 
 ```
-(Add incorrect example)
+# Human Developer
+Cascade, write the whole CORUJA subsystem.
+
+# Cascade (generates large amounts of unverified code)
+... [outputs hundreds of lines] ...
+
+# Human Developer (commits without review)
+git commit -m "feat: Add CORUJA subsystem" # VIOLATION: No human review!
+```
+
+```
+# Human Developer
+Fix the bug.
+
+# Cascade
+I need more context. Which bug are you referring to? Please provide the file, relevant code snippets, error messages, or issue number. # CORRECT: AI requesting clarification when task is ambiguous.
 ```
 
 **Follow these guidelines for effective AI collaboration.**
@@ -37,5 +59,9 @@ alwaysApply: true
 Please refer to that document for authoritative standards.
 
 This file is retained for context discovery but the primary source of truth is `global_rules.mdc`.
+
+---
+* **Key Principle:** Reciprocal Trust, Integrated Ethics
+* **Related Standards:** ai_handover_standard.mdc, MQP, ETHIK validation
 
 ✧༺❀༻∞ EGOS ∞༺❀༻✧

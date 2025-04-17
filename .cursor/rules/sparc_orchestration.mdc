@@ -1,7 +1,7 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: (Describe rule purpose - Standards and guidelines for SPARC orchestration within EGOS, likely involving CORUJA)
+globs: ["**/coruja_*.py", "**/sparc_*.py"]
+alwaysApply: false
 ---
 ---
 description: Guidelines for implementing SPARC methodology within the EGOS ecosystem
@@ -89,88 +89,85 @@ SPARC task coordination should follow these Mycelium topic patterns:
 - Task Delegation: `sparc.task.delegate.<target-subsystem>`
 - Task Results: `sparc.task.results.<task-id>`
 
-### Implementation Examples
+## Examples
 
-#### Correct Task Delegation (ATLAS → CORUJA → HARMONY)
+### Correct Usage
 
 ```python
-# ATLAS phase - Specification & Architecture
-# Clear problem statement with acceptance criteria
-specification = {
-    "id": "auth-module-2025Q2",
-    "type": "specification",
-    "title": "User Authentication Module",
-    "description": "Implement secure authentication system for EGOS dashboard",
+# Conceptual Example in CORUJA
+from core.mycelium import NatsMyceliumInterface
+from subsystems.SPARC.schemas import SparcTaskRequest, SparcTaskOutcome
+
+class Orchestrator:
+    def __init__(self):
+        self.mycelium = NatsMyceliumInterface("CORUJA")
+
+    async def kickoff_analysis_task(self, data_source: str):
+        task_request = SparcTaskRequest(
+            task_type="data_analysis",
+            objective="Identify anomalies in dataset",
+            input_data={"source": data_source},
+            steps=["sense_data", "plan_analysis", "act_calculate", "reflect_results"]
+        )
+        await self.mycelium.publish(
+            "request.sparc.new_task",
+            task_request.model_dump_json()
+        )
+        # ... logic to monitor task progress via outcome messages ...
+
+```
+
+### Incorrect Usage
+
+-   Implementing complex workflows synchronously within a single agent.
+-   Using unstructured dictionaries instead of Pydantic schemas for task messages.
+-   Failing to publish outcome/status messages for long-running tasks.
+-   Not leveraging Mycelium for task distribution.
+
+**Use the SPARC framework and Mycelium for orchestrating complex tasks.**
+
+## Implementation Guidance
+
+### Task Definition Format
+
+When defining tasks within the SPARC framework, use the following format:
+
+```python
+task = {
+    "id": "unique-task-identifier",
+    "type": "specification|architecture|implementation|testing|security|documentation",
+    "title": "Brief task description",
+    "description": "Detailed task requirements and context",
     "acceptance_criteria": [
-        "Support email/password authentication",
-        "Include rate limiting for failed attempts",
-        "Log all authentication attempts (via KOIOS)",
-        "Follow ETHIK validation principles"
+        "Criterion 1",
+        "Criterion 2",
+        "..."
     ],
-    "interfaces": {
-        "input": {"username": "str", "password": "str"},
-        "output": {"success": "bool", "token": "Optional[str]", "error": "Optional[str]"}
+    "inputs": {
+        "input1": "value1",
+        "input2": "value2"
     },
+    "dependencies": [
+        "dependency-task-id-1",
+        "dependency-task-id-2"
+    ],
     "metadata": {
-        "priority": "high",
-        "estimated_complexity": 3,
-        "owner": "ATLAS"
+        "priority": "high|medium|low",
+        "estimated_complexity": 1-5,
+        "owner": "subsystem-name"
     }
 }
-
-# NEXUS phase - Architecture
-architecture = {
-    "id": "auth-module-arch-2025Q2", 
-    "parent_id": "auth-module-2025Q2",
-    "type": "architecture",
-    "components": [
-        {
-            "name": "AuthenticationService",
-            "responsibility": "Validate credentials, generate tokens",
-            "interfaces": ["IAuthenticator", "ITokenGenerator"],
-            "dependencies": ["KoiosLogger", "ConfigManager"]
-        },
-        {
-            "name": "RateLimiter",
-            "responsibility": "Track and limit authentication attempts",
-            "interfaces": ["IRateLimiter"],
-            "dependencies": ["RedisClient", "KoiosLogger"]
-        }
-    ],
-    "data_flow": [
-        "Request → InputValidator → RateLimiter → AuthenticationService → TokenGenerator → Response"
-    ],
-    "security_considerations": [
-        "Password hashing with Argon2id",
-        "Token expiration and rotation",
-        "IP-based and account-based rate limiting"
-    ]
-}
-
-# CORUJA phase - Implementation
-# Code that follows the specification with proper modularization
-
-# HARMONY phase - Testing
-# Tests that validate the implementation against specification
 ```
 
-#### Incorrect Practices
+### Mycelium Topic Structure for SPARC Tasks
 
-```python
-# ❌ Monolithic implementation (violates modularity)
-class AuthSystem:
-    def __init__(self):
-        self.db_connection = "hardcoded-connection-string"  # ❌ Hardcoded configuration
-        self.secret_key = "super-secret-key"  # ❌ Embedded secret
-        
-    def do_everything(self, username, password):  # ❌ No separation of concerns
-        # 200+ lines of code handling validation, auth, tokens, rate limiting
-        # ❌ No clear interfaces or error handling
-        pass
+SPARC task coordination should follow these Mycelium topic patterns:
 
-# ❌ Missing clear specification
-# ❌ No tests or validation criteria
-```
+- Task Creation: `sparc.task.create.<subsystem>`
+- Task Status Updates: `sparc.task.status.<task-id>`
+- Task Completion: `sparc.task.complete.<task-id>`
+- Task Delegation: `sparc.task.delegate.<target-subsystem>`
+- Task Results: `sparc.task.results.<task-id>`
 
 ## Rationale
 

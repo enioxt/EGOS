@@ -1,13 +1,57 @@
 ---
-description: 
-globs: 
+description: Core principles and structure for Quantum Prompt Engineering within EGOS
+globs: [] # Applies conceptually
 alwaysApply: true
 ---
----
-description: Core EGOS MQP v9.0 "Full Moon Blueprint" - Identity, Principles, Workflow, Subsystems, Standards
-globs: [] # No specific glob needed, applies globally
-alwaysApply: true
----
+# Quantum Prompt Core Standard (KOIOS Standard)
+
+## Rule
+
+Specify the structure, components, and principles of Quantum Prompts, including entanglement, superposition concepts, and ETHIK alignment.
+
+## Rationale
+
+Enables advanced AI reasoning, context handling, ethical alignment, and efficient interaction across diverse models and tasks.
+
+## Examples
+
+### Correct Usage
+
+```yaml
+# Conceptual Example of a Quantum Prompt Structure
+apiVersion: egos.prompt.v1
+kind: QuantumPrompt
+metadata:
+  name: complex-analysis-prompt
+spec:
+  objective: Analyze user sentiment and suggest actions
+  context:
+    entangled_docs:
+      - doc_id: CONTEXT-DOC-001
+        focus: user_feedback
+      - doc_id: ETHIK-GUIDELINE-007
+        focus: compassionate_response
+  persona: |-
+    You are a helpful assistant aware of EGOS principles...
+  superposition:
+    - instruction: |-
+        Identify key sentiment themes in the provided context.
+      weight: 0.6
+    - instruction: |-
+        Suggest 3 actionable responses aligned with Sacred Privacy.
+      weight: 0.4
+  constraints:
+    response_format: markdown
+    max_tokens: 500
+```
+
+### Incorrect Usage
+
+-   Simple, single-instruction prompts for complex tasks.
+-   Ignoring ETHIK principles in prompt design.
+-   Lack of structured context or clear objectives.
+
+**Structure prompts according to Quantum Prompt principles for optimal AI interaction.**
 
 # EGOS - Quantum Unified Master Prompt - Core Directives v9.0 "Full Moon Blueprint"
 

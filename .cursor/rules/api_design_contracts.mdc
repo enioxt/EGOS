@@ -1,9 +1,9 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: Standards for designing API contracts, especially inter-subsystem communication
+globs: ["**/*.py"]
+alwaysApply: false
 ---
-# API & Message Contract Standards (KOIOS v1.1.0)
+# API Design and Contracts Standard (KOIOS Standard)
 
 ## 1. Purpose
 
@@ -51,7 +51,37 @@ To ensure reliable, maintainable, and understandable communication between EGOS 
 *   **Testability:** Simplifies integration testing and mocking.
 *   **Orchestration:** Structured delegation/outcome messages are essential for complex workflow management (like SPARC by CORUJA), enabling better tracking, error handling, and synthesis of results.
 
-## 4. Example (Conceptual SPARC Task)
+## 4. Examples
+
+### Correct Usage
+
+```python
+# Example using Pydantic for message contracts
+from pydantic import BaseModel
+
+class TaskUpdateRequest(BaseModel):
+    task_id: str
+    new_status: str
+    details: Optional[str] = None
+
+# Example Mycelium topic
+# topic = "event.sparc.task.status_changed"
+```
+
+### Incorrect Usage
+
+```python
+# Using ambiguous dictionaries instead of schemas
+def process_update(data): # What's in data?
+    task_id = data['id']
+    status = data['stat']
+    # ... potential KeyError or type issues
+
+# Vague topic name
+# topic = "updates"
+```
+
+### Conceptual SPARC Task
 
 ```python
 # --- In subsystems/MYCELIUM/schemas/sparc_tasks.py ---
@@ -124,4 +154,4 @@ class SparcTaskOutcomePayloadV1(BaseModel):
 #         # Potentially publish failure outcome
 ```
 
-**Enforce clear, documented, and schema-validated contracts, including structured delegation and outcome reporting, for all inter-subsystem communication.**
+**Design clear, explicit API contracts for robust communication.**
