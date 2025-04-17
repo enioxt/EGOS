@@ -7,6 +7,15 @@
 
 NEXUS (Neural Evolution and Xenial Unified System) is the modular analysis engine for the EVA & GUARANI Operational System (EGOS). Its primary responsibility is to analyze source code, understand its structure, map dependencies between components, calculate relevant metrics (like complexity), and provide suggestions for improvement.
 
+## Role in Dynamic Roadmap Sync & EGOS Interconnection
+
+NEXUS is responsible for:
+- Analyzing dependencies and integration points for the roadmap sync and subsystem interconnection.
+- Supporting refactoring efforts to ensure modular, maintainable integration.
+- Collaborating with KOIOS, MYCELIUM, and other subsystems to optimize the architecture and performance of the sync mechanism.
+
+Cross-reference: See ROADMAP.md sections "Dynamic Roadmap Sync & Mycelium Interconnection" and "Technical Implementation Plan: Dynamic Roadmap Sync (Phase 1)".
+
 ## Core Components
 
 *   **`NEXUSCore` (`core/nexus_core.py`):** Implements the core analysis logic. It uses AST (Abstract Syntax Tree) parsing (`core/ast_visitor.py`) to inspect Python code. Key functions include:

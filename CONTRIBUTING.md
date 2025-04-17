@@ -20,6 +20,19 @@ There are many ways to contribute:
 *   **Improving Documentation:** Enhance READMEs, add docstrings, write tutorials, or correct typos.
 *   **Submitting Feedback:** Share your experience using EGOS and suggest improvements.
 
+## Using the Website Roadmap
+
+The primary way to discover, understand, and contribute to EGOS tasks is through the interactive roadmap on the [official website](https://enioxt.github.io/egos) (or your local deployment). On the roadmap page, you can:
+
+- Browse all current, planned, and completed tasks.
+- Click on any task to open a detailed modal with:
+  - Contribution instructions
+  - Acceptance criteria
+  - Links to the relevant GitHub code, issues, or discussions
+- Follow the instructions in each modal to start contributing.
+
+This modular approach ensures clarity, accessibility, and alignment with EGOS standards. Always refer to the roadmap first before opening issues or submitting pull requests.
+
 ## Reporting Bugs
 
 Before creating a bug report, please check existing issues to see if someone has already reported it. If not, create a new issue and include:
