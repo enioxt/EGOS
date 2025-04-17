@@ -184,6 +184,7 @@
   * [Planned] **Task 2.2: Prioritized Content Creation/Revision:** Focus on documenting critical subsystems/features relevant to initial LLM support. Develop clear natural language descriptions, practical examples, diagrams (update/create), and relevant code snippets (Ref: LLM Integration Plan IV.B).
   * [Planned] **Task 2.3: Structure & Searchability:** Organize documentation logically (e.g., by subsystem) and ensure the chosen format is machine-parsable and ideally searchable (prep for RAG).
   * [Planned] **Task 2.4: Refine Website Standards:** Review and potentially further refine the enhanced `website_standards.mdc` (v1.1.0) based on feedback from initial website implementation tasks (Phase W1/W2).
+  * [Planned] **[KOIOS-DOC-QPG-01]** **Document Quantum Prompt Generator:** Create documentation covering the QPG component's architecture, frontend usage, backend API interaction (if applicable), configuration, and contribution guidelines. (`MEDIUM`, Phase 2) `Status: Planned` `Subsystems: [KOIOS, WEBSITE]` `Principles: Comprehensive Documentation` `depends_on: [WEBSITE-QPG-IMPL-01]`
 * **Phase 3: Alignment & Maintenance Process (Q3 2025)**
   * [Planned] **Task 3.1: Code/Doc Alignment:** Verify documentation accurately reflects current implementation logic, interfaces, and KOIOS standards. Update docstrings/comments (`python_documentation.mdc`).
   * [Planned] **Task 3.2: Establish Maintenance Workflow:** Integrate documentation updates into the standard development lifecycle. Assign ownership.
@@ -403,3 +404,27 @@
 
 * [Planned] **[WEBSITE-GENKI-DAMA]** **Genki Dama Page Implementation:** Design and implement the "Genki Dama" page featuring specific artwork, clear calls for collaboration/contribution, and donation addresses (e.g., Solana: `[Your Solana Address]`, BTC: `[Your BTC Address]`, EVM: `[Your EVM Address]`). Ensure minimal text and focus on artistic/mysterious appeal. (`HIGH`)
 * [Planned] **[WEB/ETHIK][WEBSITE-DONATION-INTEGRATION]** Securely integrate and test donation mechanisms for Genki Dama page (`HIGH`), `depends_on: [WEBSITE-GENKI-DAMA]`
+
+```
+{{ ... }}
+* **Phase 2: Content Standardization & Enrichment (Q2/Q3 2025)**
+  * [Planned] **Task 2.1: Define Standards:** Establish documentation templates, style guide, and definitive format (e.g., Markdown in repo, potentially feeding a tool like MkDocs).
+  * [Planned] **Task 2.2: Prioritized Content Creation/Revision:** Focus on documenting critical subsystems/features relevant to initial LLM support. Develop clear natural language descriptions, practical examples, diagrams (update/create), and relevant code snippets (Ref: LLM Integration Plan IV.B).
+  * [Planned] **Task 2.3: Structure & Searchability:** Organize documentation logically (e.g., by subsystem) and ensure the chosen format is machine-parsable and ideally searchable (prep for RAG).
+  * [Planned] **Task 2.4: Refine Website Standards:** Review and potentially further refine the enhanced `website_standards.mdc` (v1.1.0) based on feedback from initial website implementation tasks (Phase W1/W2).
+  * [Planned] **[KOIOS-DOC-QPG-01]** **Document Quantum Prompt Generator:** Create documentation covering the QPG component's architecture, frontend usage, backend API interaction (if applicable), configuration, and contribution guidelines. (`MEDIUM`, Phase 2) `Status: Planned` `Subsystems: [KOIOS, WEBSITE]` `Principles: Comprehensive Documentation` `depends_on: [WEBSITE-QPG-IMPL-01]`
+* **Phase 3: Alignment & Maintenance Process (Q3 2025)**
+{{ ... }}
+
+* **Phase W2: Core Functionality & Initial LLM (Status: Planned - Sequential)**
+  * **Goal:** Implement core interactive features and integrate the initial LLM assistant.
+  * `[Planned]` **Task W2-1:** Implement Task Contribution Modal logic (connect to backend/data source). (`HIGH`)
+  * `[Planned]` **Task W2-2:** Develop Backend API Endpoint for LLM interaction (proxy to OpenRouter/fallback). (`HIGH`)
+  * `[Planned]` **Task W2-3:** Implement Basic Chat UI Component (`ChatWindow`, `MessageInput`). (`HIGH`)
+  * `[Planned]` **Task W2-4:** Integrate Chat UI with Backend API. (`HIGH`)
+  * `[Planned]` **Task W2-5:** Implement Context Injection (basic RAG using documentation). (`MEDIUM`)
+  * `[Planned]` **Task W2-6:** Implement ETHIK Token Display (read-only initially). (`MEDIUM`)
+  * `[Planned]` **[WEBSITE-QPG-IMPL-01]** **Implement Quantum Prompt Generator UI:** Scaffold and implement the QPG component within the website interface (React/Next.js). Includes basic UI (input, output display), state management, and initial hookup points for backend integration. (`HIGH`, Phase W2) `Status: Planned` `Subsystems: [WEBSITE, CORUJA]` `Principles: Universal Accessibility, Reciprocal Trust` `depends_on: [MVP-DEFINE-QPG]`
+
+* **Phase W3: Advanced Features & Web3 Integration (Status: Planned - Sequential)**
+{{ ... }}
