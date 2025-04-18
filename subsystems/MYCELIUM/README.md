@@ -89,4 +89,19 @@ async def run_example_service():
 
 Refer to the detailed protocol design in `docs/protocol_design.md` and the main project `ROADMAP.md` for current priorities.
 
+## Standard Message Schemas
+
+Mycelium promotes standardized communication through Pydantic schemas. Key schemas include:
+
+*   **SPARC Task Messages (`src/schemas/sparc_tasks.py`):**
+    *   Defines the structure for messages related to SPARC task execution, including requests, stage updates, and final results.
+    *   Models include `BaseSparcMessage`, `SparcTaskRequest`, `SparcTaskResult`, `SparcStageUpdate`, along with enums `SparcStage` and `TaskStatus`.
+    *   Ensures consistent data exchange between subsystems involved in task orchestration (e.g., CORUJA, ATLAS).
+
+*(More schemas will be added as the system evolves.)*
+
+## Contributing
+
+Refer to the main EGOS contribution guidelines.
+
 ✧༺❀༻∞ EVA & GUARANI ∞༺❀༻✧
