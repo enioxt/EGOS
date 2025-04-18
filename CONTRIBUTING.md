@@ -101,7 +101,7 @@ feat/roadmap-updates
 
 EGOS leverages AI coding assistants (like Cascade) to accelerate development. When collaborating with AI:
 
-*   **Follow Guidelines:** Adhere strictly to the [AI Collaboration Guidelines](.cursor/rules/ai_collaboration_guidelines.mdc).
+*   **Follow Guidelines:** Adhere strictly to the [AI Collaboration Guidelines](docs/process/human_ai_collaboration_guidelines.md).
 *   **Human Review MANDATORY:** All AI-generated output (code, documentation, plans, tests) **MUST** be reviewed and verified by a human developer. The developer retains full responsibility for the final committed code.
 *   **Handover Standards:** Use the [AI Handover Standard](.cursor/rules/ai_handover_standard.mdc) when transferring context between sessions or agents.
 *   **Clarity:** Provide clear, concise instructions and context to the AI.

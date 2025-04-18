@@ -50,20 +50,40 @@ Refer to the [CONTRIBUTING.md](CONTRIBUTING.md) for more details on the contribu
 
 ---
 
-## subsystems Overview
+## ✨ Features
 
-EGOS is composed of several key subsystems communicating via the **Mycelium Network (facilitating decentralized, event-driven inter-subsystem communication)**:
+*   **Subsystem Architecture:** Modular design based on EGOS principles (ETHIK, KOIOS, NEXUS, etc.).
+*   **AI Collaboration:** Designed for human-AI pair programming and agentic workflows.
+*   **Dynamic Development:** Emphasizes continuous improvement, feedback loops, and systemic propagation.
+*   **Automated Quality Gates:** CI/CD workflows for linting, security scanning, type checking, protocol adherence, and test coverage.
+*   **Interactive Dashboard (`dashboard/streamlit_app.py`)**:
+    *   Visualizes SPARC task flow (supports simulated & **live** data via Mycelium/NATS).
+    *   Displays LLM interaction logs (supports simulated & **live** data via Mycelium/NATS).
+    *   Provides a feedback submission form.
+    *   Shows automated feedback reports (summary, word cloud, top feedback).
+    *   Includes a meta-panel for system transparency (context usage, batch info, heartbeat).
+    *   Supports filtering SPARC tasks by type and status.
+    *   Includes a toggle for switching between simulated and live data streams.
+    *   Displays a Systemic Propagation Log (supports simulated & **live** data via Mycelium/NATS).
+    *   Modular UI structure for maintainability.
+*   **Website (`website/`)**: Public-facing interface (under development).
+*   **Automated Workflows**: CI/CD pipeline for linting, security scanning, type checking, and protocol adherence.
+*   **Comprehensive Documentation:** Following KOIOS standards for processes, architecture, and onboarding.
 
-* **`ATLAS`**: Systemic cartography & visualization.
-* **`NEXUS`**: Modular analysis, dependency tracking & optimization.
-* **`CRONOS`**: Evolutionary preservation, state management & backups **(providing system history integrity)**.
-* **`ETHIK`**: Ethical framework validation, data sanitization, policy enforcement, and privacy preservation **(aiming for verifiable ethical compliance)**.
-* **`HARMONY`**: Cross-platform integration & compatibility layer.
-* **`KOIOS`**: Standardization, logging (including standards for **potentially verifiable logs**), search, documentation, knowledge management, and potentially integrating external data sources (e.g., Oracles) for validation.
-* **`CORUJA`**: AI orchestration, prompt management, complex interaction handling (including multi-step tasks), monitoring, and alignment considerations. Manages **MCPs** like EVA & GUARANI.
-* **`(Future) ETHICHAIN`**: Blockchain concepts for verifiable ethical actions, trust mechanisms, and potential contribution tokenomics (Conceptual).
+---
 
-*Subsystem READMEs (`subsystems/<NAME>/README.md`) contain detailed information about respective modules.*
+## ✨ Current Capabilities (via EGOS AI in Cursor)
+
+The EGOS system, operated primarily through the **EGOS AI assistant (persona: EVA & GUARANI)** within Cursor IDE, currently focuses on:
+
+*   **Codebase Understanding & Navigation (ATLAS):** Mapping dependencies and understanding the project structure to assist development.
+*   **Modular Development & Refactoring (NEXUS):** Analyzing code modularity and suggesting improvements.
+*   **Standard Enforcement (KOIOS):** Applying coding standards, managing documentation templates, ensuring consistent logging (including verifiable logging standards), and potentially validating data integrity.
+*   **Ethical Guideline Application (ETHIK):** Incorporating privacy-preserving checks, policy enforcement, and ethical considerations during development discussions and code generation.
+*   **Context & History Management (CRONOS):** Maintaining awareness of the development process and project evolution across interactions.
+*   **Task Execution & Orchestration (CORUJA):** Performing development tasks, managing complex AI interactions, and applying basic monitoring/alignment principles based on user requests and project context.
+
+Interaction with these capabilities occurs through natural language prompts directed at the **EGOS AI assistant** within the Cursor IDE chat or code context.
 
 ---
 
@@ -71,26 +91,26 @@ EGOS is composed of several key subsystems communicating via the **Mycelium Netw
 
 ### Prerequisites
 
-* **IDE:** **[Cursor IDE](https://cursor.sh/)** (Essential for interacting with EVA & GUARANI)
-* **OS:** Windows (Primary development target)
-* **Python:** 3.9+
-* **Git:** For version control.
-* **PowerShell:** For running test/utility scripts.
+*   **IDE:** **[Cursor IDE](https://cursor.sh/)** (Essential for interacting with EVA & GUARANI)
+*   **OS:** Windows (Primary development target)
+*   **Python:** 3.9+
+*   **Git:** For version control.
+*   **PowerShell:** For running test/utility scripts.
 
 ### Development Environment Setup
 
 Developing EGOS relies heavily on the **Cursor IDE** integrated with the **EGOS AI assistant (persona: EVA & GUARANI)**. Follow these steps to set up your environment:
 
-1. **Clone the repository:**
+1.  **Clone the repository:**
 
-   ```bash
+    ```bash
     git clone https://github.com/enioxt/EVA-e-Guarani-EGOS.git # Replace with your fork if applicable
     cd EVA-e-Guarani-EGOS
-   ```
+    ```
 
-2. **Set up Python Environment:** Create and activate a virtual environment, then install dependencies. This is standard Python practice.
+2.  **Set up Python Environment:** Create and activate a virtual environment, then install dependencies. This is standard Python practice.
 
-   ```bash
+    ```bash
     # Create virtual environment
     python -m venv .venv
     # Activate (Windows PowerShell)
@@ -99,84 +119,24 @@ Developing EGOS relies heavily on the **Cursor IDE** integrated with the **EGOS 
     pip install -r requirements.txt
     ```
 
-3. **Configure Cursor IDE:** Crucially, follow the setup guide in **[cursor_initialization.md](.cursor/cursor_initialization.md)**. This ensures your terminal and environment context work correctly with the EGOS AI assistant.
-4. **Understand Cursor Rules:** Familiarize yourself with the files in **[.cursor/rules/](.cursor/rules/)**. These rules contain essential guidelines (like KOIOS standards, subsystem boundaries, etc.) that the **EGOS AI assistant** uses to assist with development, maintain consistency, and understand the project context. Interacting effectively often involves awareness of these rules.
+3.  **Configure Cursor IDE:** Crucially, follow the setup guide in **[cursor_initialization.md](.cursor/cursor_initialization.md)**. This ensures your terminal and environment context work correctly with the EGOS AI assistant.
+4.  **Understand Cursor Rules:** Familiarize yourself with the files in **[.cursor/rules/](.cursor/rules/)**. These rules contain essential guidelines (like KOIOS standards, subsystem boundaries, etc.) that the **EGOS AI assistant** uses to assist with development, maintain consistency, and understand the project context. Interacting effectively often involves awareness of these rules.
 
 ### Configuration
 
-* While the core system doesn't require extensive manual configuration for *development within Cursor*, specific tasks delegated to the **EGOS AI assistant** might interact with subsystems requiring API keys or settings (e.g., `CORUJA` for external AI model access). These are typically managed via the `config/` directory and referenced in relevant subsystem documentation or Cursor Rules.
+*   While the core system doesn't require extensive manual configuration for *development within Cursor*, specific tasks delegated to the **EGOS AI assistant** might interact with subsystems requiring API keys or settings (e.g., `CORUJA` for external AI model access). These are typically managed via the `config/` directory and referenced in relevant subsystem documentation or Cursor Rules.
 
 ---
 
-## ✨ Current Capabilities (via EGOS AI in Cursor)
+## 🚀 Running the Dashboard
 
-The EGOS system, operated primarily through the **EGOS AI assistant (persona: EVA & GUARANI)** within Cursor IDE, currently focuses on:
+Navigate to the project root directory and run:
 
-* **Codebase Understanding & Navigation (ATLAS):** Mapping dependencies and understanding the project structure to assist development.
-* **Modular Development & Refactoring (NEXUS):** Analyzing code modularity and suggesting improvements.
-* **Standard Enforcement (KOIOS):** Applying coding standards, managing documentation templates, ensuring consistent logging (including verifiable logging standards), and potentially validating data integrity.
-* **Ethical Guideline Application (ETHIK):** Incorporating privacy-preserving checks, policy enforcement, and ethical considerations during development discussions and code generation.
-* **Context & History Management (CRONOS):** Maintaining awareness of the development process and project evolution across interactions.
-* **Task Execution & Orchestration (CORUJA):** Performing development tasks, managing complex AI interactions, and applying basic monitoring/alignment principles based on user requests and project context.
-
-Interaction with these capabilities occurs through natural language prompts directed at the **EGOS AI assistant** within the Cursor IDE chat or code context.
-
----
-
-## 💻 Usage
-
-* The EGOS system is primarily designed as a collection of interconnected services.
-* Core interaction often happens via the **Mycelium Network** message bus.
-* Individual subsystems might offer CLI interfaces or APIs (under development).
-* Refer to specific subsystem documentation (`subsystems/<NAME>/README.md`) for detailed usage instructions.
-
----
-
-## 📚 Key Documentation & Resources
-
-To fully understand the project's philosophy, architecture, and contribution process, please refer to:
-
-* **[Master Quantum Prompt (MQP v9.0 "Full Moon Blueprint")](docs/MQP.md):** The core philosophical and operational blueprint.
-* **[ROADMAP.md](ROADMAP.md):** High-level development plan and phases.
-* **[docs/](docs/):** The main directory for all project documentation, including strategy, methodology, and subsystem details.
-* **[subsystems/](subsystems/):** Explore individual subsystem directories for their specific READMEs and code.
-* **[STRATEGIC_THINKING/](STRATEGIC_THINKING/):** Contains structured prompts, AI-generated analyses, and related research links supporting strategic decision-making.
-* **[research/](research/):** Holds background studies, competitive analysis, and external resources.
-* **[CONTRIBUTING.md](CONTRIBUTING.md):** Guidelines for contributing to the project.
-* **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md):** Community standards and expectations.
-* **[LICENSE](LICENSE):** Project licensing information.
-* **[.cursor/rules/](.cursor/rules/):** Directory containing specific operational rules and standards for AI collaboration and project workflows.
-
----
-
-## 📂 Project Structure
-
+```bash
+streamlit run dashboard/streamlit_app.py
 ```
-/
-├── .venv/                  # Virtual environment
-├── .cursor/                # Cursor IDE specific settings and rules
-├── config/                 # Configuration files (e.g., API keys - managed carefully)
-├── docs/                   # Project documentation (MQP, Strategy, Tech Radar, etc.)
-├── research/               # Background research, studies, external resources
-├── subsystems/             # Core subsystems (ATLAS, KOIOS, ETHIK, etc.)
-│   ├── ATLAS/
-│   │   ├── core/
-│   │   ├── services/
-│   │   ├── tests/
-│   │   └── README.md
-│   └── ...                 # Other subsystems (CRONOS, CORUJA, ETHIK, HARMONY, KOIOS, MYCELIUM, NEXUS)
-├── scripts/                # Utility and automation scripts
-├── tools/                  # Supporting tools or utilities (distinct from scripts)
-├── tests/                  # Global or integration tests (if any)
-├── .gitignore
-├── LICENSE                 # Project License (e.g., MIT)
-├── README.md               # This file
-├── ROADMAP.md              # High-level project roadmap
-├── CONTRIBUTING.md         # Contribution guidelines
-├── CODE_OF_CONDUCT.md      # Community standards
-├── requirements.txt        # Python dependencies
-└── test_*.ps1              # PowerShell test runners
-```
+
+Ensure you have the necessary dependencies installed (`streamlit`, `pandas`, `wordcloud`).
 
 ---
 
@@ -188,7 +148,7 @@ See the [**ROADMAP.md**](ROADMAP.md) file for the high-level development plan, c
 
 ## 🤝 Contributing
 
-We welcome contributions! Please read our [**CONTRIBUTING.md**](CONTRIBUTING.md) guidelines to get started, including how to report issues, suggest features, and submit code changes.
+We welcome contributions! Please read our [**CONTRIBUTING.md**](CONTRIBUTING.md) guidelines to get started, including how to report issues, suggest features, submit code changes, and follow the essential [**Human-AI Collaboration Best Practices**](docs/process/human_ai_collaboration_guidelines.md).
 
 ---
 
@@ -206,15 +166,15 @@ This project is licensed under the MIT License - see the [**LICENSE**](LICENSE) 
 
 ## 💬 Contact & Community
 
-* **Issues:** Report bugs or suggest features via [GitHub Issues](https://github.com/enioxt/EVA-e-Guarani-EGOS/issues).
-* **Discussions:** Use [GitHub Discussions](https://github.com/enioxt/EVA-e-Guarani-EGOS/discussions) for questions and broader conversations (if enabled).
+*   **Issues:** Report bugs or suggest features via [GitHub Issues](https://github.com/enioxt/EVA-e-Guarani-EGOS/issues).
+*   **Discussions:** Use [GitHub Discussions](https://github.com/enioxt/EVA-e-Guarani-EGOS/discussions) for questions and broader conversations (if enabled).
 
 ### Creator Contact
 
-* **Enio Rocha**
-* **Email:** <eniodind@protonmail.com>
-* **Telegram:** <https://t.me/ethikin>
-* **LinkedIn:** <https://www.linkedin.com/in/enio-rocha-138a01225>
+*   **Enio Rocha**
+*   **Email:** <eniodind@protonmail.com>
+*   **Telegram:** <https://t.me/ethikin>
+*   **LinkedIn:** <https://www.linkedin.com/in/enio-rocha-138a01225>
 
 ---
 
